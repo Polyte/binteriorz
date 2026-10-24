@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { toast } from 'sonner';
-import { projectId, publicAnonKey } from '../../../utils/supabase/info';
 import { Send, ArrowRight } from 'lucide-react';
 
 export const ConsultationForm = () => {
@@ -19,12 +18,10 @@ export const ConsultationForm = () => {
     setLoading(true);
 
     try {
-      const response = await fetch(`https://${projectId}.supabase.co/functions/v1/make-server-710d82e2/inquiries`, {
+      const response = await fetch(`/api/inquiries`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${publicAnonKey}`,
-          'apikey': publicAnonKey
         },
         body: JSON.stringify(formData)
       });

@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Link, useNavigate } from 'react-router';
-import { supabase } from '../../../utils/supabase/client';
-import { projectId, publicAnonKey } from '../../../utils/supabase/info';
+import { cloudflareAuth } from '../../../utils/cloudflare/client';
 import { toast } from 'sonner';
 import {
   User, Package, LogOut, ChevronRight, Clock, CheckCircle2, Truck,
   Mail, MapPin, ShoppingBag, Eye, ArrowRight, Loader2
 } from 'lucide-react';
 
-const API = `https://${projectId}.supabase.co/functions/v1/make-server-710d82e2`;
+const API = `/api`;
 
 export const Account = () => {
   const navigate = useNavigate();
@@ -22,12 +21,12 @@ export const Account = () => {
   const [expandedOrder, setExpandedOrder] = useState<string | null>(null);
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    cloudflareAuth.getSession().then(({ data: { session } }) => {
       setSession(session);
       if (session) fetchOrders(session.access_token);
       else setLoading(false);
     });
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_e, session) => {
+    const { data: { subscription } } = cloudflareAuth.onAuthStateChange((_e, session) => {
       setSession(session);
       if (session) fetchOrders(session.access_token);
     });
@@ -37,7 +36,7 @@ export const Account = () => {
   const fetchOrders = async (token: string) => {
     try {
       const res = await fetch(`${API}/my-orders`, {
-        headers: { Authorization: `Bearer ${token}`, apikey: publicAnonKey }
+        headers: { Authorization: `Bearer ${token}`, }
       });
       if (res.ok) {
         const data = await res.json();
@@ -54,17 +53,17 @@ export const Account = () => {
       if (authMode === 'signup') {
         const res = await fetch(`${API}/signup`, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${publicAnonKey}`, apikey: publicAnonKey },
+          headers: { 'Content-Type': 'application/json', },
           body: JSON.stringify(form)
         });
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || 'Signup failed');
         // Now sign in
-        const { error } = await supabase.auth.signInWithPassword({ email: form.email, password: form.password });
+        const { error } = await cloudflareAuth.signInWithPassword({ email: form.email, password: form.password });
         if (error) throw new Error(error.message);
         toast.success('Welcome to B-Interiors. Your account is ready.');
       } else {
-        const { error } = await supabase.auth.signInWithPassword({ email: form.email, password: form.password });
+        const { error } = await cloudflareAuth.signInWithPassword({ email: form.email, password: form.password });
         if (error) throw new Error(error.message);
         toast.success('Welcome back to the studio.');
       }
@@ -74,7 +73,7 @@ export const Account = () => {
   };
 
   const handleLogout = async () => {
-    await supabase.auth.signOut();
+    await cloudflareAuth.signOut();
     setSession(null);
     setOrders([]);
     toast.info('Signed out successfully.');

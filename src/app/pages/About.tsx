@@ -34,7 +34,7 @@ export const About = () => {
       />
 
       {/* Hero Narrative */}
-      <section className="py-32 md:py-48 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-32 md:py-48 max-w-[1480px] mx-auto px-6 sm:px-8 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
           <div className="lg:col-span-8">
             <motion.span 
@@ -109,7 +109,7 @@ export const About = () => {
       </section>
 
       {/* The Pillars */}
-      <section className="py-32 md:py-48 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-32 md:py-48 max-w-[1480px] mx-auto px-6 sm:px-8 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-24">
           {[
             {
@@ -147,7 +147,7 @@ export const About = () => {
 
       {/* The Workshop Reveal */}
       <section className="py-32 bg-neutral-950 text-white overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[1480px] mx-auto px-6 sm:px-8 lg:px-12">
           <div className="flex flex-col lg:flex-row gap-24 items-center">
             <div className="flex-1 space-y-12">
               <span className="text-[10px] uppercase tracking-[0.6em] text-neutral-500 font-black block">The Workshop</span>

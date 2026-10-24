@@ -20,14 +20,10 @@ export const VendorApplication = () => {
     setIsSubmitting(true);
     
     try {
-      const { projectId } = await import('../../../utils/supabase/info');
-      const { publicAnonKey } = await import('../../../utils/supabase/info');
 
-      const res = await fetch(`https://${projectId}.supabase.co/functions/v1/make-server-710d82e2/vendors/apply`, {
+      const res = await fetch(`/api/vendors/apply`, {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${publicAnonKey}`,
-          'apikey': publicAnonKey,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(formData)
@@ -47,7 +43,7 @@ export const VendorApplication = () => {
 
   return (
     <div className="min-h-screen pt-32 pb-24 bg-neutral-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1480px] mx-auto px-6 sm:px-8 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
           
           {/* Left: Content */}

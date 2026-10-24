@@ -3,14 +3,6 @@ import { motion } from 'motion/react';
 import { useLocation, Link, useNavigate, useSearchParams } from 'react-router';
 import { CheckCircle2, Package, Mail, ArrowRight, Instagram, Clock, Wallet } from 'lucide-react';
 import confetti from 'canvas-confetti';
-import { projectId, publicAnonKey } from '../../../utils/supabase/info';
-
-const API_BASE = `https://${projectId}.supabase.co/functions/v1/make-server-710d82e2`;
-const headers = {
-  'Content-Type': 'application/json',
-  'Authorization': `Bearer ${publicAnonKey}`,
-  'apikey': publicAnonKey,
-};
 
 export const ThankYou = () => {
   const location = useLocation();
@@ -18,7 +10,7 @@ export const ThankYou = () => {
   const [searchParams] = useSearchParams();
   const isPayFastReturn = searchParams.get('payfast') === '1';
 
-  // State from Stripe flow (passed via navigate state)
+  // State from checkout flow (passed via navigate state)
   const stateData = location.state || {};
 
   const [orderId, setOrderId] = useState<string>(stateData.orderId || '');
@@ -26,7 +18,7 @@ export const ThankYou = () => {
   const [items, setItems] = useState<any[]>(stateData.items || []);
   const [total, setTotal] = useState<number>(stateData.total || 0);
   const [customerName, setCustomerName] = useState<string>(stateData.customerName || '');
-  const [paymentMethod, setPaymentMethod] = useState<string>('stripe');
+  const [paymentMethod, setPaymentMethod] = useState<string>('payfast');
   const [orderStatus, setOrderStatus] = useState<string>('confirmed');
   const [loading, setLoading] = useState(false);
 
@@ -40,7 +32,7 @@ export const ThankYou = () => {
 
         const fetchOrder = async () => {
           try {
-            const res = await fetch(`${API_BASE}/orders/lookup/${savedOrderId}`, { headers });
+            const res = await fetch(`/api/payfast/orders/${encodeURIComponent(savedOrderId)}`);
             if (res.ok) {
               const data = await res.json();
               setOrderId(data.orderId);

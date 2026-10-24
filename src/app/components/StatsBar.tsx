@@ -49,13 +49,13 @@ const StatCounter = ({ stat, index, inView }: { stat: StatItem; index: number; i
         duration: 0.8,
         ease: [0.22, 1, 0.36, 1],
       }}
-      className="relative text-center group"
+      className="group relative text-center"
     >
       {/* Decorative top line */}
-      <div className="w-6 h-px bg-neutral-300 mx-auto mb-8 group-hover:w-12 transition-all duration-700" />
+      <div className="mx-auto mb-5 h-px w-6 bg-neutral-300 transition-all duration-700 group-hover:w-12" />
 
       <p
-        className="text-4xl md:text-5xl lg:text-6xl text-neutral-900 mb-3 tabular-nums tracking-tight font-light"
+        className="mb-2 text-3xl font-light tabular-nums tracking-tight text-neutral-900 md:text-4xl lg:text-5xl"
         style={{ fontFamily: 'var(--font-playfair)' }}
       >
         {count.toLocaleString()}
@@ -76,13 +76,13 @@ export const StatsBar = () => {
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section className="py-24 md:py-32 bg-white relative overflow-hidden">
+    <section className="relative overflow-hidden bg-white py-14 md:py-18">
       {/* Subtle top/bottom hairlines */}
       <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-neutral-200 to-transparent" />
       <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-neutral-200 to-transparent" />
 
       <div ref={ref} className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-6">
+        <div className="grid grid-cols-2 gap-8 md:grid-cols-4 md:gap-6">
           {stats.map((stat, i) => (
             <StatCounter key={i} stat={stat} index={i} inView={inView} />
           ))}

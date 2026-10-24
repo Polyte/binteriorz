@@ -11,64 +11,40 @@ const topItems = [
   'Sustainable Timber',
 ];
 
-const bottomItems = [
-  'Studio Made',
-  'Heirloom Quality',
-  'Interior Design',
-  'Custom Fabrication',
-  'Certified Timber',
-  'Premium Logistics',
-  'South African Craft',
-  'Curated Collections',
-];
-
 export const Marquee = () => {
   return (
-    <div className="relative bg-neutral-950 py-4 md:py-5 overflow-hidden border-y border-neutral-800/30 select-none">
-      {/* Row 1 — left to right */}
-      <div className="flex whitespace-nowrap animate-[marquee_45s_linear_infinite] mb-3">
+    <section className="relative overflow-hidden border-y border-white/10 bg-[#11100e] py-5 text-white md:py-6">
+      <p className="sr-only">Handcrafted furniture, bespoke design, sustainable timber, and white-glove delivery.</p>
+
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-50 [background-image:radial-gradient(rgba(255,255,255,.12)_0.5px,transparent_0.5px)] [background-size:8px_8px]" />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-[8%] w-px bg-gradient-to-b from-transparent via-[#d4af37]/30 to-transparent" />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 right-[8%] w-px bg-gradient-to-b from-transparent via-[#d4af37]/30 to-transparent" />
+
+      <div aria-hidden="true" className="relative select-none motion-reduce:[&_*]:animate-none">
+        <div className="flex whitespace-nowrap animate-[marquee_38s_linear_infinite]">
         {[...topItems, ...topItems, ...topItems].map((item, i) => (
-          <span key={`t-${i}`} className="flex items-center gap-7 mx-7">
+          <span key={`t-${i}`} className="mx-7 flex items-center gap-7 md:mx-10 md:gap-10">
             <span
-              className="text-[10px] uppercase tracking-[0.55em] text-neutral-500 font-bold"
-              style={{ fontFamily: 'var(--font-josefin)' }}
+              className={`text-[22px] tracking-normal ${i % 2 === 0 ? 'text-white/90' : 'italic text-[#d7b96a]'}`}
+              style={{ fontFamily: 'var(--font-playfair)' }}
             >
               {item}
             </span>
-            <span className="w-[5px] h-[5px] rounded-full bg-neutral-700/80 flex-shrink-0" />
+            <span className="h-1.5 w-1.5 flex-shrink-0 rotate-45 border border-[#d7b96a]/60" />
           </span>
         ))}
+        </div>
       </div>
 
-      {/* Row 2 — right to left */}
-      <div className="flex whitespace-nowrap animate-[marqueeReverse_55s_linear_infinite]">
-        {[...bottomItems, ...bottomItems, ...bottomItems].map((item, i) => (
-          <span key={`b-${i}`} className="flex items-center gap-7 mx-7">
-            <span
-              className="text-[9px] uppercase tracking-[0.6em] text-neutral-600/50 font-bold"
-              style={{ fontFamily: 'var(--font-josefin)' }}
-            >
-              {item}
-            </span>
-            <span className="w-1 h-1 rounded-full bg-neutral-700/40 flex-shrink-0" />
-          </span>
-        ))}
-      </div>
-
-      {/* Fade edges */}
-      <div className="absolute left-0 top-0 bottom-0 w-28 bg-gradient-to-r from-neutral-950 to-transparent z-10 pointer-events-none" />
-      <div className="absolute right-0 top-0 bottom-0 w-28 bg-gradient-to-l from-neutral-950 to-transparent z-10 pointer-events-none" />
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-20 bg-gradient-to-r from-[#11100e] to-transparent md:w-40" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-20 bg-gradient-to-l from-[#11100e] to-transparent md:w-40" />
 
       <style>{`
         @keyframes marquee {
           0% { transform: translateX(0); }
           100% { transform: translateX(-33.333%); }
         }
-        @keyframes marqueeReverse {
-          0% { transform: translateX(-33.333%); }
-          100% { transform: translateX(0); }
-        }
       `}</style>
-    </div>
+    </section>
   );
 };

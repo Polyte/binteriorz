@@ -1,3 +1,143 @@
 @import './fonts.css';
 @import './tailwind.css';
 @import './theme.css';
+
+/* Small, GPU-friendly finishing touches used by homepage image cards. */
+@media (hover: hover) and (pointer: fine) {
+  .group:has(> img):hover {
+    box-shadow: 0 22px 55px -32px rgb(35 29 22 / 55%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.group:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+
+/* Cool, translucent reflection for the fixed header once it becomes sticky glass. */
+.nav-glass-sheen::before {
+  content: '';
+  position: absolute;
+  inset: -150% -35%;
+  background: linear-gradient(112deg,
+    transparent 38%,
+    rgb(255 255 255 / 4%) 43%,
+    rgb(255 255 255 / 30%) 49%,
+    rgb(190 226 245 / 12%) 52%,
+    transparent 59%);
+  transform: translateX(-55%) rotate(-8deg);
+  animation: water-glass-drift 12s ease-in-out infinite;
+}
+
+.nav-glass-sheen::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgb(255 255 255 / 20%), transparent 38%, rgb(174 219 239 / 5%));
+}
+
+@keyframes water-glass-drift {
+  0%, 100% { transform: translateX(-55%) rotate(-8deg); opacity: .45; }
+  50% { transform: translateX(55%) rotate(-8deg); opacity: .9; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-glass-sheen::before { animation: none; }
+}
+@keyframes hero-gold-sheen {
+  0%, 18% { background-position: 100% 50%; }
+  55%, 100% { background-position: -100% 50%; }
+}
+
+@keyframes topbar-gold-sheen {
+  0%, 16% { background-position: 120% 50%; }
+  84%, 100% { background-position: -120% 50%; }
+}
+
+@keyframes campaign-gold-surface {
+  0%, 12% { background-position: 100% 50%; }
+  88%, 100% { background-position: 0% 50%; }
+}
+
+.campaign-gold-bar {
+  background-color: #d4af37;
+  background-image: linear-gradient(
+    112deg,
+    #7a5700 0%,
+    #bd8f16 17%,
+    #efd36b 33%,
+    #fff1a8 44%,
+    #d4af37 54%,
+    #9f7407 66%,
+    #f1d572 82%,
+    #866000 100%
+  );
+  background-size: 240% 100%;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 252, 218, 0.82),
+    inset 0 -1px 0 rgba(92, 61, 0, 0.58),
+    0 5px 22px rgba(126, 88, 0, 0.25);
+  animation: campaign-gold-surface 14s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+.hero-gold-shine,
+.topbar-gold-shine {
+  color: #d4af37;
+  background-image: linear-gradient(
+    110deg,
+    #6f4b00 0%,
+    #b57f08 16%,
+    #f3d66d 29%,
+    #fff8c7 38%,
+    #d4af37 47%,
+    #8a5e00 61%,
+    #f6dd78 78%,
+    #9a6b00 100%
+  );
+  background-size: 220% 100%;
+  background-position: 100% 50%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 0 rgba(91, 58, 0, 0.85)) drop-shadow(0 8px 18px rgba(212, 175, 55, 0.38));
+}
+
+.hero-gold-shine {
+  animation: hero-gold-sheen 4.5s ease-in-out infinite;
+}
+
+.hero-lighting-wash {
+  background:
+    radial-gradient(ellipse at 72% 26%, rgb(255 235 196 / 24%) 0%, rgb(255 226 168 / 8%) 30%, transparent 52%),
+    radial-gradient(ellipse at 52% 88%, rgb(218 178 89 / 12%) 0%, transparent 48%),
+    linear-gradient(110deg, transparent 46%, rgb(255 255 255 / 5%) 63%, transparent 78%);
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.topbar-gold-shine {
+  animation: topbar-gold-sheen 10s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-gold-shine,
+  .topbar-gold-shine {
+    animation: none;
+    background-position: 48% 50%;
+  }
+
+  .campaign-gold-bar {
+    animation: none;
+    background-position: 50% 50%;
+  }
+}

@@ -4,8 +4,8 @@ const logo = "/logo.png";
 
 export const Footer = () => {
   return (
-    <footer className="bg-neutral-900 text-white pt-24 pb-28 md:pb-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <footer className="relative z-20 bg-neutral-900 pt-24 pb-28 text-white md:pb-12">
+      <div className="relative z-10 max-w-[1480px] mx-auto px-6 sm:px-8 lg:px-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           <div className="space-y-6">
             <div className="flex items-center gap-4">

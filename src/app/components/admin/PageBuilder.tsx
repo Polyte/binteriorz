@@ -11,10 +11,9 @@ import {
   ExternalLink, BookTemplate, Bookmark, Palette, Hash, Code2, Maximize2
 } from 'lucide-react';
 import { toast } from 'sonner';
-import { projectId } from '../../../../utils/supabase/info';
 import { useAdmin } from './AdminContext';
 
-const API = `https://${projectId}.supabase.co/functions/v1/make-server-710d82e2`;
+const API = `/api`;
 
 // ─── Block Types ─────────────────────────────────────────────
 const BLOCK_TYPES = [

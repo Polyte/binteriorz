@@ -5,14 +5,17 @@ import { Instagram, ArrowUpRight } from 'lucide-react';
 
 interface MoodGalleryProps {
   images: string[];
+  imageAlts?: string[];
+  eyebrow?: string;
+  title?: string;
 }
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-export const MoodGallery = ({ images }: MoodGalleryProps) => {
+export const MoodGallery = ({ images, imageAlts = [], eyebrow = 'The Mood', title = 'Curated Interiors' }: MoodGalleryProps) => {
   return (
-    <section className="py-28 md:py-40 bg-white overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 mb-16 md:mb-20">
+    <section className="py-24 md:py-32 bg-white overflow-hidden">
+      <div className="max-w-[1480px] mx-auto px-6 sm:px-8 lg:px-12 mb-16 md:mb-20">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -26,14 +29,14 @@ export const MoodGallery = ({ images }: MoodGalleryProps) => {
                 className="text-[10px] uppercase tracking-[0.5em] text-neutral-400 font-bold"
                 style={{ fontFamily: 'var(--font-josefin)' }}
               >
-                The Mood
+                {eyebrow}
               </span>
             </div>
             <h2
               className="text-4xl md:text-6xl text-neutral-900 leading-tight tracking-tight"
               style={{ fontFamily: 'var(--font-playfair)' }}
             >
-              Curated Interiors
+              {title}
             </h2>
           </motion.div>
           <motion.a
@@ -70,15 +73,16 @@ export const MoodGallery = ({ images }: MoodGalleryProps) => {
                   duration: 0.8,
                   ease: ease,
                 }}
-                className={`relative overflow-hidden group cursor-pointer ${
+                className={`relative overflow-hidden group cursor-pointer [isolation:isolate] ${
                   tall ? 'row-span-2 aspect-[3/5]' : 'aspect-square'
                 }`}
               >
                 <ImageWithFallback
                   src={img}
-                  alt={`Interior mood ${i + 1}`}
-                  className="w-full h-full object-cover transition-all duration-[1.2s] ease-out group-hover:scale-110 grayscale-[0.15] group-hover:grayscale-0"
+                  alt={imageAlts[i] || `Interior mood ${i + 1}`}
+                  className="w-full h-full object-cover transition-[transform,filter] duration-1000 ease-out group-hover:scale-[1.08] saturate-[0.85] group-hover:saturate-110"
                 />
+                <div aria-hidden="true" className="pointer-events-none absolute inset-2 border border-white/0 transition-all duration-700 group-hover:inset-4 group-hover:border-white/35" />
                 {/* Hover overlay */}
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-500 flex items-center justify-center">
                   <div className="opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-500">

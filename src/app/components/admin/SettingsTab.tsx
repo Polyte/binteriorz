@@ -2,13 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import {
   Settings, Globe, Mail, ShoppingCart, Shield, UserPlus, UserCog, Trash2,
-  CreditCard, CheckCircle2, AlertCircle, Eye, EyeOff, ExternalLink, Loader2
+  CreditCard, CheckCircle2, AlertCircle
 } from 'lucide-react';
 import { toast } from 'sonner';
-import { projectId } from '../../../../utils/supabase/info';
 import { useAdmin } from './AdminContext';
 
-const API = `https://${projectId}.supabase.co/functions/v1/make-server-710d82e2`;
+const API = `/api`;
 
 export const SettingsTab = () => {
   const {
@@ -18,69 +17,26 @@ export const SettingsTab = () => {
     handleRemoveTeamMember, handleUpdateTeamRole,
   } = useAdmin();
 
-  // PayFast settings state
+  // PayFast status is managed in Cloudflare and never exposed to this admin UI.
   const [pfLoading, setPfLoading] = useState(true);
-  const [pfSaving, setPfSaving] = useState(false);
-  const [pfSettings, setPfSettings] = useState<any>({});
-  const [pfMerchantId, setPfMerchantId] = useState('');
-  const [pfMerchantKey, setPfMerchantKey] = useState('');
-  const [pfPassphrase, setPfPassphrase] = useState('');
   const [pfSandbox, setPfSandbox] = useState(true);
-  const [showPfKey, setShowPfKey] = useState(false);
-  const [showPfPass, setShowPfPass] = useState(false);
+  const [pfConfigured, setPfConfigured] = useState(false);
 
   // Fetch PayFast settings
   useEffect(() => {
     const fetchPf = async () => {
       try {
-        const h = authHeaders();
-        const res = await fetch(`${API}/payfast/settings`, { headers: h });
+        const res = await fetch('/api/payfast/config');
         if (res.ok) {
           const data = await res.json();
-          setPfSettings(data);
-          setPfMerchantId(data.merchantId || '');
-          setPfMerchantKey(data.merchantKey || '');
-          setPfPassphrase(data.passphrase || '');
+          setPfConfigured(Boolean(data.configured));
           setPfSandbox(data.sandbox !== undefined ? data.sandbox : true);
         }
       } catch { /* silent */ }
       finally { setPfLoading(false); }
     };
     fetchPf();
-  }, [authHeaders]);
-
-  const handleSavePayFast = async () => {
-    setPfSaving(true);
-    try {
-      const body: any = { sandbox: pfSandbox };
-      if (pfMerchantId) body.merchantId = pfMerchantId;
-      if (pfMerchantKey && !pfMerchantKey.startsWith('••••')) body.merchantKey = pfMerchantKey;
-      if (pfPassphrase && !pfPassphrase.startsWith('••••')) body.passphrase = pfPassphrase;
-
-      const res = await fetch(`${API}/payfast/settings`, {
-        method: 'PUT',
-        headers: authHeaders(),
-        body: JSON.stringify(body),
-      });
-      if (res.ok) {
-        toast.success('PayFast settings saved');
-        // Re-fetch to get masked values
-        const refetch = await fetch(`${API}/payfast/settings`, { headers: authHeaders() });
-        if (refetch.ok) {
-          const data = await refetch.json();
-          setPfSettings(data);
-          setPfMerchantId(data.merchantId || '');
-          setPfMerchantKey(data.merchantKey || '');
-          setPfPassphrase(data.passphrase || '');
-          setPfSandbox(data.sandbox !== undefined ? data.sandbox : true);
-        }
-      } else {
-        const err = await res.json();
-        toast.error(err.error || 'Failed to save PayFast settings');
-      }
-    } catch { toast.error('Failed to save PayFast settings'); }
-    finally { setPfSaving(false); }
-  };
+  }, []);
 
   return (
     <motion.div key="settings" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="space-y-4">
@@ -189,13 +145,9 @@ export const SettingsTab = () => {
             </h3>
             {!pfLoading && (
               <div className="flex items-center gap-2">
-                {pfSettings.activeSource === 'admin' ? (
-                  <span className="flex items-center gap-1 text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded-full">
-                    <CheckCircle2 className="w-3 h-3" /> Configured via Admin
-                  </span>
-                ) : pfSettings.activeSource === 'env' ? (
+                {pfConfigured ? (
                   <span className="flex items-center gap-1 text-[10px] font-bold text-blue-600 bg-blue-50 px-2 py-1 rounded-full">
-                    <CheckCircle2 className="w-3 h-3" /> Configured via Env
+                    <CheckCircle2 className="w-3 h-3" /> Configured on Cloudflare
                   </span>
                 ) : (
                   <span className="flex items-center gap-1 text-[10px] font-bold text-amber-600 bg-amber-50 px-2 py-1 rounded-full">
@@ -206,7 +158,7 @@ export const SettingsTab = () => {
             )}
           </div>
           <p className="text-[10px] text-neutral-400 mt-1">
-            Accept payments from South African customers via PayFast. Settings entered here override environment variables.
+            PayFast credentials are stored as Cloudflare secrets and are never shown in the admin dashboard.
           </p>
         </div>
 
@@ -216,117 +168,16 @@ export const SettingsTab = () => {
           </div>
         ) : (
           <div className="p-5 space-y-5">
-            {/* Mode Toggle */}
             <div className="flex items-center justify-between p-3 bg-neutral-50 rounded-lg">
               <div>
                 <p className="text-sm font-medium text-neutral-900">Payment Mode</p>
-                <p className="text-[10px] text-neutral-400">
-                  {pfSandbox ? 'Testing mode — no real payments processed' : 'Live mode — real payments will be processed'}
-                </p>
+                <p className="text-[10px] text-neutral-400">{pfSandbox ? 'Sandbox — test payments only' : 'Live — real payments enabled'}</p>
               </div>
-              <div className="flex items-center gap-2">
-                <span className={`text-[10px] font-bold uppercase tracking-widest ${pfSandbox ? 'text-amber-600' : 'text-neutral-300'}`}>Sandbox</span>
-                <button
-                  type="button"
-                  onClick={() => setPfSandbox(!pfSandbox)}
-                  className={`relative w-11 h-6 rounded-full transition-colors ${pfSandbox ? 'bg-amber-500' : 'bg-emerald-500'}`}
-                >
-                  <span className={`absolute top-0.5 w-5 h-5 rounded-full bg-white shadow transition-transform ${pfSandbox ? 'left-0.5' : 'left-[22px]'}`} />
-                </button>
-                <span className={`text-[10px] font-bold uppercase tracking-widest ${!pfSandbox ? 'text-emerald-600' : 'text-neutral-300'}`}>Live</span>
-              </div>
+              <span className={`text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full ${pfSandbox ? 'text-amber-700 bg-amber-100' : 'text-emerald-700 bg-emerald-100'}`}>
+                {pfSandbox ? 'Sandbox' : 'Live'}
+              </span>
             </div>
-
-            {/* Credentials */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className="text-[10px] uppercase tracking-widest font-bold text-neutral-500 mb-1.5 block">Merchant ID</label>
-                <input
-                  value={pfMerchantId}
-                  onChange={(e) => setPfMerchantId(e.target.value)}
-                  placeholder="e.g. 10000100"
-                  className="w-full bg-neutral-50 border border-neutral-200 rounded-md px-3 py-2 text-sm outline-none focus:border-neutral-900 transition-colors font-mono"
-                />
-              </div>
-              <div>
-                <label className="text-[10px] uppercase tracking-widest font-bold text-neutral-500 mb-1.5 block">Merchant Key</label>
-                <div className="relative">
-                  <input
-                    type={showPfKey ? 'text' : 'password'}
-                    value={pfMerchantKey}
-                    onChange={(e) => setPfMerchantKey(e.target.value)}
-                    placeholder="e.g. 46f0cd694581a"
-                    className="w-full bg-neutral-50 border border-neutral-200 rounded-md px-3 py-2 pr-9 text-sm outline-none focus:border-neutral-900 transition-colors font-mono"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPfKey(!showPfKey)}
-                    className="absolute right-2.5 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-neutral-600"
-                  >
-                    {showPfKey ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
-                  </button>
-                </div>
-              </div>
-              <div className="md:col-span-2">
-                <label className="text-[10px] uppercase tracking-widest font-bold text-neutral-500 mb-1.5 block">Passphrase <span className="text-neutral-300">(optional but recommended)</span></label>
-                <div className="relative">
-                  <input
-                    type={showPfPass ? 'text' : 'password'}
-                    value={pfPassphrase}
-                    onChange={(e) => setPfPassphrase(e.target.value)}
-                    placeholder="Your PayFast passphrase"
-                    className="w-full bg-neutral-50 border border-neutral-200 rounded-md px-3 py-2 pr-9 text-sm outline-none focus:border-neutral-900 transition-colors font-mono"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPfPass(!showPfPass)}
-                    className="absolute right-2.5 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-neutral-600"
-                  >
-                    {showPfPass ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* Info Box */}
-            <div className="bg-blue-50 border border-blue-100 rounded-lg p-4 space-y-2">
-              <p className="text-[10px] font-bold uppercase tracking-widest text-blue-700">How it works</p>
-              <ul className="text-[11px] text-blue-600 space-y-1.5">
-                <li className="flex items-start gap-2">
-                  <span className="text-blue-400 mt-0.5">1.</span>
-                  Create a PayFast account at <a href="https://www.payfast.co.za" target="_blank" rel="noopener noreferrer" className="underline hover:text-blue-800 inline-flex items-center gap-0.5">payfast.co.za <ExternalLink className="w-2.5 h-2.5" /></a>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-blue-400 mt-0.5">2.</span>
-                  Find your Merchant ID and Key in PayFast Dashboard → Settings → Integration
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-blue-400 mt-0.5">3.</span>
-                  Set a passphrase in PayFast → Settings → Security and enter it above
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-blue-400 mt-0.5">4.</span>
-                  Use Sandbox mode to test, then switch to Live when ready
-                </li>
-              </ul>
-              {pfSandbox && (
-                <p className="text-[10px] text-amber-600 mt-2 font-medium">
-                  Sandbox test credentials: Merchant ID <code className="bg-amber-100 px-1 py-0.5 rounded text-[10px]">10000100</code>, Key <code className="bg-amber-100 px-1 py-0.5 rounded text-[10px]">46f0cd694581a</code>, Passphrase <code className="bg-amber-100 px-1 py-0.5 rounded text-[10px]">jt7NOE43FZPn</code>
-                </p>
-              )}
-            </div>
-
-            <div className="flex justify-end">
-              <button
-                type="button"
-                onClick={handleSavePayFast}
-                disabled={pfSaving}
-                className="px-6 py-2.5 bg-neutral-900 text-white rounded-md text-xs font-medium hover:bg-neutral-800 transition-colors disabled:opacity-50 flex items-center gap-2"
-              >
-                {pfSaving && <Loader2 className="w-3 h-3 animate-spin" />}
-                Save PayFast Settings
-              </button>
-            </div>
+            <p className="text-xs text-neutral-500">To change credentials or switch payment mode, update the Cloudflare Pages secrets and configuration, then redeploy.</p>
           </div>
         )}
       </div>

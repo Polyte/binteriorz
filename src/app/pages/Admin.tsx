@@ -4,12 +4,11 @@ import {
   LayoutDashboard, Package, ShoppingCart, Users, FileText, Image, Star,
   Settings, Plus, Search, Bell, ChevronRight, UserPlus, AlertTriangle,
   PanelLeftClose, PanelLeft, Globe, X, Layers, Activity, MessageSquare,
-  CheckCircle2, Shield
+  CheckCircle2, Shield, PanelsTopLeft, Mail, ExternalLink
 } from 'lucide-react';
 import * as XLSX from 'xlsx';
 import { toast } from 'sonner';
-import { supabase } from '../../../utils/supabase/client';
-import { projectId, publicAnonKey } from '../../../utils/supabase/info';
+import { cloudflareAuth } from '../../../utils/cloudflare/client';
 const logo = "/logo.png";
 
 // Admin context + tabs
@@ -26,22 +25,39 @@ import { ActivityTab } from '../components/admin/ActivityTab';
 import { SettingsTab } from '../components/admin/SettingsTab';
 import { AdminModals } from '../components/admin/AdminModals';
 import { PageBuilder } from '../components/admin/PageBuilder';
+import { HomepageTab } from '../components/admin/HomepageTab';
+import { normalizeHomepageContent } from '../content/homepage';
+import { resolveProductCatalogue } from '../data/productCatalogue';
 
-const API = `https://${projectId}.supabase.co/functions/v1/make-server-710d82e2`;
+const API = `/api`;
+const ADMIN_REQUEST_TIMEOUT = 10000;
+
+const fetchWithTimeout = async (url: string, options: RequestInit = {}, timeout = ADMIN_REQUEST_TIMEOUT) => {
+  const controller = new AbortController();
+  const timeoutId = window.setTimeout(() => controller.abort(), timeout);
+  try {
+    return await fetch(url, { ...options, signal: controller.signal });
+  } finally {
+    window.clearTimeout(timeoutId);
+  }
+};
 
 // ─── Sidebar Navigation Config ────────────────────────────────
 const sidebarSections = [
   { title: 'Main', items: [{ id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard }] },
-  { title: 'E-Commerce', items: [
-    { id: 'products', label: 'Products', icon: Package },
+  { title: 'WooCommerce', items: [
     { id: 'orders', label: 'Orders', icon: ShoppingCart },
+    { id: 'products', label: 'Products', icon: Package },
     { id: 'customers', label: 'Customers', icon: Users },
   ]},
   { title: 'Content', items: [
+    { id: 'homepage', label: 'Homepage', icon: PanelsTopLeft },
     { id: 'pages', label: 'Pages', icon: FileText },
     { id: 'media', label: 'Media Library', icon: Image },
   ]},
   { title: 'Community', items: [
+    { id: 'inquiries', label: 'Inquiries', icon: MessageSquare },
+    { id: 'subscribers', label: 'Subscribers', icon: Mail },
     { id: 'reviews', label: 'Reviews', icon: Star },
     { id: 'vendors', label: 'Artisan Guild', icon: Layers },
   ]},
@@ -51,15 +67,35 @@ const sidebarSections = [
   ]},
 ];
 
+const getInitialAdminTab = () => {
+  if (typeof window === 'undefined') return 'dashboard';
+  const requested = window.location.hash.replace(/^#/, '');
+  return sidebarSections.some((section) => section.items.some((item) => item.id === requested)) ? requested : 'dashboard';
+};
+
 const exportProductsToExcel = (products: any[]) => {
   const rows = products.map(p => ({
-    'Product ID': p.id, 'Name': p.name, 'Category': p.category,
-    'Material': p.material, 'Color': p.color, 'Price (ZAR)': p.price,
-    'Stock': p.stock ?? 'N/A', 'Rooms': (p.rooms || []).join(', '),
-    'Tags': (p.tags || []).join(', '), 'Image URL': p.image || p.image_url || '',
+    'Original ID': p.originalId || '',
+    'Internal SKU': p.internalSku || p.sku || '',
+    'Barcode (Code 128)': p.barcode || '',
+    'Category': p.category || '',
+    'Website Product Name': p.name || '',
+    'Product Description': p.description || '',
+    'Color': p.color || '',
+    'Material / Finish': p.materialFinish || p.material || '',
+    'Search Tags': p.searchTags || (p.tags || []).join(', '),
+    'Est. Cost (ZAR)': p.costPrice ?? 0,
+    'Est. Selling (ZAR)': p.price ?? 0,
+    'Availability': p.availability || '',
+    'Original Image Filename': p.originalImageFilename || '',
+    'Pricing / Supplier Notes': p.pricingSupplierNotes || p.notes || '',
+    'Previous Website Category': p.previousWebsiteCategory || '',
+    'Main Image': p.mainImage || p.image || p.image_url || '',
+    'Gallery Images': (p.galleryImageFiles || p.gallery?.map((item: any) => item.fileName) || []).join(', '),
+    'Image Count': p.imageCount ?? p.gallery?.length ?? 0,
   }));
   const ws = XLSX.utils.json_to_sheet(rows);
-  ws['!cols'] = [{ wch: 12 }, { wch: 30 }, { wch: 14 }, { wch: 14 }, { wch: 14 }, { wch: 14 }, { wch: 8 }, { wch: 24 }, { wch: 30 }, { wch: 60 }];
+  ws['!cols'] = [{ wch: 12 }, { wch: 16 }, { wch: 18 }, { wch: 16 }, { wch: 34 }, { wch: 70 }, { wch: 16 }, { wch: 24 }, { wch: 42 }, { wch: 15 }, { wch: 16 }, { wch: 14 }, { wch: 30 }, { wch: 70 }, { wch: 24 }, { wch: 45 }, { wch: 70 }, { wch: 12 }];
   const wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, ws, 'Product Archive');
   XLSX.writeFile(wb, `B-Interiors_Products_${new Date().toISOString().slice(0, 10)}.xlsx`);
@@ -69,13 +105,17 @@ const exportProductsToExcel = (products: any[]) => {
 // ═══════════════════════════════════════════════════════════════
 // ADMIN COMPONENT (Orchestrator)
 // ═══════════════════════════════════════════════════════════════
-export const Admin = () => {
-  const [activeTab, setActiveTab] = useState('dashboard');
+interface AdminProps {
+  products: any[];
+  onProductsChange: (products: any[]) => void;
+}
+
+export const Admin = ({ products, onProductsChange }: AdminProps) => {
+  const [activeTab, setActiveTab] = useState(getInitialAdminTab);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
   // Data state
-  const [products, setProducts] = useState<any[]>([]);
   const [orders, setOrders] = useState<any[]>([]);
   const [vendors, setVendors] = useState<any[]>([]);
   const [reviews, setReviews] = useState<any[]>([]);
@@ -84,11 +124,21 @@ export const Admin = () => {
   const [pages, setPages] = useState<any[]>([]);
   const [media, setMedia] = useState<any[]>([]);
   const [siteSettings, setSiteSettings] = useState<any>(null);
+  const [homepageContent, setHomepageContent] = useState<any>(() => normalizeHomepageContent());
+  const [homepagePublishedAt, setHomepagePublishedAt] = useState<string | null>(null);
   const [activityLog, setActivityLog] = useState<any[]>([]);
   const [activityRoleFilter, setActivityRoleFilter] = useState('all');
   const [activityActionFilter, setActivityActionFilter] = useState('all');
   const [loading, setLoading] = useState(true);
+  const [authChecking, setAuthChecking] = useState(true);
+  const [authError, setAuthError] = useState<string | null>(null);
+  const [refreshing, setRefreshing] = useState(false);
+  const [loadError, setLoadError] = useState<string | null>(null);
+  const [lastUpdatedAt, setLastUpdatedAt] = useState<string | null>(null);
+  const [accessDenied, setAccessDenied] = useState(false);
   const [session, setSession] = useState<any>(null);
+  const hasLoadedRef = useRef(false);
+  const refreshSessionPromiseRef = useRef<Promise<any> | null>(null);
 
   // Modals
   const [productModal, setProductModal] = useState(false);
@@ -132,58 +182,175 @@ export const Admin = () => {
   const canDelete = userRole === 'owner' || userRole === 'admin';
   const isOwner = userRole === 'owner';
 
+  useEffect(() => {
+    window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}#${activeTab}`);
+  }, [activeTab]);
+
   // ─── Auth ───────────────────────────────────────────────────
   useEffect(() => {
     const checkAuth = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session) { window.location.href = '/login'; return; }
-      setSession(session);
+      try {
+        const { data: { session }, error } = await cloudflareAuth.getSession();
+        if (error) throw error;
+        if (!session) { window.location.replace('/login'); return; }
+        setAuthError(null);
+        setSession(session);
+      } catch (error) {
+        console.error('Admin authentication failed:', error);
+        setAuthError('We could not verify your session because the authentication service did not respond. Your login has not been cleared.');
+      } finally {
+        setAuthChecking(false);
+      }
     };
     checkAuth();
+
+    const { data: authListener } = cloudflareAuth.onAuthStateChange((event, nextSession) => {
+      if (nextSession) {
+        setSession(nextSession);
+        setAuthChecking(false);
+      } else if (event === 'SIGNED_OUT') {
+        window.location.replace('/login?redirect=/admin');
+      }
+    });
+
+    return () => authListener.subscription.unsubscribe();
   }, []);
 
   const authHeaders = useCallback(() => ({
     Authorization: `Bearer ${session?.access_token}`,
-    apikey: publicAnonKey,
     'Content-Type': 'application/json',
   }), [session]);
+
+  const authorizedFetch = useCallback(async (url: string, options: RequestInit = {}, timeout = ADMIN_REQUEST_TIMEOUT) => {
+    const readSession = async (forceRefresh = false) => {
+      if (forceRefresh) {
+        if (!refreshSessionPromiseRef.current) {
+          refreshSessionPromiseRef.current = cloudflareAuth.refreshSession()
+            .then(({ data, error }) => (!error ? data.session : null))
+            .finally(() => { refreshSessionPromiseRef.current = null; });
+        }
+        const refreshedSession = await refreshSessionPromiseRef.current;
+        if (refreshedSession) return refreshedSession;
+      }
+      const { data, error } = await cloudflareAuth.getSession();
+      if (error) throw error;
+      return data.session;
+    };
+
+    let activeSession = await readSession(false);
+    if (!activeSession) {
+      const noSessionError: any = new Error('No active session');
+      noSessionError.code = 'NO_SESSION';
+      throw noSessionError;
+    }
+
+    const request = (token: string) => {
+      const headers = new Headers(options.headers);
+      headers.set('Authorization', `Bearer ${token}`);
+      if (!headers.has('Content-Type')) headers.set('Content-Type', 'application/json');
+      return fetchWithTimeout(url, { ...options, headers }, timeout);
+    };
+
+    let response = await request(activeSession.access_token);
+    if (response.status !== 401) return response;
+
+    activeSession = await readSession(true);
+    if (!activeSession) return response;
+    return request(activeSession.access_token);
+  }, []);
 
   // ─── Data Fetching ──────────────────────────────────────────
   const fetchData = useCallback(async () => {
     if (!session) return;
-    setLoading(true);
+    const isFirstLoad = !hasLoadedRef.current;
+    if (isFirstLoad) setLoading(true);
+    else setRefreshing(true);
+    setLoadError(null);
     try {
-      const h = authHeaders();
-      const [pRes, oRes, vRes, rRes, iRes, nRes, pgRes, mRes, sRes] = await Promise.all([
-        fetch(`${API}/products`, { headers: h }),
-        fetch(`${API}/orders`, { headers: h }),
-        fetch(`${API}/vendors`, { headers: h }),
-        fetch(`${API}/all-reviews`, { headers: h }),
-        fetch(`${API}/inquiries`, { headers: h }),
-        fetch(`${API}/newsletter-subs`, { headers: h }),
-        fetch(`${API}/pages`, { headers: h }),
-        fetch(`${API}/media`, { headers: h }),
-        fetch(`${API}/site-settings`, { headers: h }),
-      ]);
+      const resources = [
+        { key: 'products', path: '/products' },
+        { key: 'orders', path: '/orders' },
+        { key: 'vendors', path: '/vendors' },
+        { key: 'reviews', path: '/all-reviews' },
+        { key: 'inquiries', path: '/inquiries' },
+        { key: 'subscribers', path: '/newsletter-subs' },
+        { key: 'pages', path: '/pages' },
+        { key: 'media', path: '/media' },
+        { key: 'settings', path: '/site-settings' },
+        { key: 'homepage', path: '/homepage-content/admin' },
+      ] as const;
 
-      if (pRes.status === 401 || oRes.status === 401) {
-        toast.error('Session expired. Please log in again.');
-        window.location.href = '/login';
+      const results = await Promise.allSettled(resources.map(async (resource) => {
+        const response = await authorizedFetch(`${API}${resource.path}`);
+        if (!response.ok) {
+          const resourceError: any = new Error(`${resource.key} returned ${response.status}`);
+          resourceError.status = response.status;
+          throw resourceError;
+        }
+        return {
+          key: resource.key,
+          data: await response.json(),
+          catalogueVersion: resource.key === 'products'
+            ? response.headers.get('X-Product-Catalogue-Version')
+            : null,
+        };
+      }));
+
+      if (results.some((result) => result.status === 'rejected' && (result.reason as any)?.code === 'NO_SESSION')) {
+        window.location.replace('/login?redirect=/admin');
         return;
       }
+      if (results.some((result) => result.status === 'rejected' && (result.reason as any)?.status === 401)) {
+        const { data: sessionCheck } = await cloudflareAuth.getSession();
+        if (!sessionCheck.session) {
+          window.location.replace('/login?redirect=/admin');
+          return;
+        }
+      }
 
-      const [pData, oData, vData, rData, iData, nData, pgData, mData, sData] = await Promise.all([
-        pRes.ok ? pRes.json() : [], oRes.ok ? oRes.json() : [], vRes.ok ? vRes.json() : [],
-        rRes.ok ? rRes.json() : [], iRes.ok ? iRes.json() : [], nRes.ok ? nRes.json() : [],
-        pgRes.ok ? pgRes.json() : [], mRes.ok ? mRes.json() : [], sRes.ok ? sRes.json() : null,
-      ]);
+      let loadedCount = 0;
+      let loadedProtectedResourceCount = 0;
+      const failedResources: string[] = [];
+      const deniedResourceCount = results.filter((result) => result.status === 'rejected' && (result.reason as any)?.status === 403).length;
+      const protectedResourceCount = resources.filter((resource) => resource.key !== 'products').length;
+      results.forEach((result, index) => {
+        if (result.status === 'rejected') {
+          failedResources.push(resources[index].key);
+          return;
+        }
+        loadedCount += 1;
+        const { key, data, catalogueVersion } = result.value;
+        if (key !== 'products') loadedProtectedResourceCount += 1;
+        if (key === 'products') onProductsChange(resolveProductCatalogue(data, catalogueVersion));
+        if (key === 'orders') setOrders(Array.isArray(data) ? data : []);
+        if (key === 'vendors') setVendors(Array.isArray(data) ? data : []);
+        if (key === 'reviews') setReviews(Array.isArray(data) ? data : []);
+        if (key === 'inquiries') setInquiries(Array.isArray(data) ? data : []);
+        if (key === 'subscribers') setNewsletterSubs(Array.isArray(data) ? data : []);
+        if (key === 'pages') setPages(Array.isArray(data) ? data : []);
+        if (key === 'media') setMedia(Array.isArray(data) ? data : []);
+        if (key === 'settings') setSiteSettings(data);
+        if (key === 'homepage') {
+          setHomepageContent(normalizeHomepageContent(data?.draft || data?.published));
+          setHomepagePublishedAt(data?.publishedAt || data?.published?.publishedAt || null);
+        }
+      });
 
-      setProducts(Array.isArray(pData) ? pData : []); setOrders(Array.isArray(oData) ? oData : []); setVendors(Array.isArray(vData) ? vData : []);
-      setReviews(Array.isArray(rData) ? rData : []); setInquiries(Array.isArray(iData) ? iData : []); setNewsletterSubs(Array.isArray(nData) ? nData : []);
-      setPages(Array.isArray(pgData) ? pgData : []); setMedia(Array.isArray(mData) ? mData : []); setSiteSettings(sData);
+      if (failedResources.length) {
+        setLoadError(`${failedResources.length} section${failedResources.length === 1 ? '' : 's'} could not be refreshed: ${failedResources.join(', ')}.`);
+      }
+      if (loadedProtectedResourceCount > 0) {
+        setAccessDenied(false);
+      }
+      if (loadedCount > 0) {
+        setLastUpdatedAt(new Date().toISOString());
+      }
+      hasLoadedRef.current = true;
+      setLoading(false);
+      setRefreshing(false);
 
       try {
-        const alRes = await fetch(`${API}/activity-log`, { headers: h });
+        const alRes = await authorizedFetch(`${API}/activity-log`, {}, 6000);
         if (alRes.ok) {
           const alData = await alRes.json();
           setActivityLog(Array.isArray(alData) ? alData : []);
@@ -192,7 +359,7 @@ export const Admin = () => {
 
       // Fetch notifications
       try {
-        const notifsRes = await fetch(`${API}/notifications`, { headers: h });
+        const notifsRes = await authorizedFetch(`${API}/notifications`, {}, 6000);
         if (notifsRes.ok) {
           const notifsData = await notifsRes.json();
           setNotifications(Array.isArray(notifsData) ? notifsData : []);
@@ -200,28 +367,37 @@ export const Admin = () => {
       } catch { /* non-critical */ }
 
       try {
-        const roleRes = await fetch(`${API}/admin-role`, { headers: h });
+        const roleRes = await authorizedFetch(`${API}/admin-role`, {}, 8000);
         if (roleRes.ok) {
           const roleData = await roleRes.json();
+          setAccessDenied(false);
           setUserRole(roleData.role || 'editor');
           if (roleData.role === 'owner') {
-            const teamRes = await fetch(`${API}/admin-roles`, { headers: h });
+            const teamRes = await authorizedFetch(`${API}/admin-roles`, {}, 6000);
             if (teamRes.ok) {
               const tmData = await teamRes.json();
               setTeamMembers(Array.isArray(tmData) ? tmData : []);
             }
           }
         } else if (roleRes.status === 403) {
-          toast.error('You do not have admin access.');
-          window.location.href = '/';
-          return;
+          const accessIsConsistentlyDenied = loadedProtectedResourceCount === 0 && deniedResourceCount === protectedResourceCount;
+          if (accessIsConsistentlyDenied) {
+            setAccessDenied(true);
+            setLoadError('This account is signed in, but it has not been assigned an administration role. Ask the site owner to add it under Settings → Team.');
+          } else {
+            setAccessDenied(false);
+          }
         }
       } catch { /* role fetch optional */ }
     } catch (err) {
       console.error('Admin fetchData error:', err);
-      toast.error('Failed to load administration data');
-    } finally { setLoading(false); }
-  }, [session, authHeaders]);
+      setLoadError('The dashboard could not connect to the administration service. Your existing data is still shown where available.');
+    } finally {
+      hasLoadedRef.current = true;
+      setLoading(false);
+      setRefreshing(false);
+    }
+  }, [session, authorizedFetch, onProductsChange]);
 
   useEffect(() => { if (session) fetchData(); }, [session, fetchData]);
 
@@ -230,8 +406,7 @@ export const Admin = () => {
     if (!session) return;
     const poll = setInterval(async () => {
       try {
-        const h = authHeaders();
-        const res = await fetch(`${API}/notifications`, { headers: h });
+        const res = await authorizedFetch(`${API}/notifications`, {}, 8000);
         if (res.ok) {
           const data = await res.json();
           setNotifications(Array.isArray(data) ? data : []);
@@ -239,15 +414,15 @@ export const Admin = () => {
       } catch { /* silent */ }
     }, 30000);
     return () => clearInterval(poll);
-  }, [session, authHeaders]);
+  }, [session, authorizedFetch]);
 
   // ─── Actions ────────────────────────────────────────────────
-  const handleLogout = async () => { await supabase.auth.signOut(); window.location.href = '/'; };
+  const handleLogout = async () => { await cloudflareAuth.signOut(); window.location.href = '/'; };
 
   const handleDeleteProduct = async (id: string) => {
     if (!confirm('Delete this product permanently?')) return;
     try {
-      const res = await fetch(`${API}/products/${id}`, { method: 'DELETE', headers: authHeaders() });
+      const res = await authorizedFetch(`${API}/products/${id}`, { method: 'DELETE', headers: authHeaders() });
       if (res.ok) { toast.success('Product deleted'); fetchData(); }
     } catch { toast.error('Failed to delete product'); }
   };
@@ -256,23 +431,45 @@ export const Admin = () => {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
     const data = Object.fromEntries(fd.entries());
-    // Extract rooms (checkboxes) and tags (comma string)
+    // Extract rooms and the catalogue search tags.
     const rooms = fd.getAll('rooms').map(r => String(r));
-    const tagsRaw = String(data.tags || '');
+    const tagsRaw = String(data.searchTags || '');
     const tags = tagsRaw.split(',').map(t => t.trim().toLowerCase()).filter(Boolean);
+    const gallery = productGallery.map((item: any, index: number) => ({ ...item, position: index + 1 }));
+    const sku = String(data.internalSku || editingProduct?.internalSku || editingProduct?.sku || '').trim();
+    const availability = String(data.availability || 'Available').trim();
+    const productName = String(data.name || '').trim();
     const productData: any = {
       ...data,
+      sku,
+      internalSku: sku,
+      barcodeFormat: editingProduct?.barcodeFormat || 'CODE128',
+      barcodeType: editingProduct?.barcodeType || 'Internal Code 128 (not retail GTIN)',
+      material: String(data.materialFinish || ''),
+      materialFinish: String(data.materialFinish || ''),
+      costPrice: Number(data.costPrice) || 0,
       price: Number(data.price),
-      stock: Number(data.stock) || 0,
-      gallery: productGallery,
-      image: productGallery.length > 0 ? productGallery[0].url : (data.image || ''),
+      currency: 'ZAR',
+      availability,
+      inStock: !/unavailable|out of stock|discontinued/i.test(availability),
+      manageStock: editingProduct?.manageStock ?? false,
+      stock: editingProduct?.stock ?? null,
+      pricingSupplierNotes: String(data.pricingSupplierNotes || ''),
+      notes: String(data.pricingSupplierNotes || ''),
+      searchTags: tagsRaw,
+      gallery,
+      galleryImageFiles: gallery.map((item: any) => item.fileName).filter(Boolean),
+      imageCount: gallery.length,
+      mainImage: gallery[0]?.url || editingProduct?.mainImage || '',
+      image: gallery[0]?.url || editingProduct?.image || '',
       rooms,
       tags,
+      slug: editingProduct?.slug || `${productName.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}-${sku.toLowerCase()}`,
+      sourceWorkbook: editingProduct?.sourceWorkbook || 'Admin dashboard',
     };
-    delete productData.image_input;
     try {
       const url = editingProduct ? `${API}/products/${editingProduct.id}` : `${API}/products`;
-      const res = await fetch(url, { method: editingProduct ? 'PUT' : 'POST', headers: authHeaders(), body: JSON.stringify(productData) });
+      const res = await authorizedFetch(url, { method: editingProduct ? 'PUT' : 'POST', headers: authHeaders(), body: JSON.stringify(productData) });
       if (res.ok) { toast.success(editingProduct ? 'Product updated' : 'Product created'); setProductModal(false); setEditingProduct(null); setProductGallery([]); fetchData(); }
     } catch { toast.error('Failed to save product'); }
   };
@@ -280,7 +477,7 @@ export const Admin = () => {
   const handleDeleteReview = async (id: string) => {
     if (!confirm('Delete this review permanently?')) return;
     try {
-      const res = await fetch(`${API}/reviews/${id}`, { method: 'DELETE', headers: authHeaders() });
+      const res = await authorizedFetch(`${API}/reviews/${id}`, { method: 'DELETE', headers: authHeaders() });
       if (res.ok) { toast.success('Review deleted'); fetchData(); }
     } catch { toast.error('Failed to delete review'); }
   };
@@ -288,7 +485,7 @@ export const Admin = () => {
   const handleDeleteSubscriber = async (id: string) => {
     if (!confirm('Remove this subscriber?')) return;
     try {
-      const res = await fetch(`${API}/newsletter-subs/${id}`, { method: 'DELETE', headers: authHeaders() });
+      const res = await authorizedFetch(`${API}/newsletter-subs/${id}`, { method: 'DELETE', headers: authHeaders() });
       if (res.ok) { toast.success('Subscriber removed'); fetchData(); }
     } catch { toast.error('Failed to remove subscriber'); }
   };
@@ -296,21 +493,21 @@ export const Admin = () => {
   const handleDeleteInquiry = async (id: string) => {
     if (!confirm('Delete this inquiry permanently?')) return;
     try {
-      const res = await fetch(`${API}/inquiries/${id}`, { method: 'DELETE', headers: authHeaders() });
+      const res = await authorizedFetch(`${API}/inquiries/${id}`, { method: 'DELETE', headers: authHeaders() });
       if (res.ok) { toast.success('Inquiry deleted'); fetchData(); }
     } catch { toast.error('Failed to delete inquiry'); }
   };
 
   const handleUpdateInquiryStatus = async (id: string, status: string) => {
     try {
-      const res = await fetch(`${API}/inquiries/${id}`, { method: 'PATCH', headers: authHeaders(), body: JSON.stringify({ status }) });
+      const res = await authorizedFetch(`${API}/inquiries/${id}`, { method: 'PATCH', headers: authHeaders(), body: JSON.stringify({ status }) });
       if (res.ok) { toast.success(`Inquiry marked as ${status}`); fetchData(); }
     } catch { toast.error('Failed to update inquiry'); }
   };
 
   const handleUpdateOrderStatus = async (orderId: string, status: string) => {
     try {
-      const res = await fetch(`${API}/orders/${orderId}`, { method: 'PATCH', headers: authHeaders(), body: JSON.stringify({ status }) });
+      const res = await authorizedFetch(`${API}/orders/${orderId}`, { method: 'PATCH', headers: authHeaders(), body: JSON.stringify({ status }) });
       if (res.ok) { toast.success(`Order ${status}`); fetchData(); }
     } catch { toast.error('Failed to update order'); }
   };
@@ -335,7 +532,7 @@ export const Admin = () => {
 
   const handleUpdateVendor = async (id: string, updates: any) => {
     try {
-      const res = await fetch(`${API}/vendors/${id}`, { method: 'PATCH', headers: authHeaders(), body: JSON.stringify(updates) });
+      const res = await authorizedFetch(`${API}/vendors/${id}`, { method: 'PATCH', headers: authHeaders(), body: JSON.stringify(updates) });
       if (res.ok) { toast.success(updates.status ? `Vendor ${updates.status}` : 'Vendor profile updated'); fetchData(); }
       else { const data = await res.json(); toast.error(data.error || 'Failed to update vendor'); }
     } catch { toast.error('Failed to update vendor'); }
@@ -344,7 +541,7 @@ export const Admin = () => {
   const handleDeleteVendor = async (id: string) => {
     if (!confirm('Remove this vendor application permanently?')) return;
     try {
-      const res = await fetch(`${API}/vendors/${id}`, { method: 'DELETE', headers: authHeaders() });
+      const res = await authorizedFetch(`${API}/vendors/${id}`, { method: 'DELETE', headers: authHeaders() });
       if (res.ok) { toast.success('Vendor removed'); fetchData(); }
       else { const d = await res.json(); toast.error(d.error || 'Failed to delete vendor'); }
     } catch { toast.error('Failed to delete vendor'); }
@@ -372,7 +569,7 @@ export const Admin = () => {
     const data = Object.fromEntries(fd.entries());
     try {
       const url = editingPage ? `${API}/pages/${editingPage.id}` : `${API}/pages`;
-      const res = await fetch(url, { method: editingPage ? 'PUT' : 'POST', headers: authHeaders(), body: JSON.stringify(data) });
+      const res = await authorizedFetch(url, { method: editingPage ? 'PUT' : 'POST', headers: authHeaders(), body: JSON.stringify(data) });
       if (res.ok) { toast.success(editingPage ? 'Page updated' : 'Page created'); setPageModal(false); setEditingPage(null); fetchData(); }
     } catch { toast.error('Failed to save page'); }
   };
@@ -380,7 +577,7 @@ export const Admin = () => {
   const handleDeletePage = async (id: string) => {
     if (!confirm('Delete this page permanently?')) return;
     try {
-      const res = await fetch(`${API}/pages/${id}`, { method: 'DELETE', headers: authHeaders() });
+      const res = await authorizedFetch(`${API}/pages/${id}`, { method: 'DELETE', headers: authHeaders() });
       if (res.ok) { toast.success('Page deleted'); fetchData(); }
     } catch { toast.error('Failed to delete page'); }
   };
@@ -392,7 +589,7 @@ export const Admin = () => {
       reader.onload = async () => {
         const base64 = (reader.result as string).split(',')[1];
         try {
-          const res = await fetch(`${API}/media/upload`, {
+          const res = await authorizedFetch(`${API}/media/upload`, {
             method: 'POST', headers: authHeaders(),
             body: JSON.stringify({ fileName: file.name, fileType: file.type, fileSize: file.size, base64Data: base64 }),
           });
@@ -408,7 +605,7 @@ export const Admin = () => {
   const handleDeleteMedia = async (id: string) => {
     if (!confirm('Delete this media file permanently?')) return;
     try {
-      const res = await fetch(`${API}/media/${id}`, { method: 'DELETE', headers: authHeaders() });
+      const res = await authorizedFetch(`${API}/media/${id}`, { method: 'DELETE', headers: authHeaders() });
       if (res.ok) { toast.success('Media deleted'); fetchData(); }
     } catch { toast.error('Failed to delete media'); }
   };
@@ -422,14 +619,45 @@ export const Admin = () => {
     data.enableNewsletter = data.enableNewsletter === 'on';
     data.maintenanceMode = data.maintenanceMode === 'on';
     try {
-      const res = await fetch(`${API}/site-settings`, { method: 'PUT', headers: authHeaders(), body: JSON.stringify(data) });
+      const res = await authorizedFetch(`${API}/site-settings`, { method: 'PUT', headers: authHeaders(), body: JSON.stringify(data) });
       if (res.ok) { toast.success('Settings saved'); fetchData(); }
     } catch { toast.error('Failed to save settings'); }
   };
 
+  const handleSaveHomepage = async (content: any, publish = false) => {
+    try {
+      const draftRes = await authorizedFetch(`${API}/homepage-content`, {
+        method: 'PUT',
+        headers: authHeaders(),
+        body: JSON.stringify(content),
+      });
+      if (!draftRes.ok) {
+        const error = await draftRes.json().catch(() => ({}));
+        throw new Error(error.error || 'Failed to save homepage draft');
+      }
+
+      if (publish) {
+        const publishRes = await authorizedFetch(`${API}/homepage-content/publish`, { method: 'POST', headers: authHeaders() });
+        if (!publishRes.ok) {
+          const error = await publishRes.json().catch(() => ({}));
+          throw new Error(error.error || 'Failed to publish homepage');
+        }
+        toast.success('Homepage published');
+      } else {
+        toast.success('Homepage draft saved');
+      }
+
+      await fetchData();
+      return true;
+    } catch (error: any) {
+      toast.error(error.message || 'Failed to save homepage');
+      return false;
+    }
+  };
+
   const handleQuickLinkProduct = async (productId: string, vendorId: string) => {
     try {
-      const res = await fetch(`${API}/products/${productId}`, { method: 'PUT', headers: authHeaders(), body: JSON.stringify({ vendorId }) });
+      const res = await authorizedFetch(`${API}/products/${productId}`, { method: 'PUT', headers: authHeaders(), body: JSON.stringify({ vendorId }) });
       if (res.ok) { toast.success('Product linked to vendor'); fetchData(); }
     } catch { toast.error('Failed to link product'); }
   };
@@ -439,7 +667,7 @@ export const Admin = () => {
     let linked = 0;
     try {
       await Promise.all(productIds.map(async (pid) => {
-        const res = await fetch(`${API}/products/${pid}`, { method: 'PUT', headers: authHeaders(), body: JSON.stringify({ vendorId }) });
+        const res = await authorizedFetch(`${API}/products/${pid}`, { method: 'PUT', headers: authHeaders(), body: JSON.stringify({ vendorId }) });
         if (res.ok) linked++;
       }));
       toast.success(`${linked} product${linked !== 1 ? 's' : ''} linked to vendor`);
@@ -452,7 +680,7 @@ export const Admin = () => {
 
   const handleUnlinkProduct = async (productId: string) => {
     try {
-      const res = await fetch(`${API}/products/${productId}`, { method: 'PUT', headers: authHeaders(), body: JSON.stringify({ vendorId: '' }) });
+      const res = await authorizedFetch(`${API}/products/${productId}`, { method: 'PUT', headers: authHeaders(), body: JSON.stringify({ vendorId: '' }) });
       if (res.ok) { toast.success('Product unlinked'); fetchData(); }
     } catch { toast.error('Failed to unlink product'); }
   };
@@ -462,7 +690,7 @@ export const Admin = () => {
     let unlinked = 0;
     try {
       await Promise.all(productIds.map(async (pid) => {
-        const res = await fetch(`${API}/products/${pid}`, { method: 'PUT', headers: authHeaders(), body: JSON.stringify({ vendorId: '' }) });
+        const res = await authorizedFetch(`${API}/products/${pid}`, { method: 'PUT', headers: authHeaders(), body: JSON.stringify({ vendorId: '' }) });
         if (res.ok) unlinked++;
       }));
       toast.success(`${unlinked} product${unlinked !== 1 ? 's' : ''} unlinked`);
@@ -497,7 +725,7 @@ export const Admin = () => {
     if (importPreview.length === 0) return;
     setImportLoading(true);
     try {
-      const res = await fetch(`${API}/products/bulk`, {
+      const res = await authorizedFetch(`${API}/products/bulk`, {
         method: 'POST', headers: authHeaders(),
         body: JSON.stringify({ products: importPreview }),
       });
@@ -512,10 +740,29 @@ export const Admin = () => {
 
   const downloadImportTemplate = () => {
     const template = [
-      { Name: 'Example Chair', Category: 'Seating', Material: 'Leather', Color: 'Black', 'Price (ZAR)': 5000, Stock: 10, Description: 'A beautiful chair', 'Image URL': 'https://example.com/chair.jpg', Rooms: 'living-room, bedroom', Tags: 'leather, modern, handcrafted' },
+      {
+        'Original ID': 'BI-001',
+        'Internal SKU': 'BID-CHA-001',
+        'Barcode (Code 128)': 'BID-CHA-001',
+        Category: 'Chairs',
+        'Website Product Name': 'Example Accent Chair',
+        'Product Description': 'A handcrafted accent chair.',
+        Color: 'Walnut / Cream',
+        'Material / Finish': 'Solid timber, woven upholstery',
+        'Search Tags': 'chair, accent, walnut, cream',
+        'Est. Cost (ZAR)': 5000,
+        'Est. Selling (ZAR)': 8500,
+        Availability: 'Made to order',
+        'Original Image Filename': 'example-chair.jpg',
+        'Pricing / Supplier Notes': 'Confirm lead time before ordering.',
+        'Previous Website Category': 'Seating',
+        'Main Image': 'BID-CHA-001_01.jpg',
+        'Gallery Images': 'BID-CHA-001_01.jpg, BID-CHA-001_02.jpg',
+        'Image Count': 2,
+      },
     ];
     const ws = XLSX.utils.json_to_sheet(template);
-    ws['!cols'] = [{ wch: 24 }, { wch: 14 }, { wch: 14 }, { wch: 14 }, { wch: 12 }, { wch: 8 }, { wch: 30 }, { wch: 50 }, { wch: 24 }, { wch: 30 }];
+    ws['!cols'] = [12, 18, 20, 15, 30, 42, 20, 30, 35, 18, 20, 18, 28, 35, 24, 28, 45, 12].map(wch => ({ wch }));
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Import Template');
     XLSX.writeFile(wb, 'B-Interiors_Import_Template.xlsx');
@@ -529,21 +776,21 @@ export const Admin = () => {
 
   const handleMarkNotificationRead = async (id: string) => {
     try {
-      await fetch(`${API}/notifications/${id}/read`, { method: 'PATCH', headers: authHeaders() });
+      await authorizedFetch(`${API}/notifications/${id}/read`, { method: 'PATCH', headers: authHeaders() });
       setNotifications(prev => prev.map(n => n.id === id ? { ...n, read: true } : n));
     } catch { /* silent */ }
   };
 
   const handleMarkAllRead = async () => {
     try {
-      await fetch(`${API}/notifications/read-all`, { method: 'POST', headers: authHeaders() });
+      await authorizedFetch(`${API}/notifications/read-all`, { method: 'POST', headers: authHeaders() });
       setNotifications(prev => prev.map(n => ({ ...n, read: true })));
     } catch { /* silent */ }
   };
 
   const handleDismissNotification = async (id: string) => {
     try {
-      await fetch(`${API}/notifications/${id}`, { method: 'DELETE', headers: authHeaders() });
+      await authorizedFetch(`${API}/notifications/${id}`, { method: 'DELETE', headers: authHeaders() });
       setNotifications(prev => prev.filter(n => n.id !== id));
     } catch { /* silent */ }
   };
@@ -551,7 +798,7 @@ export const Admin = () => {
   const handleClearAllNotifications = async () => {
     if (!confirm('Clear all notifications?')) return;
     try {
-      await fetch(`${API}/notifications`, { method: 'DELETE', headers: authHeaders() });
+      await authorizedFetch(`${API}/notifications`, { method: 'DELETE', headers: authHeaders() });
       setNotifications([]);
       toast.success('Notifications cleared');
     } catch { toast.error('Failed to clear notifications'); }
@@ -561,7 +808,7 @@ export const Admin = () => {
   const handleInviteTeamMember = async () => {
     if (!inviteEmail.trim()) return;
     try {
-      const res = await fetch(`${API}/admin-roles`, { method: 'POST', headers: authHeaders(), body: JSON.stringify({ email: inviteEmail.trim(), role: inviteRole }) });
+      const res = await authorizedFetch(`${API}/admin-roles`, { method: 'POST', headers: authHeaders(), body: JSON.stringify({ email: inviteEmail.trim(), role: inviteRole }) });
       const data = await res.json();
       if (res.ok) { toast.success(`${inviteEmail} added as ${inviteRole}`); setInviteEmail(''); fetchData(); }
       else { toast.error(data.error || 'Failed to add team member'); }
@@ -571,7 +818,7 @@ export const Admin = () => {
   const handleRemoveTeamMember = async (userId: string, email: string) => {
     if (!confirm(`Remove ${email} from the admin team?`)) return;
     try {
-      const res = await fetch(`${API}/admin-roles/${userId}`, { method: 'DELETE', headers: authHeaders() });
+      const res = await authorizedFetch(`${API}/admin-roles/${userId}`, { method: 'DELETE', headers: authHeaders() });
       if (res.ok) { toast.success(`${email} removed`); fetchData(); }
       else { const d = await res.json(); toast.error(d.error); }
     } catch { toast.error('Failed to remove team member'); }
@@ -579,7 +826,7 @@ export const Admin = () => {
 
   const handleUpdateTeamRole = async (userId: string, email: string, role: string) => {
     try {
-      const res = await fetch(`${API}/admin-roles`, { method: 'POST', headers: authHeaders(), body: JSON.stringify({ email, role }) });
+      const res = await authorizedFetch(`${API}/admin-roles`, { method: 'POST', headers: authHeaders(), body: JSON.stringify({ email, role }) });
       if (res.ok) { toast.success(`${email} is now ${role}`); fetchData(); }
     } catch { toast.error('Failed to update role'); }
   };
@@ -592,14 +839,35 @@ export const Admin = () => {
   const _reviews = Array.isArray(reviews) ? reviews : [];
   const _inquiries = Array.isArray(inquiries) ? inquiries : [];
 
-  const totalRevenue = _orders.reduce((a: number, b: any) => a + (b.total || 0), 0);
-  const avgRating = _reviews.length ? (_reviews.reduce((a: number, r: any) => a + r.rating, 0) / _reviews.length) : 0;
+  const nonRevenueStatuses = new Set(['pending', 'pending_payment', 'cancelled', 'failed', 'refunded']);
+  const paidOrders = _orders.filter((order: any) => !nonRevenueStatuses.has(String(order.status || '').toLowerCase()));
+  const totalRevenue = paidOrders.reduce((sum: number, order: any) => sum + (Number(order.total) || 0), 0);
+  const thirtyDaysAgo = Date.now() - (30 * 24 * 60 * 60 * 1000);
+  const paidOrdersLast30Days = paidOrders.filter((order: any) => {
+    const createdAt = new Date(order.createdAt).getTime();
+    return Number.isFinite(createdAt) && createdAt >= thirtyDaysAgo;
+  });
+  const revenueLast30Days = paidOrdersLast30Days.reduce((sum: number, order: any) => sum + (Number(order.total) || 0), 0);
+  const ordersLast30Days = paidOrdersLast30Days.length;
+  const averageOrderValue = paidOrders.length ? totalRevenue / paidOrders.length : 0;
+  const itemsSold = paidOrders.reduce((sum: number, order: any) => sum + (order.items || []).reduce((itemSum: number, item: any) => itemSum + (Number(item.quantity) || 1), 0), 0);
+  const uniqueCustomers = new Set(_orders.map((order: any) => order.customerInfo?.email?.trim().toLowerCase()).filter(Boolean)).size;
+  const avgRating = _reviews.length ? (_reviews.reduce((sum: number, review: any) => sum + (Number(review.rating) || 0), 0) / _reviews.length) : 0;
   const pendingVendors = _vendors.filter((v: any) => v.status === 'pending').length;
 
   const revenueByMonth = (() => {
-    const months: Record<string, number> = {};
-    _orders.forEach((o: any) => { const d = new Date(o.createdAt); const key = d.toLocaleDateString('en-ZA', { month: 'short', year: '2-digit' }); months[key] = (months[key] || 0) + (o.total || 0); });
-    return Object.entries(months).map(([month, revenue]) => ({ month, Revenue: revenue }));
+    const months: Record<string, { label: string; revenue: number }> = {};
+    paidOrders.forEach((order: any) => {
+      const date = new Date(order.createdAt);
+      if (!Number.isFinite(date.getTime())) return;
+      const key = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+      if (!months[key]) months[key] = { label: date.toLocaleDateString('en-ZA', { month: 'short', year: '2-digit' }), revenue: 0 };
+      months[key].revenue += Number(order.total) || 0;
+    });
+    return Object.entries(months)
+      .sort(([a], [b]) => a.localeCompare(b))
+      .slice(-12)
+      .map(([, value]) => ({ month: value.label, Revenue: value.revenue }));
   })();
 
   const ordersByStatus = (() => {
@@ -616,7 +884,7 @@ export const Admin = () => {
 
   const topProducts = (() => {
     const freq: Record<string, { name: string; count: number; revenue: number }> = {};
-    _orders.forEach((o: any) => {
+    paidOrders.forEach((o: any) => {
       o.items?.forEach((item: any) => {
         const key = item.name || item.id;
         if (!freq[key]) freq[key] = { name: key, count: 0, revenue: 0 };
@@ -631,19 +899,50 @@ export const Admin = () => {
 
   const getBadge = (id: string) => {
     if (id === 'orders') return _orders.filter((o: any) => o.status === 'confirmed').length || undefined;
+    if (id === 'inquiries') return _inquiries.filter((item: any) => !item.status || item.status === 'new').length || undefined;
+    if (id === 'subscribers') return newsletterSubs.length || undefined;
     if (id === 'vendors') return pendingVendors || undefined;
     if (id === 'reviews') return _reviews.length || undefined;
     return undefined;
   };
+
+  if (authChecking) {
+    return (
+      <div className="fixed inset-0 z-[60] flex min-h-screen items-center justify-center bg-[#f0f0f1]">
+        <div className="text-center">
+          <div className="mx-auto mb-4 h-12 w-12 overflow-hidden rounded-lg border border-neutral-200 bg-white shadow-sm">
+            <img src={logo} alt="B-Interiors" className="h-full w-full object-contain" />
+          </div>
+          <div className="mx-auto h-1 w-36 overflow-hidden rounded-full bg-neutral-200">
+            <motion.div className="h-full w-1/2 bg-[#2271b1]" animate={{ x: ['-100%', '200%'] }} transition={{ duration: 1.1, repeat: Infinity, ease: 'easeInOut' }} />
+          </div>
+          <p className="mt-3 text-xs text-neutral-500">Opening administration…</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (authError && !session) {
+    return (
+      <div className="fixed inset-0 z-[60] flex min-h-screen items-center justify-center bg-[#f0f0f1] px-5">
+        <div className="w-full max-w-md border border-neutral-200 bg-white p-8 text-center shadow-sm">
+          <AlertTriangle className="mx-auto mb-4 h-8 w-8 text-amber-600" />
+          <h1 className="text-xl text-neutral-900" style={{ fontFamily: 'var(--font-playfair)' }}>Session check interrupted</h1>
+          <p className="mt-2 text-sm leading-relaxed text-neutral-500">{authError}</p>
+          <button onClick={() => window.location.reload()} className="mt-6 rounded-sm bg-[#2271b1] px-4 py-2 text-xs font-semibold text-white hover:bg-[#135e96]">Try again</button>
+        </div>
+      </div>
+    );
+  }
 
   if (!session) return null;
 
   // ─── Context Store ──────────────────────────────────────────
   const store: AdminStore = {
     products, orders, vendors, reviews, inquiries, newsletterSubs, pages, media,
-    siteSettings, activityLog, teamMembers,
+    siteSettings, homepageContent, homepagePublishedAt, activityLog, teamMembers,
     session, userRole, canEdit, canDelete, isOwner,
-    searchQuery, setSearchQuery, setActiveTab,
+    searchQuery, setSearchQuery, setActiveTab, refreshing, loadError, lastUpdatedAt,
     setProductModal, setEditingProduct, setProductGallery,
     setPageModal, setEditingPage,
     setMediaUploadModal, setSelectedOrder,
@@ -664,7 +963,7 @@ export const Admin = () => {
     handleDeleteInquiry, handleUpdateInquiryStatus, handleUpdateOrderStatus,
     handleDeletePage, handleDeleteMedia,
     handleUpdateVendor, handleDeleteVendor, handleSaveVendorProfile,
-    handleSaveSettings,
+    handleSaveSettings, handleSaveHomepage,
     handleQuickLinkProduct, handleBulkLinkProducts,
     handleUnlinkProduct, handleBulkUnlinkProducts,
     handleInviteTeamMember, handleRemoveTeamMember, handleUpdateTeamRole,
@@ -672,6 +971,7 @@ export const Admin = () => {
     exportProductsToExcel, exportOrdersToExcel,
     totalRevenue, avgRating, pendingVendors,
     revenueByMonth, ordersByStatus, productsByCategory, topProducts, lowStockProducts,
+    paidOrders, revenueLast30Days, ordersLast30Days, averageOrderValue, itemsSold, uniqueCustomers,
   };
 
   // ═══════════════════════════════════════════════════════════
@@ -689,7 +989,7 @@ export const Admin = () => {
           {!sidebarCollapsed && (
             <div className="min-w-0">
               <h1 className="text-xs font-bold tracking-[0.15em] uppercase truncate">B-Interiors</h1>
-              <p className="text-[9px] text-neutral-500 tracking-wider uppercase">Admin Console</p>
+              <p className="text-[9px] text-neutral-500 tracking-wider uppercase">Commerce & Content</p>
             </div>
           )}
         </div>
@@ -736,7 +1036,7 @@ export const Admin = () => {
             <motion.aside initial={{ x: -280 }} animate={{ x: 0 }} exit={{ x: -280 }} transition={{ type: 'spring', damping: 30, stiffness: 300 }} className="lg:hidden fixed left-0 top-0 bottom-0 w-[260px] bg-[#1d2327] text-white z-50 flex flex-col">
               <div className="flex items-center gap-3 px-4 h-16 border-b border-white/5 flex-shrink-0">
                 <div className="w-9 h-9 bg-neutral-800 rounded-lg overflow-hidden flex items-center justify-center flex-shrink-0"><img src={logo} alt="" className="w-full h-full object-contain" /></div>
-                <div className="min-w-0 flex-1"><h1 className="text-xs font-bold tracking-[0.15em] uppercase">B-Interiors</h1><p className="text-[9px] text-neutral-500 tracking-wider uppercase">Admin Console</p></div>
+                <div className="min-w-0 flex-1"><h1 className="text-xs font-bold tracking-[0.15em] uppercase">B-Interiors</h1><p className="text-[9px] text-neutral-500 tracking-wider uppercase">Commerce & Content</p></div>
                 <button onClick={() => setMobileSidebarOpen(false)} className="text-neutral-500 hover:text-white"><X className="w-5 h-5" /></button>
               </div>
               <nav className="flex-1 overflow-y-auto py-3 px-2 space-y-4">
@@ -765,22 +1065,23 @@ export const Admin = () => {
       {/* ─── MAIN CONTENT ─── */}
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
         {/* Top Bar */}
-        <header className="h-14 bg-white border-b border-neutral-200 flex items-center gap-3 px-4 flex-shrink-0 z-10">
-          <button onClick={() => setMobileSidebarOpen(true)} className="lg:hidden p-1.5 hover:bg-neutral-100 rounded-md"><PanelLeft className="w-5 h-5 text-neutral-600" /></button>
-          <div className="flex items-center gap-2 text-sm text-neutral-500">
-            <a href="/" className="hover:text-neutral-900 transition-colors text-xs flex items-center gap-1"><Globe className="w-3.5 h-3.5" /> Visit Site</a>
-            <ChevronRight className="w-3 h-3" />
-            <span className="text-neutral-900 font-medium text-xs capitalize">{activeTab.replace('-', ' ')}</span>
-            <span className={`ml-2 text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full ${userRole === 'owner' ? 'bg-neutral-900 text-white' : userRole === 'admin' ? 'bg-blue-100 text-blue-700' : 'bg-neutral-100 text-neutral-500'}`}>{userRole}</span>
+        <header className="h-12 bg-[#1d2327] border-b border-black/50 text-white flex items-center gap-3 px-3 md:px-4 flex-shrink-0 z-10 shadow-sm">
+          <button onClick={() => setMobileSidebarOpen(true)} className="lg:hidden p-1.5 hover:bg-white/10 rounded-sm"><PanelLeft className="w-5 h-5 text-neutral-300" /></button>
+          <div className="flex min-w-0 items-center gap-2 text-sm text-neutral-400">
+            <a href="/" target="_blank" rel="noreferrer" className="hover:text-white transition-colors text-xs flex items-center gap-1.5"><Globe className="w-3.5 h-3.5" /> <span className="hidden sm:inline">Visit Site</span><ExternalLink className="hidden h-3 w-3 sm:block" /></a>
+            <ChevronRight className="hidden w-3 h-3 sm:block" />
+            <span className="truncate text-xs font-medium capitalize text-white">{activeTab.replace('-', ' ')}</span>
+            <span className={`hidden sm:inline-flex ml-1 text-[8px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full ${userRole === 'owner' ? 'bg-[#2271b1] text-white' : userRole === 'admin' ? 'bg-blue-500/20 text-blue-200' : 'bg-white/10 text-neutral-300'}`}>{userRole}</span>
           </div>
+          {canEdit && <button onClick={() => { setEditingProduct(null); setProductGallery([]); setProductModal(true); }} className="hidden sm:flex items-center gap-1.5 border-l border-white/10 pl-3 text-xs text-neutral-300 hover:text-white"><Plus className="h-3.5 w-3.5" /> New product</button>}
           <div className="flex-1" />
-          <div className="hidden md:flex items-center gap-1.5 bg-neutral-100 rounded-lg px-3 py-1.5 w-64">
+          <div className="hidden md:flex items-center gap-1.5 bg-white/10 border border-white/10 rounded-sm px-3 py-1.5 w-64">
             <Search className="w-3.5 h-3.5 text-neutral-400" />
-            <input type="text" placeholder="Search..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="bg-transparent text-xs outline-none flex-1 text-neutral-700 placeholder:text-neutral-400" />
+            <input type="text" placeholder={`Search ${activeTab}…`} value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="bg-transparent text-xs outline-none flex-1 text-white placeholder:text-neutral-500" />
           </div>
           <div className="relative">
-            <button onClick={() => setNotificationsOpen(!notificationsOpen)} className="relative p-2 hover:bg-neutral-100 rounded-md transition-colors">
-              <Bell className="w-4 h-4 text-neutral-500" />
+            <button onClick={() => setNotificationsOpen(!notificationsOpen)} className="relative p-2 hover:bg-white/10 rounded-sm transition-colors">
+              <Bell className="w-4 h-4 text-neutral-300" />
               {unreadNotifications.length > 0 && (
                 <span className="absolute top-0.5 right-0.5 min-w-[16px] h-4 flex items-center justify-center bg-red-500 text-white text-[9px] font-bold rounded-full px-1 animate-pulse">
                   {unreadNotifications.length > 99 ? '99+' : unreadNotifications.length}
@@ -868,20 +1169,48 @@ export const Admin = () => {
               )}
             </AnimatePresence>
           </div>
-          <div className="flex items-center gap-2 pl-2 border-l border-neutral-200">
-            <div className="w-7 h-7 bg-neutral-900 rounded-full flex items-center justify-center text-white text-[10px] font-bold">
+          <div className="flex items-center gap-2 pl-2 border-l border-white/10">
+            <div className="w-7 h-7 bg-[#2271b1] rounded-full flex items-center justify-center text-white text-[10px] font-bold">
               {session?.user?.email?.[0]?.toUpperCase() || 'A'}
             </div>
-            <button onClick={handleLogout} className="text-xs text-neutral-500 hover:text-red-600 transition-colors font-medium">Sign Out</button>
+            <button onClick={handleLogout} className="hidden text-xs text-neutral-300 hover:text-white transition-colors font-medium sm:block">Sign Out</button>
           </div>
         </header>
 
         {/* Content */}
         <main className="flex-1 overflow-y-auto">
           <div className="max-w-[1400px] mx-auto p-4 md:p-6">
+            {loadError && !loading && !accessDenied && (
+              <div className="mb-5 flex flex-col gap-3 border-l-4 border-amber-500 bg-white px-4 py-3 shadow-sm sm:flex-row sm:items-center sm:justify-between">
+                <div className="flex items-start gap-3">
+                  <AlertTriangle className="mt-0.5 h-4 w-4 flex-shrink-0 text-amber-600" />
+                  <div><p className="text-xs font-semibold text-neutral-900">Some administration data is unavailable</p><p className="mt-0.5 text-[11px] text-neutral-500">{loadError}</p></div>
+                </div>
+                <button onClick={fetchData} disabled={refreshing} className="flex items-center gap-1.5 self-start rounded-sm border border-[#2271b1] px-3 py-1.5 text-[11px] font-semibold text-[#2271b1] hover:bg-[#f0f6fc] disabled:opacity-50 sm:self-auto">
+                  <Activity className={`h-3.5 w-3.5 ${refreshing ? 'animate-spin' : ''}`} /> Retry
+                </button>
+              </div>
+            )}
             {loading ? (
-              <div className="flex items-center justify-center py-32">
-                <div className="w-10 h-10 border-2 border-neutral-200 border-t-neutral-900 animate-spin rounded-full" />
+              <div className="space-y-5 py-2" aria-label="Loading administration data">
+                <div className="h-8 w-52 animate-pulse rounded bg-neutral-200" />
+                <div className="grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-6">
+                  {Array.from({ length: 6 }).map((_, index) => <div key={index} className="h-28 animate-pulse border border-neutral-200 bg-white" />)}
+                </div>
+                <div className="grid gap-4 lg:grid-cols-3">
+                  <div className="h-80 animate-pulse border border-neutral-200 bg-white lg:col-span-2" />
+                  <div className="h-80 animate-pulse border border-neutral-200 bg-white" />
+                </div>
+              </div>
+            ) : accessDenied ? (
+              <div className="mx-auto mt-12 max-w-xl border border-neutral-200 bg-white p-8 text-center shadow-sm">
+                <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-amber-50 text-amber-700"><Shield className="h-5 w-5" /></div>
+                <h2 className="text-2xl text-neutral-900" style={{ fontFamily: 'var(--font-playfair)' }}>Administration access required</h2>
+                <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-neutral-500">You are still signed in as <strong className="text-neutral-700">{session?.user?.email}</strong>, but this account is not assigned to the admin team. The site owner can add it from Settings → Team.</p>
+                <div className="mt-6 flex flex-wrap justify-center gap-3">
+                  <button onClick={fetchData} disabled={refreshing} className="inline-flex items-center gap-2 rounded-sm bg-[#2271b1] px-4 py-2 text-xs font-semibold text-white hover:bg-[#135e96] disabled:opacity-50"><Activity className={`h-3.5 w-3.5 ${refreshing ? 'animate-spin' : ''}`} /> Check again</button>
+                  <button onClick={handleLogout} className="rounded-sm border border-neutral-300 bg-white px-4 py-2 text-xs font-semibold text-neutral-700 hover:bg-neutral-50">Use another account</button>
+                </div>
               </div>
             ) : (
               <AnimatePresence mode="wait">
@@ -889,6 +1218,9 @@ export const Admin = () => {
                 {activeTab === 'products' && <ProductsTab />}
                 {activeTab === 'orders' && <OrdersTab />}
                 {activeTab === 'customers' && <CustomersTab />}
+                {activeTab === 'inquiries' && <CustomersTab view="inquiries" />}
+                {activeTab === 'subscribers' && <CustomersTab view="subscribers" />}
+                {activeTab === 'homepage' && <HomepageTab />}
                 {activeTab === 'pages' && <PagesTab />}
                 {activeTab === 'media' && <MediaTab />}
                 {activeTab === 'reviews' && <ReviewsTab />}
@@ -931,7 +1263,7 @@ export const Admin = () => {
             onSave={async (pageData) => {
               const url = editingPage ? `${API}/pages/${editingPage.id}` : `${API}/pages`;
               const method = editingPage ? 'PUT' : 'POST';
-              const res = await fetch(url, { method, headers: authHeaders(), body: JSON.stringify(pageData) });
+              const res = await authorizedFetch(url, { method, headers: authHeaders(), body: JSON.stringify(pageData) });
               if (res.ok) {
                 toast.success(editingPage ? 'Page updated' : 'Page created');
                 setPageBuilderOpen(false);

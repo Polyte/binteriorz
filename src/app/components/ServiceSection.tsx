@@ -7,6 +7,8 @@ import { Link } from 'react-router';
 interface ServiceSectionProps {
   image: string;
   consultImage?: string;
+  eyebrow?: string;
+  title?: string;
 }
 
 const services = [
@@ -34,7 +36,11 @@ const services = [
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-export const ServiceSection = ({ image, consultImage }: ServiceSectionProps) => {
+export const ServiceSection = ({
+  image,
+  eyebrow = 'Our Services',
+  title = 'Bespoke Interior Decor Services',
+}: ServiceSectionProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -47,7 +53,7 @@ export const ServiceSection = ({ image, consultImage }: ServiceSectionProps) => 
     <section
       ref={containerRef}
       id="services"
-      className="py-28 md:py-40 bg-white relative overflow-hidden"
+      className="relative overflow-hidden bg-white py-16 md:py-20"
     >
       {/* Decorative grid lines */}
       <div className="absolute inset-0 pointer-events-none">
@@ -55,41 +61,32 @@ export const ServiceSection = ({ image, consultImage }: ServiceSectionProps) => 
         <div className="absolute top-0 right-1/4 w-px h-full bg-neutral-100" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
+      <div className="max-w-[1480px] mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: ease }}
-          className="flex flex-col md:flex-row justify-between items-start md:items-end mb-20 md:mb-28 gap-6"
+          className="mb-12 md:mb-16"
         >
           <div>
-            <div className="flex items-center gap-3 mb-6">
+            <div className="mb-5 flex items-center gap-3">
               <div className="w-10 h-px bg-neutral-300" />
               <span
                 className="text-[10px] uppercase tracking-[0.5em] text-neutral-400 font-bold"
                 style={{ fontFamily: 'var(--font-josefin)' }}
               >
-                Our Services
+                {eyebrow}
               </span>
             </div>
             <h2
               className="text-4xl md:text-6xl text-neutral-900 leading-[1.05] tracking-tight"
               style={{ fontFamily: 'var(--font-playfair)' }}
             >
-              Bespoke Interior <br />
-              <span className="italic text-neutral-400">Decor Services</span>
+              {title}
             </h2>
           </div>
-          <p
-            className="text-base md:text-lg text-neutral-400 max-w-sm leading-relaxed"
-            style={{ fontFamily: 'var(--font-cormorant)' }}
-          >
-            Based in Alberton, B-Interiors provides end-to-end decor solutions
-            for discerning clients — from residential sanctuaries to corporate
-            boardrooms.
-          </p>
         </motion.div>
 
         {/* Grid — image + services */}
@@ -151,7 +148,7 @@ export const ServiceSection = ({ image, consultImage }: ServiceSectionProps) => 
                     duration: 0.8,
                     ease: ease,
                   }}
-                  className="group border-b border-neutral-200 py-8 md:py-10 flex items-start gap-6 md:gap-8 cursor-default hover:bg-neutral-50/60 transition-colors duration-500 px-4 -mx-4"
+                  className="group -mx-4 flex cursor-default items-start gap-5 border-b border-neutral-200 px-4 py-6 transition-colors duration-500 hover:bg-neutral-50/60 md:gap-7 md:py-7"
                 >
                   {/* Step number */}
                   <span
@@ -196,7 +193,7 @@ export const ServiceSection = ({ image, consultImage }: ServiceSectionProps) => 
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.5, duration: 0.7, ease: ease }}
-              className="mt-12"
+              className="mt-9"
             >
               <Link
                 to="/services"

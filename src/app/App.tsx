@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { Suspense, lazy, useState, useEffect, useCallback, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router';
 import { Toaster, toast } from 'sonner';
 import { ThemeProvider, useTheme } from 'next-themes';
@@ -8,46 +8,96 @@ import { Cart } from './components/Cart';
 import { Wishlist } from './components/Wishlist';
 import { QuickView } from './components/QuickView';
 import { BackToTop } from './components/BackToTop';
-import { supabase } from '../../utils/supabase/client';
-import { projectId, publicAnonKey } from '../../utils/supabase/info';
+import { cloudflareAuth } from '../../utils/cloudflare/client';
 import { AnimatePresence, motion } from 'motion/react';
-const logo = "/logo.png";
-
 import { MobileBottomNav } from './components/MobileBottomNav';
 import { CraftsmanshipStory } from './components/CraftsmanshipStory';
 import { GlobalSearch } from './components/GlobalSearch';
 import { CampaignBanner } from './components/CampaignBanner';
 import { WhatsAppWidget } from './components/WhatsAppWidget';
+import { PageMotion } from './components/PageMotion';
+import { DEFAULT_HOMEPAGE_CONTENT, HomepageContent, normalizeHomepageContent } from './content/homepage';
+import { bundledProductCatalogue, normalizeProducts, resolveProductCatalogue } from './data/productCatalogue';
 
-// Pages
-import { Home } from './pages/Home';
-import { Shop } from './pages/Shop';
-import { Services } from './pages/Services';
-import { About } from './pages/About';
-import { Contact } from './pages/Contact';
-import { ProductDetail } from './pages/ProductDetail';
-import { Checkout } from './pages/Checkout';
-import { ThankYou } from './pages/ThankYou';
-import { VendorApplication } from './pages/VendorApplication';
-import { Admin } from './pages/Admin';
-import { Login } from './pages/Login';
-import { Account } from './pages/Account';
-import { DynamicPage } from './pages/DynamicPage';
+const API = `/api`;
 
-const ScrollToTop = () => {
+const RouteMetadata = ({ products }: { products: any[] }) => {
   const { pathname } = useLocation();
   useEffect(() => {
+    const productMatch = pathname.match(/^\/product\/([^/]+)/);
+    const product = productMatch ? products.find((item) => item.id === decodeURIComponent(productMatch[1])) : null;
+    const pages: Record<string, { title: string; description: string; keywords: string; noIndex?: boolean }> = {
+      '/': { title: 'Luxury Furniture & Interior Design in Alberton | B-Interiors', description: 'Shop considered furniture, home décor and bespoke interior design from B-Interiors in Alberton, South Africa. Explore our collection and book a consultation.', keywords: 'interior design Alberton, furniture South Africa, luxury home décor, bespoke furniture, interior designers Johannesburg' },
+      '/shop': { title: 'Shop Furniture & Home Décor | B-Interiors', description: 'Discover furniture and home décor curated by B-Interiors. Shop considered pieces for living rooms, bedrooms and every space in your South African home.', keywords: 'shop furniture South Africa, home décor online, luxury furniture, living room furniture, bedroom décor' },
+      '/services': { title: 'Interior Design & Bespoke Furniture Services | B-Interiors', description: 'Plan your space with B-Interiors. Explore interior design, bespoke furniture and furnishing services from our Alberton studio.', keywords: 'interior design services Alberton, bespoke furniture, interior styling Johannesburg, design consultation' },
+      '/about': { title: 'Our Story | B-Interiors Alberton', description: 'Meet B-Interiors, an Alberton design studio creating considered furniture, interiors and objects with a focus on material and craftsmanship.', keywords: 'B-Interiors Alberton, interior design studio South Africa, furniture craftsmanship' },
+      '/contact': { title: 'Contact Our Alberton Interior Design Studio | B-Interiors', description: 'Visit or contact B-Interiors at 35 Radio Street, Alberton. Book a design consultation for furniture, décor or an interior project.', keywords: 'contact interior designer Alberton, B-Interiors address, interior design consultation Johannesburg' },
+      '/become-a-partner': { title: 'Become a B-Interiors Partner', description: 'Apply to partner with B-Interiors and collaborate with our interior design and furniture studio.', keywords: 'B-Interiors partners, furniture supplier partnership', noIndex: true },
+      '/checkout': { title: 'Checkout | B-Interiors', description: 'Complete your B-Interiors order securely.', keywords: '', noIndex: true },
+      '/thank-you': { title: 'Thank You | B-Interiors', description: 'Thank you for choosing B-Interiors.', keywords: '', noIndex: true },
+      '/login': { title: 'Sign In | B-Interiors', description: 'Sign in to your B-Interiors account.', keywords: '', noIndex: true },
+      '/account': { title: 'Your Account | B-Interiors', description: 'Manage your B-Interiors account and orders.', keywords: '', noIndex: true },
+      '/admin': { title: 'Store Administration | B-Interiors', description: 'B-Interiors store administration.', keywords: '', noIndex: true },
+    };
+    const metadata = product
+      ? { title: `${product.name} | B-Interiors`, description: `${product.name}${product.description ? ` — ${String(product.description).replace(/<[^>]*>/g, '').slice(0, 135)}` : ' from B-Interiors. Shop considered furniture and home décor, delivered from our Alberton studio.'}`, keywords: `${product.name}, furniture South Africa, home décor, B-Interiors` }
+      : pages[pathname] ?? { title: 'B-Interiors | Furniture & Interior Design, Alberton', description: 'Discover furniture, home décor and interior design by B-Interiors in Alberton, South Africa.', keywords: 'B-Interiors, interior design Alberton, furniture South Africa', noIndex: pathname.startsWith('/p/') };
+    const setMeta = (selector: string, attribute: string, value: string) => {
+      let element = document.head.querySelector<HTMLMetaElement>(selector);
+      if (!element) { element = document.createElement('meta'); document.head.appendChild(element); }
+      element.setAttribute(attribute, value);
+    };
+    document.title = metadata.title;
+    setMeta('meta[name="description"]', 'content', metadata.description);
+    setMeta('meta[name="keywords"]', 'content', metadata.keywords);
+    setMeta('meta[name="robots"]', 'content', metadata.noIndex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large');
+    setMeta('meta[property="og:title"]', 'content', metadata.title);
+    setMeta('meta[property="og:description"]', 'content', metadata.description);
+    setMeta('meta[property="og:url"]', 'content', window.location.href);
+    setMeta('meta[property="og:type"]', 'content', product ? 'product' : 'website');
+    setMeta('meta[property="og:image"]', 'content', new URL(product?.image_url || product?.image || '/hero-pillows.png', window.location.origin).href);
+    setMeta('meta[name="twitter:title"]', 'content', metadata.title);
+    setMeta('meta[name="twitter:description"]', 'content', metadata.description);
+    let canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+    if (!canonical) { canonical = document.createElement('link'); canonical.rel = 'canonical'; document.head.appendChild(canonical); }
+    canonical.href = window.location.href.split(/[?#]/)[0];
+  }, [pathname, products]);
+  return null;
+};
+
+// Pages
+const Home = lazy(() => import('./pages/Home').then((module) => ({ default: module.Home })));
+const Shop = lazy(() => import('./pages/Shop').then((module) => ({ default: module.Shop })));
+const Services = lazy(() => import('./pages/Services').then((module) => ({ default: module.Services })));
+const About = lazy(() => import('./pages/About').then((module) => ({ default: module.About })));
+const Contact = lazy(() => import('./pages/Contact').then((module) => ({ default: module.Contact })));
+const ProductDetail = lazy(() => import('./pages/ProductDetail').then((module) => ({ default: module.ProductDetail })));
+const Checkout = lazy(() => import('./pages/Checkout').then((module) => ({ default: module.Checkout })));
+const ThankYou = lazy(() => import('./pages/ThankYou').then((module) => ({ default: module.ThankYou })));
+const VendorApplication = lazy(() => import('./pages/VendorApplication').then((module) => ({ default: module.VendorApplication })));
+const Admin = lazy(() => import('./pages/Admin').then((module) => ({ default: module.Admin })));
+const Login = lazy(() => import('./pages/Login').then((module) => ({ default: module.Login })));
+const Account = lazy(() => import('./pages/Account').then((module) => ({ default: module.Account })));
+const DynamicPage = lazy(() => import('./pages/DynamicPage').then((module) => ({ default: module.DynamicPage })));
+
+const ScrollToTop = () => {
+  const { pathname, hash } = useLocation();
+  useEffect(() => {
+    if (hash) {
+      const timer = window.setTimeout(() => document.querySelector(hash)?.scrollIntoView(), 500);
+      return () => window.clearTimeout(timer);
+    }
     window.scrollTo(0, 0);
-  }, [pathname]);
+  }, [pathname, hash]);
   return null;
 };
 
 const AppContent = () => {
   const { theme } = useTheme();
-  const [products, setProducts] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [showPreloader, setShowPreloader] = useState(true);
-  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [products, setProducts] = useState<any[]>(bundledProductCatalogue);
+  const productChannelRef = useRef<BroadcastChannel | null>(null);
+  const [homepageContent, setHomepageContent] = useState<HomepageContent>(DEFAULT_HOMEPAGE_CONTENT);
+  const [loading, setLoading] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isWishlistOpen, setIsWishlistOpen] = useState(false);
   const [isCraftsmanshipOpen, setIsCraftsmanshipOpen] = useState(false);
@@ -65,6 +115,29 @@ const AppContent = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isBannerVisible, setIsBannerVisible] = useState(false);
 
+  const syncProducts = useCallback((nextProducts: any[], broadcast = false) => {
+    const normalized = normalizeProducts(nextProducts);
+    setProducts(normalized);
+    if (broadcast) productChannelRef.current?.postMessage(normalized);
+  }, []);
+
+  const handleAdminProductsChange = useCallback((nextProducts: any[]) => {
+    syncProducts(nextProducts, true);
+  }, [syncProducts]);
+
+  useEffect(() => {
+    if (typeof BroadcastChannel === 'undefined') return;
+    const channel = new BroadcastChannel('b-interiors-product-catalogue');
+    productChannelRef.current = channel;
+    channel.onmessage = (event) => {
+      if (Array.isArray(event.data)) syncProducts(event.data);
+    };
+    return () => {
+      productChannelRef.current = null;
+      channel.close();
+    };
+  }, [syncProducts]);
+
   // Global Cmd+K / Ctrl+K search shortcut
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -78,11 +151,11 @@ const AppContent = () => {
   }, []);
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    cloudflareAuth.getSession().then(({ data: { session } }) => {
       setSession(session);
     });
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    const { data: { subscription } } = cloudflareAuth.onAuthStateChange((_event, session) => {
       setSession(session);
     });
 
@@ -101,14 +174,6 @@ const AppContent = () => {
 
   const isAdminRoute = location.pathname === '/admin';
 
-  useEffect(() => {
-    if (!showPreloader) {
-      setIsTransitioning(true);
-      const timer = setTimeout(() => setIsTransitioning(false), 1200);
-      return () => clearTimeout(timer);
-    }
-  }, [location.pathname]);
-
   const toggleWishlist = (product: any) => {
     setWishlistItems(prev => {
       const exists = prev.find(item => item.id === product.id);
@@ -126,62 +191,36 @@ const AppContent = () => {
   };
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const res = await fetch(`https://${projectId}.supabase.co/functions/v1/make-server-710d82e2/products`, {
-          headers: { 
-            'Authorization': `Bearer ${publicAnonKey}`,
-            'apikey': publicAnonKey,
-            'Content-Type': 'application/json'
-          }
-        });
-        
-        if (!res.ok) {
-          const errorText = await res.text();
-          throw new Error(`Failed to fetch products: ${res.status} ${res.statusText} - ${errorText}`);
-        }
+    let active = true;
+    setLoading(true);
+    fetch(`${API}/products`, {
+      headers: { },
+    })
+      .then(async (response) => {
+        if (!response.ok) throw new Error('Catalogue request failed');
+        return {
+          data: await response.json(),
+          version: response.headers.get('X-Product-Catalogue-Version'),
+        };
+      })
+      .then(({ data, version }) => {
+        if (!active) return;
+        syncProducts(resolveProductCatalogue(data, version));
+      })
+      .catch(() => { if (active) syncProducts(bundledProductCatalogue); })
+      .finally(() => { if (active) setLoading(false); });
+    return () => { active = false; };
+  }, [syncProducts]);
 
-        const data = await res.json();
-        
-        if (!Array.isArray(data) || data.length < 5) {
-          console.log('Products missing or insufficient, seeding database...');
-          const seedRes = await fetch(`https://${projectId}.supabase.co/functions/v1/make-server-710d82e2/seed`, {
-            method: 'POST',
-            headers: { 
-              'Authorization': `Bearer ${publicAnonKey}`,
-              'apikey': publicAnonKey,
-              'Content-Type': 'application/json'
-            }
-          });
-          
-          if (!seedRes.ok) console.warn('Seeding failed, using initial products');
-
-          const reRes = await fetch(`https://${projectId}.supabase.co/functions/v1/make-server-710d82e2/products`, {
-            headers: { 
-              'Authorization': `Bearer ${publicAnonKey}`,
-              'apikey': publicAnonKey
-            }
-          });
-          
-          if (reRes.ok) {
-            const reData = await reRes.json();
-            setProducts(Array.isArray(reData) ? reData : []);
-          }
-        } else {
-          setProducts(data);
-        }
-      } catch (err) {
-        console.error('Critical: Failed to fetch products:', err);
-        // Fallback to empty or dummy if absolutely necessary to prevent crash
-        setProducts([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProducts();
-    const timer = setTimeout(() => setShowPreloader(false), 2500);
-    return () => clearTimeout(timer);
+  useEffect(() => {
+    let active = true;
+    fetch(`${API}/homepage-content`, {
+      headers: { },
+    })
+      .then((response) => response.ok ? response.json() : null)
+      .then((data) => { if (active && data) setHomepageContent(normalizeHomepageContent(data)); })
+      .catch(() => { /* Built-in homepage content remains available offline. */ });
+    return () => { active = false; };
   }, []);
 
   const addToCart = (product: any) => {
@@ -202,85 +241,17 @@ const AppContent = () => {
 
   return (
     <div className="min-h-screen bg-white dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100 transition-colors duration-500 relative overflow-x-hidden">
-      <AnimatePresence>
-        {showPreloader && (
-          <motion.div
-            key="preloader"
-            initial={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.8, ease: "easeInOut" }}
-            className="fixed inset-0 z-[100] bg-neutral-900 flex items-center justify-center overflow-hidden"
-          >
-            <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 1.2, ease: "easeOut" }}
-              className="relative flex flex-col items-center"
-            >
-              <div className="w-32 h-32 mb-8 relative">
-                <motion.div
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                  className="absolute inset-0 border-2 border-neutral-700 rounded-full border-t-white"
-                />
-                <div className="absolute inset-2 bg-black rounded-full overflow-hidden p-4">
-                  <img src={logo} alt="B-Interiors" className="w-full h-full object-contain" />
-                </div>
-              </div>
-              <motion.div
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.5, duration: 0.8 }}
-                className="text-center"
-              >
-                <h2 className="text-white text-2xl font-serif tracking-[0.3em] uppercase mb-2">B-Interiors</h2>
-                <div className="h-0.5 w-12 bg-white mx-auto" />
-                <p className="text-neutral-500 text-[10px] uppercase tracking-[0.5em] mt-4">Alberton Est. 2026</p>
-              </motion.div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      <AnimatePresence>
-        {isTransitioning && (
-          <motion.div
-            key="page-transition"
-            initial={{ x: "100%" }}
-            animate={{ x: "0%" }}
-            exit={{ x: "-100%" }}
-            transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
-            className="fixed inset-0 z-[90] bg-neutral-900 flex items-center justify-center pointer-events-none"
-          >
-            <div className="flex flex-col items-center">
-              <div className="w-16 h-16 mb-4 relative opacity-40">
-                <motion.div
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-                  className="absolute inset-0 border border-neutral-700 rounded-full border-t-white"
-                />
-                <div className="absolute inset-1 bg-black rounded-full overflow-hidden p-2">
-                  <img src={logo} alt="" className="w-full h-full object-contain" />
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
       <ScrollToTop />
+      <RouteMetadata products={products} />
       <BackToTop />
       <Toaster position="top-center" richColors theme={theme as 'light' | 'dark' | 'system'} />
       
       {/* Global Grain Overlay */}
-      {!isAdminRoute && (
-        <div className="fixed inset-0 z-[9999] pointer-events-none opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-overlay" />
-      )}
-
       {!isAdminRoute && <CampaignBanner onVisibilityChange={setIsBannerVisible} />}
 
       {!isAdminRoute && (
         <Navbar 
+          products={products}
           cartCount={cartItems.reduce((a, b) => a + b.quantity, 0)} 
           wishlistCount={wishlistItems.length}
           onOpenCart={() => setIsCartOpen(true)} 
@@ -318,22 +289,24 @@ const AppContent = () => {
 
       <main className="relative z-10" style={{ position: 'relative' }}>
         <AnimatePresence mode="wait">
+          <Suspense fallback={<div className="min-h-[60vh]" aria-label="Loading page" />}>
           <Routes location={location} key={location.pathname}>
-            <Route path="/" element={<Home products={products} onAddToCart={addToCart} onToggleWishlist={toggleWishlist} onQuickView={setQuickViewProduct} wishlistItems={wishlistItems} />} />
-            <Route path="/shop" element={<Shop products={products} onAddToCart={addToCart} onToggleWishlist={toggleWishlist} onQuickView={setQuickViewProduct} wishlistItems={wishlistItems} loading={loading} />} />
-            <Route path="/product/:id" element={<ProductDetail products={products} onAddToCart={addToCart} onToggleWishlist={toggleWishlist} wishlistItems={wishlistItems} />} />
-            <Route path="/checkout" element={<Checkout items={cartItems} total={cartItems.reduce((a, b) => a + (b.price * b.quantity), 0)} onClearCart={() => setCartItems([])} />} />
-            <Route path="/thank-you" element={<ThankYou />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/become-a-partner" element={<VendorApplication />} />
-            <Route path="/admin" element={<Admin />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/account" element={<Account />} />
-            <Route path="/p/:slug" element={<DynamicPage />} />
-            <Route path="*" element={<DynamicPage />} />
+            <Route path="/" element={<PageMotion><Home products={products} onAddToCart={addToCart} onToggleWishlist={toggleWishlist} onQuickView={setQuickViewProduct} wishlistItems={wishlistItems} homepageContent={homepageContent} /></PageMotion>} />
+            <Route path="/shop" element={<PageMotion><Shop products={products} onAddToCart={addToCart} onToggleWishlist={toggleWishlist} onQuickView={setQuickViewProduct} wishlistItems={wishlistItems} loading={loading} /></PageMotion>} />
+            <Route path="/product/:id" element={<PageMotion><ProductDetail products={products} onAddToCart={addToCart} onToggleWishlist={toggleWishlist} wishlistItems={wishlistItems} /></PageMotion>} />
+            <Route path="/checkout" element={<PageMotion><Checkout items={cartItems} total={cartItems.reduce((a, b) => a + (b.price * b.quantity), 0)} onClearCart={() => setCartItems([])} /></PageMotion>} />
+            <Route path="/thank-you" element={<PageMotion><ThankYou /></PageMotion>} />
+            <Route path="/services" element={<PageMotion><Services /></PageMotion>} />
+            <Route path="/about" element={<PageMotion><About /></PageMotion>} />
+            <Route path="/contact" element={<PageMotion><Contact /></PageMotion>} />
+            <Route path="/become-a-partner" element={<PageMotion><VendorApplication /></PageMotion>} />
+            <Route path="/admin" element={<Admin products={products} onProductsChange={handleAdminProductsChange} />} />
+            <Route path="/login" element={<PageMotion><Login /></PageMotion>} />
+            <Route path="/account" element={<PageMotion><Account /></PageMotion>} />
+            <Route path="/p/:slug" element={<PageMotion><DynamicPage /></PageMotion>} />
+            <Route path="*" element={<PageMotion><DynamicPage /></PageMotion>} />
           </Routes>
+          </Suspense>
         </AnimatePresence>
       </main>
 

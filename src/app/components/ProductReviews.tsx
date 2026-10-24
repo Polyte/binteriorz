@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Star, Send, User, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
-import { projectId, publicAnonKey } from '../../../utils/supabase/info';
 
-const API = `https://${projectId}.supabase.co/functions/v1/make-server-710d82e2`;
-const hdrs = { 'Content-Type': 'application/json', Authorization: `Bearer ${publicAnonKey}`, apikey: publicAnonKey };
+const API = `/api`;
+const hdrs = { 'Content-Type': 'application/json', };
 
 interface Review { id: string; productId: string; name: string; rating: number; comment: string; createdAt: string; }
 

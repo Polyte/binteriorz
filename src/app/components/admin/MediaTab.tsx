@@ -3,9 +3,8 @@ import { motion } from 'motion/react';
 import { Image, Upload, RefreshCw, Copy, Trash2, FileText, Film } from 'lucide-react';
 import { toast } from 'sonner';
 import { useAdmin, formatBytes } from './AdminContext';
-import { projectId, publicAnonKey } from '../../../../utils/supabase/info';
 
-const API = `https://${projectId}.supabase.co/functions/v1/make-server-710d82e2`;
+const API = `/api`;
 
 export const MediaTab = () => {
   const {

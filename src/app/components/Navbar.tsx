@@ -16,6 +16,7 @@ const navLinks = [
 ];
 
 interface NavbarProps {
+  products: any[];
   cartCount: number;
   wishlistCount: number;
   onOpenCart: () => void;
@@ -25,7 +26,7 @@ interface NavbarProps {
   bannerVisible?: boolean;
 }
 
-export const Navbar = ({ cartCount, wishlistCount, onOpenCart, onOpenWishlist, onOpenSearch, isAdmin, bannerVisible }: NavbarProps) => {
+export const Navbar = ({ products, cartCount, wishlistCount, onOpenCart, onOpenWishlist, onOpenSearch, isAdmin, bannerVisible }: NavbarProps) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
@@ -82,16 +83,17 @@ export const Navbar = ({ cartCount, wishlistCount, onOpenCart, onOpenWishlist, o
 
   return (
     <nav 
-      className={`fixed left-0 right-0 z-50 transition-all duration-700 ${
+      className={`fixed left-0 right-0 z-50 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-500 ${
         isTransparent 
-          ? 'bg-transparent border-transparent' 
-          : 'bg-white/90 dark:bg-neutral-950/90 backdrop-blur-3xl border-b border-neutral-100 dark:border-neutral-800'
+          ? 'bg-transparent border-b border-white/25'
+          : 'bg-sky-50/25 dark:bg-slate-900/20 backdrop-blur-2xl backdrop-saturate-150 border-b border-white/35 dark:border-white/15 shadow-[0_12px_40px_-24px_rgba(12,30,45,.5)]'
       }`}
       style={{ top: bannerVisible ? 'var(--banner-height, 44px)' : '0px' }}
       onMouseLeave={handleMouseLeave}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-24">
+      {!isTransparent && <div aria-hidden="true" className="nav-glass-sheen pointer-events-none absolute inset-0 z-0 overflow-hidden" />}
+      <div className="relative z-10 max-w-[1480px] mx-auto px-6 sm:px-8 lg:px-12">
+        <div className={`flex justify-between items-center transition-[height] duration-500 ${isScrolled ? 'h-[4.5rem]' : 'h-24'}`}>
           <div className="flex-shrink-0 flex items-center">
             <Link to="/" className="group flex items-center gap-4">
               <div className={`w-12 h-12 rounded-full flex items-center justify-center overflow-hidden border transition-all duration-700 group-hover:scale-110 group-hover:rotate-6 shadow-2xl ${
@@ -127,10 +129,10 @@ export const Navbar = ({ cartCount, wishlistCount, onOpenCart, onOpenWishlist, o
                       ? isActive(link.href)
                         ? 'text-white font-bold'
                         : 'text-white/60 hover:text-white'
-                      : isActive(link.href) 
-                        ? 'text-neutral-900 dark:text-white font-bold' 
-                        : 'text-neutral-400 hover:text-neutral-900 dark:hover:text-white'
-                  }`}
+                      : isActive(link.href)
+                        ? 'text-neutral-900 dark:text-white font-bold'
+                        : 'text-[#b0862f] hover:text-[#d4af37] dark:text-[#d4af37] dark:hover:text-[#f3d873]'
+                  } ${isScrolled ? '[text-shadow:0_1px_1px_rgba(255,255,255,.85),0_2px_6px_rgba(41,30,12,.32)] dark:[text-shadow:0_2px_7px_rgba(0,0,0,.8)]' : ''}`}
                 >
                   {link.name}
                   {link.isNew && (
@@ -169,7 +171,7 @@ export const Navbar = ({ cartCount, wishlistCount, onOpenCart, onOpenWishlist, o
                     isTransparent
                       ? 'text-white border-white/20 hover:bg-white/10'
                       : 'text-neutral-900 dark:text-white border-neutral-200 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-900'
-                  }`}
+                  } ${isScrolled ? '[text-shadow:0_1px_1px_rgba(255,255,255,.85),0_2px_6px_rgba(41,30,12,.3)] dark:[text-shadow:0_2px_7px_rgba(0,0,0,.8)]' : ''}`}
                 >
                   Console
                 </Link>
@@ -299,6 +301,7 @@ export const Navbar = ({ cartCount, wishlistCount, onOpenCart, onOpenWishlist, o
           <MegaMenu 
             isOpen={isMegaMenuOpen} 
             onClose={() => setIsMegaMenuOpen(false)} 
+            products={products}
           />
         )}
       </AnimatePresence>

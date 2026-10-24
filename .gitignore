@@ -1,0 +1,20 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Local Cloudflare / Wrangler state (local D1, KV, R2 emulation)
+.wrangler/
+
+# Secrets & local env
+.dev.vars
+.dev.vars.*
+.env
+.env.*
+!.env.example
+
+# Large import artifacts (regenerated via scripts/)
+catalogue-import/*.sqlite
+
+# Logs & OS cruft
+*.log
+.DS_Store

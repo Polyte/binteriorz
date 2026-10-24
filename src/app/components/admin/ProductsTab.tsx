@@ -38,16 +38,18 @@ export const ProductsTab = () => {
             <thead className="bg-neutral-50 border-b border-neutral-200">
               <tr>
                 <th className="px-4 py-3 text-[10px] uppercase tracking-widest font-bold text-neutral-500">Product</th>
+                <th className="px-4 py-3 text-[10px] uppercase tracking-widest font-bold text-neutral-500">SKU / Barcode</th>
                 <th className="px-4 py-3 text-[10px] uppercase tracking-widest font-bold text-neutral-500">Category</th>
-                <th className="px-4 py-3 text-[10px] uppercase tracking-widest font-bold text-neutral-500">Material</th>
-                <th className="px-4 py-3 text-[10px] uppercase tracking-widest font-bold text-neutral-500">Price</th>
-                <th className="px-4 py-3 text-[10px] uppercase tracking-widest font-bold text-neutral-500">Rooms</th>
-                <th className="px-4 py-3 text-[10px] uppercase tracking-widest font-bold text-neutral-500">Stock</th>
+                <th className="px-4 py-3 text-[10px] uppercase tracking-widest font-bold text-neutral-500">Color & Finish</th>
+                <th className="px-4 py-3 text-[10px] uppercase tracking-widest font-bold text-neutral-500 text-right">Cost</th>
+                <th className="px-4 py-3 text-[10px] uppercase tracking-widest font-bold text-neutral-500 text-right">Selling</th>
+                <th className="px-4 py-3 text-[10px] uppercase tracking-widest font-bold text-neutral-500">Availability</th>
+                <th className="px-4 py-3 text-[10px] uppercase tracking-widest font-bold text-neutral-500 text-center">Images</th>
                 <th className="px-4 py-3 text-[10px] uppercase tracking-widest font-bold text-neutral-500 text-right">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-neutral-100">
-              {products.filter(p => !searchQuery || p.name?.toLowerCase().includes(searchQuery.toLowerCase())).map((product: any) => (
+              {products.filter(p => !searchQuery || [p.name, p.sku, p.internalSku, p.barcode, p.category].some((value) => value?.toLowerCase().includes(searchQuery.toLowerCase()))).map((product: any) => (
                 <tr key={product.id} className="hover:bg-neutral-50 transition-colors">
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-3">
@@ -62,7 +64,8 @@ export const ProductsTab = () => {
                         )}
                       </div>
                       <div className="truncate max-w-[200px]">
-                        <span className="text-sm font-medium text-neutral-900">{product.name}</span>
+                        <span className="block text-sm font-medium text-neutral-900">{product.name}</span>
+                        <span className="text-[10px] text-neutral-400">{product.originalId || product.id}</span>
                         {product.vendorId && (() => {
                           const v = vendors.find((vn: any) => vn.id === product.vendorId);
                           return v ? <p className="text-[10px] text-neutral-400 truncate">by {v.businessName}</p> : null;
@@ -70,30 +73,21 @@ export const ProductsTab = () => {
                       </div>
                     </div>
                   </td>
+                  <td className="px-4 py-3">
+                    <p className="whitespace-nowrap font-mono text-[11px] font-semibold text-neutral-700">{product.internalSku || product.sku || '—'}</p>
+                    <p className="mt-0.5 whitespace-nowrap font-mono text-[9px] text-neutral-400">{product.barcode || 'No barcode'}</p>
+                  </td>
                   <td className="px-4 py-3 text-xs text-neutral-500">{product.category}</td>
-                  <td className="px-4 py-3 text-xs text-neutral-500">{product.material}</td>
-                  <td className="px-4 py-3 text-sm font-medium">R {product.price?.toLocaleString()}</td>
                   <td className="px-4 py-3">
-                    {(product.rooms || []).length > 0 ? (
-                      <div className="flex flex-wrap gap-1">
-                        {product.rooms.slice(0, 2).map((r: string) => (
-                          <span key={r} className="text-[9px] font-medium bg-neutral-100 text-neutral-600 px-1.5 py-0.5 rounded">{r.replace(/-/g, ' ')}</span>
-                        ))}
-                        {product.rooms.length > 2 && <span className="text-[9px] text-neutral-400">+{product.rooms.length - 2}</span>}
-                      </div>
-                    ) : (
-                      <span className="text-[10px] text-neutral-300">--</span>
-                    )}
+                    <p className="text-xs text-neutral-600">{product.color || '—'}</p>
+                    <p className="mt-0.5 max-w-[170px] truncate text-[10px] text-neutral-400">{product.materialFinish || product.material || '—'}</p>
                   </td>
+                  <td className="px-4 py-3 text-right text-xs text-neutral-500">R {(Number(product.costPrice) || 0).toLocaleString()}</td>
+                  <td className="px-4 py-3 text-right text-sm font-semibold text-neutral-900">R {(Number(product.price) || 0).toLocaleString()}</td>
                   <td className="px-4 py-3">
-                    {typeof product.stock === 'number' ? (
-                      <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${product.stock <= 5 ? 'bg-red-50 text-red-600' : product.stock <= 20 ? 'bg-amber-50 text-amber-600' : 'bg-emerald-50 text-emerald-600'}`}>
-                        {product.stock}
-                      </span>
-                    ) : (
-                      <span className="text-xs text-neutral-300">--</span>
-                    )}
+                    <span className={`whitespace-nowrap rounded-full px-2 py-1 text-[9px] font-bold uppercase tracking-wide ${product.inStock === false ? 'bg-red-50 text-red-700' : 'bg-emerald-50 text-emerald-700'}`}>{product.availability || (product.inStock === false ? 'Unavailable' : 'Available')}</span>
                   </td>
+                  <td className="px-4 py-3 text-center text-xs font-semibold text-neutral-600">{product.imageCount ?? product.gallery?.length ?? 0}</td>
                   <td className="px-4 py-3 text-right">
                     <div className="flex justify-end gap-1">
                       <button onClick={() => { setEditingProduct(product); setProductGallery(product.gallery || (product.image ? [{ url: product.image, type: 'image', fileName: 'main' }] : [])); setProductModal(true); }} className="p-1.5 hover:bg-neutral-100 rounded text-neutral-400 hover:text-neutral-900 transition-colors"><Edit className="w-3.5 h-3.5" /></button>

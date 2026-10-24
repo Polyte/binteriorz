@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router';
 import { motion } from 'motion/react';
-import { projectId, publicAnonKey } from '../../../utils/supabase/info';
 import { BlockRenderer } from '../components/BlockRenderer';
 import { Loader2 } from 'lucide-react';
 
-const API = `https://${projectId}.supabase.co/functions/v1/make-server-710d82e2`;
+const API = `/api`;
 
 export const DynamicPage = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -25,8 +24,6 @@ export const DynamicPage = () => {
       try {
         const res = await fetch(`${API}/page/${pageSlug}`, {
           headers: {
-            'Authorization': `Bearer ${publicAnonKey}`,
-            'apikey': publicAnonKey,
           },
         });
         if (res.status === 404) {

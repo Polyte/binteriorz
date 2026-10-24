@@ -8,17 +8,17 @@ interface Room {
   name: string;
   slug: string;
   image: string;
+  video?: string;
   pieces: string;
   span: string;
   aspect: string;
 }
 
-const rooms: Room[] = [
+const defaultRooms: Room[] = [
   {
     name: 'Living Room',
     slug: 'living-room',
-    image:
-      'https://images.unsplash.com/photo-1728649060658-8e64dccf2711?auto=format&fit=crop&q=80&w=1200',
+    image: '/product-images/bi-057.jpg',
     pieces: 'Sofas, Coffee Tables, Shelving',
     span: 'md:col-span-2 md:row-span-2',
     aspect: 'aspect-[4/5] md:aspect-auto md:h-full',
@@ -26,8 +26,8 @@ const rooms: Room[] = [
   {
     name: 'Bedroom',
     slug: 'bedroom',
-    image:
-      'https://images.unsplash.com/photo-1560185128-e173042f79dd?auto=format&fit=crop&q=80&w=1080',
+    image: '/product-images/bi-100.jpg',
+    video: 'https://www.youtube.com/embed/gBv6sOXVG08?autoplay=1&mute=1&controls=0&loop=1&playlist=gBv6sOXVG08&rel=0&iv_load_policy=3&playsinline=1',
     pieces: 'Beds, Nightstands, Wardrobes',
     span: '',
     aspect: 'aspect-[4/3]',
@@ -35,8 +35,7 @@ const rooms: Room[] = [
   {
     name: 'Dining Room',
     slug: 'dining-room',
-    image:
-      'https://images.unsplash.com/photo-1663756915302-437cd36f4cfd?auto=format&fit=crop&q=80&w=1080',
+    image: '/product-images/bi-091.jpg',
     pieces: 'Dining Tables, Chairs, Sideboards',
     span: '',
     aspect: 'aspect-[4/3]',
@@ -44,8 +43,8 @@ const rooms: Room[] = [
   {
     name: 'Home Office',
     slug: 'home-office',
-    image:
-      'https://images.unsplash.com/photo-1699831112447-9c8c803f584b?auto=format&fit=crop&q=80&w=1080',
+    image: '/product-images/bi-072.jpg',
+    video: 'https://www.youtube.com/embed/pKwzfvIEiBs?autoplay=1&mute=1&controls=0&loop=1&playlist=pKwzfvIEiBs&start=30&rel=0&iv_load_policy=3&playsinline=1',
     pieces: 'Desks, Bookshelves, Task Chairs',
     span: '',
     aspect: 'aspect-[4/3]',
@@ -53,55 +52,65 @@ const rooms: Room[] = [
   {
     name: 'Outdoor',
     slug: 'outdoor',
-    image:
-      'https://images.unsplash.com/photo-1768527339600-3127e34acdad?auto=format&fit=crop&q=80&w=1080',
+    image: '/product-images/bi-115.jpg',
     pieces: 'Lounge Sets, Planters, Lighting',
     span: '',
     aspect: 'aspect-[4/3]',
   },
 ];
 
-export const ShopByRoom = () => {
+interface ShopByRoomProps {
+  rooms?: Array<Pick<Room, 'name' | 'slug' | 'image' | 'video' | 'pieces'>>;
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+}
+
+export const ShopByRoom = ({ rooms = defaultRooms, eyebrow = 'Shop by Room', title = 'Find Your Space', description = 'Every room tells a story. Explore curated collections designed for the way you live.' }: ShopByRoomProps) => {
+  const displayRooms: Room[] = rooms.map((room, index) => ({
+    ...room,
+    span: index === 0 ? 'md:col-span-2 md:row-span-2' : '',
+    aspect: index === 0 ? 'aspect-[4/5] md:aspect-auto md:h-full' : 'aspect-[16/10]',
+  }));
   return (
-    <section className="py-28 md:py-36 bg-white overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+    <section className="overflow-hidden bg-white py-16 md:py-20">
+      <div className="max-w-[1480px] mx-auto px-6 sm:px-8 lg:px-12">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 md:mb-20 gap-6"
+          className="mb-10 flex flex-col items-start justify-between gap-6 md:mb-12 md:flex-row md:items-end"
         >
           <div>
-            <div className="flex items-center gap-3 mb-6">
+            <div className="mb-5 flex items-center gap-3">
               <div className="w-10 h-px bg-neutral-300" />
               <span
                 className="text-[10px] uppercase tracking-[0.5em] text-neutral-400 font-bold"
                 style={{ fontFamily: 'var(--font-josefin)' }}
               >
-                Shop by Room
+                {eyebrow}
               </span>
             </div>
             <h2
               className="text-4xl md:text-5xl lg:text-6xl text-neutral-900 leading-tight tracking-tight"
               style={{ fontFamily: 'var(--font-playfair)' }}
             >
-              Find Your Space
+              {title}
             </h2>
           </div>
           <p
             className="text-base md:text-lg text-neutral-400 max-w-sm leading-relaxed"
             style={{ fontFamily: 'var(--font-cormorant)' }}
           >
-            Every room tells a story. Explore curated collections designed for
-            the way you live.
+            {description}
           </p>
         </motion.div>
 
         {/* Asymmetric Grid */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-3 md:gap-4 auto-rows-auto">
-          {rooms.map((room, i) => (
+          {displayRooms.map((room, i) => (
             <motion.div
               key={room.slug}
               initial={{ opacity: 0, y: 30 }}
@@ -118,15 +127,30 @@ export const ShopByRoom = () => {
                 to={`/shop?room=${room.slug}`}
                 className={`group relative block overflow-hidden ${room.aspect} h-full`}
               >
-                {/* Image */}
-                <ImageWithFallback
-                  src={room.image}
-                  alt={room.name}
-                  className="absolute inset-0 w-full h-full object-cover transition-all duration-[1.2s] ease-out group-hover:scale-110 grayscale-[0.1] group-hover:grayscale-0"
-                />
+                {/* Framed image with warm, editorial color on hover */}
+                <div className="absolute inset-0 overflow-hidden">
+                  {room.video ? (
+                    <iframe
+                      src={room.video}
+                      title={`${room.name} collection video`}
+                      loading="lazy"
+                      tabIndex={-1}
+                      aria-hidden="true"
+                      allow="autoplay; encrypted-media; picture-in-picture"
+                      className="pointer-events-none absolute left-1/2 top-1/2 h-full w-[112%] max-w-none -translate-x-1/2 -translate-y-1/2 transition-transform duration-1000 ease-out group-hover:scale-[1.04]"
+                    />
+                  ) : (
+                    <ImageWithFallback
+                      src={room.image}
+                      alt={room.name}
+                      className="h-full w-full object-cover transition-[transform,filter] duration-1000 ease-out group-hover:scale-[1.07] group-hover:saturate-[1.12] group-hover:contrast-[1.03]"
+                    />
+                  )}
+                </div>
+                <div aria-hidden="true" className="pointer-events-none absolute inset-3 border border-white/0 transition-all duration-700 group-hover:inset-5 group-hover:border-white/35" />
 
                 {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent opacity-70 transition-opacity duration-700 group-hover:opacity-95" />
 
                 {/* Content */}
                 <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-end">

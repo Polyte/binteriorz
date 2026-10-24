@@ -1,20 +1,15 @@
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'motion/react';
+import React, { useMemo } from 'react';
+import { motion, useReducedMotion } from 'motion/react';
 import { HeroCarousel } from '../components/HeroCarousel';
 import { Marquee } from '../components/Marquee';
 import { PressStrip } from '../components/PressStrip';
-import { CategoryCard } from '../components/CategoryCard';
 import { ProductSlider } from '../components/ProductSlider';
-import { ServiceSection } from '../components/ServiceSection';
-import { NewsletterParallax } from '../components/NewsletterParallax';
-import { StatsBar } from '../components/StatsBar';
 import { FeaturedSpotlight } from '../components/FeaturedSpotlight';
-import { MoodGallery } from '../components/MoodGallery';
 import { ShopByRoom } from '../components/ShopByRoom';
-import { RecentlyViewed } from '../components/RecentlyViewed';
-import { ArrowRight, Gem, Truck, Shield, TreePine } from 'lucide-react';
-const logo = "/logo.png";
+import { NewsletterPopup } from '../components/NewsletterPopup';
+import { ArrowRight, MessageCircle, DraftingCompass, Hammer, PackageCheck } from 'lucide-react';
 import { Link } from 'react-router';
+import { HomepageContent, normalizeHomepageContent } from '../content/homepage';
 
 interface HomeProps {
   products: any[];
@@ -22,52 +17,20 @@ interface HomeProps {
   onToggleWishlist: (p: any) => void;
   onQuickView: (p: any) => void;
   wishlistItems: any[];
+  homepageContent?: HomepageContent | null;
 }
-
-const trustPillars = [
-  { icon: Gem, label: 'Studio Made', sub: 'Alberton, SA', accent: 'from-amber-100 to-amber-50', border: 'border-amber-200/60' },
-  { icon: TreePine, label: 'Ethical Source', sub: 'Certified Timber', accent: 'from-emerald-100 to-emerald-50', border: 'border-emerald-200/60' },
-  { icon: Truck, label: 'White Glove', sub: 'Premium Logistics', accent: 'from-blue-100 to-blue-50', border: 'border-blue-200/60' },
-  { icon: Shield, label: 'Lifetime Care', sub: 'Heirloom Guarantee', accent: 'from-violet-100 to-violet-50', border: 'border-violet-200/60' },
-];
-
-const moodImages = [
-  'https://images.unsplash.com/photo-1767800765630-f5603a47df68?auto=format&fit=crop&q=80&w=1080',
-  'https://images.unsplash.com/photo-1765371515651-faa86f08f0ae?auto=format&fit=crop&q=80&w=1080',
-  'https://images.unsplash.com/photo-1760564019103-81cd3c225cd1?auto=format&fit=crop&q=80&w=1080',
-  'https://images.unsplash.com/photo-1765828313695-cd872255352f?auto=format&fit=crop&q=80&w=1080',
-  'https://images.unsplash.com/photo-1762418362644-a4daad168fb9?auto=format&fit=crop&q=80&w=1080',
-  'https://images.unsplash.com/photo-1762423656649-24aaf046402e?auto=format&fit=crop&q=80&w=1080',
-];
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-export const Home = ({ products, onAddToCart, onToggleWishlist, onQuickView, wishlistItems }: HomeProps) => {
-  const trustRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress: trustScroll } = useScroll({
-    target: trustRef,
-    offset: ['start end', 'end start'],
-  });
-  const trustY = useTransform(trustScroll, [0, 1], [30, -30]);
+export const Home = ({ products, onAddToCart, onToggleWishlist, onQuickView, wishlistItems, homepageContent }: HomeProps) => {
+  const home = useMemo(() => normalizeHomepageContent(homepageContent), [homepageContent]);
+  const prefersReducedMotion = useReducedMotion();
 
-  const staticImages = {
-    newsletter: "https://images.unsplash.com/photo-1765745518739-bd8225374713?auto=format&fit=crop&q=80&w=2000",
-    service: "https://images.unsplash.com/photo-1542904990-579199bba13a?auto=format&fit=crop&q=80&w=1080",
-    featured: "https://images.unsplash.com/photo-1661446569716-86e93bf267d3?auto=format&fit=crop&q=80&w=1080",
-    featuredDetail: "https://images.unsplash.com/photo-1658264250874-52f403e2ebaa?auto=format&fit=crop&q=80&w=1080",
-    categories: {
-      tables: "https://images.unsplash.com/photo-1635826082437-1123d04d221e?auto=format&fit=crop&q=80&w=1080",
-      lighting: "https://images.unsplash.com/photo-1518893883800-45cd0954574b?auto=format&fit=crop&q=80&w=1080",
-      ornaments: "https://images.unsplash.com/photo-1734600891278-cea15105639f?auto=format&fit=crop&q=80&w=1080",
-      vintage: "https://images.unsplash.com/photo-1629470937866-f8b6b7e98889?auto=format&fit=crop&q=80&w=1080"
-    }
-  };
-
-  const categories = [
-    { title: 'Custom Tables', image: staticImages.categories.tables, href: '/shop' },
-    { title: 'Artisanal Lighting', image: staticImages.categories.lighting, href: '/shop' },
-    { title: 'Bespoke Ornaments', image: staticImages.categories.ornaments, href: '/shop' },
-    { title: 'Vintage Classics', image: staticImages.categories.vintage, href: '/shop' },
+  const customOrderSteps = [
+    { icon: MessageCircle, number: '01', title: 'Share your brief', text: 'Tell us what you need, where it will live, and what matters most to you.' },
+    { icon: DraftingCompass, number: '02', title: 'Shape the details', text: 'We refine dimensions, finishes, materials, and the details that make it yours.' },
+    { icon: Hammer, number: '03', title: 'Made with care', text: 'Our team brings the approved design to life with considered craftsmanship.' },
+    { icon: PackageCheck, number: '04', title: 'Delivered to you', text: 'We coordinate delivery and installation so your new piece feels at home.' },
   ];
 
   return (
@@ -79,235 +42,141 @@ export const Home = ({ products, onAddToCart, onToggleWishlist, onQuickView, wis
       style={{ position: 'relative' }}
     >
       {/* ═══ 1. HERO ═══ */}
-      <HeroCarousel />
+      {home.sections.hero.enabled && (
+        <HeroCarousel slides={home.sections.hero.slides.filter((slide) => slide.id !== 'material-stories').map((slide) => ({
+          ...slide,
+          video: slide.id === 'cinematic-living'
+            ? 'https://www.youtube.com/embed/1v5hcZpOMUI?autoplay=1&mute=1&controls=0&loop=1&playlist=1v5hcZpOMUI&start=8&rel=0&iv_load_policy=3&vq=hd1080&enablejsapi=1&playsinline=1'
+            : slide.id === 'masterful-artistry'
+              ? 'https://www.youtube.com/embed/NErMeyBrYTE?autoplay=1&mute=1&controls=0&loop=1&playlist=NErMeyBrYTE&rel=0&iv_load_policy=3&vq=hd1080&enablejsapi=1&playsinline=1'
+              : slide.video,
+          image: slide.image.url,
+          imageAlt: slide.image.alt,
+        }))} />
+      )}
 
-      {/* ═══ 2. MARQUEE — Brand Promise ═══ */}
+      {/* ═══ 2. LIVE PRODUCT CATALOGUE ═══ */}
+      {home.sections.catalogue.enabled && (
+        <>
+          <ProductSlider
+            title={home.sections.catalogue.title}
+            products={products}
+            onAddToCart={onAddToCart}
+            onToggleWishlist={onToggleWishlist}
+            onQuickView={onQuickView}
+            wishlistItems={wishlistItems}
+          />
+          <NewsletterPopup />
+        </>
+      )}
+
+      {/* A practical guide for customers considering a bespoke piece */}
+      {home.sections.bespoke.enabled && <section
+        className="relative z-[30] w-full overflow-visible bg-[#171510] bg-cover bg-center bg-fixed py-16 text-white md:py-20"
+        style={{ backgroundImage: "url('https://images.unsplash.com/photo-1696761868245-3e96dfb8620b?auto=format&fit=crop&q=85&w=2200')" }}
+      >
+        <div className="pointer-events-none absolute inset-x-0 top-0 z-[9999] mx-auto hidden max-w-[1480px] px-6 sm:px-8 md:block lg:px-12">
+          <img
+            data-wobble-reveal
+            src="/bespoke-cushion.png"
+            alt="Art cushion featuring an African woman in an orange headwrap"
+            loading="lazy"
+            decoding="async"
+            className="w-[340px] -translate-x-[52%] -translate-y-[34%] select-none drop-shadow-[0_26px_32px_rgba(0,0,0,.38)] lg:w-[410px]"
+          />
+        </div>
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(17,15,12,.78)_0%,rgba(17,15,12,.62)_48%,rgba(17,15,12,.46)_100%)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/5 via-transparent to-black/25" />
+        <motion.div
+          aria-hidden="true"
+          animate={prefersReducedMotion ? { opacity: 0.82, scale: 1 } : {
+            opacity: [0.62, 0.92, 0.68, 1, 0.62],
+            scale: [0.94, 1.06, 0.98, 1.08, 0.94],
+          }}
+          transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
+          className="pointer-events-none absolute left-1/2 top-1/2 z-[1] h-[42rem] w-[42rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(255,239,195,.72)_0%,rgba(255,213,143,.48)_13%,rgba(255,181,92,.24)_32%,rgba(217,145,67,.1)_52%,transparent_72%)] blur-3xl mix-blend-screen"
+        />
+        <div className="absolute -right-24 -top-28 h-96 w-96 rounded-full border border-white/10" />
+        <div className="absolute -right-8 -top-12 h-64 w-64 rounded-full border border-white/10" />
+        <div className="relative z-10 mx-auto max-w-[1480px] px-6 sm:px-8 lg:px-12">
+          <motion.div
+            initial={{ opacity: 0, y: 22 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.65, ease }}
+            className="mb-10 flex flex-col justify-between gap-7 md:mb-12 md:flex-row md:items-end"
+          >
+            <div className="max-w-2xl md:ml-44 lg:ml-56">
+              <div className="mb-5 flex items-center gap-3">
+                <div className="h-px w-10 bg-[#d7b96a]" />
+                <span className="text-[10px] font-bold uppercase tracking-[0.45em] text-[#d7b96a]" style={{ fontFamily: 'var(--font-josefin)' }}>{home.sections.bespoke.eyebrow}</span>
+              </div>
+              <motion.h2
+                data-no-reveal
+                initial={{ opacity: 0, y: -72, rotateX: -32 }}
+                whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+                viewport={{ once: true, amount: 0.35 }}
+                transition={{ type: 'spring', stiffness: 92, damping: 15, mass: 0.9, delay: 0.12 }}
+                className="origin-top text-4xl leading-tight tracking-tight text-white md:text-6xl"
+                style={{ fontFamily: 'var(--font-playfair)', transformPerspective: 800 }}
+              >
+                {home.sections.bespoke.title}
+              </motion.h2>
+            </div>
+            <Link to="/contact" className="group inline-flex w-fit items-center gap-3 border-b border-white/40 pb-2 text-[10px] font-bold uppercase tracking-[0.25em] text-white transition-colors hover:border-[#d7b96a] hover:text-[#e4cc8d]" style={{ fontFamily: 'var(--font-josefin)' }}>
+              Start a conversation <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </motion.div>
+          <div className="grid grid-cols-1 gap-px border border-white/10 bg-white/15 shadow-2xl backdrop-blur-sm sm:grid-cols-2 lg:grid-cols-4">
+            {customOrderSteps.map((step, index) => (
+              <motion.article key={step.number}
+                initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }} transition={{ delay: index * 0.08, duration: 0.55, ease }}
+                className="group min-h-[210px] bg-[#171510]/58 p-6 transition-colors duration-500 hover:bg-[#211e18]/76 md:p-7"
+              >
+                <div className="mb-7 flex items-center justify-between">
+                  <step.icon className="h-5 w-5 text-[#d7b96a] transition-transform duration-300 group-hover:-translate-y-1" strokeWidth={1.5} />
+                  <span className="text-xs tabular-nums text-white/35" style={{ fontFamily: 'var(--font-josefin)' }}>{step.number}</span>
+                </div>
+                <h3 className="mb-3 text-2xl text-white" style={{ fontFamily: 'var(--font-playfair)' }}>{step.title}</h3>
+                <p className="text-sm leading-relaxed text-white/55">{step.text}</p>
+              </motion.article>
+            ))}
+          </div>
+        </div>
+      </section>}
+
+      {/* ═══ 3. MARQUEE — Brand Promise ═══ */}
       <Marquee />
 
-      {/* ═══ 3. PRESS — Instant Credibility ═══ */}
+      {/* ═══ 4. SHOP BY ROOM — Visual Navigator ═══ */}
+      {home.sections.rooms.enabled && <ShopByRoom
+        eyebrow={home.sections.rooms.eyebrow}
+        title={home.sections.rooms.title}
+        description={home.sections.rooms.description}
+        rooms={home.sections.rooms.items.map((room) => ({
+          ...room,
+          image: room.image.url,
+          video: room.slug === 'home-office'
+            ? 'https://www.youtube.com/embed/pKwzfvIEiBs?autoplay=1&mute=1&controls=0&loop=1&playlist=pKwzfvIEiBs&start=30&rel=0&iv_load_policy=3&playsinline=1'
+            : room.slug === 'bedroom'
+              ? 'https://www.youtube.com/embed/gBv6sOXVG08?autoplay=1&mute=1&controls=0&loop=1&playlist=gBv6sOXVG08&rel=0&iv_load_policy=3&playsinline=1'
+              : room.video,
+        }))}
+      />}
+
+      {/* ═══ 5. PRESS — Publication Logos ═══ */}
       <PressStrip />
 
-      {/* ═══ 4. CURATED CATEGORIES ═══ */}
-      <section className="py-28 md:py-40 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 overflow-hidden relative">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: ease }}
-          className="flex flex-col md:flex-row justify-between items-start md:items-end mb-20 gap-6"
-        >
-          <div>
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-px bg-neutral-300" />
-              <span
-                className="text-[10px] uppercase tracking-[0.5em] text-neutral-400 font-bold"
-                style={{ fontFamily: 'var(--font-josefin)' }}
-              >
-                Curated Selection
-              </span>
-            </div>
-            <h2
-              className="text-4xl md:text-6xl text-neutral-900 leading-tight tracking-tight"
-              style={{ fontFamily: 'var(--font-playfair)' }}
-            >
-              Refined Living
-            </h2>
-          </div>
-          <Link
-            to="/shop"
-            className="flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] font-bold text-neutral-900 group"
-            style={{ fontFamily: 'var(--font-josefin)' }}
-          >
-            Explore All
-            <div className="w-8 h-8 rounded-full border border-neutral-200 flex items-center justify-center group-hover:bg-neutral-900 group-hover:border-neutral-900 group-hover:text-white transition-all duration-300">
-              <ArrowRight className="w-3.5 h-3.5" />
-            </div>
-          </Link>
-        </motion.div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-6">
-          {categories.map((cat, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1, duration: 0.8, ease: ease }}
-            >
-              <CategoryCard {...cat} index={idx} />
-            </motion.div>
-          ))}
-        </div>
-      </section>
+      {/* ═══ 6. FEATURED SPOTLIGHT — Editorial ═══ */}
+      {home.sections.featured.enabled && <FeaturedSpotlight
+        image="/product-images/bi-111.jpg"
+        detailImage="/product-images/BID-CHR-111_03.jpeg"
+        eyebrow={home.sections.featured.eyebrow}
+        title={home.sections.featured.title}
+        description={home.sections.featured.description}
+      />}
 
-      {/* ═══ 5. STATS BAR — Social Proof Numbers ═══ */}
-      <StatsBar />
-
-      {/* ═══ 6. PRODUCT SLIDER ═══ */}
-      <ProductSlider
-        title="The 2026 Collection"
-        products={products}
-        onAddToCart={onAddToCart}
-        onToggleWishlist={onToggleWishlist}
-        onQuickView={onQuickView}
-        wishlistItems={wishlistItems}
-      />
-
-      {/* ═══ 6b. RECENTLY VIEWED — Personalized ═══ */}
-      <RecentlyViewed products={products} onQuickView={onQuickView} />
-
-      {/* ═══ 7. FEATURED SPOTLIGHT — Editorial ═══ */}
-      <FeaturedSpotlight
-        image={staticImages.featured}
-        detailImage={staticImages.featuredDetail}
-      />
-
-      {/* ═══ 8. SHOP BY ROOM — Visual Navigator ═══ */}
-      <ShopByRoom />
-
-      {/* ═══ 9. MOOD GALLERY — Lifestyle / Instagram ═══ */}
-      <MoodGallery images={moodImages} />
-
-      {/* ═══ 10. TRUST PILLARS ═══ */}
-      <section ref={trustRef} className="py-32 md:py-44 bg-neutral-50 border-y border-neutral-100 overflow-hidden relative">
-        {/* Subtle background */}
-        <div className="absolute inset-0 opacity-[0.02] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
-
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1 }}
-            className="text-center mb-20 md:mb-24"
-          >
-            <div className="flex items-center justify-center gap-4 mb-6">
-              <div className="w-12 h-px bg-neutral-300" />
-              <span
-                className="text-[9px] uppercase tracking-[0.6em] text-neutral-400 font-bold"
-                style={{ fontFamily: 'var(--font-josefin)' }}
-              >
-                Why B-Interiors
-              </span>
-              <div className="w-12 h-px bg-neutral-300" />
-            </div>
-            <h2
-              className="text-3xl md:text-5xl lg:text-6xl text-neutral-900 tracking-tight"
-              style={{ fontFamily: 'var(--font-playfair)' }}
-            >
-              Built on Principle
-            </h2>
-          </motion.div>
-
-          <motion.div style={{ y: trustY }} className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-            {trustPillars.map((item, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.12, duration: 0.7, ease: ease }}
-                className="group flex flex-col items-center text-center"
-              >
-                <div className={`w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-gradient-to-br ${item.accent} p-5 md:p-6 mb-7 flex items-center justify-center transition-all duration-700 group-hover:shadow-xl group-hover:-translate-y-3 group-hover:scale-105 border ${item.border}`}>
-                  <item.icon className="w-7 h-7 md:w-8 md:h-8 text-neutral-800 stroke-[1.5]" />
-                </div>
-                <h4
-                  className="text-[11px] uppercase tracking-[0.35em] font-black text-neutral-900 mb-2"
-                  style={{ fontFamily: 'var(--font-josefin)' }}
-                >
-                  {item.label}
-                </h4>
-                <p className="text-[10px] uppercase tracking-[0.2em] text-neutral-400 font-medium">
-                  {item.sub}
-                </p>
-                {/* Decorative bottom line */}
-                <div className="w-0 h-px bg-neutral-300 mt-4 group-hover:w-8 transition-all duration-700" />
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ═══ 11. SERVICES ═══ */}
-      <ServiceSection image={staticImages.service} />
-
-      {/* ═══ 12. ARTISAN GUILD CTA ═══ */}
-      <section className="py-28 md:py-36 border-t border-neutral-100">
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, ease: ease }}
-            className="bg-neutral-950 p-12 md:p-20 lg:p-24 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-16"
-          >
-            {/* Grain overlay */}
-            <div className="absolute inset-0 opacity-[0.04] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
-
-            {/* Subtle glow */}
-            <div className="absolute -top-32 -left-32 w-96 h-96 bg-white/[0.03] rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute -bottom-32 -right-32 w-64 h-64 bg-white/[0.02] rounded-full blur-3xl pointer-events-none" />
-
-            <div className="relative z-10 max-w-xl">
-              <div className="flex items-center gap-3 mb-8">
-                <div className="w-8 h-px bg-neutral-700" />
-                <span
-                  className="text-[9px] uppercase tracking-[0.6em] text-neutral-500 font-bold"
-                  style={{ fontFamily: 'var(--font-josefin)' }}
-                >
-                  The Guild
-                </span>
-              </div>
-              <h2
-                className="text-4xl md:text-6xl text-white mb-8 leading-[1.05] tracking-tight"
-                style={{ fontFamily: 'var(--font-playfair)' }}
-              >
-                For the <br />Artisans
-              </h2>
-              <p
-                className="text-lg md:text-xl text-white/50 mb-12 leading-relaxed max-w-md"
-                style={{ fontFamily: 'var(--font-cormorant)' }}
-              >
-                Showcase your craftsmanship alongside the world's most refined
-                collections. Join our network of verified luxury vendors.
-              </p>
-              <Link
-                to="/become-a-partner"
-                className="inline-flex items-center gap-4 py-5 px-10 bg-white text-neutral-900 hover:bg-neutral-100 transition-all duration-300 group"
-              >
-                <span
-                  className="text-[10px] uppercase tracking-[0.3em] font-bold"
-                  style={{ fontFamily: 'var(--font-josefin)' }}
-                >
-                  Apply to Sell
-                </span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </div>
-
-            <div className="relative z-10 w-full md:w-1/3 aspect-square hidden md:block">
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 60, repeat: Infinity, ease: 'linear' }}
-                className="w-full h-full border border-white/[0.06] rounded-full flex items-center justify-center"
-              >
-                <div className="w-4/5 h-4/5 border border-white/[0.04] rounded-full flex items-center justify-center">
-                  <div className="w-3/5 h-3/5 border border-white/[0.03] rounded-full flex items-center justify-center">
-                    <img
-                      src={logo}
-                      alt=""
-                      className="w-14 h-14 object-contain invert opacity-20"
-                    />
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ═══ 13. NEWSLETTER ═══ */}
-      <NewsletterParallax image={staticImages.newsletter} />
     </motion.div>
   );
 };

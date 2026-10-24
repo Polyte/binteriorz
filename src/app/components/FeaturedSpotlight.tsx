@@ -7,9 +7,18 @@ import { Link } from 'react-router';
 interface FeaturedSpotlightProps {
   image: string;
   detailImage: string;
+  eyebrow?: string;
+  title?: string;
+  description?: string;
 }
 
-export const FeaturedSpotlight = ({ image, detailImage }: FeaturedSpotlightProps) => {
+export const FeaturedSpotlight = ({
+  image,
+  detailImage,
+  eyebrow = 'Featured Piece',
+  title = 'Where Material Meets Mastery',
+  description = 'Each B-Interiors piece begins as a dialogue between raw material and refined vision. European oak, hand-selected marble, brushed brass — every element earns its place through merit, not convenience.',
+}: FeaturedSpotlightProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -25,7 +34,7 @@ export const FeaturedSpotlight = ({ image, detailImage }: FeaturedSpotlightProps
   return (
     <section
       ref={containerRef}
-      className="relative py-32 md:py-44 bg-neutral-950 overflow-hidden"
+      className="relative overflow-hidden bg-neutral-950 py-20 md:py-24"
     >
       {/* Grain overlay */}
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
@@ -34,21 +43,21 @@ export const FeaturedSpotlight = ({ image, detailImage }: FeaturedSpotlightProps
       <div className="absolute top-1/4 -left-32 w-[500px] h-[500px] bg-amber-900/[0.04] rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-1/4 -right-32 w-[400px] h-[400px] bg-neutral-100/[0.02] rounded-full blur-[100px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
+      <div className="max-w-[1480px] mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
         {/* Section tag */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="flex items-center gap-3 mb-20 md:mb-28"
+          className="mb-12 flex items-center gap-3 md:mb-16"
         >
           <div className="w-12 h-px bg-neutral-700" />
           <span
             className="text-[9px] uppercase tracking-[0.6em] text-neutral-500 font-bold"
             style={{ fontFamily: 'var(--font-josefin)' }}
           >
-            Featured Piece
+            {eyebrow}
           </span>
         </motion.div>
 
@@ -57,15 +66,16 @@ export const FeaturedSpotlight = ({ image, detailImage }: FeaturedSpotlightProps
           <div className="lg:col-span-7 relative">
             <motion.div
               style={{ y: imageY }}
-              className="relative aspect-[4/5] md:aspect-[3/4] overflow-hidden"
+              className="group relative aspect-[4/5] overflow-hidden bg-neutral-900 shadow-[0_35px_90px_-38px_rgba(0,0,0,0.9)] [transform:perspective(1200px)_rotateY(-2deg)] md:aspect-[3/2] lg:aspect-[4/3]"
             >
               <ImageWithFallback
                 src={image}
                 alt="Featured craftsmanship"
-                className="w-full h-full object-cover grayscale-[0.2]"
+                className="w-full h-full object-cover saturate-[0.82] transition-[transform,filter] duration-1000 group-hover:scale-[1.035] group-hover:saturate-100"
               />
               {/* Subtle vignette */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-neutral-950/40 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-tr from-neutral-950/45 via-transparent to-transparent" />
+              <div className="pointer-events-none absolute inset-4 border border-white/10" />
             </motion.div>
 
             {/* Floating detail image */}
@@ -105,28 +115,23 @@ export const FeaturedSpotlight = ({ image, detailImage }: FeaturedSpotlightProps
             className="lg:col-span-5 lg:pl-8"
           >
             <h2
-              className="text-4xl md:text-5xl lg:text-6xl text-white leading-[1.05] tracking-tight mb-8"
+              className="mb-6 text-4xl leading-[1.05] tracking-tight text-white md:text-5xl lg:text-6xl"
               style={{ fontFamily: 'var(--font-playfair)' }}
             >
-              Where <br />
-              <span className="italic text-white/60">Material</span> <br />
-              Meets Mastery
+              {title}
             </h2>
 
-            <div className="w-16 h-px bg-neutral-700 mb-8" />
+            <div className="mb-6 h-px w-16 bg-neutral-700" />
 
             <p
-              className="text-lg md:text-xl text-white/40 leading-relaxed mb-10 max-w-md"
+              className="mb-8 max-w-md text-lg leading-relaxed text-white/40 md:text-xl"
               style={{ fontFamily: 'var(--font-cormorant)' }}
             >
-              Each B-Interiors piece begins as a dialogue between raw material
-              and refined vision. European oak, hand-selected marble, brushed
-              brass — every element earns its place through merit, not
-              convenience.
+              {description}
             </p>
 
             {/* Key specs */}
-            <div className="grid grid-cols-3 gap-6 mb-12 py-8 border-y border-neutral-800/60">
+            <div className="mb-9 grid grid-cols-3 gap-4 border-y border-neutral-800/60 py-6">
               {[
                 { value: '200+', label: 'Hours Per Piece' },
                 { value: '100%', label: 'Hand Finished' },

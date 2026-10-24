@@ -24,13 +24,14 @@ export const Shop = ({ products, onAddToCart, onToggleWishlist, onQuickView, wis
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isLowBandwidth, setIsLowBandwidth] = useState(false);
   const [activeRoom, setActiveRoom] = useState<string | null>(null);
+  const [sortBy, setSortBy] = useState('featured');
 
-  // Handle ?room= query param from Shop by Room navigator
+  // Keep catalogue filters in sync with links from the mega menu and room navigator.
   useEffect(() => {
     const room = searchParams.get('room');
-    if (room) {
-      setActiveRoom(room);
-    }
+    const category = searchParams.get('category');
+    setActiveRoom(room || null);
+    setActiveCategory(category || 'All');
   }, [searchParams]);
 
   const categories = useMemo(() => ['All', ...new Set(products.map(p => p.category))], [products]);
@@ -46,7 +47,7 @@ export const Shop = ({ products, onAddToCart, onToggleWishlist, onQuickView, wis
   }, [products]);
 
   const filteredProducts = useMemo(() => {
-    return products.filter(p => {
+    const filtered = products.filter(p => {
       const matchesSearch = !searchQuery || 
         p.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
         p.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -60,7 +61,14 @@ export const Shop = ({ products, onAddToCart, onToggleWishlist, onQuickView, wis
       
       return matchesSearch && matchesCategory && matchesMaterial && matchesColor && matchesPrice && matchesRoom;
     });
-  }, [products, searchQuery, activeCategory, activeMaterial, activeColor, priceRange, activeRoom]);
+
+    return [...filtered].sort((a, b) => {
+      if (sortBy === 'price-low') return a.price - b.price;
+      if (sortBy === 'price-high') return b.price - a.price;
+      if (sortBy === 'name') return a.name.localeCompare(b.name);
+      return Number(Boolean(b.featured)) - Number(Boolean(a.featured));
+    });
+  }, [products, searchQuery, activeCategory, activeMaterial, activeColor, priceRange, activeRoom, sortBy]);
 
   const grainOverlay = (
     <div className="fixed inset-0 pointer-events-none z-[100] opacity-[0.03]" style={{ 
@@ -84,7 +92,7 @@ export const Shop = ({ products, onAddToCart, onToggleWishlist, onQuickView, wis
         subtitle="Curated Collection • Est. 2026"
       />
 
-      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-12 mt-16">
+      <div className="max-w-[1480px] mx-auto px-6 sm:px-8 lg:px-12 mt-16">
         <header className="mb-12">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
             
@@ -115,8 +123,8 @@ export const Shop = ({ products, onAddToCart, onToggleWishlist, onQuickView, wis
             </div>
           </div>
 
-          <div className="flex items-center justify-between border-y border-neutral-100 py-6">
-            <div className="flex items-center gap-8">
+          <div className="flex flex-col gap-5 border-y border-neutral-200 py-5 lg:flex-row lg:items-center lg:justify-between">
+            <div className="flex min-w-0 items-center gap-5">
               <button 
                 onClick={() => setIsSidebarOpen(true)}
                 className="flex items-center gap-3 group"
@@ -124,7 +132,7 @@ export const Shop = ({ products, onAddToCart, onToggleWishlist, onQuickView, wis
                 <div className="w-10 h-10 rounded-full border border-neutral-200 flex items-center justify-center group-hover:bg-neutral-900 group-hover:border-neutral-900 transition-all duration-500">
                   <SlidersHorizontal className="w-4 h-4 group-hover:text-white transition-colors" />
                 </div>
-                <span className="text-xs uppercase tracking-[0.2em] font-bold">Filter & Sort</span>
+                <span className="text-xs uppercase tracking-[0.2em] font-bold">Filters</span>
               </button>
               
               <div className="hidden lg:flex items-center gap-4">
@@ -142,20 +150,37 @@ export const Shop = ({ products, onAddToCart, onToggleWishlist, onQuickView, wis
               </div>
             </div>
 
-            <div className="relative w-full max-w-xs">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-300" />
-              <input 
-                type="text" 
-                placeholder="Find a masterpiece..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-6 py-3 bg-neutral-50 rounded-full border-none text-xs tracking-widest focus:ring-1 focus:ring-neutral-900 outline-none placeholder:text-neutral-300 transition-all"
-              />
+            <div className="flex w-full flex-col gap-3 sm:flex-row lg:w-auto">
+              <label className="relative block min-w-0 flex-1 lg:w-72">
+                <span className="sr-only">Search products</span>
+                <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-400" />
+                <input type="search" placeholder="Search the collection" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="w-full rounded-full border border-neutral-200 bg-white py-3 pl-11 pr-5 text-xs tracking-wide outline-none transition placeholder:text-neutral-400 focus:border-neutral-900 focus:ring-2 focus:ring-neutral-900/10" />
+              </label>
+              <label className="relative block sm:w-48">
+                <span className="sr-only">Sort products</span>
+                <select value={sortBy} onChange={(e) => setSortBy(e.target.value)} className="h-full w-full appearance-none rounded-full border border-neutral-200 bg-white py-3 pl-5 pr-10 text-[10px] font-bold uppercase tracking-[0.15em] outline-none transition focus:border-neutral-900 focus:ring-2 focus:ring-neutral-900/10">
+                  <option value="featured">Featured first</option>
+                  <option value="price-low">Price: low to high</option>
+                  <option value="price-high">Price: high to low</option>
+                  <option value="name">Name: A–Z</option>
+                </select>
+                <ChevronDown className="pointer-events-none absolute right-4 top-1/2 h-3.5 w-3.5 -translate-y-1/2" />
+              </label>
             </div>
           </div>
         </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-16 relative" style={{ position: 'relative' }}>
+        <div className="mb-8 flex items-end justify-between gap-4">
+          <div>
+            <p className="text-[9px] font-bold uppercase tracking-[0.3em] text-neutral-400">The collection</p>
+            <p className="mt-2 font-serif text-2xl text-neutral-900">{filteredProducts.length} {filteredProducts.length === 1 ? 'piece' : 'pieces'}</p>
+          </div>
+          {(searchQuery || activeCategory !== 'All' || activeMaterial !== 'All' || activeColor !== 'All' || activeRoom) && (
+            <button onClick={() => { setActiveCategory('All'); setActiveMaterial('All'); setActiveColor('All'); setActiveRoom(null); setPriceRange([0, 50000]); setSearchQuery(''); }} className="text-[9px] font-bold uppercase tracking-[0.2em] text-neutral-500 underline decoration-neutral-300 underline-offset-4 hover:text-neutral-900">Clear filters</button>
+          )}
+        </div>
+
+        <div className="relative grid grid-cols-1 gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-7" style={{ position: 'relative' }}>
           <AnimatePresence mode="popLayout">
             {loading ? (
               Array.from({ length: 8 }).map((_, i) => (

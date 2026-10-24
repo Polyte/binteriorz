@@ -1,181 +1,139 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { motion } from 'motion/react';
 import { Link } from 'react-router';
 import { ImageWithFallback } from './figma/ImageWithFallback';
-import { ArrowUpRight, Sparkles } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 
-interface Category {
-  name: string;
-  items: { label: string; href: string }[];
-  featured?: { name: string; price: string; image: string }[];
-  image: string;
-}
-
-const categories: Category[] = [
-  {
-    name: 'The Seating Collection',
-    items: [
-      { label: 'Crescent Ottomans', href: '/shop' },
-      { label: 'Heritage Armchairs', href: '/shop' },
-      { label: 'Silk Lounge Pieces', href: '/shop' },
-      { label: 'Minimalist Benches', href: '/shop' }
-    ],
-    featured: [
-      { name: 'Heritage Leather Armchair', price: 'R 12,800', image: 'https://images.unsplash.com/photo-1702865263661-9da5ecf2f374?auto=format&fit=crop&q=80&w=300' }
-    ],
-    image: 'https://images.unsplash.com/photo-1755325541565-aca7a68f6e66?auto=format&fit=crop&q=80&w=500'
-  },
-  {
-    name: 'Spatial Structures',
-    items: [
-      { label: 'Oak Dining Tables', href: '/shop' },
-      { label: 'Marble Coffee Units', href: '/shop' },
-      { label: 'Walnut Executive Desks', href: '/shop' },
-      { label: 'Bespoke Sideboards', href: '/shop' }
-    ],
-    featured: [
-      { name: 'Marble Coffee Table', price: 'R 9,500', image: 'https://images.unsplash.com/photo-1758448755778-90ebf4d0f1e7?auto=format&fit=crop&q=80&w=300' }
-    ],
-    image: 'https://images.unsplash.com/photo-1617262869510-3793b141c294?auto=format&fit=crop&q=80&w=500'
-  },
-  {
-    name: 'Artisanal Elements',
-    items: [
-      { label: 'Brass Sphere Pendants', href: '/shop' },
-      { label: 'Ceramic Table Lamps', href: '/shop' },
-      { label: 'Luxury Wool Rugs', href: '/shop' },
-      { label: 'Decorative Sculptures', href: '/shop' }
-    ],
-    featured: [
-      { name: 'Brass Pendant Sphere', price: 'R 3,200', image: 'https://images.unsplash.com/photo-1669823734572-57c47df22b52?auto=format&fit=crop&q=80&w=300' }
-    ],
-    image: 'https://images.unsplash.com/photo-1571536206659-52415ba027d3?auto=format&fit=crop&q=80&w=500'
-  }
+const categoryOrder = [
+  'Sofas', 'Chairs', 'Tables', 'Beds', 'Consoles', 'Cushions',
+  'Curtains', 'Lamps', 'Pendant Lights', 'Rugs', 'Decor',
 ];
 
-export const MegaMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
+const categoryGroup: Record<string, string> = {
+  Sofas: 'Seating & textiles',
+  Chairs: 'Seating & textiles',
+  Cushions: 'Seating & textiles',
+  Curtains: 'Seating & textiles',
+  Tables: 'Furniture',
+  Consoles: 'Furniture',
+  Beds: 'Furniture',
+  Lamps: 'Lighting & décor',
+  'Pendant Lights': 'Lighting & décor',
+  Rugs: 'Lighting & décor',
+  Decor: 'Lighting & décor',
+};
+
+const tileAspect = ['aspect-[4/3]', 'aspect-[3/2]', 'aspect-[5/4]', 'aspect-[16/10]'];
+
+export const MegaMenu = ({ isOpen, onClose, products }: { isOpen: boolean; onClose: () => void; products: any[] }) => {
+  const categories = useMemo(() => {
+    const availableCategories = [...new Set(products.map((product) => product.category).filter(Boolean))];
+    return availableCategories
+      .map((name) => {
+        const items = products.filter((product) => product.category === name);
+        const imageProduct = items.find((product) => product.image || product.mainImage);
+        return {
+          name,
+          count: items.length,
+          image: imageProduct?.image || imageProduct?.mainImage || '',
+          group: categoryGroup[name] || 'The collection',
+        };
+      })
+      .sort((a, b) => {
+        const aOrder = categoryOrder.indexOf(a.name);
+        const bOrder = categoryOrder.indexOf(b.name);
+        return (aOrder < 0 ? Number.MAX_SAFE_INTEGER : aOrder)
+          - (bOrder < 0 ? Number.MAX_SAFE_INTEGER : bOrder)
+          || a.name.localeCompare(b.name);
+      });
+  }, [products]);
+
+  const availableProducts = products.filter((product) => product.inStock !== false).length;
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: -20 }}
+      initial={{ opacity: 0, y: -16 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
-      className="absolute top-full left-0 w-full bg-white dark:bg-neutral-950 border-b border-neutral-100 dark:border-neutral-900 shadow-2xl overflow-hidden z-[60]"
+      exit={{ opacity: 0, y: -16 }}
+      transition={{ duration: 0.45, ease: [0.76, 0, 0.24, 1] }}
+      aria-hidden={!isOpen}
+      className="absolute left-0 top-full z-[60] w-full overflow-hidden border-b border-neutral-100 bg-white shadow-2xl dark:border-neutral-900 dark:bg-neutral-950"
       onMouseLeave={onClose}
     >
-      {/* Grain Texture Overlay */}
-      <div 
-        className="absolute inset-0 pointer-events-none opacity-[0.05] dark:opacity-[0.02] mix-blend-multiply dark:mix-blend-overlay"
-        style={{ 
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` 
-        }}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 opacity-[0.035] dark:opacity-[0.02]"
+        style={{ backgroundImage: 'radial-gradient(#75664e 0.55px, transparent 0.55px)', backgroundSize: '9px 9px' }}
       />
-      
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
-          
-          {categories.map((cat, idx) => (
-            <motion.div 
-              key={cat.name}
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: idx * 0.1 }}
-              className="space-y-10"
-            >
-              <div className="space-y-6">
-                <h3 className="text-[10px] uppercase tracking-[0.5em] font-bold text-neutral-400 dark:text-neutral-500">
-                  {cat.name}
-                </h3>
-                <ul className="space-y-4">
-                  {cat.items.map((item, i) => (
-                    <li key={i}>
-                      <Link
-                        to={item.href}
-                        onClick={onClose}
-                        className="group flex items-center justify-between text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors duration-300 font-light"
-                      >
-                        {item.label}
-                        <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0" />
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
 
-              {cat.featured && (
-                <div className="pt-6 border-t border-neutral-50 dark:border-neutral-900 space-y-4">
-                  <p className="text-[8px] uppercase tracking-widest text-neutral-400">Current Acquisition</p>
-                  {cat.featured.map((f) => (
-                    <Link key={f.name} to="/shop" onClick={onClose} className="flex items-center gap-4 group/item">
-                      <div className="w-14 h-14 bg-neutral-100 dark:bg-neutral-900 overflow-hidden relative">
-                         <ImageWithFallback src={f.image} alt={f.name} className="w-full h-full object-cover transition-transform duration-700 group-hover/item:scale-110" />
-                      </div>
-                      <div>
-                        <p className="text-[10px] font-bold uppercase tracking-widest text-neutral-900 dark:text-white leading-tight">{f.name}</p>
-                        <p className="text-[9px] text-neutral-400 mt-1">{f.price}</p>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </motion.div>
-          ))}
-
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.4 }}
-            className="md:col-span-1"
-          >
-            <div className="h-full bg-neutral-50 dark:bg-neutral-900 p-8 rounded-3xl relative overflow-hidden group">
-              <div className="absolute top-0 right-0 p-4">
-                <Sparkles className="w-5 h-5 text-neutral-200 dark:text-neutral-800" />
-              </div>
-              <div className="relative z-10 h-full flex flex-col">
-                <h4 className="text-xl font-serif text-neutral-900 dark:text-white leading-tight mb-4">
-                  Bespoke Studio <br /> Consultations
-                </h4>
-                <p className="text-xs text-neutral-500 font-light leading-relaxed mb-8">
-                  Work directly with our lead artisans to commission a piece that defines your architectural legacy.
-                </p>
-                <div className="mt-auto space-y-4">
-                  <Link 
-                    to="/services" 
-                    onClick={onClose}
-                    className="block w-full py-3 bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 text-center text-[10px] font-bold uppercase tracking-[0.3em] rounded-xl hover:opacity-90 transition-opacity"
-                  >
-                    Book Private Session
-                  </Link>
-                  <p className="text-[8px] text-center uppercase tracking-widest text-neutral-400">Available in Alberton Studio Only</p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
+      <div className="relative z-10 mx-auto max-h-[calc(100vh-7rem)] max-w-[1280px] overflow-y-auto px-6 py-8 sm:px-8 lg:px-12 lg:py-9">
+        <div className="mb-7 flex items-end justify-between gap-5 border-b border-neutral-100 pb-5 dark:border-neutral-900 md:mb-8 md:pb-6">
+          <div>
+            <p className="mb-2 text-[9px] font-bold uppercase tracking-[0.45em] text-[#a17d31]">The Collection</p>
+            <h2 className="text-3xl text-neutral-900 dark:text-white" style={{ fontFamily: 'var(--font-playfair)' }}>
+              Shop by category
+            </h2>
+          </div>
+          <span className="hidden text-[9px] font-bold uppercase tracking-[0.28em] text-neutral-400 sm:block">
+            {availableProducts} available pieces · {categories.length} categories
+          </span>
         </div>
 
-        <div className="mt-16 pt-8 border-t border-neutral-100 dark:border-neutral-900 flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="flex gap-12">
-             <div className="space-y-1">
-               <p className="text-[8px] uppercase tracking-widest text-neutral-400">Est.</p>
-               <p className="text-[10px] font-bold text-neutral-900 dark:text-white">2026</p>
-             </div>
-             <div className="space-y-1">
-               <p className="text-[8px] uppercase tracking-widest text-neutral-400">Region</p>
-               <p className="text-[10px] font-bold text-neutral-900 dark:text-white">Alberton, JHB</p>
-             </div>
+        <div className="columns-2 gap-3 sm:gap-4 md:columns-3 xl:columns-4">
+          {categories.map((category, index) => (
+            <motion.div
+              key={category.name}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: Math.min(index * 0.035, 0.3), duration: 0.45, ease: 'easeOut' }}
+              className="mb-3 break-inside-avoid sm:mb-4"
+            >
+              <Link
+                to={`/shop?category=${encodeURIComponent(category.name)}`}
+                onClick={onClose}
+                className={`group relative block ${tileAspect[index % tileAspect.length]} overflow-hidden bg-neutral-200 outline-none ring-[#d4af37]/0 transition-[box-shadow] duration-500 hover:shadow-[0_18px_40px_-20px_rgba(0,0,0,.55)] focus-visible:ring-2 dark:bg-neutral-800`}
+              >
+                <ImageWithFallback
+                  src={category.image}
+                  alt={`${category.name} collection`}
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.07]"
+                />
+                <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-black/5 transition-colors duration-500 group-hover:from-black/85 group-hover:via-black/20" />
+                <span className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
+                  <span className="mb-2 flex items-center justify-between gap-3">
+                    <span className="text-[8px] font-bold uppercase tracking-[0.3em] text-white/65 sm:text-[9px]">
+                      {category.group}
+                    </span>
+                    <span className="text-[8px] tabular-nums text-white/60 sm:text-[9px]">{category.count} pieces</span>
+                  </span>
+                  <span className="flex items-end justify-between gap-3 border-t border-white/25 pt-2.5">
+                    <span className="text-xl leading-tight text-white sm:text-2xl" style={{ fontFamily: 'var(--font-playfair)' }}>
+                      {category.name}
+                    </span>
+                    <span className="mb-0.5 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-white/40 text-white transition-all duration-500 group-hover:border-[#d4af37] group-hover:bg-[#d4af37] group-hover:text-neutral-950">
+                      <ArrowUpRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    </span>
+                  </span>
+                </span>
+              </Link>
+            </motion.div>
+          ))}
+        </div>
+
+        <div className="mt-7 flex flex-col items-center justify-between gap-5 border-t border-neutral-100 pt-6 dark:border-neutral-900 sm:flex-row">
+          <div className="flex items-center gap-8">
+            <span className="text-[9px] font-bold uppercase tracking-[0.25em] text-neutral-400">Alberton, Gauteng</span>
+            <Link to="/services" onClick={onClose} className="text-[9px] font-bold uppercase tracking-[0.25em] text-neutral-500 transition-colors hover:text-neutral-950 dark:hover:text-white">
+              Interior design services
+            </Link>
           </div>
-          <Link 
-            to="/shop" 
+          <Link
+            to="/shop"
             onClick={onClose}
-            className="group flex items-center gap-3 text-[10px] uppercase tracking-[0.4em] font-bold text-neutral-900 dark:text-white"
+            className="group flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.32em] text-neutral-900 dark:text-white"
           >
-            Explore The Full Catalogue 
-            <motion.div 
-              animate={{ x: [0, 5, 0] }}
-              transition={{ repeat: Infinity, duration: 2 }}
-              className="w-10 h-px bg-neutral-900 dark:bg-white" 
-            />
+            Explore all {availableProducts} pieces
+            <span className="h-px w-8 bg-neutral-900 transition-all duration-500 group-hover:w-12 dark:bg-white" />
           </Link>
         </div>
       </div>

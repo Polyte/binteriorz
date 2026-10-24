@@ -88,7 +88,7 @@ export const RecentlyViewed = ({ products, onQuickView }: RecentlyViewedProps) =
       {/* Subtle grain */}
       <div className="absolute inset-0 opacity-[0.015] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
 
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
+      <div className="max-w-[1480px] mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
         {/* Header */}
         <div className="flex items-center justify-between mb-10 md:mb-12">
           <div className="flex items-center gap-4">

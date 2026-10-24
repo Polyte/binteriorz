@@ -18,7 +18,7 @@ export const Contact = () => {
         subtitle="Inquiries & Appointments"
       />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-24">
+      <div className="max-w-[1480px] mx-auto px-6 sm:px-8 lg:px-12 mt-24">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-24 items-start">
           
           {/* Content & Info */}
@@ -122,7 +122,7 @@ export const Contact = () => {
 
       {/* Full-width Map Section */}
       <div className="mt-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
+        <div className="max-w-[1480px] mx-auto px-6 sm:px-8 lg:px-12 mb-8">
           <div className="flex justify-between items-end">
             <h3 className="text-[10px] uppercase tracking-[0.5em] font-bold text-neutral-400">Our Location</h3>
             <span className="text-[10px] font-medium text-neutral-400 italic">35 Radio Street, Alberton, JHB</span>
@@ -177,7 +177,7 @@ export const Contact = () => {
             </motion.div>
           </div>
         </div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+        <div className="max-w-[1480px] mx-auto px-6 sm:px-8 lg:px-12 mt-8">
           <div className="flex items-center gap-4 p-8 bg-neutral-50 rounded-3xl border border-neutral-100">
             <Clock className="w-5 h-5 text-neutral-400" />
             <p className="text-xs text-neutral-500 leading-relaxed italic">

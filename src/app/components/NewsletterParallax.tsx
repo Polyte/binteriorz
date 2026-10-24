@@ -2,14 +2,23 @@ import React, { useRef, useState } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { toast } from 'sonner';
-import { projectId, publicAnonKey } from '../../../utils/supabase/info';
 import { CheckCircle2, Loader2, ArrowRight } from 'lucide-react';
 
 interface NewsletterParallaxProps {
   image: string;
+  imageAlt?: string;
+  eyebrow?: string;
+  title?: string;
+  description?: string;
 }
 
-export const NewsletterParallax = ({ image }: NewsletterParallaxProps) => {
+export const NewsletterParallax = ({
+  image,
+  imageAlt = 'Newsletter background',
+  eyebrow = 'The Inner Circle',
+  title = 'Stay Inspired with B-Interiors',
+  description = 'Be the first to receive exclusive previews of our new collections, artisan stories, and bespoke interior inspiration.',
+}: NewsletterParallaxProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [email, setEmail] = useState('');
   const [submitting, setSubmitting] = useState(false);
@@ -31,13 +40,11 @@ export const NewsletterParallax = ({ image }: NewsletterParallaxProps) => {
     setSubmitting(true);
     try {
       const res = await fetch(
-        `https://${projectId}.supabase.co/functions/v1/make-server-710d82e2/newsletter`,
+        `/api/newsletter`,
         {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${publicAnonKey}`,
-            'apikey': publicAnonKey,
           },
           body: JSON.stringify({ email: email.trim() }),
         }
@@ -77,7 +84,7 @@ export const NewsletterParallax = ({ image }: NewsletterParallaxProps) => {
           <ImageWithFallback
             src={image}
             className="w-full h-full object-cover opacity-50 grayscale-[30%]"
-            alt="Newsletter Background"
+            alt={imageAlt}
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/60" />
         </motion.div>
@@ -95,7 +102,7 @@ export const NewsletterParallax = ({ image }: NewsletterParallaxProps) => {
               className="text-[9px] uppercase tracking-[0.6em] text-white/50 font-bold"
               style={{ fontFamily: 'var(--font-josefin)' }}
             >
-              The Inner Circle
+              {eyebrow}
             </span>
             <div className="w-12 h-px bg-white/20" />
           </div>
@@ -103,15 +110,13 @@ export const NewsletterParallax = ({ image }: NewsletterParallaxProps) => {
             className="text-4xl md:text-6xl lg:text-7xl text-white mb-5 leading-[1.05] tracking-tight"
             style={{ fontFamily: 'var(--font-playfair)' }}
           >
-            Stay Inspired <br />
-            <span className="italic text-white/60">with B-Interiors</span>
+            {title}
           </h2>
           <p
             className="text-white/40 mb-8 text-lg md:text-xl font-light leading-relaxed max-w-md mx-auto"
             style={{ fontFamily: 'var(--font-cormorant)' }}
           >
-            Be the first to receive exclusive previews of our new collections,
-            artisan stories, and bespoke interior inspiration.
+            {description}
           </p>
 
           <AnimatePresence mode="wait">

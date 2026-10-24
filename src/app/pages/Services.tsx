@@ -58,7 +58,7 @@ export const Services = () => {
       />
 
       {/* Intro Section */}
-      <section className="py-32 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-32 max-w-[1480px] mx-auto px-6 sm:px-8 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-end">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -87,7 +87,7 @@ export const Services = () => {
       {/* Services List */}
       <section className="pb-32 space-y-48">
         {services.map((service, idx) => (
-          <div key={service.id} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div key={service.id} className="max-w-[1480px] mx-auto px-6 sm:px-8 lg:px-12">
             <div className={`flex flex-col lg:flex-row gap-20 items-center ${idx % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`}>
               <div className="flex-1 w-full">
                 <div className="relative aspect-[4/5] overflow-hidden group">
@@ -145,7 +145,7 @@ export const Services = () => {
       {/* Process Section */}
       <section className="py-32 bg-neutral-900 text-white overflow-hidden relative">
         <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max-w-[1480px] mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-24">
             <span className="text-xs uppercase tracking-[0.8em] text-neutral-500 mb-6 block font-bold">The Journey</span>
             <h2 className="text-4xl md:text-7xl font-serif mb-8">From Vision to Reality</h2>
@@ -177,7 +177,7 @@ export const Services = () => {
       </section>
 
       {/* Inquiry Section */}
-      <section className="py-48 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-48 max-w-[1480px] mx-auto px-6 sm:px-8 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-32 items-start">
           <div className="space-y-12">
             <div>

@@ -11,9 +11,8 @@ import {
 } from 'recharts';
 import { toast } from 'sonner';
 import { useAdmin, ROOM_OPTIONS } from './AdminContext';
-import { projectId, publicAnonKey } from '../../../../utils/supabase/info';
 
-const API = `https://${projectId}.supabase.co/functions/v1/make-server-710d82e2`;
+const API = `/api`;
 const GALLERY_ITEM_TYPE = 'GALLERY_ITEM';
 
 // ─── Draggable Gallery Item ───────────────────────────────────
@@ -187,33 +186,62 @@ export const AdminModals = ({
                 <button onClick={() => { setProductModal(false); setProductGallery([]); }} className="p-1.5 hover:bg-neutral-100 rounded-md transition-colors"><X className="w-4 h-4" /></button>
               </div>
               <form onSubmit={handleSaveProduct} className="p-5 space-y-5">
-                {/* Basic Info */}
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="col-span-2">
-                    <label className="text-[10px] uppercase font-bold tracking-widest text-neutral-500 mb-1 block">Name</label>
-                    <input name="name" defaultValue={editingProduct?.name} required className="w-full bg-neutral-50 border border-neutral-200 rounded-md py-2.5 px-3 text-sm outline-none focus:border-neutral-900 transition-colors" />
+                {/* Workbook-aligned product fields */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="text-[10px] uppercase font-bold tracking-widest text-neutral-500 mb-1 block">Original ID</label>
+                    <input name="originalId" defaultValue={editingProduct?.originalId} placeholder="BI-001" className="w-full bg-neutral-50 border border-neutral-200 rounded-md py-2.5 px-3 text-sm font-mono outline-none focus:border-neutral-900 transition-colors" />
+                  </div>
+                  <div>
+                    <label className="text-[10px] uppercase font-bold tracking-widest text-neutral-500 mb-1 block">Internal SKU</label>
+                    <input name="internalSku" defaultValue={editingProduct?.internalSku || editingProduct?.sku} required placeholder="BID-CHA-001" className="w-full bg-neutral-50 border border-neutral-200 rounded-md py-2.5 px-3 text-sm font-mono outline-none focus:border-neutral-900 transition-colors" />
+                  </div>
+                  <div>
+                    <label className="text-[10px] uppercase font-bold tracking-widest text-neutral-500 mb-1 block">Barcode (Code 128)</label>
+                    <input name="barcode" defaultValue={editingProduct?.barcode} placeholder="BID-CHA-001" className="w-full bg-neutral-50 border border-neutral-200 rounded-md py-2.5 px-3 text-sm font-mono outline-none focus:border-neutral-900 transition-colors" />
                   </div>
                   <div>
                     <label className="text-[10px] uppercase font-bold tracking-widest text-neutral-500 mb-1 block">Category</label>
-                    <select name="category" defaultValue={editingProduct?.category} className="w-full bg-neutral-50 border border-neutral-200 rounded-md py-2.5 px-3 text-sm outline-none focus:border-neutral-900 transition-colors">
-                      <option>Seating</option><option>Tables</option><option>Lighting</option><option>Storage</option><option>Textiles</option><option>Office</option><option>Outdoor</option>
-                    </select>
+                    <input name="category" list="product-categories" defaultValue={editingProduct?.category} required placeholder="Chairs" className="w-full bg-neutral-50 border border-neutral-200 rounded-md py-2.5 px-3 text-sm outline-none focus:border-neutral-900 transition-colors" />
+                    <datalist id="product-categories">
+                      {[...new Set(products.map((product: any) => product.category).filter(Boolean))].sort().map((category: any) => <option key={category} value={category} />)}
+                    </datalist>
                   </div>
-                  <div>
-                    <label className="text-[10px] uppercase font-bold tracking-widest text-neutral-500 mb-1 block">Price (R)</label>
-                    <input name="price" type="number" defaultValue={editingProduct?.price} required className="w-full bg-neutral-50 border border-neutral-200 rounded-md py-2.5 px-3 text-sm outline-none focus:border-neutral-900 transition-colors" />
+                  <div className="sm:col-span-2">
+                    <label className="text-[10px] uppercase font-bold tracking-widest text-neutral-500 mb-1 block">Website Product Name</label>
+                    <input name="name" defaultValue={editingProduct?.name} required className="w-full bg-neutral-50 border border-neutral-200 rounded-md py-2.5 px-3 text-sm outline-none focus:border-neutral-900 transition-colors" />
                   </div>
-                  <div>
-                    <label className="text-[10px] uppercase font-bold tracking-widest text-neutral-500 mb-1 block">Material</label>
-                    <input name="material" defaultValue={editingProduct?.material} required className="w-full bg-neutral-50 border border-neutral-200 rounded-md py-2.5 px-3 text-sm outline-none focus:border-neutral-900 transition-colors" />
+                  <div className="sm:col-span-2">
+                    <label className="text-[10px] uppercase font-bold tracking-widest text-neutral-500 mb-1 block">Product Description</label>
+                    <textarea name="description" defaultValue={editingProduct?.description} rows={3} className="w-full bg-neutral-50 border border-neutral-200 rounded-md py-2.5 px-3 text-sm outline-none focus:border-neutral-900 transition-colors resize-y" placeholder="Describe the product..." />
                   </div>
                   <div>
                     <label className="text-[10px] uppercase font-bold tracking-widest text-neutral-500 mb-1 block">Color</label>
-                    <input name="color" defaultValue={editingProduct?.color} required className="w-full bg-neutral-50 border border-neutral-200 rounded-md py-2.5 px-3 text-sm outline-none focus:border-neutral-900 transition-colors" />
+                    <input name="color" defaultValue={editingProduct?.color} className="w-full bg-neutral-50 border border-neutral-200 rounded-md py-2.5 px-3 text-sm outline-none focus:border-neutral-900 transition-colors" />
                   </div>
                   <div>
-                    <label className="text-[10px] uppercase font-bold tracking-widest text-neutral-500 mb-1 block">Stock</label>
-                    <input name="stock" type="number" defaultValue={editingProduct?.stock ?? 0} className="w-full bg-neutral-50 border border-neutral-200 rounded-md py-2.5 px-3 text-sm outline-none focus:border-neutral-900 transition-colors" />
+                    <label className="text-[10px] uppercase font-bold tracking-widest text-neutral-500 mb-1 block">Material / Finish</label>
+                    <input name="materialFinish" defaultValue={editingProduct?.materialFinish || editingProduct?.material} className="w-full bg-neutral-50 border border-neutral-200 rounded-md py-2.5 px-3 text-sm outline-none focus:border-neutral-900 transition-colors" />
+                  </div>
+                  <div>
+                    <label className="text-[10px] uppercase font-bold tracking-widest text-neutral-500 mb-1 block">Estimated Cost (R)</label>
+                    <input name="costPrice" type="number" min="0" step="0.01" defaultValue={editingProduct?.costPrice} className="w-full bg-neutral-50 border border-neutral-200 rounded-md py-2.5 px-3 text-sm outline-none focus:border-neutral-900 transition-colors" />
+                  </div>
+                  <div>
+                    <label className="text-[10px] uppercase font-bold tracking-widest text-neutral-500 mb-1 block">Estimated Selling (R)</label>
+                    <input name="price" type="number" min="0" step="0.01" defaultValue={editingProduct?.price} required className="w-full bg-neutral-50 border border-neutral-200 rounded-md py-2.5 px-3 text-sm outline-none focus:border-neutral-900 transition-colors" />
+                  </div>
+                  <div>
+                    <label className="text-[10px] uppercase font-bold tracking-widest text-neutral-500 mb-1 block">Availability</label>
+                    <input name="availability" defaultValue={editingProduct?.availability || 'Available'} placeholder="Available / Made to order" className="w-full bg-neutral-50 border border-neutral-200 rounded-md py-2.5 px-3 text-sm outline-none focus:border-neutral-900 transition-colors" />
+                  </div>
+                  <div>
+                    <label className="text-[10px] uppercase font-bold tracking-widest text-neutral-500 mb-1 block">Previous Website Category</label>
+                    <input name="previousWebsiteCategory" defaultValue={editingProduct?.previousWebsiteCategory} className="w-full bg-neutral-50 border border-neutral-200 rounded-md py-2.5 px-3 text-sm outline-none focus:border-neutral-900 transition-colors" />
+                  </div>
+                  <div>
+                    <label className="text-[10px] uppercase font-bold tracking-widest text-neutral-500 mb-1 block">Original Image Filename</label>
+                    <input name="originalImageFilename" defaultValue={editingProduct?.originalImageFilename} className="w-full bg-neutral-50 border border-neutral-200 rounded-md py-2.5 px-3 text-sm font-mono outline-none focus:border-neutral-900 transition-colors" />
                   </div>
                   <div>
                     <label className="text-[10px] uppercase font-bold tracking-widest text-neutral-500 mb-1 block">Vendor / Artisan</label>
@@ -224,9 +252,9 @@ export const AdminModals = ({
                       ))}
                     </select>
                   </div>
-                  <div className="col-span-2">
-                    <label className="text-[10px] uppercase font-bold tracking-widest text-neutral-500 mb-1 block">Description</label>
-                    <textarea name="description" defaultValue={editingProduct?.description} rows={3} className="w-full bg-neutral-50 border border-neutral-200 rounded-md py-2.5 px-3 text-sm outline-none focus:border-neutral-900 transition-colors resize-y" placeholder="Describe the product..." />
+                  <div className="sm:col-span-2">
+                    <label className="text-[10px] uppercase font-bold tracking-widest text-neutral-500 mb-1 block">Pricing / Supplier Notes</label>
+                    <textarea name="pricingSupplierNotes" defaultValue={editingProduct?.pricingSupplierNotes || editingProduct?.notes} rows={2} className="w-full bg-neutral-50 border border-neutral-200 rounded-md py-2.5 px-3 text-sm outline-none focus:border-neutral-900 transition-colors resize-y" />
                   </div>
                 </div>
 
@@ -252,12 +280,12 @@ export const AdminModals = ({
                   </div>
                 </div>
 
-                {/* ─── Tags (comma-separated) ─── */}
+                {/* ─── Search tags (comma-separated) ─── */}
                 <div>
-                  <label className="text-[10px] uppercase font-bold tracking-widest text-neutral-500 mb-1 block">Tags</label>
+                  <label className="text-[10px] uppercase font-bold tracking-widest text-neutral-500 mb-1 block">Search Tags</label>
                   <input
-                    name="tags"
-                    defaultValue={(editingProduct?.tags || []).join(', ')}
+                    name="searchTags"
+                    defaultValue={editingProduct?.searchTags || (editingProduct?.tags || []).join(', ')}
                     placeholder="luxury, handcrafted, velvet, modern..."
                     className="w-full bg-neutral-50 border border-neutral-200 rounded-md py-2.5 px-3 text-sm outline-none focus:border-neutral-900 transition-colors"
                   />
@@ -495,7 +523,7 @@ export const AdminModals = ({
                 <div className="grid grid-cols-2 gap-4">
                   <div className="bg-neutral-50 rounded-lg p-4">
                     <h4 className="text-[10px] uppercase tracking-widest font-bold text-neutral-400 mb-2">Payment</h4>
-                    <p className="text-xs text-neutral-700">{selectedOrder.paymentIntentId ? `Stripe: ${selectedOrder.paymentIntentId.slice(0, 20)}...` : 'Not available'}</p>
+                    <p className="text-xs text-neutral-700">{selectedOrder.pfPaymentId ? `PayFast: ${String(selectedOrder.pfPaymentId).slice(0, 20)}` : 'PayFast (pending)'}</p>
                   </div>
                   <div className="bg-neutral-50 rounded-lg p-4">
                     <h4 className="text-[10px] uppercase tracking-widest font-bold text-neutral-400 mb-2">Update Status</h4>
@@ -679,7 +707,7 @@ export const AdminModals = ({
                   </div>
                 )}
                 <p className="text-[10px] text-neutral-400 mt-3">
-                  Column mapping: Name, Category, Material, Color, Price (ZAR), Stock, Description, Image URL, Rooms, Tags. Headers are matched flexibly.
+                  Column mapping follows Product Master: Original ID, Internal SKU, Barcode, Category, Website Product Name, Description, Color, Material / Finish, Search Tags, Cost, Selling Price, Availability, image filenames, supplier notes, previous category, and image count.
                   <button onClick={downloadImportTemplate} className="ml-2 text-neutral-900 underline hover:no-underline font-medium">Download template</button>
                 </p>
               </div>

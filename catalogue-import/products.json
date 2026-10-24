@@ -1,0 +1,4870 @@
+[
+  {
+    "id": "bid-cur-001",
+    "originalId": "BI-001",
+    "sku": "BID-CUR-001",
+    "internalSku": "BID-CUR-001",
+    "barcode": "BID-CUR-001",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Curtains",
+    "name": "Grey Fabric Curtain",
+    "description": "Grey Fabric Curtain in grey tones. A versatile window-treatment option for home or commercial interiors; confirm dimensions, fabric specification and installation separately.",
+    "color": "Grey",
+    "material": "Fabric",
+    "materialFinish": "Fabric",
+    "searchTags": "curtains, interior-design, home-decor, grey",
+    "tags": [
+      "curtains",
+      "interior-design",
+      "home-decor",
+      "grey"
+    ],
+    "costPrice": 240,
+    "price": 310,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "grey-fabric-curtain.jpg",
+    "pricingSupplierNotes": "Estimated per metre; selling price includes 30% markup. Final price depends on curtain size/metres, fabric and installation.",
+    "notes": "Estimated per metre; selling price includes 30% markup. Final price depends on curtain size/metres, fabric and installation.",
+    "previousWebsiteCategory": "Curtains",
+    "mainImageFilename": "bi-001.jpg",
+    "mainImage": "/product-images/bi-001.jpg",
+    "image": "/product-images/bi-001.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-001.jpg",
+        "type": "image",
+        "fileName": "bi-001.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      },
+      {
+        "url": "/product-images/BID-CUR-001_02.jpeg",
+        "type": "image",
+        "fileName": "BID-CUR-001_02.jpeg",
+        "position": 2
+      },
+      {
+        "url": "/product-images/BID-CUR-001_03.jpeg",
+        "type": "image",
+        "fileName": "BID-CUR-001_03.jpeg",
+        "position": 3
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-CUR-001_01.jpeg",
+      "BID-CUR-001_02.jpeg",
+      "BID-CUR-001_03.jpeg"
+    ],
+    "imageCount": 3,
+    "workbookImageCount": 3,
+    "rooms": [
+      "living-room",
+      "bedroom"
+    ],
+    "slug": "grey-fabric-curtain-bid-cur-001",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-cur-004",
+    "originalId": "BI-004",
+    "sku": "BID-CUR-004",
+    "internalSku": "BID-CUR-004",
+    "barcode": "BID-CUR-004",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Curtains",
+    "name": "Grey Fabric Curtain – Design 02",
+    "description": "Grey Fabric Curtain in grey tones. A versatile window-treatment option for home or commercial interiors; confirm dimensions, fabric specification and installation separately.",
+    "color": "Grey",
+    "material": "Fabric",
+    "materialFinish": "Fabric",
+    "searchTags": "curtains, interior-design, home-decor, grey",
+    "tags": [
+      "curtains",
+      "interior-design",
+      "home-decor",
+      "grey"
+    ],
+    "costPrice": 240,
+    "price": 310,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "grey-fabric-curtain.jpg",
+    "pricingSupplierNotes": "Estimated per metre; selling price includes 30% markup. Final price depends on curtain size/metres, fabric and installation.",
+    "notes": "Estimated per metre; selling price includes 30% markup. Final price depends on curtain size/metres, fabric and installation.",
+    "previousWebsiteCategory": "Curtains",
+    "mainImageFilename": "bi-004.jpg",
+    "mainImage": "/product-images/bi-004.jpg",
+    "image": "/product-images/bi-004.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-004.jpg",
+        "type": "image",
+        "fileName": "bi-004.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      },
+      {
+        "url": "/product-images/BID-CUR-004_02.jpeg",
+        "type": "image",
+        "fileName": "BID-CUR-004_02.jpeg",
+        "position": 2
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-CUR-004_01.jpeg",
+      "BID-CUR-004_02.jpeg"
+    ],
+    "imageCount": 2,
+    "workbookImageCount": 2,
+    "rooms": [
+      "living-room",
+      "bedroom"
+    ],
+    "slug": "grey-fabric-curtain-design-02-bid-cur-004",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-cur-007",
+    "originalId": "BI-007",
+    "sku": "BID-CUR-007",
+    "internalSku": "BID-CUR-007",
+    "barcode": "BID-CUR-007",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Curtains",
+    "name": "Grey Fabric Curtain – Design 03",
+    "description": "Grey Fabric Curtain in grey tones. A versatile window-treatment option for home or commercial interiors; confirm dimensions, fabric specification and installation separately.",
+    "color": "Grey",
+    "material": "Fabric",
+    "materialFinish": "Fabric",
+    "searchTags": "curtains, interior-design, home-decor, grey",
+    "tags": [
+      "curtains",
+      "interior-design",
+      "home-decor",
+      "grey"
+    ],
+    "costPrice": 240,
+    "price": 310,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "grey-fabric-curtain.jpg",
+    "pricingSupplierNotes": "Estimated per metre; selling price includes 30% markup. Final price depends on curtain size/metres, fabric and installation.",
+    "notes": "Estimated per metre; selling price includes 30% markup. Final price depends on curtain size/metres, fabric and installation.",
+    "previousWebsiteCategory": "Curtains",
+    "mainImageFilename": "bi-007.jpg",
+    "mainImage": "/product-images/bi-007.jpg",
+    "image": "/product-images/bi-007.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-007.jpg",
+        "type": "image",
+        "fileName": "bi-007.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      },
+      {
+        "url": "/product-images/BID-CUR-007_02.jpeg",
+        "type": "image",
+        "fileName": "BID-CUR-007_02.jpeg",
+        "position": 2
+      },
+      {
+        "url": "/product-images/BID-CUR-007_03.jpeg",
+        "type": "image",
+        "fileName": "BID-CUR-007_03.jpeg",
+        "position": 3
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-CUR-007_01.jpeg",
+      "BID-CUR-007_02.jpeg",
+      "BID-CUR-007_03.jpeg"
+    ],
+    "imageCount": 3,
+    "workbookImageCount": 3,
+    "rooms": [
+      "living-room",
+      "bedroom"
+    ],
+    "slug": "grey-fabric-curtain-design-03-bid-cur-007",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-rug-014",
+    "originalId": "BI-014",
+    "sku": "BID-RUG-014",
+    "internalSku": "BID-RUG-014",
+    "barcode": "BID-RUG-014",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Rugs",
+    "name": "Light Grey Boucle Textured Rug",
+    "description": "Light Grey Boucle Textured Rug in light grey tones. A floor accent designed to add texture and visual warmth to living spaces; confirm measurements and fibre composition before publishing.",
+    "color": "Light Grey",
+    "material": "Textured fabric",
+    "materialFinish": "Textured fabric",
+    "searchTags": "rugs, interior-design, home-decor, light-grey, textured, boucle",
+    "tags": [
+      "rugs",
+      "interior-design",
+      "home-decor",
+      "light-grey",
+      "textured",
+      "boucle"
+    ],
+    "costPrice": 3200,
+    "price": 4160,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "light-grey-boucle-textured-rug.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Rugs",
+    "mainImageFilename": "bi-014.jpg",
+    "mainImage": "/product-images/bi-014.jpg",
+    "image": "/product-images/bi-014.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-014.jpg",
+        "type": "image",
+        "fileName": "bi-014.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      },
+      {
+        "url": "/product-images/BID-RUG-014_02.jpeg",
+        "type": "image",
+        "fileName": "BID-RUG-014_02.jpeg",
+        "position": 2
+      },
+      {
+        "url": "/product-images/BID-RUG-014_03.jpeg",
+        "type": "image",
+        "fileName": "BID-RUG-014_03.jpeg",
+        "position": 3
+      },
+      {
+        "url": "/product-images/BID-RUG-014_04.jpeg",
+        "type": "image",
+        "fileName": "BID-RUG-014_04.jpeg",
+        "position": 4
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-RUG-014_01.jpeg",
+      "BID-RUG-014_02.jpeg",
+      "BID-RUG-014_03.jpeg",
+      "BID-RUG-014_04.jpeg"
+    ],
+    "imageCount": 4,
+    "workbookImageCount": 4,
+    "rooms": [
+      "living-room",
+      "bedroom"
+    ],
+    "slug": "light-grey-boucle-textured-rug-bid-rug-014",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-rug-016",
+    "originalId": "BI-016",
+    "sku": "BID-RUG-016",
+    "internalSku": "BID-RUG-016",
+    "barcode": "BID-RUG-016",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Rugs",
+    "name": "Taupe Wool Textured Rug",
+    "description": "Taupe Wool Textured Rug in taupe tones. A floor accent designed to add texture and visual warmth to living spaces; confirm measurements and fibre composition before publishing.",
+    "color": "Taupe",
+    "material": "Wool (source-labelled)",
+    "materialFinish": "Wool (source-labelled)",
+    "searchTags": "rugs, interior-design, home-decor, taupe, textured",
+    "tags": [
+      "rugs",
+      "interior-design",
+      "home-decor",
+      "taupe",
+      "textured"
+    ],
+    "costPrice": 3200,
+    "price": 4160,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "taupe-wool-textured-rug.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Rugs",
+    "mainImageFilename": "bi-016.jpg",
+    "mainImage": "/product-images/bi-016.jpg",
+    "image": "/product-images/bi-016.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-016.jpg",
+        "type": "image",
+        "fileName": "bi-016.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-RUG-016_01.jpeg"
+    ],
+    "imageCount": 1,
+    "workbookImageCount": 1,
+    "rooms": [
+      "living-room",
+      "bedroom"
+    ],
+    "slug": "taupe-wool-textured-rug-bid-rug-016",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-rug-017",
+    "originalId": "BI-017",
+    "sku": "BID-RUG-017",
+    "internalSku": "BID-RUG-017",
+    "barcode": "BID-RUG-017",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Rugs",
+    "name": "Taupe Rug",
+    "description": "Taupe Rug in taupe tones. A floor accent designed to add texture and visual warmth to living spaces; confirm measurements and fibre composition before publishing.",
+    "color": "Taupe",
+    "material": "To Confirm",
+    "materialFinish": "To Confirm",
+    "searchTags": "rugs, interior-design, home-decor, taupe",
+    "tags": [
+      "rugs",
+      "interior-design",
+      "home-decor",
+      "taupe"
+    ],
+    "costPrice": 2800,
+    "price": 3640,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "taupe-rug.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Rugs",
+    "mainImageFilename": "bi-017.jpg",
+    "mainImage": "/product-images/bi-017.jpg",
+    "image": "/product-images/bi-017.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-017.jpg",
+        "type": "image",
+        "fileName": "bi-017.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      },
+      {
+        "url": "/product-images/BID-RUG-017_02.jpeg",
+        "type": "image",
+        "fileName": "BID-RUG-017_02.jpeg",
+        "position": 2
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-RUG-017_01.jpeg",
+      "BID-RUG-017_02.jpeg"
+    ],
+    "imageCount": 2,
+    "workbookImageCount": 2,
+    "rooms": [
+      "living-room",
+      "bedroom"
+    ],
+    "slug": "taupe-rug-bid-rug-017",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-rug-019",
+    "originalId": "BI-019",
+    "sku": "BID-RUG-019",
+    "internalSku": "BID-RUG-019",
+    "barcode": "BID-RUG-019",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Rugs",
+    "name": "Beige Rug",
+    "description": "Beige Rug in beige tones. A floor accent designed to add texture and visual warmth to living spaces; confirm measurements and fibre composition before publishing.",
+    "color": "Beige",
+    "material": "To Confirm",
+    "materialFinish": "To Confirm",
+    "searchTags": "rugs, interior-design, home-decor, beige",
+    "tags": [
+      "rugs",
+      "interior-design",
+      "home-decor",
+      "beige"
+    ],
+    "costPrice": 2800,
+    "price": 3640,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "beige-rug.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Rugs",
+    "mainImageFilename": "bi-019.jpg",
+    "mainImage": "/product-images/bi-019.jpg",
+    "image": "/product-images/bi-019.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-019.jpg",
+        "type": "image",
+        "fileName": "bi-019.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      },
+      {
+        "url": "/product-images/BID-RUG-019_02.jpeg",
+        "type": "image",
+        "fileName": "BID-RUG-019_02.jpeg",
+        "position": 2
+      },
+      {
+        "url": "/product-images/BID-RUG-019_03.jpeg",
+        "type": "image",
+        "fileName": "BID-RUG-019_03.jpeg",
+        "position": 3
+      },
+      {
+        "url": "/product-images/BID-RUG-019_04.jpeg",
+        "type": "image",
+        "fileName": "BID-RUG-019_04.jpeg",
+        "position": 4
+      },
+      {
+        "url": "/product-images/BID-RUG-019_05.jpeg",
+        "type": "image",
+        "fileName": "BID-RUG-019_05.jpeg",
+        "position": 5
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-RUG-019_01.jpeg",
+      "BID-RUG-019_02.jpeg",
+      "BID-RUG-019_03.jpeg",
+      "BID-RUG-019_04.jpeg",
+      "BID-RUG-019_05.jpeg"
+    ],
+    "imageCount": 5,
+    "workbookImageCount": 5,
+    "rooms": [
+      "living-room",
+      "bedroom"
+    ],
+    "slug": "beige-rug-bid-rug-019",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-rug-023",
+    "originalId": "BI-023",
+    "sku": "BID-RUG-023",
+    "internalSku": "BID-RUG-023",
+    "barcode": "BID-RUG-023",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Rugs",
+    "name": "Beige & Grey Framed Abstract Area Rug",
+    "description": "Beige & Grey Framed Abstract Area Rug in beige / grey tones. A floor accent designed to add texture and visual warmth to living spaces; confirm measurements and fibre composition before publishing.",
+    "color": "Beige / Grey",
+    "material": "Wool (source-labelled)",
+    "materialFinish": "Wool (source-labelled)",
+    "searchTags": "rugs, interior-design, home-decor, beige, grey, abstract",
+    "tags": [
+      "rugs",
+      "interior-design",
+      "home-decor",
+      "beige",
+      "grey",
+      "abstract"
+    ],
+    "costPrice": 2800,
+    "price": 3640,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "framed-abstract-wool-rug.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Decor",
+    "mainImageFilename": "bi-023.jpg",
+    "mainImage": "/product-images/bi-023.jpg",
+    "image": "/product-images/bi-023.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-023.jpg",
+        "type": "image",
+        "fileName": "bi-023.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-RUG-023_01.jpeg"
+    ],
+    "imageCount": 1,
+    "workbookImageCount": 1,
+    "rooms": [
+      "living-room",
+      "bedroom"
+    ],
+    "slug": "beige-and-grey-framed-abstract-area-rug-bid-rug-023",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-rug-031",
+    "originalId": "BI-031",
+    "sku": "BID-RUG-031",
+    "internalSku": "BID-RUG-031",
+    "barcode": "BID-RUG-031",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Rugs",
+    "name": "Beige Rug – Design 02",
+    "description": "Beige Rug in beige tones. A floor accent designed to add texture and visual warmth to living spaces; confirm measurements and fibre composition before publishing.",
+    "color": "Beige",
+    "material": "To Confirm",
+    "materialFinish": "To Confirm",
+    "searchTags": "rugs, interior-design, home-decor, beige",
+    "tags": [
+      "rugs",
+      "interior-design",
+      "home-decor",
+      "beige"
+    ],
+    "costPrice": 3000,
+    "price": 3900,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "beige-rug.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Rugs",
+    "mainImageFilename": "bi-031.jpg",
+    "mainImage": "/product-images/bi-031.jpg",
+    "image": "/product-images/bi-031.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-031.jpg",
+        "type": "image",
+        "fileName": "bi-031.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      },
+      {
+        "url": "/product-images/BID-RUG-031_02.jpeg",
+        "type": "image",
+        "fileName": "BID-RUG-031_02.jpeg",
+        "position": 2
+      },
+      {
+        "url": "/product-images/BID-RUG-031_03.jpeg",
+        "type": "image",
+        "fileName": "BID-RUG-031_03.jpeg",
+        "position": 3
+      },
+      {
+        "url": "/product-images/BID-RUG-031_04.jpeg",
+        "type": "image",
+        "fileName": "BID-RUG-031_04.jpeg",
+        "position": 4
+      },
+      {
+        "url": "/product-images/BID-RUG-031_05.jpeg",
+        "type": "image",
+        "fileName": "BID-RUG-031_05.jpeg",
+        "position": 5
+      },
+      {
+        "url": "/product-images/BID-RUG-031_06.jpeg",
+        "type": "image",
+        "fileName": "BID-RUG-031_06.jpeg",
+        "position": 6
+      },
+      {
+        "url": "/product-images/BID-RUG-031_07.jpeg",
+        "type": "image",
+        "fileName": "BID-RUG-031_07.jpeg",
+        "position": 7
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-RUG-031_01.jpeg",
+      "BID-RUG-031_02.jpeg",
+      "BID-RUG-031_03.jpeg",
+      "BID-RUG-031_04.jpeg",
+      "BID-RUG-031_05.jpeg",
+      "BID-RUG-031_06.jpeg",
+      "BID-RUG-031_07.jpeg"
+    ],
+    "imageCount": 7,
+    "workbookImageCount": 7,
+    "rooms": [
+      "living-room",
+      "bedroom"
+    ],
+    "slug": "beige-rug-design-02-bid-rug-031",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-rug-033",
+    "originalId": "BI-033",
+    "sku": "BID-RUG-033",
+    "internalSku": "BID-RUG-033",
+    "barcode": "BID-RUG-033",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Rugs",
+    "name": "Beige Boucle Textured Rug",
+    "description": "Beige Boucle Textured Rug in beige tones. A floor accent designed to add texture and visual warmth to living spaces; confirm measurements and fibre composition before publishing.",
+    "color": "Beige",
+    "material": "Textured fabric",
+    "materialFinish": "Textured fabric",
+    "searchTags": "rugs, interior-design, home-decor, beige, textured, boucle",
+    "tags": [
+      "rugs",
+      "interior-design",
+      "home-decor",
+      "beige",
+      "textured",
+      "boucle"
+    ],
+    "costPrice": 2800,
+    "price": 3640,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "beige-boucle-textured-rug.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Rugs",
+    "mainImageFilename": "bi-033.jpg",
+    "mainImage": "/product-images/bi-033.jpg",
+    "image": "/product-images/bi-033.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-033.jpg",
+        "type": "image",
+        "fileName": "bi-033.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      },
+      {
+        "url": "/product-images/BID-RUG-033_02.jpeg",
+        "type": "image",
+        "fileName": "BID-RUG-033_02.jpeg",
+        "position": 2
+      },
+      {
+        "url": "/product-images/BID-RUG-033_03.jpeg",
+        "type": "image",
+        "fileName": "BID-RUG-033_03.jpeg",
+        "position": 3
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-RUG-033_01.jpeg",
+      "BID-RUG-033_02.jpeg",
+      "BID-RUG-033_03.jpeg"
+    ],
+    "imageCount": 3,
+    "workbookImageCount": 3,
+    "rooms": [
+      "living-room",
+      "bedroom"
+    ],
+    "slug": "beige-boucle-textured-rug-bid-rug-033",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-sof-036",
+    "originalId": "BI-036",
+    "sku": "BID-SOF-036",
+    "internalSku": "BID-SOF-036",
+    "barcode": "BID-SOF-036",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Sofas",
+    "name": "Light Grey Fabric Sofa",
+    "description": "Light Grey Fabric Sofa in light grey tones. An upholstered seating option suited to contemporary lounge settings; confirm dimensions, upholstery and seating configuration.",
+    "color": "Light Grey",
+    "material": "Fabric",
+    "materialFinish": "Fabric",
+    "searchTags": "sofas, interior-design, home-decor, light-grey",
+    "tags": [
+      "sofas",
+      "interior-design",
+      "home-decor",
+      "light-grey"
+    ],
+    "costPrice": 17900,
+    "price": 23270,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "light-grey-fabric-sofa.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Sofas",
+    "mainImageFilename": "bi-036.jpg",
+    "mainImage": "/product-images/bi-036.jpg",
+    "image": "/product-images/bi-036.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-036.jpg",
+        "type": "image",
+        "fileName": "bi-036.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      },
+      {
+        "url": "/product-images/BID-SOF-036_02.jpeg",
+        "type": "image",
+        "fileName": "BID-SOF-036_02.jpeg",
+        "position": 2
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-SOF-036_01.jpeg",
+      "BID-SOF-036_02.jpeg"
+    ],
+    "imageCount": 2,
+    "workbookImageCount": 2,
+    "rooms": [],
+    "slug": "light-grey-fabric-sofa-bid-sof-036",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-sof-043",
+    "originalId": "BI-043",
+    "sku": "BID-SOF-043",
+    "internalSku": "BID-SOF-043",
+    "barcode": "BID-SOF-043",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Sofas",
+    "name": "Light Grey Fabric Sofa – Design 02",
+    "description": "Light Grey Fabric Sofa in light grey tones. An upholstered seating option suited to contemporary lounge settings; confirm dimensions, upholstery and seating configuration.",
+    "color": "Light Grey",
+    "material": "Fabric",
+    "materialFinish": "Fabric",
+    "searchTags": "sofas, interior-design, home-decor, light-grey",
+    "tags": [
+      "sofas",
+      "interior-design",
+      "home-decor",
+      "light-grey"
+    ],
+    "costPrice": 14500,
+    "price": 18800,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "light-grey-fabric-sofa.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Sofas",
+    "mainImageFilename": "bi-043.jpg",
+    "mainImage": "/product-images/bi-043.jpg",
+    "image": "/product-images/bi-043.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-043.jpg",
+        "type": "image",
+        "fileName": "bi-043.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      },
+      {
+        "url": "/product-images/BID-SOF-043_02.jpeg",
+        "type": "image",
+        "fileName": "BID-SOF-043_02.jpeg",
+        "position": 2
+      },
+      {
+        "url": "/product-images/BID-SOF-043_03.jpeg",
+        "type": "image",
+        "fileName": "BID-SOF-043_03.jpeg",
+        "position": 3
+      },
+      {
+        "url": "/product-images/BID-SOF-043_04.jpeg",
+        "type": "image",
+        "fileName": "BID-SOF-043_04.jpeg",
+        "position": 4
+      },
+      {
+        "url": "/product-images/BID-SOF-043_05.jpeg",
+        "type": "image",
+        "fileName": "BID-SOF-043_05.jpeg",
+        "position": 5
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-SOF-043_01.jpeg",
+      "BID-SOF-043_02.jpeg",
+      "BID-SOF-043_03.jpeg",
+      "BID-SOF-043_04.jpeg",
+      "BID-SOF-043_05.jpeg"
+    ],
+    "imageCount": 5,
+    "workbookImageCount": 5,
+    "rooms": [],
+    "slug": "light-grey-fabric-sofa-design-02-bid-sof-043",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-chr-048",
+    "originalId": "BI-048",
+    "sku": "BID-CHR-048",
+    "internalSku": "BID-CHR-048",
+    "barcode": "BID-CHR-048",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Chairs",
+    "name": "Light Grey Fabric Armchair",
+    "description": "Light Grey Fabric Armchair in light grey tones. An accent seating piece for lounges, bedrooms or reading corners; confirm dimensions and upholstery details.",
+    "color": "Light Grey",
+    "material": "Fabric",
+    "materialFinish": "Fabric",
+    "searchTags": "chairs, interior-design, home-decor, light-grey",
+    "tags": [
+      "chairs",
+      "interior-design",
+      "home-decor",
+      "light-grey"
+    ],
+    "costPrice": 8500,
+    "price": 11000,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "light-grey-fabric-armchair.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Chairs",
+    "mainImageFilename": "bi-048.jpg",
+    "mainImage": "/product-images/bi-048.jpg",
+    "image": "/product-images/bi-048.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-048.jpg",
+        "type": "image",
+        "fileName": "bi-048.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      },
+      {
+        "url": "/product-images/BID-CHR-048_02.jpeg",
+        "type": "image",
+        "fileName": "BID-CHR-048_02.jpeg",
+        "position": 2
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-CHR-048_01.jpeg",
+      "BID-CHR-048_02.jpeg"
+    ],
+    "imageCount": 2,
+    "workbookImageCount": 2,
+    "rooms": [
+      "living-room",
+      "dining-room"
+    ],
+    "slug": "light-grey-fabric-armchair-bid-chr-048",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-chr-050",
+    "originalId": "BI-050",
+    "sku": "BID-CHR-050",
+    "internalSku": "BID-CHR-050",
+    "barcode": "BID-CHR-050",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Chairs",
+    "name": "Light Grey Fabric Armchair – Design 02",
+    "description": "Light Grey Fabric Armchair in light grey tones. An accent seating piece for lounges, bedrooms or reading corners; confirm dimensions and upholstery details.",
+    "color": "Light Grey",
+    "material": "Fabric",
+    "materialFinish": "Fabric",
+    "searchTags": "chairs, interior-design, home-decor, light-grey",
+    "tags": [
+      "chairs",
+      "interior-design",
+      "home-decor",
+      "light-grey"
+    ],
+    "costPrice": 8000,
+    "price": 10400,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "light-grey-fabric-armchair.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Chairs",
+    "mainImageFilename": "bi-050.jpg",
+    "mainImage": "/product-images/bi-050.jpg",
+    "image": "/product-images/bi-050.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-050.jpg",
+        "type": "image",
+        "fileName": "bi-050.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      },
+      {
+        "url": "/product-images/BID-CHR-050_02.jpeg",
+        "type": "image",
+        "fileName": "BID-CHR-050_02.jpeg",
+        "position": 2
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-CHR-050_01.jpeg",
+      "BID-CHR-050_02.jpeg"
+    ],
+    "imageCount": 2,
+    "workbookImageCount": 2,
+    "rooms": [
+      "living-room",
+      "dining-room"
+    ],
+    "slug": "light-grey-fabric-armchair-design-02-bid-chr-050",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-sof-052",
+    "originalId": "BI-052",
+    "sku": "BID-SOF-052",
+    "internalSku": "BID-SOF-052",
+    "barcode": "BID-SOF-052",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Sofas",
+    "name": "Light Grey Fabric Sofa – Design 03",
+    "description": "Light Grey Fabric Sofa in light grey tones. An upholstered seating option suited to contemporary lounge settings; confirm dimensions, upholstery and seating configuration.",
+    "color": "Light Grey",
+    "material": "Fabric",
+    "materialFinish": "Fabric",
+    "searchTags": "sofas, interior-design, home-decor, light-grey",
+    "tags": [
+      "sofas",
+      "interior-design",
+      "home-decor",
+      "light-grey"
+    ],
+    "costPrice": 26000,
+    "price": 33800,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "light-grey-fabric-sofa.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Sofas",
+    "mainImageFilename": "bi-052.jpg",
+    "mainImage": "/product-images/bi-052.jpg",
+    "image": "/product-images/bi-052.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-052.jpg",
+        "type": "image",
+        "fileName": "bi-052.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      },
+      {
+        "url": "/product-images/BID-SOF-052_02.jpeg",
+        "type": "image",
+        "fileName": "BID-SOF-052_02.jpeg",
+        "position": 2
+      },
+      {
+        "url": "/product-images/BID-SOF-052_03.jpeg",
+        "type": "image",
+        "fileName": "BID-SOF-052_03.jpeg",
+        "position": 3
+      },
+      {
+        "url": "/product-images/BID-SOF-052_04.jpeg",
+        "type": "image",
+        "fileName": "BID-SOF-052_04.jpeg",
+        "position": 4
+      },
+      {
+        "url": "/product-images/BID-SOF-052_05.jpeg",
+        "type": "image",
+        "fileName": "BID-SOF-052_05.jpeg",
+        "position": 5
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-SOF-052_01.jpeg",
+      "BID-SOF-052_02.jpeg",
+      "BID-SOF-052_03.jpeg",
+      "BID-SOF-052_04.jpeg",
+      "BID-SOF-052_05.jpeg"
+    ],
+    "imageCount": 5,
+    "workbookImageCount": 5,
+    "rooms": [],
+    "slug": "light-grey-fabric-sofa-design-03-bid-sof-052",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-chr-062",
+    "originalId": "BI-062",
+    "sku": "BID-CHR-062",
+    "internalSku": "BID-CHR-062",
+    "barcode": "BID-CHR-062",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Chairs",
+    "name": "Grey Upholstered Wood-Frame Accent Chair",
+    "description": "Grey Upholstered Wood-Frame Accent Chair in grey / wood tones. An accent seating piece for lounges, bedrooms or reading corners; confirm dimensions and upholstery details.",
+    "color": "Grey / Wood",
+    "material": "Wood",
+    "materialFinish": "Wood",
+    "searchTags": "chairs, interior-design, home-decor, grey, wood",
+    "tags": [
+      "chairs",
+      "interior-design",
+      "home-decor",
+      "grey",
+      "wood"
+    ],
+    "costPrice": 9500,
+    "price": 12300,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "grey-upholstered-armchair-with-wood-frame.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Armchair",
+    "mainImageFilename": "bi-062.jpg",
+    "mainImage": "/product-images/bi-062.jpg",
+    "image": "/product-images/bi-062.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-062.jpg",
+        "type": "image",
+        "fileName": "bi-062.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      },
+      {
+        "url": "/product-images/BID-CHR-062_02.jpeg",
+        "type": "image",
+        "fileName": "BID-CHR-062_02.jpeg",
+        "position": 2
+      },
+      {
+        "url": "/product-images/BID-CHR-062_03.jpeg",
+        "type": "image",
+        "fileName": "BID-CHR-062_03.jpeg",
+        "position": 3
+      },
+      {
+        "url": "/product-images/BID-CHR-062_04.jpeg",
+        "type": "image",
+        "fileName": "BID-CHR-062_04.jpeg",
+        "position": 4
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-CHR-062_01.jpeg",
+      "BID-CHR-062_02.jpeg",
+      "BID-CHR-062_03.jpeg",
+      "BID-CHR-062_04.jpeg"
+    ],
+    "imageCount": 4,
+    "workbookImageCount": 4,
+    "rooms": [
+      "living-room",
+      "dining-room"
+    ],
+    "slug": "grey-upholstered-wood-frame-accent-chair-bid-chr-062",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-sof-066",
+    "originalId": "BI-066",
+    "sku": "BID-SOF-066",
+    "internalSku": "BID-SOF-066",
+    "barcode": "BID-SOF-066",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Sofas",
+    "name": "Light Grey Fabric Sofa – Design 04",
+    "description": "Light Grey Fabric Sofa in light grey tones. An upholstered seating option suited to contemporary lounge settings; confirm dimensions, upholstery and seating configuration.",
+    "color": "Light Grey",
+    "material": "Fabric",
+    "materialFinish": "Fabric",
+    "searchTags": "sofas, interior-design, home-decor, light-grey",
+    "tags": [
+      "sofas",
+      "interior-design",
+      "home-decor",
+      "light-grey"
+    ],
+    "costPrice": 14000,
+    "price": 18200,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "light-grey-fabric-sofa.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Sofas",
+    "mainImageFilename": "bi-066.jpg",
+    "mainImage": "/product-images/bi-066.jpg",
+    "image": "/product-images/bi-066.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-066.jpg",
+        "type": "image",
+        "fileName": "bi-066.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      },
+      {
+        "url": "/product-images/BID-SOF-066_02.jpeg",
+        "type": "image",
+        "fileName": "BID-SOF-066_02.jpeg",
+        "position": 2
+      },
+      {
+        "url": "/product-images/BID-SOF-066_03.jpeg",
+        "type": "image",
+        "fileName": "BID-SOF-066_03.jpeg",
+        "position": 3
+      },
+      {
+        "url": "/product-images/BID-SOF-066_04.jpeg",
+        "type": "image",
+        "fileName": "BID-SOF-066_04.jpeg",
+        "position": 4
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-SOF-066_01.jpeg",
+      "BID-SOF-066_02.jpeg",
+      "BID-SOF-066_03.jpeg",
+      "BID-SOF-066_04.jpeg"
+    ],
+    "imageCount": 4,
+    "workbookImageCount": 4,
+    "rooms": [],
+    "slug": "light-grey-fabric-sofa-design-04-bid-sof-066",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-sof-069",
+    "originalId": "BI-069",
+    "sku": "BID-SOF-069",
+    "internalSku": "BID-SOF-069",
+    "barcode": "BID-SOF-069",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Sofas",
+    "name": "Light Grey Fabric Sofa – Design 05",
+    "description": "Light Grey Fabric Sofa in light grey tones. An upholstered seating option suited to contemporary lounge settings; confirm dimensions, upholstery and seating configuration.",
+    "color": "Light Grey",
+    "material": "Fabric",
+    "materialFinish": "Fabric",
+    "searchTags": "sofas, interior-design, home-decor, light-grey",
+    "tags": [
+      "sofas",
+      "interior-design",
+      "home-decor",
+      "light-grey"
+    ],
+    "costPrice": 28000,
+    "price": 32200,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "light-grey-fabric-sofa.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Sofas",
+    "mainImageFilename": "bi-069.jpg",
+    "mainImage": "/product-images/bi-069.jpg",
+    "image": "/product-images/bi-069.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-069.jpg",
+        "type": "image",
+        "fileName": "bi-069.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      },
+      {
+        "url": "/product-images/BID-SOF-069_02.jpeg",
+        "type": "image",
+        "fileName": "BID-SOF-069_02.jpeg",
+        "position": 2
+      },
+      {
+        "url": "/product-images/BID-SOF-069_03.jpeg",
+        "type": "image",
+        "fileName": "BID-SOF-069_03.jpeg",
+        "position": 3
+      },
+      {
+        "url": "/product-images/BID-SOF-069_04.jpeg",
+        "type": "image",
+        "fileName": "BID-SOF-069_04.jpeg",
+        "position": 4
+      },
+      {
+        "url": "/product-images/BID-SOF-069_05.jpeg",
+        "type": "image",
+        "fileName": "BID-SOF-069_05.jpeg",
+        "position": 5
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-SOF-069_01.jpeg",
+      "BID-SOF-069_02.jpeg",
+      "BID-SOF-069_03.jpeg",
+      "BID-SOF-069_04.jpeg",
+      "BID-SOF-069_05.jpeg"
+    ],
+    "imageCount": 5,
+    "workbookImageCount": 5,
+    "rooms": [],
+    "slug": "light-grey-fabric-sofa-design-05-bid-sof-069",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-sof-084",
+    "originalId": "BI-084",
+    "sku": "BID-SOF-084",
+    "internalSku": "BID-SOF-084",
+    "barcode": "BID-SOF-084",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Sofas",
+    "name": "Sand Fabric Sofa",
+    "description": "Sand Fabric Sofa in sand tones. An upholstered seating option suited to contemporary lounge settings; confirm dimensions, upholstery and seating configuration.",
+    "color": "Sand",
+    "material": "Fabric",
+    "materialFinish": "Fabric",
+    "searchTags": "sofas, interior-design, home-decor, sand",
+    "tags": [
+      "sofas",
+      "interior-design",
+      "home-decor",
+      "sand"
+    ],
+    "costPrice": 9500,
+    "price": 12350,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "sand-fabric-sofa.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Sofas",
+    "mainImageFilename": "bi-084.jpg",
+    "mainImage": "/product-images/bi-084.jpg",
+    "image": "/product-images/bi-084.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-084.jpg",
+        "type": "image",
+        "fileName": "bi-084.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      },
+      {
+        "url": "/product-images/BID-SOF-084_02.jpeg",
+        "type": "image",
+        "fileName": "BID-SOF-084_02.jpeg",
+        "position": 2
+      },
+      {
+        "url": "/product-images/BID-SOF-084_03.jpeg",
+        "type": "image",
+        "fileName": "BID-SOF-084_03.jpeg",
+        "position": 3
+      },
+      {
+        "url": "/product-images/BID-SOF-084_04.jpeg",
+        "type": "image",
+        "fileName": "BID-SOF-084_04.jpeg",
+        "position": 4
+      },
+      {
+        "url": "/product-images/BID-SOF-084_05.jpeg",
+        "type": "image",
+        "fileName": "BID-SOF-084_05.jpeg",
+        "position": 5
+      },
+      {
+        "url": "/product-images/BID-SOF-084_06.jpeg",
+        "type": "image",
+        "fileName": "BID-SOF-084_06.jpeg",
+        "position": 6
+      },
+      {
+        "url": "/product-images/BID-SOF-084_07.jpeg",
+        "type": "image",
+        "fileName": "BID-SOF-084_07.jpeg",
+        "position": 7
+      },
+      {
+        "url": "/product-images/BID-SOF-084_08.jpeg",
+        "type": "image",
+        "fileName": "BID-SOF-084_08.jpeg",
+        "position": 8
+      },
+      {
+        "url": "/product-images/BID-SOF-084_09.jpeg",
+        "type": "image",
+        "fileName": "BID-SOF-084_09.jpeg",
+        "position": 9
+      },
+      {
+        "url": "/product-images/BID-SOF-084_10.jpeg",
+        "type": "image",
+        "fileName": "BID-SOF-084_10.jpeg",
+        "position": 10
+      },
+      {
+        "url": "/product-images/BID-SOF-084_11.jpeg",
+        "type": "image",
+        "fileName": "BID-SOF-084_11.jpeg",
+        "position": 11
+      },
+      {
+        "url": "/product-images/BID-SOF-084_12.jpeg",
+        "type": "image",
+        "fileName": "BID-SOF-084_12.jpeg",
+        "position": 12
+      },
+      {
+        "url": "/product-images/BID-SOF-084_13.jpeg",
+        "type": "image",
+        "fileName": "BID-SOF-084_13.jpeg",
+        "position": 13
+      },
+      {
+        "url": "/product-images/BID-SOF-084_14.jpeg",
+        "type": "image",
+        "fileName": "BID-SOF-084_14.jpeg",
+        "position": 14
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-SOF-084_01.jpeg",
+      "BID-SOF-084_02.jpeg",
+      "BID-SOF-084_03.jpeg",
+      "BID-SOF-084_04.jpeg",
+      "BID-SOF-084_05.jpeg",
+      "BID-SOF-084_06.jpeg",
+      "BID-SOF-084_07.jpeg",
+      "BID-SOF-084_08.jpeg",
+      "BID-SOF-084_09.jpeg",
+      "BID-SOF-084_10.jpeg",
+      "BID-SOF-084_11.jpeg",
+      "BID-SOF-084_12.jpeg",
+      "BID-SOF-084_13.jpeg",
+      "BID-SOF-084_14.jpeg"
+    ],
+    "imageCount": 14,
+    "workbookImageCount": 14,
+    "rooms": [],
+    "slug": "sand-fabric-sofa-bid-sof-084",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-tbl-091",
+    "originalId": "BI-091",
+    "sku": "BID-TBL-091",
+    "internalSku": "BID-TBL-091",
+    "barcode": "BID-TBL-091",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Tables",
+    "name": "Light Brown Coffee Table",
+    "description": "Light Brown Coffee Table in light brown tones. A statement surface for contemporary interiors; confirm dimensions and finish before ordering.",
+    "color": "Light Brown",
+    "material": "To Confirm",
+    "materialFinish": "To Confirm",
+    "searchTags": "tables, interior-design, home-decor, light-brown",
+    "tags": [
+      "tables",
+      "interior-design",
+      "home-decor",
+      "light-brown"
+    ],
+    "costPrice": 14800,
+    "price": 19240,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "light-brown-coffee-table.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Tables",
+    "mainImageFilename": "bi-091.jpg",
+    "mainImage": "/product-images/bi-091.jpg",
+    "image": "/product-images/bi-091.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-091.jpg",
+        "type": "image",
+        "fileName": "bi-091.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-TBL-091_01.jpeg"
+    ],
+    "imageCount": 1,
+    "workbookImageCount": 1,
+    "rooms": [
+      "living-room",
+      "dining-room"
+    ],
+    "slug": "light-brown-coffee-table-bid-tbl-091",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-lmp-104",
+    "originalId": "BI-104",
+    "sku": "BID-LMP-104",
+    "internalSku": "BID-LMP-104",
+    "barcode": "BID-LMP-104",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Lamps",
+    "name": "Black Table Lamp",
+    "description": "Black Table Lamp in black tones. A lighting accent for side tables or bedside styling; confirm lamp type, electrical rating and included bulb.",
+    "color": "Black",
+    "material": "To Confirm",
+    "materialFinish": "To Confirm",
+    "searchTags": "lamps, interior-design, home-decor, black",
+    "tags": [
+      "lamps",
+      "interior-design",
+      "home-decor",
+      "black"
+    ],
+    "costPrice": 2500,
+    "price": 3250,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "black-table-lamp.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Lamps",
+    "mainImageFilename": "bi-104.jpg",
+    "mainImage": "/product-images/bi-104.jpg",
+    "image": "/product-images/bi-104.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-104.jpg",
+        "type": "image",
+        "fileName": "bi-104.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      },
+      {
+        "url": "/product-images/BID-LMP-104_02.jpeg",
+        "type": "image",
+        "fileName": "BID-LMP-104_02.jpeg",
+        "position": 2
+      },
+      {
+        "url": "/product-images/BID-LMP-104_03.jpeg",
+        "type": "image",
+        "fileName": "BID-LMP-104_03.jpeg",
+        "position": 3
+      },
+      {
+        "url": "/product-images/BID-LMP-104_04.jpeg",
+        "type": "image",
+        "fileName": "BID-LMP-104_04.jpeg",
+        "position": 4
+      },
+      {
+        "url": "/product-images/BID-LMP-104_05.jpeg",
+        "type": "image",
+        "fileName": "BID-LMP-104_05.jpeg",
+        "position": 5
+      },
+      {
+        "url": "/product-images/BID-LMP-104_06.jpeg",
+        "type": "image",
+        "fileName": "BID-LMP-104_06.jpeg",
+        "position": 6
+      },
+      {
+        "url": "/product-images/BID-LMP-104_07.jpeg",
+        "type": "image",
+        "fileName": "BID-LMP-104_07.jpeg",
+        "position": 7
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-LMP-104_01.jpeg",
+      "BID-LMP-104_02.jpeg",
+      "BID-LMP-104_03.jpeg",
+      "BID-LMP-104_04.jpeg",
+      "BID-LMP-104_05.jpeg",
+      "BID-LMP-104_06.jpeg",
+      "BID-LMP-104_07.jpeg"
+    ],
+    "imageCount": 7,
+    "workbookImageCount": 7,
+    "rooms": [
+      "living-room",
+      "bedroom",
+      "home-office"
+    ],
+    "slug": "black-table-lamp-bid-lmp-104",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-sof-105",
+    "originalId": "BI-105",
+    "sku": "BID-SOF-105",
+    "internalSku": "BID-SOF-105",
+    "barcode": "BID-SOF-105",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Sofas",
+    "name": "Light Grey Fabric Sofa – Design 06",
+    "description": "Light Grey Fabric Sofa in light grey tones. An upholstered seating option suited to contemporary lounge settings; confirm dimensions, upholstery and seating configuration.",
+    "color": "Light Grey",
+    "material": "Fabric",
+    "materialFinish": "Fabric",
+    "searchTags": "sofas, interior-design, home-decor, light-grey",
+    "tags": [
+      "sofas",
+      "interior-design",
+      "home-decor",
+      "light-grey"
+    ],
+    "costPrice": 14500,
+    "price": 18850,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "light-grey-fabric-sofa.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Sofas",
+    "mainImageFilename": "bi-105.jpg",
+    "mainImage": "/product-images/bi-105.jpg",
+    "image": "/product-images/bi-105.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-105.jpg",
+        "type": "image",
+        "fileName": "bi-105.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      },
+      {
+        "url": "/product-images/BID-SOF-105_02.jpeg",
+        "type": "image",
+        "fileName": "BID-SOF-105_02.jpeg",
+        "position": 2
+      },
+      {
+        "url": "/product-images/BID-SOF-105_03.jpeg",
+        "type": "image",
+        "fileName": "BID-SOF-105_03.jpeg",
+        "position": 3
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-SOF-105_01.jpeg",
+      "BID-SOF-105_02.jpeg",
+      "BID-SOF-105_03.jpeg"
+    ],
+    "imageCount": 3,
+    "workbookImageCount": 3,
+    "rooms": [],
+    "slug": "light-grey-fabric-sofa-design-06-bid-sof-105",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-chr-111",
+    "originalId": "BI-111",
+    "sku": "BID-CHR-111",
+    "internalSku": "BID-CHR-111",
+    "barcode": "BID-CHR-111",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Chairs",
+    "name": "Leather Upholstered Lounge Seat",
+    "description": "Leather Upholstered Lounge Seat. An accent seating piece for lounges, bedrooms or reading corners; confirm dimensions and upholstery details.",
+    "color": "To Confirm",
+    "material": "Leather / leather-look",
+    "materialFinish": "Leather / leather-look",
+    "searchTags": "chairs, interior-design, home-decor, leather",
+    "tags": [
+      "chairs",
+      "interior-design",
+      "home-decor",
+      "leather"
+    ],
+    "costPrice": 13500,
+    "price": 17550,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "light-grey-fabric-armchair.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Chairs",
+    "mainImageFilename": "bi-111.jpg",
+    "mainImage": "/product-images/bi-111.jpg",
+    "image": "/product-images/bi-111.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-111.jpg",
+        "type": "image",
+        "fileName": "bi-111.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      },
+      {
+        "url": "/product-images/BID-CHR-111_02.jpeg",
+        "type": "image",
+        "fileName": "BID-CHR-111_02.jpeg",
+        "position": 2
+      },
+      {
+        "url": "/product-images/BID-CHR-111_03.jpeg",
+        "type": "image",
+        "fileName": "BID-CHR-111_03.jpeg",
+        "position": 3
+      },
+      {
+        "url": "/product-images/BID-CHR-111_04.jpeg",
+        "type": "image",
+        "fileName": "BID-CHR-111_04.jpeg",
+        "position": 4
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-CHR-111_01.jpeg",
+      "BID-CHR-111_02.jpeg",
+      "BID-CHR-111_03.jpeg",
+      "BID-CHR-111_04.jpeg"
+    ],
+    "imageCount": 4,
+    "workbookImageCount": 4,
+    "rooms": [
+      "living-room",
+      "dining-room"
+    ],
+    "slug": "leather-upholstered-lounge-seat-bid-chr-111",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-lmp-116",
+    "originalId": "BI-116",
+    "sku": "BID-LMP-116",
+    "internalSku": "BID-LMP-116",
+    "barcode": "BID-LMP-116",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Lamps",
+    "name": "Brown Grey Lamp",
+    "description": "Brown Grey Lamp in brown grey tones. A lighting accent for side tables or bedside styling; confirm lamp type, electrical rating and included bulb.",
+    "color": "Brown Grey",
+    "material": "To Confirm",
+    "materialFinish": "To Confirm",
+    "searchTags": "lamps, interior-design, home-decor, brown-grey",
+    "tags": [
+      "lamps",
+      "interior-design",
+      "home-decor",
+      "brown-grey"
+    ],
+    "costPrice": 3200,
+    "price": 4560,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "brown-grey-lamp.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Lamps",
+    "mainImageFilename": "bi-116.jpg",
+    "mainImage": "/product-images/bi-116.jpg",
+    "image": "/product-images/bi-116.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-116.jpg",
+        "type": "image",
+        "fileName": "bi-116.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-LMP-116_01.jpeg"
+    ],
+    "imageCount": 1,
+    "workbookImageCount": 1,
+    "rooms": [
+      "living-room",
+      "bedroom",
+      "home-office"
+    ],
+    "slug": "brown-grey-lamp-bid-lmp-116",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-tbl-119",
+    "originalId": "BI-119",
+    "sku": "BID-TBL-119",
+    "internalSku": "BID-TBL-119",
+    "barcode": "BID-TBL-119",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Tables",
+    "name": "Sand Coffee Table",
+    "description": "Sand Coffee Table in sand tones. A statement surface for contemporary interiors; confirm dimensions and finish before ordering.",
+    "color": "Sand",
+    "material": "To Confirm",
+    "materialFinish": "To Confirm",
+    "searchTags": "tables, interior-design, home-decor, sand",
+    "tags": [
+      "tables",
+      "interior-design",
+      "home-decor",
+      "sand"
+    ],
+    "costPrice": 11000,
+    "price": 14300,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "sand-coffee-table.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Tables",
+    "mainImageFilename": "bi-119.jpg",
+    "mainImage": "/product-images/bi-119.jpg",
+    "image": "/product-images/bi-119.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-119.jpg",
+        "type": "image",
+        "fileName": "bi-119.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      },
+      {
+        "url": "/product-images/BID-TBL-119_02.jpeg",
+        "type": "image",
+        "fileName": "BID-TBL-119_02.jpeg",
+        "position": 2
+      },
+      {
+        "url": "/product-images/BID-TBL-119_03.jpeg",
+        "type": "image",
+        "fileName": "BID-TBL-119_03.jpeg",
+        "position": 3
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-TBL-119_01.jpeg",
+      "BID-TBL-119_02.jpeg",
+      "BID-TBL-119_03.jpeg"
+    ],
+    "imageCount": 3,
+    "workbookImageCount": 3,
+    "rooms": [
+      "living-room",
+      "dining-room"
+    ],
+    "slug": "sand-coffee-table-bid-tbl-119",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-tbl-121",
+    "originalId": "BI-121",
+    "sku": "BID-TBL-121",
+    "internalSku": "BID-TBL-121",
+    "barcode": "BID-TBL-121",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Tables",
+    "name": "Taupe Coffee Table",
+    "description": "Taupe Coffee Table in taupe tones. A statement surface for contemporary interiors; confirm dimensions and finish before ordering.",
+    "color": "Taupe",
+    "material": "To Confirm",
+    "materialFinish": "To Confirm",
+    "searchTags": "tables, interior-design, home-decor, taupe",
+    "tags": [
+      "tables",
+      "interior-design",
+      "home-decor",
+      "taupe"
+    ],
+    "costPrice": 24000,
+    "price": 31200,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "taupe-coffee-table.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Tables",
+    "mainImageFilename": "bi-121.jpg",
+    "mainImage": "/product-images/bi-121.jpg",
+    "image": "/product-images/bi-121.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-121.jpg",
+        "type": "image",
+        "fileName": "bi-121.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      },
+      {
+        "url": "/product-images/BID-TBL-121_02.jpeg",
+        "type": "image",
+        "fileName": "BID-TBL-121_02.jpeg",
+        "position": 2
+      },
+      {
+        "url": "/product-images/BID-TBL-121_03.jpeg",
+        "type": "image",
+        "fileName": "BID-TBL-121_03.jpeg",
+        "position": 3
+      },
+      {
+        "url": "/product-images/BID-TBL-121_04.jpeg",
+        "type": "image",
+        "fileName": "BID-TBL-121_04.jpeg",
+        "position": 4
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-TBL-121_01.jpeg",
+      "BID-TBL-121_02.jpeg",
+      "BID-TBL-121_03.jpeg",
+      "BID-TBL-121_04.jpeg"
+    ],
+    "imageCount": 4,
+    "workbookImageCount": 4,
+    "rooms": [
+      "living-room",
+      "dining-room"
+    ],
+    "slug": "taupe-coffee-table-bid-tbl-121",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-lmp-125",
+    "originalId": "BI-125",
+    "sku": "BID-LMP-125",
+    "internalSku": "BID-LMP-125",
+    "barcode": "BID-LMP-125",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Lamps",
+    "name": "Brass Table Lamp",
+    "description": "Brass Table Lamp in white / brass tones. A lighting accent for side tables or bedside styling; confirm lamp type, electrical rating and included bulb.",
+    "color": "White / Brass",
+    "material": "Brass / mixed materials",
+    "materialFinish": "Brass / mixed materials",
+    "searchTags": "lamps, interior-design, home-decor, white, brass",
+    "tags": [
+      "lamps",
+      "interior-design",
+      "home-decor",
+      "white",
+      "brass"
+    ],
+    "costPrice": 2500,
+    "price": 3250,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "white-brass-table-lamp.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Lamps",
+    "mainImageFilename": "bi-125.jpg",
+    "mainImage": "/product-images/bi-125.jpg",
+    "image": "/product-images/bi-125.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-125.jpg",
+        "type": "image",
+        "fileName": "bi-125.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      },
+      {
+        "url": "/product-images/BID-LMP-125_02.jpeg",
+        "type": "image",
+        "fileName": "BID-LMP-125_02.jpeg",
+        "position": 2
+      },
+      {
+        "url": "/product-images/BID-LMP-125_03.jpeg",
+        "type": "image",
+        "fileName": "BID-LMP-125_03.jpeg",
+        "position": 3
+      },
+      {
+        "url": "/product-images/BID-LMP-125_04.jpeg",
+        "type": "image",
+        "fileName": "BID-LMP-125_04.jpeg",
+        "position": 4
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-LMP-125_01.jpeg",
+      "BID-LMP-125_02.jpeg",
+      "BID-LMP-125_03.jpeg",
+      "BID-LMP-125_04.jpeg"
+    ],
+    "imageCount": 4,
+    "workbookImageCount": 4,
+    "rooms": [
+      "living-room",
+      "bedroom",
+      "home-office"
+    ],
+    "slug": "brass-table-lamp-bid-lmp-125",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-con-128",
+    "originalId": "BI-128",
+    "sku": "BID-CON-128",
+    "internalSku": "BID-CON-128",
+    "barcode": "BID-CON-128",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Consoles",
+    "name": "Console Table",
+    "description": "Console Table in marble / to confirm tones. A streamlined storage or display unit for modern interiors; confirm materials, dimensions and configuration.",
+    "color": "Marble / To Confirm",
+    "material": "To Confirm",
+    "materialFinish": "To Confirm",
+    "searchTags": "consoles, interior-design, home-decor, marble, to-confirm",
+    "tags": [
+      "consoles",
+      "interior-design",
+      "home-decor",
+      "marble",
+      "to-confirm"
+    ],
+    "costPrice": 18500,
+    "price": 24050,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "light-grey-coffee-table.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Tables",
+    "mainImageFilename": "bi-128.jpg",
+    "mainImage": "/product-images/bi-128.jpg",
+    "image": "/product-images/bi-128.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-128.jpg",
+        "type": "image",
+        "fileName": "bi-128.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-CON-128_01.jpeg"
+    ],
+    "imageCount": 1,
+    "workbookImageCount": 1,
+    "rooms": [],
+    "slug": "console-table-bid-con-128",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-tbl-133",
+    "originalId": "BI-133",
+    "sku": "BID-TBL-133",
+    "internalSku": "BID-TBL-133",
+    "barcode": "BID-TBL-133",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Tables",
+    "name": "Light Grey Coffee Table",
+    "description": "Light Grey Coffee Table in light grey tones. A statement surface for contemporary interiors; confirm dimensions and finish before ordering.",
+    "color": "Light Grey",
+    "material": "To Confirm",
+    "materialFinish": "To Confirm",
+    "searchTags": "tables, interior-design, home-decor, light-grey",
+    "tags": [
+      "tables",
+      "interior-design",
+      "home-decor",
+      "light-grey"
+    ],
+    "costPrice": 18500,
+    "price": 24000,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "light-grey-coffee-table.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Tables",
+    "mainImageFilename": "bi-133.jpg",
+    "mainImage": "/product-images/bi-133.jpg",
+    "image": "/product-images/bi-133.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-133.jpg",
+        "type": "image",
+        "fileName": "bi-133.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      },
+      {
+        "url": "/product-images/BID-TBL-133_02.jpeg",
+        "type": "image",
+        "fileName": "BID-TBL-133_02.jpeg",
+        "position": 2
+      },
+      {
+        "url": "/product-images/BID-TBL-133_03.jpeg",
+        "type": "image",
+        "fileName": "BID-TBL-133_03.jpeg",
+        "position": 3
+      },
+      {
+        "url": "/product-images/BID-TBL-133_04.jpeg",
+        "type": "image",
+        "fileName": "BID-TBL-133_04.jpeg",
+        "position": 4
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-TBL-133_01.jpeg",
+      "BID-TBL-133_02.jpeg",
+      "BID-TBL-133_03.jpeg",
+      "BID-TBL-133_04.jpeg"
+    ],
+    "imageCount": 4,
+    "workbookImageCount": 4,
+    "rooms": [
+      "living-room",
+      "dining-room"
+    ],
+    "slug": "light-grey-coffee-table-bid-tbl-133",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-tbl-136",
+    "originalId": "BI-136",
+    "sku": "BID-TBL-136",
+    "internalSku": "BID-TBL-136",
+    "barcode": "BID-TBL-136",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Tables",
+    "name": "Natural Wood Nested Coffee Tables",
+    "description": "Natural Wood Nested Coffee Tables in natural wood tones. A statement surface for contemporary interiors; confirm dimensions and finish before ordering.",
+    "color": "Natural Wood",
+    "material": "Wood",
+    "materialFinish": "Wood",
+    "searchTags": "tables, interior-design, home-decor, natural-wood, wood",
+    "tags": [
+      "tables",
+      "interior-design",
+      "home-decor",
+      "natural-wood",
+      "wood"
+    ],
+    "costPrice": 12500,
+    "price": 16250,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "styled-living-room-with-nested-wood-coffee-tables.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Coffee Table",
+    "mainImageFilename": "bi-136.jpg",
+    "mainImage": "/product-images/bi-136.jpg",
+    "image": "/product-images/bi-136.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-136.jpg",
+        "type": "image",
+        "fileName": "bi-136.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      },
+      {
+        "url": "/product-images/BID-TBL-136_02.jpeg",
+        "type": "image",
+        "fileName": "BID-TBL-136_02.jpeg",
+        "position": 2
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-TBL-136_01.jpeg",
+      "BID-TBL-136_02.jpeg"
+    ],
+    "imageCount": 2,
+    "workbookImageCount": 2,
+    "rooms": [
+      "living-room",
+      "dining-room"
+    ],
+    "slug": "natural-wood-nested-coffee-tables-bid-tbl-136",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-chr-141",
+    "originalId": "BI-141",
+    "sku": "BID-CHR-141",
+    "internalSku": "BID-CHR-141",
+    "barcode": "BID-CHR-141",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Chairs",
+    "name": "Beige Fabric Armchair",
+    "description": "Beige Fabric Armchair in beige tones. An accent seating piece for lounges, bedrooms or reading corners; confirm dimensions and upholstery details.",
+    "color": "Beige",
+    "material": "Fabric",
+    "materialFinish": "Fabric",
+    "searchTags": "chairs, interior-design, home-decor, beige",
+    "tags": [
+      "chairs",
+      "interior-design",
+      "home-decor",
+      "beige"
+    ],
+    "costPrice": 13000,
+    "price": 16900,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "beige-fabric-armchair.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Chairs",
+    "mainImageFilename": "bi-141.jpg",
+    "mainImage": "/product-images/bi-141.jpg",
+    "image": "/product-images/bi-141.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-141.jpg",
+        "type": "image",
+        "fileName": "bi-141.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      },
+      {
+        "url": "/product-images/BID-CHR-141_02.jpeg",
+        "type": "image",
+        "fileName": "BID-CHR-141_02.jpeg",
+        "position": 2
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-CHR-141_01.jpeg",
+      "BID-CHR-141_02.jpeg"
+    ],
+    "imageCount": 2,
+    "workbookImageCount": 2,
+    "rooms": [
+      "living-room",
+      "dining-room"
+    ],
+    "slug": "beige-fabric-armchair-bid-chr-141",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-lmp-143",
+    "originalId": "BI-143",
+    "sku": "BID-LMP-143",
+    "internalSku": "BID-LMP-143",
+    "barcode": "BID-LMP-143",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Lamps",
+    "name": "Black Table Lamp – Design 02",
+    "description": "Black Table Lamp in black tones. A lighting accent for side tables or bedside styling; confirm lamp type, electrical rating and included bulb.",
+    "color": "Black",
+    "material": "To Confirm",
+    "materialFinish": "To Confirm",
+    "searchTags": "lamps, interior-design, home-decor, black",
+    "tags": [
+      "lamps",
+      "interior-design",
+      "home-decor",
+      "black"
+    ],
+    "costPrice": 2500,
+    "price": 3250,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "black-table-lamp.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Lamps",
+    "mainImageFilename": "bi-143.jpg",
+    "mainImage": "/product-images/bi-143.jpg",
+    "image": "/product-images/bi-143.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-143.jpg",
+        "type": "image",
+        "fileName": "bi-143.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      },
+      {
+        "url": "/product-images/BID-LMP-143_02.jpeg",
+        "type": "image",
+        "fileName": "BID-LMP-143_02.jpeg",
+        "position": 2
+      },
+      {
+        "url": "/product-images/BID-LMP-143_03.jpeg",
+        "type": "image",
+        "fileName": "BID-LMP-143_03.jpeg",
+        "position": 3
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-LMP-143_01.jpeg",
+      "BID-LMP-143_02.jpeg",
+      "BID-LMP-143_03.jpeg"
+    ],
+    "imageCount": 3,
+    "workbookImageCount": 3,
+    "rooms": [
+      "living-room",
+      "bedroom",
+      "home-office"
+    ],
+    "slug": "black-table-lamp-design-02-bid-lmp-143",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-sof-150",
+    "originalId": "BI-150",
+    "sku": "BID-SOF-150",
+    "internalSku": "BID-SOF-150",
+    "barcode": "BID-SOF-150",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Sofas",
+    "name": "Off-White Fabric Sofa",
+    "description": "Off-White Fabric Sofa in off-white tones. An upholstered seating option suited to contemporary lounge settings; confirm dimensions, upholstery and seating configuration.",
+    "color": "Off-White",
+    "material": "Fabric",
+    "materialFinish": "Fabric",
+    "searchTags": "sofas, interior-design, home-decor, off-white",
+    "tags": [
+      "sofas",
+      "interior-design",
+      "home-decor",
+      "off-white"
+    ],
+    "costPrice": 35000,
+    "price": 45050,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "off-white-fabric-sofa.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Sofas",
+    "mainImageFilename": "bi-150.jpg",
+    "mainImage": "/product-images/bi-150.jpg",
+    "image": "/product-images/bi-150.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-150.jpg",
+        "type": "image",
+        "fileName": "bi-150.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      },
+      {
+        "url": "/product-images/BID-SOF-150_02.jpeg",
+        "type": "image",
+        "fileName": "BID-SOF-150_02.jpeg",
+        "position": 2
+      },
+      {
+        "url": "/product-images/BID-SOF-150_03.jpeg",
+        "type": "image",
+        "fileName": "BID-SOF-150_03.jpeg",
+        "position": 3
+      },
+      {
+        "url": "/product-images/BID-SOF-150_04.jpeg",
+        "type": "image",
+        "fileName": "BID-SOF-150_04.jpeg",
+        "position": 4
+      },
+      {
+        "url": "/product-images/BID-SOF-150_05.jpeg",
+        "type": "image",
+        "fileName": "BID-SOF-150_05.jpeg",
+        "position": 5
+      },
+      {
+        "url": "/product-images/BID-SOF-150_06.jpeg",
+        "type": "image",
+        "fileName": "BID-SOF-150_06.jpeg",
+        "position": 6
+      },
+      {
+        "url": "/product-images/BID-SOF-150_07.jpeg",
+        "type": "image",
+        "fileName": "BID-SOF-150_07.jpeg",
+        "position": 7
+      },
+      {
+        "url": "/product-images/BID-SOF-150_08.jpeg",
+        "type": "image",
+        "fileName": "BID-SOF-150_08.jpeg",
+        "position": 8
+      },
+      {
+        "url": "/product-images/BID-SOF-150_09.jpeg",
+        "type": "image",
+        "fileName": "BID-SOF-150_09.jpeg",
+        "position": 9
+      },
+      {
+        "url": "/product-images/BID-SOF-150_10.jpeg",
+        "type": "image",
+        "fileName": "BID-SOF-150_10.jpeg",
+        "position": 10
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-SOF-150_01.jpeg",
+      "BID-SOF-150_02.jpeg",
+      "BID-SOF-150_03.jpeg",
+      "BID-SOF-150_04.jpeg",
+      "BID-SOF-150_05.jpeg",
+      "BID-SOF-150_06.jpeg",
+      "BID-SOF-150_07.jpeg",
+      "BID-SOF-150_08.jpeg",
+      "BID-SOF-150_09.jpeg",
+      "BID-SOF-150_10.jpeg"
+    ],
+    "imageCount": 10,
+    "workbookImageCount": 10,
+    "rooms": [],
+    "slug": "off-white-fabric-sofa-bid-sof-150",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-tbl-158",
+    "originalId": "BI-158",
+    "sku": "BID-TBL-158",
+    "internalSku": "BID-TBL-158",
+    "barcode": "BID-TBL-158",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Tables",
+    "name": "Off-White Coffee Table",
+    "description": "Off-White Coffee Table in off-white tones. A statement surface for contemporary interiors; confirm dimensions and finish before ordering.",
+    "color": "Off-White",
+    "material": "To Confirm",
+    "materialFinish": "To Confirm",
+    "searchTags": "tables, interior-design, home-decor, off-white",
+    "tags": [
+      "tables",
+      "interior-design",
+      "home-decor",
+      "off-white"
+    ],
+    "costPrice": 8400,
+    "price": 12000,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "off-white-coffee-table.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Tables",
+    "mainImageFilename": "bi-158.jpg",
+    "mainImage": "/product-images/bi-158.jpg",
+    "image": "/product-images/bi-158.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-158.jpg",
+        "type": "image",
+        "fileName": "bi-158.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-TBL-158_01.jpeg"
+    ],
+    "imageCount": 1,
+    "workbookImageCount": 1,
+    "rooms": [
+      "living-room",
+      "dining-room"
+    ],
+    "slug": "off-white-coffee-table-bid-tbl-158",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-cus-159",
+    "originalId": "BI-159",
+    "sku": "BID-CUS-159",
+    "internalSku": "BID-CUS-159",
+    "barcode": "BID-CUS-159",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Cushions",
+    "name": "Light Grey Fabric Cushion",
+    "description": "Light Grey Fabric Cushion in light grey tones. A decorative textile accent for layering on sofas, chairs and beds; confirm size, cover material and whether the listing is sold individually or as a set.",
+    "color": "Light Grey",
+    "material": "Fabric",
+    "materialFinish": "Fabric",
+    "searchTags": "cushions, interior-design, home-decor, light-grey",
+    "tags": [
+      "cushions",
+      "interior-design",
+      "home-decor",
+      "light-grey"
+    ],
+    "costPrice": 3500,
+    "price": 4550,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "light-grey-fabric-cushion.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Cushion",
+    "mainImageFilename": "bi-159.jpg",
+    "mainImage": "/product-images/bi-159.jpg",
+    "image": "/product-images/bi-159.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-159.jpg",
+        "type": "image",
+        "fileName": "bi-159.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-CUS-159_01.jpeg"
+    ],
+    "imageCount": 1,
+    "workbookImageCount": 1,
+    "rooms": [
+      "living-room",
+      "bedroom"
+    ],
+    "slug": "light-grey-fabric-cushion-bid-cus-159",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-chr-161",
+    "originalId": "BI-161",
+    "sku": "BID-CHR-161",
+    "internalSku": "BID-CHR-161",
+    "barcode": "BID-CHR-161",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Chairs",
+    "name": "Black & White Geometric Accent Chair",
+    "description": "Black & White Geometric Accent Chair in black & white tones. An accent seating piece for lounges, bedrooms or reading corners; confirm dimensions and upholstery details.",
+    "color": "Black & White",
+    "material": "Fabric",
+    "materialFinish": "Fabric",
+    "searchTags": "chairs, interior-design, home-decor, black-white, geometric",
+    "tags": [
+      "chairs",
+      "interior-design",
+      "home-decor",
+      "black-white",
+      "geometric"
+    ],
+    "costPrice": 9500,
+    "price": 12350,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "black-and-white-geometric-accent-chair-front-view.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Armchair",
+    "mainImageFilename": "bi-161.jpg",
+    "mainImage": "/product-images/bi-161.jpg",
+    "image": "/product-images/bi-161.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-161.jpg",
+        "type": "image",
+        "fileName": "bi-161.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      },
+      {
+        "url": "/product-images/BID-CHR-161_02.jpeg",
+        "type": "image",
+        "fileName": "BID-CHR-161_02.jpeg",
+        "position": 2
+      },
+      {
+        "url": "/product-images/BID-CHR-161_03.jpeg",
+        "type": "image",
+        "fileName": "BID-CHR-161_03.jpeg",
+        "position": 3
+      },
+      {
+        "url": "/product-images/BID-CHR-161_04.jpeg",
+        "type": "image",
+        "fileName": "BID-CHR-161_04.jpeg",
+        "position": 4
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-CHR-161_01.jpeg",
+      "BID-CHR-161_02.jpeg",
+      "BID-CHR-161_03.jpeg",
+      "BID-CHR-161_04.jpeg"
+    ],
+    "imageCount": 4,
+    "workbookImageCount": 4,
+    "rooms": [
+      "living-room",
+      "dining-room"
+    ],
+    "slug": "black-and-white-geometric-accent-chair-bid-chr-161",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-sof-164",
+    "originalId": "BI-164",
+    "sku": "BID-SOF-164",
+    "internalSku": "BID-SOF-164",
+    "barcode": "BID-SOF-164",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Sofas",
+    "name": "Green Leather Sofa",
+    "description": "Green Leather Sofa in green tones. An upholstered seating option suited to contemporary lounge settings; confirm dimensions, upholstery and seating configuration.",
+    "color": "Green",
+    "material": "To Confirm",
+    "materialFinish": "To Confirm",
+    "searchTags": "sofas, interior-design, home-decor, green, leather",
+    "tags": [
+      "sofas",
+      "interior-design",
+      "home-decor",
+      "green",
+      "leather"
+    ],
+    "costPrice": 14000,
+    "price": 18200,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "green-chesterfield-lounge-display-with-oval-walnut-coffee-table.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Coffee Table",
+    "mainImageFilename": "bi-164.jpg",
+    "mainImage": "/product-images/bi-164.jpg",
+    "image": "/product-images/bi-164.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-164.jpg",
+        "type": "image",
+        "fileName": "bi-164.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-SOF-164_01.jpeg"
+    ],
+    "imageCount": 1,
+    "workbookImageCount": 1,
+    "rooms": [],
+    "slug": "green-leather-sofa-bid-sof-164",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-tbl-165",
+    "originalId": "BI-165",
+    "sku": "BID-TBL-165",
+    "internalSku": "BID-TBL-165",
+    "barcode": "BID-TBL-165",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Tables",
+    "name": "Oval Walnut Coffee Table With Sculptural Black Legs",
+    "description": "Oval Walnut Coffee Table With Sculptural Black Legs in walnut / black tones. A statement surface for contemporary interiors; confirm dimensions and finish before ordering.",
+    "color": "Walnut / Black",
+    "material": "Wood",
+    "materialFinish": "Wood",
+    "searchTags": "tables, interior-design, home-decor, walnut, black, sculptural",
+    "tags": [
+      "tables",
+      "interior-design",
+      "home-decor",
+      "walnut",
+      "black",
+      "sculptural"
+    ],
+    "costPrice": 16500,
+    "price": 21450,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "oval-walnut-coffee-table-with-sculptural-black-legs.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Coffee Table",
+    "mainImageFilename": "bi-165.jpg",
+    "mainImage": "/product-images/bi-165.jpg",
+    "image": "/product-images/bi-165.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-165.jpg",
+        "type": "image",
+        "fileName": "bi-165.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      },
+      {
+        "url": "/product-images/BID-TBL-165_02.jpeg",
+        "type": "image",
+        "fileName": "BID-TBL-165_02.jpeg",
+        "position": 2
+      },
+      {
+        "url": "/product-images/BID-TBL-165_03.jpeg",
+        "type": "image",
+        "fileName": "BID-TBL-165_03.jpeg",
+        "position": 3
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-TBL-165_01.jpeg",
+      "BID-TBL-165_02.jpeg",
+      "BID-TBL-165_03.jpeg"
+    ],
+    "imageCount": 3,
+    "workbookImageCount": 3,
+    "rooms": [
+      "living-room",
+      "dining-room"
+    ],
+    "slug": "oval-walnut-coffee-table-with-sculptural-black-legs-bid-tbl-165",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-dec-167",
+    "originalId": "BI-167",
+    "sku": "BID-DEC-167",
+    "internalSku": "BID-DEC-167",
+    "barcode": "BID-DEC-167",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Decor",
+    "name": "World Map Globe Decanter Display Set",
+    "description": "World Map Globe Decanter Display Set in clear / to confirm tones. A decorative statement piece for styled interior displays; confirm dimensions, material and included components.",
+    "color": "Clear / To Confirm",
+    "material": "To Confirm",
+    "materialFinish": "To Confirm",
+    "searchTags": "decor, interior-design, home-decor, clear, to-confirm",
+    "tags": [
+      "decor",
+      "interior-design",
+      "home-decor",
+      "clear",
+      "to-confirm"
+    ],
+    "costPrice": 1150,
+    "price": 1500,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "world-map-globe-decanter-set-product-close-up.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Decor",
+    "mainImageFilename": "bi-167.jpg",
+    "mainImage": "/product-images/bi-167.jpg",
+    "image": "/product-images/bi-167.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-167.jpg",
+        "type": "image",
+        "fileName": "bi-167.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      },
+      {
+        "url": "/product-images/BID-DEC-167_02.jpeg",
+        "type": "image",
+        "fileName": "BID-DEC-167_02.jpeg",
+        "position": 2
+      },
+      {
+        "url": "/product-images/BID-DEC-167_03.jpeg",
+        "type": "image",
+        "fileName": "BID-DEC-167_03.jpeg",
+        "position": 3
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-DEC-167_01.jpeg",
+      "BID-DEC-167_02.jpeg",
+      "BID-DEC-167_03.jpeg"
+    ],
+    "imageCount": 3,
+    "workbookImageCount": 3,
+    "rooms": [
+      "living-room",
+      "entryway"
+    ],
+    "slug": "world-map-globe-decanter-display-set-bid-dec-167",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-cus-170",
+    "originalId": "BI-170",
+    "sku": "BID-CUS-170",
+    "internalSku": "BID-CUS-170",
+    "barcode": "BID-CUS-170",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Cushions",
+    "name": "Mustard Tufted Boho Cushion Pair",
+    "description": "Mustard Tufted Boho Cushion Pair in mustard tones. A decorative textile accent for layering on sofas, chairs and beds; confirm size, cover material and whether the listing is sold individually or as a set.",
+    "color": "Mustard",
+    "material": "Fabric",
+    "materialFinish": "Fabric",
+    "searchTags": "cushions, interior-design, home-decor, mustard",
+    "tags": [
+      "cushions",
+      "interior-design",
+      "home-decor",
+      "mustard"
+    ],
+    "costPrice": 450,
+    "price": 600,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "mustard-tufted-boho-cushion-pair-close-up.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Cushion",
+    "mainImageFilename": "bi-170.jpg",
+    "mainImage": "/product-images/bi-170.jpg",
+    "image": "/product-images/bi-170.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-170.jpg",
+        "type": "image",
+        "fileName": "bi-170.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      },
+      {
+        "url": "/product-images/BID-CUS-170_02.jpeg",
+        "type": "image",
+        "fileName": "BID-CUS-170_02.jpeg",
+        "position": 2
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-CUS-170_01.jpeg",
+      "BID-CUS-170_02.jpeg"
+    ],
+    "imageCount": 2,
+    "workbookImageCount": 2,
+    "rooms": [
+      "living-room",
+      "bedroom"
+    ],
+    "slug": "mustard-tufted-boho-cushion-pair-bid-cus-170",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-chr-177",
+    "originalId": "BI-177",
+    "sku": "BID-CHR-177",
+    "internalSku": "BID-CHR-177",
+    "barcode": "BID-CHR-177",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Chairs",
+    "name": "Caramel Faux Leather Lounge Chair",
+    "description": "Caramel Faux Leather Lounge Chair in caramel tones. An accent seating piece for lounges, bedrooms or reading corners; confirm dimensions and upholstery details.",
+    "color": "Caramel",
+    "material": "Faux leather",
+    "materialFinish": "Faux leather",
+    "searchTags": "chairs, interior-design, home-decor, caramel, leather",
+    "tags": [
+      "chairs",
+      "interior-design",
+      "home-decor",
+      "caramel",
+      "leather"
+    ],
+    "costPrice": 8000,
+    "price": 10400,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "caramel-faux-leather-lounge-chair-front-view.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Armchair",
+    "mainImageFilename": "bi-177.jpg",
+    "mainImage": "/product-images/bi-177.jpg",
+    "image": "/product-images/bi-177.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-177.jpg",
+        "type": "image",
+        "fileName": "bi-177.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      },
+      {
+        "url": "/product-images/BID-CHR-177_02.jpeg",
+        "type": "image",
+        "fileName": "BID-CHR-177_02.jpeg",
+        "position": 2
+      },
+      {
+        "url": "/product-images/BID-CHR-177_03.jpeg",
+        "type": "image",
+        "fileName": "BID-CHR-177_03.jpeg",
+        "position": 3
+      },
+      {
+        "url": "/product-images/BID-CHR-177_04.jpeg",
+        "type": "image",
+        "fileName": "BID-CHR-177_04.jpeg",
+        "position": 4
+      },
+      {
+        "url": "/product-images/BID-CHR-177_05.jpeg",
+        "type": "image",
+        "fileName": "BID-CHR-177_05.jpeg",
+        "position": 5
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-CHR-177_01.jpeg",
+      "BID-CHR-177_02.jpeg",
+      "BID-CHR-177_03.jpeg",
+      "BID-CHR-177_04.jpeg",
+      "BID-CHR-177_05.jpeg"
+    ],
+    "imageCount": 5,
+    "workbookImageCount": 5,
+    "rooms": [
+      "living-room",
+      "dining-room"
+    ],
+    "slug": "caramel-faux-leather-lounge-chair-bid-chr-177",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-tbl-180",
+    "originalId": "BI-180",
+    "sku": "BID-TBL-180",
+    "internalSku": "BID-TBL-180",
+    "barcode": "BID-TBL-180",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Tables",
+    "name": "Round Sculptural Smoked-Glass Coffee Table",
+    "description": "Round Sculptural Smoked-Glass Coffee Table in smoked glass tones. A statement surface for contemporary interiors; confirm dimensions and finish before ordering.",
+    "color": "Smoked Glass",
+    "material": "Glass / mixed materials",
+    "materialFinish": "Glass / mixed materials",
+    "searchTags": "tables, interior-design, home-decor, smoked-glass, round, sculptural, glass",
+    "tags": [
+      "tables",
+      "interior-design",
+      "home-decor",
+      "smoked-glass",
+      "round",
+      "sculptural",
+      "glass"
+    ],
+    "costPrice": 14700,
+    "price": 21000,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "round-sculptural-smoked-glass-coffee-table-full-view.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Coffee Table",
+    "mainImageFilename": "bi-180.jpg",
+    "mainImage": "/product-images/bi-180.jpg",
+    "image": "/product-images/bi-180.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-180.jpg",
+        "type": "image",
+        "fileName": "bi-180.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      },
+      {
+        "url": "/product-images/BID-TBL-180_02.jpeg",
+        "type": "image",
+        "fileName": "BID-TBL-180_02.jpeg",
+        "position": 2
+      },
+      {
+        "url": "/product-images/BID-TBL-180_03.jpeg",
+        "type": "image",
+        "fileName": "BID-TBL-180_03.jpeg",
+        "position": 3
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-TBL-180_01.jpeg",
+      "BID-TBL-180_02.jpeg",
+      "BID-TBL-180_03.jpeg"
+    ],
+    "imageCount": 3,
+    "workbookImageCount": 3,
+    "rooms": [
+      "living-room",
+      "dining-room"
+    ],
+    "slug": "round-sculptural-smoked-glass-coffee-table-bid-tbl-180",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-tbl-182",
+    "originalId": "BI-182",
+    "sku": "BID-TBL-182",
+    "internalSku": "BID-TBL-182",
+    "barcode": "BID-TBL-182",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Tables",
+    "name": "Metallic Charcoal Sculptural Pedestal Side Table",
+    "description": "Metallic Charcoal Sculptural Pedestal Side Table in metallic charcoal tones. A statement surface for contemporary interiors; confirm dimensions and finish before ordering.",
+    "color": "Metallic Charcoal",
+    "material": "Metal",
+    "materialFinish": "Metal",
+    "searchTags": "tables, interior-design, home-decor, metallic-charcoal, sculptural, metal",
+    "tags": [
+      "tables",
+      "interior-design",
+      "home-decor",
+      "metallic-charcoal",
+      "sculptural",
+      "metal"
+    ],
+    "costPrice": 4500,
+    "price": 5800,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "metallic-charcoal-sculptural-pedestal-side-table.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Side Table",
+    "mainImageFilename": "bi-182.jpg",
+    "mainImage": "/product-images/bi-182.jpg",
+    "image": "/product-images/bi-182.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-182.jpg",
+        "type": "image",
+        "fileName": "bi-182.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-TBL-182_01.jpeg"
+    ],
+    "imageCount": 1,
+    "workbookImageCount": 1,
+    "rooms": [
+      "living-room",
+      "dining-room"
+    ],
+    "slug": "metallic-charcoal-sculptural-pedestal-side-table-bid-tbl-182",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-cus-183",
+    "originalId": "BI-183",
+    "sku": "BID-CUS-183",
+    "internalSku": "BID-CUS-183",
+    "barcode": "BID-CUS-183",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Cushions",
+    "name": "Green And Black Checkerboard Accent Cushions Set",
+    "description": "Green And Black Checkerboard Accent Cushions Set in green / black tones. A decorative textile accent for layering on sofas, chairs and beds; confirm size, cover material and whether the listing is sold individually or as a set.",
+    "color": "Green / Black",
+    "material": "Fabric",
+    "materialFinish": "Fabric",
+    "searchTags": "cushions, interior-design, home-decor, green, black",
+    "tags": [
+      "cushions",
+      "interior-design",
+      "home-decor",
+      "green",
+      "black"
+    ],
+    "costPrice": 450,
+    "price": 600,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "green-and-black-checkerboard-accent-cushions-styled-pair.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Cushion",
+    "mainImageFilename": "bi-183.jpg",
+    "mainImage": "/product-images/bi-183.jpg",
+    "image": "/product-images/bi-183.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-183.jpg",
+        "type": "image",
+        "fileName": "bi-183.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      },
+      {
+        "url": "/product-images/BID-CUS-183_02.jpeg",
+        "type": "image",
+        "fileName": "BID-CUS-183_02.jpeg",
+        "position": 2
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-CUS-183_01.jpeg",
+      "BID-CUS-183_02.jpeg"
+    ],
+    "imageCount": 2,
+    "workbookImageCount": 2,
+    "rooms": [
+      "living-room",
+      "bedroom"
+    ],
+    "slug": "green-and-black-checkerboard-accent-cushions-set-bid-cus-183",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-con-185",
+    "originalId": "BI-185",
+    "sku": "BID-CON-185",
+    "internalSku": "BID-CON-185",
+    "barcode": "BID-CON-185",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Consoles",
+    "name": "Walnut Fluted Media Console",
+    "description": "Walnut Fluted Media Console in walnut tones. A streamlined storage or display unit for modern interiors; confirm materials, dimensions and configuration.",
+    "color": "Walnut",
+    "material": "Wood",
+    "materialFinish": "Wood",
+    "searchTags": "consoles, interior-design, home-decor, walnut",
+    "tags": [
+      "consoles",
+      "interior-design",
+      "home-decor",
+      "walnut"
+    ],
+    "costPrice": 18000,
+    "price": 23400,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "walnut-fluted-media-console-front-product-view.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Console",
+    "mainImageFilename": "bi-185.jpg",
+    "mainImage": "/product-images/bi-185.jpg",
+    "image": "/product-images/bi-185.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-185.jpg",
+        "type": "image",
+        "fileName": "bi-185.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      },
+      {
+        "url": "/product-images/BID-CON-185_02.jpeg",
+        "type": "image",
+        "fileName": "BID-CON-185_02.jpeg",
+        "position": 2
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-CON-185_01.jpeg",
+      "BID-CON-185_02.jpeg"
+    ],
+    "imageCount": 2,
+    "workbookImageCount": 2,
+    "rooms": [],
+    "slug": "walnut-fluted-media-console-bid-con-185",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-tbl-187",
+    "originalId": "BI-187",
+    "sku": "BID-TBL-187",
+    "internalSku": "BID-TBL-187",
+    "barcode": "BID-TBL-187",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Tables",
+    "name": "Gold Sculptural Coffee Table – Styled Display",
+    "description": "Gold Sculptural Coffee Table in gold tones. A statement surface for contemporary interiors; confirm dimensions and finish before ordering.",
+    "color": "Gold",
+    "material": "To Confirm",
+    "materialFinish": "To Confirm",
+    "searchTags": "tables, interior-design, home-decor, gold, sculptural, styled-display",
+    "tags": [
+      "tables",
+      "interior-design",
+      "home-decor",
+      "gold",
+      "sculptural",
+      "styled-display"
+    ],
+    "costPrice": 8000,
+    "price": 10400,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "styled-cushion-display-with-gold-sculptural-coffee-table.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Coffee Table",
+    "mainImageFilename": "bi-187.jpg",
+    "mainImage": "/product-images/bi-187.jpg",
+    "image": "/product-images/bi-187.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-187.jpg",
+        "type": "image",
+        "fileName": "bi-187.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      },
+      {
+        "url": "/product-images/BID-TBL-187_02.jpeg",
+        "type": "image",
+        "fileName": "BID-TBL-187_02.jpeg",
+        "position": 2
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-TBL-187_01.jpeg",
+      "BID-TBL-187_02.jpeg"
+    ],
+    "imageCount": 2,
+    "workbookImageCount": 2,
+    "rooms": [
+      "living-room",
+      "dining-room"
+    ],
+    "slug": "gold-sculptural-coffee-table-styled-display-bid-tbl-187",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-cus-188",
+    "originalId": "BI-188",
+    "sku": "BID-CUS-188",
+    "internalSku": "BID-CUS-188",
+    "barcode": "BID-CUS-188",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Cushions",
+    "name": "Cream Decorative Cushion With Blue Beaded Medallion",
+    "description": "Cream Decorative Cushion With Blue Beaded Medallion in cream / blue tones. A decorative textile accent for layering on sofas, chairs and beds; confirm size, cover material and whether the listing is sold individually or as a set.",
+    "color": "Cream / Blue",
+    "material": "Fabric",
+    "materialFinish": "Fabric",
+    "searchTags": "cushions, interior-design, home-decor, cream, blue",
+    "tags": [
+      "cushions",
+      "interior-design",
+      "home-decor",
+      "cream",
+      "blue"
+    ],
+    "costPrice": 850,
+    "price": 1200,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "cream-decorative-cushion-with-blue-beaded-medallion.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Cushion",
+    "mainImageFilename": "bi-188.jpg",
+    "mainImage": "/product-images/bi-188.jpg",
+    "image": "/product-images/bi-188.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-188.jpg",
+        "type": "image",
+        "fileName": "bi-188.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-CUS-188_01.jpeg"
+    ],
+    "imageCount": 1,
+    "workbookImageCount": 1,
+    "rooms": [
+      "living-room",
+      "bedroom"
+    ],
+    "slug": "cream-decorative-cushion-with-blue-beaded-medallion-bid-cus-188",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-cus-190",
+    "originalId": "BI-190",
+    "sku": "BID-CUS-190",
+    "internalSku": "BID-CUS-190",
+    "barcode": "BID-CUS-190",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Cushions",
+    "name": "Mustard Velvet Square Accent Cushion",
+    "description": "Mustard Velvet Square Accent Cushion in mustard tones. A decorative textile accent for layering on sofas, chairs and beds; confirm size, cover material and whether the listing is sold individually or as a set.",
+    "color": "Mustard",
+    "material": "Velvet (source-labelled)",
+    "materialFinish": "Velvet (source-labelled)",
+    "searchTags": "cushions, interior-design, home-decor, mustard, velvet",
+    "tags": [
+      "cushions",
+      "interior-design",
+      "home-decor",
+      "mustard",
+      "velvet"
+    ],
+    "costPrice": 450,
+    "price": 600,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "mustard-velvet-square-accent-cushion.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Cushion",
+    "mainImageFilename": "bi-190.jpg",
+    "mainImage": "/product-images/bi-190.jpg",
+    "image": "/product-images/bi-190.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-190.jpg",
+        "type": "image",
+        "fileName": "bi-190.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      },
+      {
+        "url": "/product-images/BID-CUS-190_02.jpeg",
+        "type": "image",
+        "fileName": "BID-CUS-190_02.jpeg",
+        "position": 2
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-CUS-190_01.jpeg",
+      "BID-CUS-190_02.jpeg"
+    ],
+    "imageCount": 2,
+    "workbookImageCount": 2,
+    "rooms": [
+      "living-room",
+      "bedroom"
+    ],
+    "slug": "mustard-velvet-square-accent-cushion-bid-cus-190",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-cus-191",
+    "originalId": "BI-191",
+    "sku": "BID-CUS-191",
+    "internalSku": "BID-CUS-191",
+    "barcode": "BID-CUS-191",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Cushions",
+    "name": "Embroidered Botanical Floral Accent Cushion",
+    "description": "Embroidered Botanical Floral Accent Cushion in multicolor tones. A decorative textile accent for layering on sofas, chairs and beds; confirm size, cover material and whether the listing is sold individually or as a set.",
+    "color": "Multicolor",
+    "material": "Fabric",
+    "materialFinish": "Fabric",
+    "searchTags": "cushions, interior-design, home-decor, multicolor, floral, botanical, embroidered",
+    "tags": [
+      "cushions",
+      "interior-design",
+      "home-decor",
+      "multicolor",
+      "floral",
+      "botanical",
+      "embroidered"
+    ],
+    "costPrice": 450,
+    "price": 600,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "embroidered-botanical-floral-accent-cushion.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Cushion",
+    "mainImageFilename": "bi-191.jpg",
+    "mainImage": "/product-images/bi-191.jpg",
+    "image": "/product-images/bi-191.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-191.jpg",
+        "type": "image",
+        "fileName": "bi-191.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      },
+      {
+        "url": "/product-images/BID-CUS-191_02.jpeg",
+        "type": "image",
+        "fileName": "BID-CUS-191_02.jpeg",
+        "position": 2
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-CUS-191_01.jpeg",
+      "BID-CUS-191_02.jpeg"
+    ],
+    "imageCount": 2,
+    "workbookImageCount": 2,
+    "rooms": [
+      "living-room",
+      "bedroom"
+    ],
+    "slug": "embroidered-botanical-floral-accent-cushion-bid-cus-191",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-cus-192",
+    "originalId": "BI-192",
+    "sku": "BID-CUS-192",
+    "internalSku": "BID-CUS-192",
+    "barcode": "BID-CUS-192",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Cushions",
+    "name": "Tan Suede-Style Square Accent Cushion",
+    "description": "Tan Suede-Style Square Accent Cushion in tan tones. A decorative textile accent for layering on sofas, chairs and beds; confirm size, cover material and whether the listing is sold individually or as a set.",
+    "color": "Tan",
+    "material": "Suede-style fabric",
+    "materialFinish": "Suede-style fabric",
+    "searchTags": "cushions, interior-design, home-decor, tan",
+    "tags": [
+      "cushions",
+      "interior-design",
+      "home-decor",
+      "tan"
+    ],
+    "costPrice": 450,
+    "price": 600,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "tan-suede-style-square-accent-cushion.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Cushion",
+    "mainImageFilename": "bi-192.jpg",
+    "mainImage": "/product-images/bi-192.jpg",
+    "image": "/product-images/bi-192.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-192.jpg",
+        "type": "image",
+        "fileName": "bi-192.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      }
+    ],
+    "galleryImageFiles": [],
+    "imageCount": 1,
+    "workbookImageCount": 0,
+    "rooms": [
+      "living-room",
+      "bedroom"
+    ],
+    "slug": "tan-suede-style-square-accent-cushion-bid-cus-192",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-cus-193",
+    "originalId": "BI-193",
+    "sku": "BID-CUS-193",
+    "internalSku": "BID-CUS-193",
+    "barcode": "BID-CUS-193",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Cushions",
+    "name": "Blush Textured Square Accent Cushion",
+    "description": "Blush Textured Square Accent Cushion in blush tones. A decorative textile accent for layering on sofas, chairs and beds; confirm size, cover material and whether the listing is sold individually or as a set.",
+    "color": "Blush",
+    "material": "Textured fabric",
+    "materialFinish": "Textured fabric",
+    "searchTags": "cushions, interior-design, home-decor, blush, textured",
+    "tags": [
+      "cushions",
+      "interior-design",
+      "home-decor",
+      "blush",
+      "textured"
+    ],
+    "costPrice": 450,
+    "price": 600,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "blush-textured-square-accent-cushion.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Cushion",
+    "mainImageFilename": "bi-193.jpg",
+    "mainImage": "/product-images/bi-193.jpg",
+    "image": "/product-images/bi-193.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-193.jpg",
+        "type": "image",
+        "fileName": "bi-193.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      }
+    ],
+    "galleryImageFiles": [],
+    "imageCount": 1,
+    "workbookImageCount": 0,
+    "rooms": [
+      "living-room",
+      "bedroom"
+    ],
+    "slug": "blush-textured-square-accent-cushion-bid-cus-193",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-cus-194",
+    "originalId": "BI-194",
+    "sku": "BID-CUS-194",
+    "internalSku": "BID-CUS-194",
+    "barcode": "BID-CUS-194",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Cushions",
+    "name": "Blue Studded Decorative Lumbar Cushions – Pair",
+    "description": "Blue Studded Decorative Lumbar Cushions – Pair in blue tones. A decorative textile accent for layering on sofas, chairs and beds; confirm size, cover material and whether the listing is sold individually or as a set.",
+    "color": "Blue",
+    "material": "Fabric",
+    "materialFinish": "Fabric",
+    "searchTags": "cushions, interior-design, home-decor, blue",
+    "tags": [
+      "cushions",
+      "interior-design",
+      "home-decor",
+      "blue"
+    ],
+    "costPrice": 950,
+    "price": 1200,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "blue-studded-decorative-lumbar-cushions-pair.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Cushion",
+    "mainImageFilename": "bi-194.jpg",
+    "mainImage": "/product-images/bi-194.jpg",
+    "image": "/product-images/bi-194.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-194.jpg",
+        "type": "image",
+        "fileName": "bi-194.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      },
+      {
+        "url": "/product-images/BID-CUS-194_02.jpeg",
+        "type": "image",
+        "fileName": "BID-CUS-194_02.jpeg",
+        "position": 2
+      },
+      {
+        "url": "/product-images/BID-CUS-194_03.jpeg",
+        "type": "image",
+        "fileName": "BID-CUS-194_03.jpeg",
+        "position": 3
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-CUS-194_01.jpeg",
+      "BID-CUS-194_02.jpeg",
+      "BID-CUS-194_03.jpeg"
+    ],
+    "imageCount": 3,
+    "workbookImageCount": 3,
+    "rooms": [
+      "living-room",
+      "bedroom"
+    ],
+    "slug": "blue-studded-decorative-lumbar-cushions-pair-bid-cus-194",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-cus-195",
+    "originalId": "BI-195",
+    "sku": "BID-CUS-195",
+    "internalSku": "BID-CUS-195",
+    "barcode": "BID-CUS-195",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Cushions",
+    "name": "Embroidered Floral Accent Cushion – Mustard, Brown & Black",
+    "description": "Embroidered Floral Accent Cushion – Mustard, Brown & Black in mustard / brown / black tones. A decorative textile accent for layering on sofas, chairs and beds; confirm size, cover material and whether the listing is sold individually or as a set.",
+    "color": "Mustard / Brown / Black",
+    "material": "Fabric",
+    "materialFinish": "Fabric",
+    "searchTags": "cushions, interior-design, home-decor, mustard, brown, black, floral, embroidered",
+    "tags": [
+      "cushions",
+      "interior-design",
+      "home-decor",
+      "mustard",
+      "brown",
+      "black",
+      "floral",
+      "embroidered"
+    ],
+    "costPrice": 450,
+    "price": 600,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "embroidered-floral-accent-cushion-mustard-brown-and-black.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Cushion",
+    "mainImageFilename": "bi-195.jpg",
+    "mainImage": "/product-images/bi-195.jpg",
+    "image": "/product-images/bi-195.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-195.jpg",
+        "type": "image",
+        "fileName": "bi-195.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      }
+    ],
+    "galleryImageFiles": [],
+    "imageCount": 1,
+    "workbookImageCount": 0,
+    "rooms": [
+      "living-room",
+      "bedroom"
+    ],
+    "slug": "embroidered-floral-accent-cushion-mustard-brown-and-black-bid-cus-195",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-cus-196",
+    "originalId": "BI-196",
+    "sku": "BID-CUS-196",
+    "internalSku": "BID-CUS-196",
+    "barcode": "BID-CUS-196",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Cushions",
+    "name": "African Portrait Decorative Cushion",
+    "description": "African Portrait Decorative Cushion in multicolor tones. A decorative textile accent for layering on sofas, chairs and beds; confirm size, cover material and whether the listing is sold individually or as a set.",
+    "color": "Multicolor",
+    "material": "Fabric",
+    "materialFinish": "Fabric",
+    "searchTags": "cushions, interior-design, home-decor, multicolor, african",
+    "tags": [
+      "cushions",
+      "interior-design",
+      "home-decor",
+      "multicolor",
+      "african"
+    ],
+    "costPrice": 450,
+    "price": 600,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "african-portrait-decorative-cushion-close-up.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Cushion",
+    "mainImageFilename": "bi-196.jpg",
+    "mainImage": "/product-images/bi-196.jpg",
+    "image": "/product-images/bi-196.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-196.jpg",
+        "type": "image",
+        "fileName": "bi-196.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      },
+      {
+        "url": "/product-images/BID-CUS-196_02.jpeg",
+        "type": "image",
+        "fileName": "BID-CUS-196_02.jpeg",
+        "position": 2
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-CUS-196_01.jpeg",
+      "BID-CUS-196_02.jpeg"
+    ],
+    "imageCount": 2,
+    "workbookImageCount": 2,
+    "rooms": [
+      "living-room",
+      "bedroom"
+    ],
+    "slug": "african-portrait-decorative-cushion-bid-cus-196",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-tbl-201",
+    "originalId": "BI-201",
+    "sku": "BID-TBL-201",
+    "internalSku": "BID-TBL-201",
+    "barcode": "BID-TBL-201",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Tables",
+    "name": "Rustic Round Wood Coffee Table",
+    "description": "Rustic Round Wood Coffee Table in natural wood tones. A statement surface for contemporary interiors; confirm dimensions and finish before ordering.",
+    "color": "Natural Wood",
+    "material": "Wood",
+    "materialFinish": "Wood",
+    "searchTags": "tables, interior-design, home-decor, natural-wood, wood, round, rustic",
+    "tags": [
+      "tables",
+      "interior-design",
+      "home-decor",
+      "natural-wood",
+      "wood",
+      "round",
+      "rustic"
+    ],
+    "costPrice": 6500,
+    "price": 8000,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "round-rustic-wood-coffee-table-with-plant-and-book.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Coffee Table",
+    "mainImageFilename": "bi-201.jpg",
+    "mainImage": "/product-images/bi-201.jpg",
+    "image": "/product-images/bi-201.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-201.jpg",
+        "type": "image",
+        "fileName": "bi-201.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      },
+      {
+        "url": "/product-images/BID-TBL-201_02.jpeg",
+        "type": "image",
+        "fileName": "BID-TBL-201_02.jpeg",
+        "position": 2
+      },
+      {
+        "url": "/product-images/BID-TBL-201_03.jpeg",
+        "type": "image",
+        "fileName": "BID-TBL-201_03.jpeg",
+        "position": 3
+      },
+      {
+        "url": "/product-images/BID-TBL-201_04.jpeg",
+        "type": "image",
+        "fileName": "BID-TBL-201_04.jpeg",
+        "position": 4
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-TBL-201_01.jpeg",
+      "BID-TBL-201_02.jpeg",
+      "BID-TBL-201_03.jpeg",
+      "BID-TBL-201_04.jpeg"
+    ],
+    "imageCount": 4,
+    "workbookImageCount": 4,
+    "rooms": [
+      "living-room",
+      "dining-room"
+    ],
+    "slug": "rustic-round-wood-coffee-table-bid-tbl-201",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-tbl-203",
+    "originalId": "BI-203",
+    "sku": "BID-TBL-203",
+    "internalSku": "BID-TBL-203",
+    "barcode": "BID-TBL-203",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Tables",
+    "name": "Copper Pedestal Side Table",
+    "description": "Copper Pedestal Side Table in copper tones. A statement surface for contemporary interiors; confirm dimensions and finish before ordering.",
+    "color": "Copper",
+    "material": "To Confirm",
+    "materialFinish": "To Confirm",
+    "searchTags": "tables, interior-design, home-decor, copper",
+    "tags": [
+      "tables",
+      "interior-design",
+      "home-decor",
+      "copper"
+    ],
+    "costPrice": 2700,
+    "price": 3500,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "copper-pedestal-side-table-with-decor.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Side Table",
+    "mainImageFilename": "bi-203.jpg",
+    "mainImage": "/product-images/bi-203.jpg",
+    "image": "/product-images/bi-203.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-203.jpg",
+        "type": "image",
+        "fileName": "bi-203.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-TBL-203_01.jpeg"
+    ],
+    "imageCount": 1,
+    "workbookImageCount": 1,
+    "rooms": [
+      "living-room",
+      "dining-room"
+    ],
+    "slug": "copper-pedestal-side-table-bid-tbl-203",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-cus-205",
+    "originalId": "BI-205",
+    "sku": "BID-CUS-205",
+    "internalSku": "BID-CUS-205",
+    "barcode": "BID-CUS-205",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Cushions",
+    "name": "Ostrich-Print Decorative Cushion",
+    "description": "Ostrich-Print Decorative Cushion in multicolor tones. A decorative textile accent for layering on sofas, chairs and beds; confirm size, cover material and whether the listing is sold individually or as a set.",
+    "color": "Multicolor",
+    "material": "Fabric",
+    "materialFinish": "Fabric",
+    "searchTags": "cushions, interior-design, home-decor, multicolor",
+    "tags": [
+      "cushions",
+      "interior-design",
+      "home-decor",
+      "multicolor"
+    ],
+    "costPrice": 450,
+    "price": 600,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "ostrich-print-decorative-cushion-close-up.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Cushion",
+    "mainImageFilename": "bi-205.jpg",
+    "mainImage": "/product-images/bi-205.jpg",
+    "image": "/product-images/bi-205.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-205.jpg",
+        "type": "image",
+        "fileName": "bi-205.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-CUS-205_01.jpeg"
+    ],
+    "imageCount": 1,
+    "workbookImageCount": 1,
+    "rooms": [
+      "living-room",
+      "bedroom"
+    ],
+    "slug": "ostrich-print-decorative-cushion-bid-cus-205",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-cus-206",
+    "originalId": "BI-206",
+    "sku": "BID-CUS-206",
+    "internalSku": "BID-CUS-206",
+    "barcode": "BID-CUS-206",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Cushions",
+    "name": "Cream Curved Sectional Sofa With Decorative Cushions",
+    "description": "Cream Curved Sectional Sofa With Decorative Cushions in cream tones. A decorative textile accent for layering on sofas, chairs and beds; confirm size, cover material and whether the listing is sold individually or as a set.",
+    "color": "Cream",
+    "material": "To Confirm",
+    "materialFinish": "To Confirm",
+    "searchTags": "cushions, interior-design, home-decor, cream",
+    "tags": [
+      "cushions",
+      "interior-design",
+      "home-decor",
+      "cream"
+    ],
+    "costPrice": 10750,
+    "price": 14000,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "cream-curved-sectional-sofa-with-decorative-cushions.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Sofa",
+    "mainImageFilename": "bi-206.jpg",
+    "mainImage": "/product-images/bi-206.jpg",
+    "image": "/product-images/bi-206.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-206.jpg",
+        "type": "image",
+        "fileName": "bi-206.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-CUS-206_01.jpeg"
+    ],
+    "imageCount": 1,
+    "workbookImageCount": 1,
+    "rooms": [
+      "living-room",
+      "bedroom"
+    ],
+    "slug": "cream-curved-sectional-sofa-with-decorative-cushions-bid-cus-206",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-cus-207",
+    "originalId": "BI-207",
+    "sku": "BID-CUS-207",
+    "internalSku": "BID-CUS-207",
+    "barcode": "BID-CUS-207",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Cushions",
+    "name": "Animal-Print Decorative Cushion Set",
+    "description": "Animal-Print Decorative Cushion Set in multicolor tones. A decorative textile accent for layering on sofas, chairs and beds; confirm size, cover material and whether the listing is sold individually or as a set.",
+    "color": "Multicolor",
+    "material": "Fabric",
+    "materialFinish": "Fabric",
+    "searchTags": "cushions, interior-design, home-decor, multicolor",
+    "tags": [
+      "cushions",
+      "interior-design",
+      "home-decor",
+      "multicolor"
+    ],
+    "costPrice": 950,
+    "price": 1200,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "animal-print-decorative-cushions-on-sofa.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Sofa",
+    "mainImageFilename": "bi-207.jpg",
+    "mainImage": "/product-images/bi-207.jpg",
+    "image": "/product-images/bi-207.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-207.jpg",
+        "type": "image",
+        "fileName": "bi-207.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-CUS-207_01.jpeg"
+    ],
+    "imageCount": 1,
+    "workbookImageCount": 1,
+    "rooms": [
+      "living-room",
+      "bedroom"
+    ],
+    "slug": "animal-print-decorative-cushion-set-bid-cus-207",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-dec-209",
+    "originalId": "BI-209",
+    "sku": "BID-DEC-209",
+    "internalSku": "BID-DEC-209",
+    "barcode": "BID-DEC-209",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Decor",
+    "name": "Decorative Vintage Tricycle Bottle Holder",
+    "description": "Decorative Vintage Tricycle Bottle Holder. A decorative statement piece for styled interior displays; confirm dimensions, material and included components.",
+    "color": "To Confirm",
+    "material": "To Confirm",
+    "materialFinish": "To Confirm",
+    "searchTags": "decor, interior-design, home-decor, vintage",
+    "tags": [
+      "decor",
+      "interior-design",
+      "home-decor",
+      "vintage"
+    ],
+    "costPrice": 1150,
+    "price": 1500,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "decorative-vintage-tricycle-bottle-holder.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Decor",
+    "mainImageFilename": "bi-209.jpg",
+    "mainImage": "/product-images/bi-209.jpg",
+    "image": "/product-images/bi-209.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-209.jpg",
+        "type": "image",
+        "fileName": "bi-209.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-DEC-209_01.jpeg"
+    ],
+    "imageCount": 1,
+    "workbookImageCount": 1,
+    "rooms": [
+      "living-room",
+      "entryway"
+    ],
+    "slug": "decorative-vintage-tricycle-bottle-holder-bid-dec-209",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-chr-210",
+    "originalId": "BI-210",
+    "sku": "BID-CHR-210",
+    "internalSku": "BID-CHR-210",
+    "barcode": "BID-CHR-210",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Chairs",
+    "name": "Brown Upholstered Accent Chair Beside Potted Tree",
+    "description": "Brown Upholstered Accent Chair Beside Potted Tree. An accent seating piece for lounges, bedrooms or reading corners; confirm dimensions and upholstery details.",
+    "color": "To Confirm",
+    "material": "Fabric",
+    "materialFinish": "Fabric",
+    "searchTags": "chairs, interior-design, home-decor",
+    "tags": [
+      "chairs",
+      "interior-design",
+      "home-decor"
+    ],
+    "costPrice": 4100,
+    "price": 5300,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "brown-upholstered-accent-chair-beside-potted-tree.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Armchair",
+    "mainImageFilename": "bi-210.jpg",
+    "mainImage": "/product-images/bi-210.jpg",
+    "image": "/product-images/bi-210.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-210.jpg",
+        "type": "image",
+        "fileName": "bi-210.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      },
+      {
+        "url": "/product-images/BID-CHR-210_02.jpeg",
+        "type": "image",
+        "fileName": "BID-CHR-210_02.jpeg",
+        "position": 2
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-CHR-210_01.jpeg",
+      "BID-CHR-210_02.jpeg"
+    ],
+    "imageCount": 2,
+    "workbookImageCount": 2,
+    "rooms": [
+      "living-room",
+      "dining-room"
+    ],
+    "slug": "brown-upholstered-accent-chair-beside-potted-tree-bid-chr-210",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-bed-217",
+    "originalId": "BI-217",
+    "sku": "BID-BED-217",
+    "internalSku": "BID-BED-217",
+    "barcode": "BID-BED-217",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Beds",
+    "name": "Contemporary Bedroom Ensemble – Styled Display",
+    "description": "Contemporary Bedroom Ensemble in white / beige / grey tones. A styled bedroom presentation used as a catalogue reference; verify exactly which items are included before selling.",
+    "color": "White / Beige / Grey",
+    "material": "To Confirm",
+    "materialFinish": "To Confirm",
+    "searchTags": "beds, interior-design, home-decor, white, beige, grey, styled-display",
+    "tags": [
+      "beds",
+      "interior-design",
+      "home-decor",
+      "white",
+      "beige",
+      "grey",
+      "styled-display"
+    ],
+    "costPrice": 8500,
+    "price": 11050,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "styled-bedroom-angle-view.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Bedroom",
+    "mainImageFilename": "bi-217.jpg",
+    "mainImage": "/product-images/bi-217.jpg",
+    "image": "/product-images/bi-217.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-217.jpg",
+        "type": "image",
+        "fileName": "bi-217.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      },
+      {
+        "url": "/product-images/BID-BED-217_02.jpeg",
+        "type": "image",
+        "fileName": "BID-BED-217_02.jpeg",
+        "position": 2
+      },
+      {
+        "url": "/product-images/BID-BED-217_03.jpeg",
+        "type": "image",
+        "fileName": "BID-BED-217_03.jpeg",
+        "position": 3
+      },
+      {
+        "url": "/product-images/BID-BED-217_04.jpeg",
+        "type": "image",
+        "fileName": "BID-BED-217_04.jpeg",
+        "position": 4
+      },
+      {
+        "url": "/product-images/BID-BED-217_05.jpeg",
+        "type": "image",
+        "fileName": "BID-BED-217_05.jpeg",
+        "position": 5
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-BED-217_01.jpeg",
+      "BID-BED-217_02.jpeg",
+      "BID-BED-217_03.jpeg",
+      "BID-BED-217_04.jpeg",
+      "BID-BED-217_05.jpeg"
+    ],
+    "imageCount": 5,
+    "workbookImageCount": 5,
+    "rooms": [
+      "bedroom"
+    ],
+    "slug": "contemporary-bedroom-ensemble-styled-display-bid-bed-217",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-bed-218",
+    "originalId": "BI-218",
+    "sku": "BID-BED-218",
+    "internalSku": "BID-BED-218",
+    "barcode": "BID-BED-218",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Beds",
+    "name": "Bedroom Ensemble with Rope Pendant – Styled Display",
+    "description": "Bedroom Ensemble with Rope Pendant in white / beige / grey tones. A styled bedroom presentation used as a catalogue reference; verify exactly which items are included before selling.",
+    "color": "White / Beige / Grey",
+    "material": "Rope / metal",
+    "materialFinish": "Rope / metal",
+    "searchTags": "beds, interior-design, home-decor, white, beige, grey, rope, styled-display",
+    "tags": [
+      "beds",
+      "interior-design",
+      "home-decor",
+      "white",
+      "beige",
+      "grey",
+      "rope",
+      "styled-display"
+    ],
+    "costPrice": 4000,
+    "price": 5200,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "styled-bedroom-with-rope-chandelier.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Pendant Light",
+    "mainImageFilename": "bi-218.jpg",
+    "mainImage": "/product-images/bi-218.jpg",
+    "image": "/product-images/bi-218.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-218.jpg",
+        "type": "image",
+        "fileName": "bi-218.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      },
+      {
+        "url": "/product-images/BID-BED-218_02.jpeg",
+        "type": "image",
+        "fileName": "BID-BED-218_02.jpeg",
+        "position": 2
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-BED-218_01.jpeg",
+      "BID-BED-218_02.jpeg"
+    ],
+    "imageCount": 2,
+    "workbookImageCount": 2,
+    "rooms": [
+      "bedroom"
+    ],
+    "slug": "bedroom-ensemble-with-rope-pendant-styled-display-bid-bed-218",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-dec-223",
+    "originalId": "BI-223",
+    "sku": "BID-DEC-223",
+    "internalSku": "BID-DEC-223",
+    "barcode": "BID-DEC-223",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Decor",
+    "name": "Distressed White Decorative Horse Sculpture Set",
+    "description": "Distressed White Decorative Horse Sculpture Set in distressed white tones. A decorative statement piece for styled interior displays; confirm dimensions, material and included components.",
+    "color": "Distressed White",
+    "material": "To Confirm",
+    "materialFinish": "To Confirm",
+    "searchTags": "decor, interior-design, home-decor, distressed-white",
+    "tags": [
+      "decor",
+      "interior-design",
+      "home-decor",
+      "distressed-white"
+    ],
+    "costPrice": 2500,
+    "price": 3250,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "decorative-horse-sculptures.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Decor",
+    "mainImageFilename": "bi-223.jpg",
+    "mainImage": "/product-images/bi-223.jpg",
+    "image": "/product-images/bi-223.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-223.jpg",
+        "type": "image",
+        "fileName": "bi-223.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      },
+      {
+        "url": "/product-images/BID-DEC-223_02.jpeg",
+        "type": "image",
+        "fileName": "BID-DEC-223_02.jpeg",
+        "position": 2
+      },
+      {
+        "url": "/product-images/BID-DEC-223_03.jpeg",
+        "type": "image",
+        "fileName": "BID-DEC-223_03.jpeg",
+        "position": 3
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-DEC-223_01.jpeg",
+      "BID-DEC-223_02.jpeg",
+      "BID-DEC-223_03.jpeg"
+    ],
+    "imageCount": 3,
+    "workbookImageCount": 3,
+    "rooms": [
+      "living-room",
+      "entryway"
+    ],
+    "slug": "distressed-white-decorative-horse-sculpture-set-bid-dec-223",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-tbl-224",
+    "originalId": "BI-224",
+    "sku": "BID-TBL-224",
+    "internalSku": "BID-TBL-224",
+    "barcode": "BID-TBL-224",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Tables",
+    "name": "Sculptural Glass-Top Console Table",
+    "description": "Sculptural Glass-Top Console Table in walnut / chrome / clear tones. A statement surface for contemporary interiors; confirm dimensions and finish before ordering.",
+    "color": "Walnut / Chrome / Clear",
+    "material": "Glass / mixed materials",
+    "materialFinish": "Glass / mixed materials",
+    "searchTags": "tables, interior-design, home-decor, walnut, chrome, clear, sculptural, glass",
+    "tags": [
+      "tables",
+      "interior-design",
+      "home-decor",
+      "walnut",
+      "chrome",
+      "clear",
+      "sculptural",
+      "glass"
+    ],
+    "costPrice": 9500,
+    "price": 11000,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "glass-top-sculptural-table.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Furniture",
+    "mainImageFilename": "bi-224.jpg",
+    "mainImage": "/product-images/bi-224.jpg",
+    "image": "/product-images/bi-224.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-224.jpg",
+        "type": "image",
+        "fileName": "bi-224.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-TBL-224_01.jpeg"
+    ],
+    "imageCount": 1,
+    "workbookImageCount": 1,
+    "rooms": [
+      "living-room",
+      "dining-room"
+    ],
+    "slug": "sculptural-glass-top-console-table-bid-tbl-224",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-con-225",
+    "originalId": "BI-225",
+    "sku": "BID-CON-225",
+    "internalSku": "BID-CON-225",
+    "barcode": "BID-CON-225",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Consoles",
+    "name": "Cream & Walnut Modern TV Console",
+    "description": "Cream & Walnut Modern TV Console in cream / walnut tones. A streamlined storage or display unit for modern interiors; confirm materials, dimensions and configuration.",
+    "color": "Cream / Walnut",
+    "material": "To Confirm",
+    "materialFinish": "To Confirm",
+    "searchTags": "consoles, interior-design, home-decor, cream, walnut, modern",
+    "tags": [
+      "consoles",
+      "interior-design",
+      "home-decor",
+      "cream",
+      "walnut",
+      "modern"
+    ],
+    "costPrice": 11000,
+    "price": 14300,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "modern-tv-console-cabinet.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Console",
+    "mainImageFilename": "bi-225.jpg",
+    "mainImage": "/product-images/bi-225.jpg",
+    "image": "/product-images/bi-225.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-225.jpg",
+        "type": "image",
+        "fileName": "bi-225.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-CON-225_01.jpeg"
+    ],
+    "imageCount": 1,
+    "workbookImageCount": 1,
+    "rooms": [],
+    "slug": "cream-and-walnut-modern-tv-console-bid-con-225",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-dec-226",
+    "originalId": "BI-226",
+    "sku": "BID-DEC-226",
+    "internalSku": "BID-DEC-226",
+    "barcode": "BID-DEC-226",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Decor",
+    "name": "Vintage-Style Decorative Wall Clock",
+    "description": "Vintage-Style Decorative Wall Clock. A decorative statement piece for styled interior displays; confirm dimensions, material and included components.",
+    "color": "To Confirm",
+    "material": "To Confirm",
+    "materialFinish": "To Confirm",
+    "searchTags": "decor, interior-design, home-decor, vintage",
+    "tags": [
+      "decor",
+      "interior-design",
+      "home-decor",
+      "vintage"
+    ],
+    "costPrice": 5400,
+    "price": 6500,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "large-vintage-style-wall-clock.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Decor",
+    "mainImageFilename": "bi-226.jpg",
+    "mainImage": "/product-images/bi-226.jpg",
+    "image": "/product-images/bi-226.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-226.jpg",
+        "type": "image",
+        "fileName": "bi-226.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-DEC-226_01.jpeg"
+    ],
+    "imageCount": 1,
+    "workbookImageCount": 1,
+    "rooms": [
+      "living-room",
+      "entryway"
+    ],
+    "slug": "vintage-style-decorative-wall-clock-bid-dec-226",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-pnd-227",
+    "originalId": "BI-227",
+    "sku": "BID-PND-227",
+    "internalSku": "BID-PND-227",
+    "barcode": "BID-PND-227",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Pendant Lights",
+    "name": "Modern LED Ring Chandelier",
+    "description": "Modern LED Ring Chandelier in black / white tones. A ceiling-hung statement light for feature lighting; confirm dimensions, electrical specifications and installation requirements.",
+    "color": "Black / White",
+    "material": "To Confirm",
+    "materialFinish": "To Confirm",
+    "searchTags": "pendant-lights, interior-design, home-decor, black, white, modern",
+    "tags": [
+      "pendant-lights",
+      "interior-design",
+      "home-decor",
+      "black",
+      "white",
+      "modern"
+    ],
+    "costPrice": 3000,
+    "price": 3900,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "modern-led-ring-chandelier-angle.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Pendant Light",
+    "mainImageFilename": "bi-227.jpg",
+    "mainImage": "/product-images/bi-227.jpg",
+    "image": "/product-images/bi-227.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-227.jpg",
+        "type": "image",
+        "fileName": "bi-227.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-PND-227_01.jpeg"
+    ],
+    "imageCount": 1,
+    "workbookImageCount": 1,
+    "rooms": [],
+    "slug": "modern-led-ring-chandelier-bid-pnd-227",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-pnd-229",
+    "originalId": "BI-229",
+    "sku": "BID-PND-229",
+    "internalSku": "BID-PND-229",
+    "barcode": "BID-PND-229",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Pendant Lights",
+    "name": "Black Three-Light Geometric Pendant",
+    "description": "Black Three-Light Geometric Pendant in black tones. A ceiling-hung statement light for feature lighting; confirm dimensions, electrical specifications and installation requirements.",
+    "color": "Black",
+    "material": "To Confirm",
+    "materialFinish": "To Confirm",
+    "searchTags": "pendant-lights, interior-design, home-decor, black, geometric, pendant",
+    "tags": [
+      "pendant-lights",
+      "interior-design",
+      "home-decor",
+      "black",
+      "geometric",
+      "pendant"
+    ],
+    "costPrice": 2800,
+    "price": 3640,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "three-light-geometric-pendant.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Pendant Light",
+    "mainImageFilename": "bi-229.jpg",
+    "mainImage": "/product-images/bi-229.jpg",
+    "image": "/product-images/bi-229.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-229.jpg",
+        "type": "image",
+        "fileName": "bi-229.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      },
+      {
+        "url": "/product-images/BID-PND-229_02.jpeg",
+        "type": "image",
+        "fileName": "BID-PND-229_02.jpeg",
+        "position": 2
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-PND-229_01.jpeg",
+      "BID-PND-229_02.jpeg"
+    ],
+    "imageCount": 2,
+    "workbookImageCount": 2,
+    "rooms": [],
+    "slug": "black-three-light-geometric-pendant-bid-pnd-229",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-pnd-230",
+    "originalId": "BI-230",
+    "sku": "BID-PND-230",
+    "internalSku": "BID-PND-230",
+    "barcode": "BID-PND-230",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Pendant Lights",
+    "name": "Natural Rope Five-Light Cage Chandelier",
+    "description": "Natural Rope Five-Light Cage Chandelier in black / natural rope tones. A ceiling-hung statement light for feature lighting; confirm dimensions, electrical specifications and installation requirements.",
+    "color": "Black / Natural Rope",
+    "material": "Rope / metal",
+    "materialFinish": "Rope / metal",
+    "searchTags": "pendant-lights, interior-design, home-decor, black, natural-rope, pendant, rope",
+    "tags": [
+      "pendant-lights",
+      "interior-design",
+      "home-decor",
+      "black",
+      "natural-rope",
+      "pendant",
+      "rope"
+    ],
+    "costPrice": 4000,
+    "price": 5200,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "rope-cage-pendant-chandelier.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Pendant Light",
+    "mainImageFilename": "bi-230.jpg",
+    "mainImage": "/product-images/bi-230.jpg",
+    "image": "/product-images/bi-230.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-230.jpg",
+        "type": "image",
+        "fileName": "bi-230.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-PND-230_01.jpeg"
+    ],
+    "imageCount": 1,
+    "workbookImageCount": 1,
+    "rooms": [],
+    "slug": "natural-rope-five-light-cage-chandelier-bid-pnd-230",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  },
+  {
+    "id": "bid-tbl-233",
+    "originalId": "BI-233",
+    "sku": "BID-TBL-233",
+    "internalSku": "BID-TBL-233",
+    "barcode": "BID-TBL-233",
+    "barcodeFormat": "CODE128",
+    "barcodeType": "Internal Code 128 (not retail GTIN)",
+    "category": "Tables",
+    "name": "Black Metal C-Shape Side Table",
+    "description": "Black Metal C-Shape Side Table in black tones. A statement surface for contemporary interiors; confirm dimensions and finish before ordering.",
+    "color": "Black",
+    "material": "Metal",
+    "materialFinish": "Metal",
+    "searchTags": "tables, interior-design, home-decor, black, metal",
+    "tags": [
+      "tables",
+      "interior-design",
+      "home-decor",
+      "black",
+      "metal"
+    ],
+    "costPrice": 2700,
+    "price": 3500,
+    "currency": "ZAR",
+    "availability": "Available",
+    "inStock": true,
+    "manageStock": false,
+    "stock": null,
+    "originalImageFilename": "black-metal-c-side-table.jpg",
+    "pricingSupplierNotes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "notes": "Estimated price; selling price calculated with approximately 30% markup. Confirm final supplier cost before website upload.",
+    "previousWebsiteCategory": "Side Table",
+    "mainImageFilename": "bi-233.jpg",
+    "mainImage": "/product-images/bi-233.jpg",
+    "image": "/product-images/bi-233.jpg",
+    "gallery": [
+      {
+        "url": "/product-images/bi-233.jpg",
+        "type": "image",
+        "fileName": "bi-233.jpg",
+        "position": 1,
+        "quality": "high-resolution"
+      },
+      {
+        "url": "/product-images/BID-TBL-233_02.jpeg",
+        "type": "image",
+        "fileName": "BID-TBL-233_02.jpeg",
+        "position": 2
+      },
+      {
+        "url": "/product-images/BID-TBL-233_03.jpeg",
+        "type": "image",
+        "fileName": "BID-TBL-233_03.jpeg",
+        "position": 3
+      }
+    ],
+    "galleryImageFiles": [
+      "BID-TBL-233_01.jpeg",
+      "BID-TBL-233_02.jpeg",
+      "BID-TBL-233_03.jpeg"
+    ],
+    "imageCount": 3,
+    "workbookImageCount": 3,
+    "rooms": [
+      "living-room",
+      "dining-room"
+    ],
+    "slug": "black-metal-c-shape-side-table-bid-tbl-233",
+    "sourceWorkbook": "B_Interior_Product_Catalogue_With_Images.xlsx"
+  }
+]

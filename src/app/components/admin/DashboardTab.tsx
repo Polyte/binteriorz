@@ -2,7 +2,8 @@ import React from 'react';
 import { motion } from 'motion/react';
 import {
   TrendingUp, ShoppingCart, Package, UserPlus, Mail, Star,
-  AlertTriangle, RefreshCw, Activity
+  AlertTriangle, RefreshCw, Activity, FileText, Images, PanelsTopLeft,
+  Layers, MessageSquare, ArrowRight, Plus, Upload, Store, Pencil
 } from 'lucide-react';
 import {
   AreaChart, Area, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis,
@@ -12,42 +13,109 @@ import { useAdmin, CustomTooltip, PIE_COLORS, timeAgo } from './AdminContext';
 
 export const DashboardTab = () => {
   const {
-    products, orders, newsletterSubs, reviews, activityLog,
+    products, orders, newsletterSubs, reviews, activityLog, pages, media, vendors, inquiries, homepageContent,
     totalRevenue, avgRating, pendingVendors, revenueByMonth,
     ordersByStatus, productsByCategory, topProducts, lowStockProducts,
-    fetchData, setActiveTab,
+    paidOrders, revenueLast30Days, ordersLast30Days, averageOrderValue, itemsSold, uniqueCustomers,
+    fetchData, setActiveTab, refreshing, lastUpdatedAt,
+    setProductModal, setEditingProduct, setProductGallery, setMediaUploadModal,
   } = useAdmin();
+
+  const formatCurrency = (value: number) => new Intl.NumberFormat('en-ZA', {
+    style: 'currency',
+    currency: 'ZAR',
+    maximumFractionDigits: 0,
+  }).format(value);
+
+  const storeMetrics = [
+    { label: 'Paid revenue', value: formatCurrency(totalRevenue), detail: 'Completed and active orders', icon: TrendingUp, tab: 'orders' },
+    { label: 'Last 30 days', value: formatCurrency(revenueLast30Days), detail: `${ordersLast30Days} paid order${ordersLast30Days === 1 ? '' : 's'}`, icon: Activity, tab: 'orders' },
+    { label: 'Paid orders', value: paidOrders.length.toLocaleString('en-ZA'), detail: `${orders.length} orders in total`, icon: ShoppingCart, tab: 'orders' },
+    { label: 'Average order', value: formatCurrency(averageOrderValue), detail: 'Across revenue orders', icon: Star, tab: 'orders' },
+    { label: 'Units sold', value: itemsSold.toLocaleString('en-ZA'), detail: 'Product quantities fulfilled', icon: Package, tab: 'products' },
+    { label: 'Customers', value: uniqueCustomers.toLocaleString('en-ZA'), detail: 'Unique customer emails', icon: UserPlus, tab: 'customers' },
+  ];
+  const homepageSections = Object.values(homepageContent?.sections || {}) as Array<{ enabled?: boolean }>;
+  const enabledHomepageSections = homepageSections.filter((section) => section.enabled !== false).length;
 
   return (
     <motion.div key="dash" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="space-y-6">
-      <div className="flex items-end justify-between">
+      <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
         <div>
-          <h2 className="text-2xl font-serif text-neutral-900">Dashboard</h2>
-          <p className="text-xs text-neutral-500 mt-0.5">Welcome back. Here's what's happening today.</p>
+          <div className="mb-1 flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.15em] text-[#2271b1]"><Store className="h-3.5 w-3.5" /> WooCommerce</div>
+          <h2 className="text-2xl font-serif text-neutral-900">Store dashboard</h2>
+          <p className="text-xs text-neutral-500 mt-0.5">Manage sales, products and website content from one workspace.</p>
         </div>
-        <button onClick={fetchData} className="text-xs flex items-center gap-1.5 text-neutral-500 hover:text-neutral-900 transition-colors">
-          <RefreshCw className="w-3.5 h-3.5" /> Refresh
+        <div className="flex items-center gap-3">
+          {lastUpdatedAt && <span className="hidden text-[10px] text-neutral-400 sm:inline">Updated {timeAgo(lastUpdatedAt)}</span>}
+          <button onClick={fetchData} disabled={refreshing} className="text-xs flex items-center gap-1.5 rounded-sm border border-neutral-300 bg-white px-3 py-2 text-neutral-600 hover:border-neutral-400 hover:text-neutral-900 transition-colors disabled:opacity-50">
+            <RefreshCw className={`w-3.5 h-3.5 ${refreshing ? 'animate-spin' : ''}`} /> {refreshing ? 'Refreshing' : 'Refresh'}
+          </button>
+        </div>
+      </div>
+
+      {/* WordPress/WooCommerce quick actions */}
+      <div className="grid overflow-hidden border border-neutral-200 bg-white sm:grid-cols-2 lg:grid-cols-4">
+        <button onClick={() => { setEditingProduct(null); setProductGallery([]); setProductModal(true); }} className="group flex items-center gap-3 border-b border-r border-neutral-100 px-4 py-3.5 text-left hover:bg-[#f6f7f7]">
+          <span className="flex h-9 w-9 items-center justify-center rounded-sm bg-[#2271b1] text-white"><Plus className="h-4 w-4" /></span>
+          <span><span className="block text-xs font-semibold text-neutral-900">Add product</span><span className="text-[10px] text-neutral-400">Create a catalogue item</span></span>
+        </button>
+        <button onClick={() => setActiveTab('orders')} className="group flex items-center gap-3 border-b border-r border-neutral-100 px-4 py-3.5 text-left hover:bg-[#f6f7f7]">
+          <span className="flex h-9 w-9 items-center justify-center rounded-sm bg-neutral-100 text-neutral-600"><ShoppingCart className="h-4 w-4" /></span>
+          <span><span className="block text-xs font-semibold text-neutral-900">Manage orders</span><span className="text-[10px] text-neutral-400">Review fulfilment</span></span>
+        </button>
+        <button onClick={() => setActiveTab('homepage')} className="group flex items-center gap-3 border-b border-r border-neutral-100 px-4 py-3.5 text-left hover:bg-[#f6f7f7]">
+          <span className="flex h-9 w-9 items-center justify-center rounded-sm bg-neutral-100 text-neutral-600"><Pencil className="h-4 w-4" /></span>
+          <span><span className="block text-xs font-semibold text-neutral-900">Edit homepage</span><span className="text-[10px] text-neutral-400">Update featured content</span></span>
+        </button>
+        <button onClick={() => setMediaUploadModal(true)} className="group flex items-center gap-3 border-b border-neutral-100 px-4 py-3.5 text-left hover:bg-[#f6f7f7]">
+          <span className="flex h-9 w-9 items-center justify-center rounded-sm bg-neutral-100 text-neutral-600"><Upload className="h-4 w-4" /></span>
+          <span><span className="block text-xs font-semibold text-neutral-900">Upload media</span><span className="text-[10px] text-neutral-400">Add images and files</span></span>
         </button>
       </div>
 
       {/* KPI Row */}
-      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3">
-        {[
-          { label: 'Revenue', value: `R ${totalRevenue.toLocaleString()}`, icon: TrendingUp, color: 'text-emerald-600', bg: 'bg-emerald-50' },
-          { label: 'Orders', value: orders.length, icon: ShoppingCart, color: 'text-blue-600', bg: 'bg-blue-50' },
-          { label: 'Products', value: products.length, icon: Package, color: 'text-amber-600', bg: 'bg-amber-50' },
-          { label: 'Pending Guild', value: pendingVendors, icon: UserPlus, color: 'text-purple-600', bg: 'bg-purple-50' },
-          { label: 'Subscribers', value: newsletterSubs.length, icon: Mail, color: 'text-pink-600', bg: 'bg-pink-50' },
-          { label: 'Avg Rating', value: avgRating.toFixed(1), icon: Star, color: 'text-yellow-600', bg: 'bg-yellow-50' },
-        ].map((stat, i) => (
-          <div key={i} className="bg-white rounded-lg border border-neutral-200 p-4 hover:shadow-md transition-shadow">
-            <div className="flex items-center justify-between mb-3">
-              <div className={`p-2 rounded-md ${stat.bg} ${stat.color}`}><stat.icon className="w-4 h-4" /></div>
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+        {storeMetrics.map((stat) => (
+          <button key={stat.label} onClick={() => setActiveTab(stat.tab)} className="group relative min-h-[148px] overflow-hidden border border-[#d9d1c4] bg-[#fbfaf7] p-5 text-left shadow-[0_12px_34px_-30px_rgba(48,35,20,.55)] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#b8914a] hover:shadow-[0_18px_42px_-28px_rgba(83,57,18,.45)]">
+            <span className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-[#6f4b00] via-[#e5c35f] to-[#8a5e00] opacity-75" />
+            <div className="mb-5 flex items-center justify-between">
+              <span className="flex h-9 w-9 items-center justify-center rounded-full border border-[#d7c7a7] bg-white text-[#7c5a1f] transition-colors group-hover:border-[#b8914a] group-hover:bg-[#f5ecd7]"><stat.icon className="h-4 w-4" strokeWidth={1.6} /></span>
+              <ArrowRight className="h-3.5 w-3.5 text-[#b9aa90] transition-transform group-hover:translate-x-1 group-hover:text-[#8a6421]" />
             </div>
-            <p className="text-[10px] uppercase tracking-widest text-neutral-400 font-semibold">{stat.label}</p>
-            <h3 className="text-xl font-serif text-neutral-900 mt-0.5">{stat.value}</h3>
-          </div>
+            <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#8b7d68]">{stat.label}</p>
+            <p className="mt-1 break-words text-[1.35rem] leading-tight text-[#241c14]" style={{ fontFamily: 'var(--font-playfair)' }}>{stat.value}</p>
+            <p className="mt-2 text-[10px] leading-relaxed text-[#8b8275]">{stat.detail}</p>
+          </button>
         ))}
+      </div>
+
+      {/* WordPress-style content overview */}
+      <div className="overflow-hidden rounded-lg border border-neutral-200 bg-white">
+        <div className="flex items-center justify-between border-b border-neutral-100 px-5 py-4">
+          <div>
+            <h3 className="text-[11px] font-bold uppercase tracking-[0.15em] text-neutral-900">Content at a glance</h3>
+            <p className="mt-1 text-[10px] text-neutral-400">Jump into any content type managed by the site.</p>
+          </div>
+          <button onClick={() => setActiveTab('homepage')} className="flex items-center gap-1 text-[10px] font-bold uppercase text-neutral-400 hover:text-neutral-900">Edit homepage <ArrowRight className="h-3 w-3" /></button>
+        </div>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            { label: 'Homepage sections', value: homepageSections.length, detail: `${enabledHomepageSections} currently enabled`, tab: 'homepage', icon: PanelsTopLeft },
+            { label: 'Pages', value: pages.length, detail: `${pages.filter((page: any) => page.status === 'published').length} published`, tab: 'pages', icon: FileText },
+            { label: 'Products', value: products.length, detail: `${lowStockProducts.length} low stock`, tab: 'products', icon: Package },
+            { label: 'Media', value: media.length, detail: 'Images and files', tab: 'media', icon: Images },
+            { label: 'Reviews', value: reviews.length, detail: avgRating ? `${avgRating.toFixed(1)} average rating` : 'No ratings yet', tab: 'reviews', icon: Star },
+            { label: 'Artisan profiles', value: vendors.length, detail: `${pendingVendors} awaiting review`, tab: 'vendors', icon: Layers },
+            { label: 'Inquiries', value: inquiries.length, detail: `${inquiries.filter((item: any) => !item.status || item.status === 'new').length} new`, tab: 'inquiries', icon: MessageSquare },
+            { label: 'Subscribers', value: newsletterSubs.length, detail: 'Newsletter audience', tab: 'subscribers', icon: Mail },
+          ].map((type) => (
+            <button key={type.label} onClick={() => setActiveTab(type.tab)} className="group flex items-center gap-3 border-b border-r border-neutral-100 p-4 text-left hover:bg-neutral-50">
+              <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-md bg-neutral-100 text-neutral-500 transition-colors group-hover:bg-neutral-900 group-hover:text-white"><type.icon className="h-4 w-4" /></div>
+              <div className="min-w-0"><p className="text-xs font-semibold text-neutral-900">{type.label} <span className="ml-1 text-neutral-400">{type.value}</span></p><p className="mt-0.5 truncate text-[10px] text-neutral-400">{type.detail}</p></div>
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Low Stock Alert */}

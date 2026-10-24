@@ -11,6 +11,8 @@ export interface AdminStore {
   pages: any[];
   media: any[];
   siteSettings: any;
+  homepageContent: any;
+  homepagePublishedAt: string | null;
   activityLog: any[];
   teamMembers: any[];
 
@@ -25,6 +27,9 @@ export interface AdminStore {
   searchQuery: string;
   setSearchQuery: (q: string) => void;
   setActiveTab: (tab: string) => void;
+  refreshing: boolean;
+  loadError: string | null;
+  lastUpdatedAt: string | null;
 
   // Modal openers
   setProductModal: (v: boolean) => void;
@@ -89,6 +94,7 @@ export interface AdminStore {
   handleDeleteVendor: (id: string) => void;
   handleSaveVendorProfile: (e: React.FormEvent<HTMLFormElement>) => void;
   handleSaveSettings: (e: React.FormEvent<HTMLFormElement>) => void;
+  handleSaveHomepage: (content: any, publish?: boolean) => Promise<boolean>;
   handleQuickLinkProduct: (productId: string, vendorId: string) => void;
   handleBulkLinkProducts: (productIds: string[], vendorId: string) => void;
   handleUnlinkProduct: (productId: string) => void;
@@ -111,6 +117,12 @@ export interface AdminStore {
   productsByCategory: any[];
   topProducts: any[];
   lowStockProducts: any[];
+  paidOrders: any[];
+  revenueLast30Days: number;
+  ordersLast30Days: number;
+  averageOrderValue: number;
+  itemsSold: number;
+  uniqueCustomers: number;
 }
 
 const AdminContext = createContext<AdminStore | null>(null);

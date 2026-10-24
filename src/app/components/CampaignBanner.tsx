@@ -264,7 +264,7 @@ export const CampaignBanner = ({ onVisibilityChange }: CampaignBannerProps) => {
           onAnimationComplete={measureBanner}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
-          className={`bg-gradient-to-r ${activeCampaign.gradientFrom} ${activeCampaign.gradientTo} text-white py-3 px-4 fixed top-0 left-0 right-0 z-[60] overflow-hidden`}
+          className="campaign-gold-bar text-[#241700] py-1.5 px-4 fixed top-0 left-0 right-0 z-[60] overflow-hidden"
         >
           {/* Animated shimmer overlay */}
           <motion.div
@@ -287,7 +287,7 @@ export const CampaignBanner = ({ onVisibilityChange }: CampaignBannerProps) => {
           />
 
           {/* Content */}
-          <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-5 text-center relative z-10">
+          <div className="max-w-[1480px] mx-auto flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-5 text-center relative z-10">
             {/* Icon + Title group */}
             <motion.div
               className="flex items-center gap-2.5"
@@ -299,19 +299,19 @@ export const CampaignBanner = ({ onVisibilityChange }: CampaignBannerProps) => {
 
               {/* Animated separator dot */}
               <motion.span
-                className="w-1 h-1 rounded-full bg-white/40 hidden sm:block"
+                className="w-1 h-1 rounded-full bg-[#3b2600]/40 hidden sm:block"
                 animate={{ scale: [1, 1.5, 1], opacity: [0.4, 0.8, 0.4] }}
                 transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
               />
 
-              <span className="font-bold uppercase tracking-[0.2em] text-[10px] sm:text-xs whitespace-nowrap">
+              <span className="font-black uppercase tracking-[0.2em] text-[10px] sm:text-xs whitespace-nowrap [text-shadow:0_1px_0_rgba(255,255,255,0.45)]">
                 {activeCampaign.title}
               </span>
             </motion.div>
 
             {/* Animated vertical divider */}
             <motion.div
-              className="hidden sm:block w-[1px] h-4 bg-white/20"
+              className="hidden sm:block w-[1px] h-4 bg-[#3b2600]/25"
               initial={{ scaleY: 0 }}
               animate={{ scaleY: 1 }}
               transition={{ delay: 0.5, duration: 0.4, ease }}
@@ -319,7 +319,7 @@ export const CampaignBanner = ({ onVisibilityChange }: CampaignBannerProps) => {
 
             {/* Subtitle with typewriter-style fade */}
             <motion.p
-              className="text-[11px] sm:text-sm font-medium text-white/90 max-w-md"
+              className="text-[11px] sm:text-sm font-semibold text-[#2d1c00]/85 max-w-md"
               initial={{ y: 8, opacity: 0, filter: 'blur(4px)' }}
               animate={{ y: 0, opacity: 1, filter: 'blur(0px)' }}
               transition={{ delay: 0.5, duration: 0.7, ease }}
@@ -329,7 +329,7 @@ export const CampaignBanner = ({ onVisibilityChange }: CampaignBannerProps) => {
 
             {/* CTA button with hover animation */}
             <motion.button
-              className="group relative text-[10px] sm:text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-colors duration-300"
+              className="group relative text-[10px] sm:text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 px-4 py-1 rounded-full bg-black/10 backdrop-blur-sm border border-black/15 hover:bg-black/15 transition-colors duration-300"
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ delay: 0.7, duration: 0.5, ease }}

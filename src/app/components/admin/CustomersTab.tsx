@@ -5,24 +5,37 @@ import * as XLSX from 'xlsx';
 import { toast } from 'sonner';
 import { useAdmin } from './AdminContext';
 
-export const CustomersTab = () => {
+type CustomerView = 'all' | 'inquiries' | 'subscribers';
+
+export const CustomersTab = ({ view = 'all' }: { view?: CustomerView }) => {
   const {
     orders, newsletterSubs, inquiries, searchQuery, canDelete,
     handleDeleteSubscriber, handleDeleteInquiry, handleUpdateInquiryStatus,
   } = useAdmin();
 
+  const heading = view === 'inquiries' ? 'Inquiries' : view === 'subscribers' ? 'Subscribers' : 'Customers';
+  const description = view === 'inquiries'
+    ? 'Manage consultation and contact requests.'
+    : view === 'subscribers'
+      ? 'Manage the newsletter audience.'
+      : 'Customers, newsletter subscribers and inquiries.';
+
   return (
-    <motion.div key="customers" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="space-y-4">
+    <motion.div key={`customers-${view}`} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="space-y-4">
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
         <div>
-          <h2 className="text-2xl font-serif text-neutral-900">Customers</h2>
-          <p className="text-xs text-neutral-500 mt-0.5">Newsletter subscribers & inquiries</p>
+          <h2 className="text-2xl font-serif text-neutral-900">{heading}</h2>
+          <p className="text-xs text-neutral-500 mt-0.5">{description}</p>
         </div>
-        <button
+        {view !== 'inquiries' && <button
           onClick={() => {
-            const rows = newsletterSubs.map((s: any) => ({ Email: s.email, 'Subscribed At': new Date(s.subscribedAt).toLocaleDateString() }));
+            const rows = newsletterSubs.map((s: any) => ({
+              Email: s.email,
+              Preferences: (s.preferences || ['monthly-newsletter']).map((preference: string) => preference.replace(/-/g, ' ')).join(', '),
+              'Subscribed At': new Date(s.subscribedAt).toLocaleDateString(),
+            }));
             const ws = XLSX.utils.json_to_sheet(rows);
-            ws['!cols'] = [{ wch: 32 }, { wch: 14 }];
+            ws['!cols'] = [{ wch: 32 }, { wch: 38 }, { wch: 14 }];
             const wb = XLSX.utils.book_new();
             XLSX.utils.book_append_sheet(wb, ws, 'Subscribers');
             XLSX.writeFile(wb, `B-Interiors_Subscribers_${new Date().toISOString().slice(0, 10)}.xlsx`);
@@ -31,15 +44,18 @@ export const CustomersTab = () => {
           className="flex items-center gap-1.5 px-3 py-2 border border-neutral-200 bg-white rounded-md text-xs font-medium text-neutral-700 hover:bg-neutral-50 transition-colors"
         >
           <Download className="w-3.5 h-3.5" /> Export Subscribers
-        </button>
+        </button>}
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+      <div className={`grid grid-cols-2 gap-3 ${view === 'all' ? 'md:grid-cols-4' : 'md:grid-cols-2'}`}>
+        {view !== 'inquiries' && <>
         <div className="bg-white rounded-lg border border-neutral-200 p-4">
           <Mail className="w-5 h-5 text-pink-500 mb-2" />
           <p className="text-[10px] uppercase tracking-widest text-neutral-400 font-semibold">Newsletter Subs</p>
           <p className="text-2xl font-serif text-neutral-900 mt-0.5">{newsletterSubs.length}</p>
         </div>
+        </>}
+        {view !== 'subscribers' && <>
         <div className="bg-white rounded-lg border border-neutral-200 p-4">
           <MessageSquare className="w-5 h-5 text-blue-500 mb-2" />
           <p className="text-[10px] uppercase tracking-widest text-neutral-400 font-semibold">All Inquiries</p>
@@ -50,15 +66,17 @@ export const CustomersTab = () => {
           <p className="text-[10px] uppercase tracking-widest text-neutral-400 font-semibold">Unread</p>
           <p className="text-2xl font-serif text-neutral-900 mt-0.5">{inquiries.filter((i: any) => !i.status || i.status === 'new').length}</p>
         </div>
+        </>}
+        {view === 'all' &&
         <div className="bg-white rounded-lg border border-neutral-200 p-4">
           <ShoppingCart className="w-5 h-5 text-emerald-500 mb-2" />
           <p className="text-[10px] uppercase tracking-widest text-neutral-400 font-semibold">Unique Buyers</p>
           <p className="text-2xl font-serif text-neutral-900 mt-0.5">{new Set(orders.map((o: any) => o.customerInfo?.email)).size}</p>
-        </div>
+        </div>}
       </div>
 
       {/* Newsletter Subscribers */}
-      <div className="bg-white rounded-lg border border-neutral-200 overflow-hidden">
+      {view !== 'inquiries' && <div className="bg-white rounded-lg border border-neutral-200 overflow-hidden">
         <div className="p-4 border-b border-neutral-100">
           <h3 className="text-[11px] uppercase tracking-[0.15em] font-bold text-neutral-900 flex items-center gap-2">
             <Mail className="w-4 h-4 text-pink-500" /> Newsletter Subscribers
@@ -71,7 +89,12 @@ export const CustomersTab = () => {
                 <div className="w-8 h-8 bg-pink-50 rounded-full flex items-center justify-center text-pink-600 text-[10px] font-bold uppercase">
                   {sub.email?.[0]}
                 </div>
-                <span className="text-xs text-neutral-900">{sub.email}</span>
+                <div>
+                  <span className="block text-xs text-neutral-900">{sub.email}</span>
+                  <span className="mt-0.5 block text-[9px] capitalize text-neutral-400">
+                    {(sub.preferences || ['monthly-newsletter']).map((preference: string) => preference.replace(/-/g, ' ')).join(' · ')}
+                  </span>
+                </div>
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-[10px] text-neutral-400">{new Date(sub.subscribedAt).toLocaleDateString()}</span>
@@ -81,10 +104,10 @@ export const CustomersTab = () => {
           ))}
           {newsletterSubs.length === 0 && <p className="p-4 text-center text-neutral-400 text-xs">No subscribers yet</p>}
         </div>
-      </div>
+      </div>}
 
       {/* Inquiries */}
-      <div className="bg-white rounded-lg border border-neutral-200 overflow-hidden">
+      {view !== 'subscribers' && <div className="bg-white rounded-lg border border-neutral-200 overflow-hidden">
         <div className="p-4 border-b border-neutral-100">
           <h3 className="text-[11px] uppercase tracking-[0.15em] font-bold text-neutral-900 flex items-center gap-2">
             <MessageSquare className="w-4 h-4 text-blue-500" /> Inquiries
@@ -123,7 +146,7 @@ export const CustomersTab = () => {
           ))}
           {inquiries.length === 0 && <p className="p-4 text-center text-neutral-400 text-xs">No inquiries yet</p>}
         </div>
-      </div>
+      </div>}
     </motion.div>
   );
 };

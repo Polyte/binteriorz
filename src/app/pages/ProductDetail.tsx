@@ -76,7 +76,7 @@ export const ProductDetail = ({ products, onAddToCart, onToggleWishlist, wishlis
       style={{ position: 'relative' }}
     >
       {grainOverlay}
-      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-12">
+      <div className="max-w-[1480px] mx-auto px-6 sm:px-8 lg:px-12">
         {/* Navigation Breadcrumbs */}
         <nav className="flex items-center gap-3 text-[10px] uppercase tracking-[0.4em] text-neutral-400 mb-16 font-bold">
           <Link to="/" className="hover:text-neutral-900 transition-colors">Studio</Link>
