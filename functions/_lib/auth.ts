@@ -17,9 +17,10 @@ async function digest(value: string): Promise<string> {
   return [...new Uint8Array(bytes)].map(byte => byte.toString(16).padStart(2, '0')).join('');
 }
 
+// Cloudflare Workers rejects PBKDF2 above 100,000 iterations.
 async function hashPassword(password: string, salt: Uint8Array): Promise<string> {
   const key = await crypto.subtle.importKey('raw', encoder.encode(password), 'PBKDF2', false, ['deriveBits']);
-  const bits = await crypto.subtle.deriveBits({ name: 'PBKDF2', hash: 'SHA-256', salt, iterations: 310_000 }, key, 256);
+  const bits = await crypto.subtle.deriveBits({ name: 'PBKDF2', hash: 'SHA-256', salt, iterations: 100_000 }, key, 256);
   return [...new Uint8Array(bits)].map(byte => byte.toString(16).padStart(2, '0')).join('');
 }
 
@@ -92,8 +93,8 @@ export async function onRequestPost({ request, env }: { request: Request; env: A
   return json({ session: await createSession(env, user), user: { id: user.id, email: user.email } });
 }
 
-export async function signup({ request, env }: { request: Request; env: AuthEnv }) {
-  const body = await parseBody(request);
+export async function signup({ request, env }: { request: Request; env: AuthEnv }, parsedBody?: Record<string, unknown> | null) {
+  const body = parsedBody ?? await parseBody(request);
   if (!body) return json({ error: 'Invalid request body.' }, 400);
   const email = String(body.email || '').trim().toLowerCase();
   const password = String(body.password || '');

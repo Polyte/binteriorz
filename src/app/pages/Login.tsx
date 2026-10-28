@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { cloudflareAuth } from '../../../utils/cloudflare/client';
 import { toast } from 'sonner';
-import { Lock, Mail, ArrowRight, UserPlus } from 'lucide-react';
+import { Lock, Mail, ArrowRight, UserPlus, User } from 'lucide-react';
 
 const API = `/api`;
 
@@ -206,9 +206,9 @@ export const Login = () => {
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       className="w-full bg-transparent border-b border-neutral-200 py-4 pl-8 outline-none focus:border-neutral-900 transition-colors"
-                      placeholder="Min 6 characters"
+                      placeholder="Min 8 characters"
                       required
-                      minLength={6}
+                      minLength={8}
                     />
                   </div>
                 </div>

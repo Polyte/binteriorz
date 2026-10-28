@@ -5,7 +5,7 @@
   "compatibility_flags": ["nodejs_compat"],
   "pages_build_output_dir": "./dist",
   "vars": {
-    "PAYFAST_MODE": "sandbox"
+    "PAYFAST_MODE": "live"
   },
   "kv_namespaces": [
     { "binding": "PAYFAST_ORDERS", "id": "d962688425914149854bc0a77413cf98" }

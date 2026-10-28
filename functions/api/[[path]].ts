@@ -42,7 +42,7 @@ export const onRequest: PagesFunction<AppEnv> = async ({ request, env }) => {
       headers.set('Cache-Control', 'public, max-age=31536000, immutable');
       return new Response(object.body, { headers });
     }
-    if (method === 'POST' && root === 'signup') return signup({ request, env });
+    if (method === 'POST' && root === 'signup') return signup({ request, env }, body);
     if (method === 'GET' && root === 'orders' && id === 'lookup' && parts[2]) {
       const order = (await readList(env, 'orders')).find((item: any) => item.orderId === parts[2]);
       if (!order) return json({ error: 'Order not found' }, 404);
