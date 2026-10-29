@@ -3,10 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Link, useNavigate } from 'react-router';
 import { cloudflareAuth } from '../../../utils/cloudflare/client';
 import { toast } from 'sonner';
-import {
-  User, Package, LogOut, ChevronRight, Clock, CheckCircle2, Truck,
-  Mail, MapPin, ShoppingBag, Eye, ArrowRight, Loader2
-} from 'lucide-react';
+import { User, Package, LogOut, ChevronRight, Clock, CheckCircle2, Truck, Mail, MapPin, ShoppingBag, ArrowRight, Loader2 } from 'lucide-react';
 
 const API = `/api`;
 

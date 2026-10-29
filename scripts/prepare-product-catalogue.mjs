@@ -186,10 +186,5 @@ fs.writeFileSync(path.join(dataDir, 'summary.json'), `${JSON.stringify({
   ])),
 }, null, 2)}\n`);
 
-execFileSync(process.execPath, [path.join(root, 'scripts', 'create-product-sqlite.mjs')], {
-  cwd: root,
-  stdio: 'inherit',
-});
-
 if (!suppliedExtractDir) fs.rmSync(extractDir, { recursive: true, force: true });
 console.log(`Prepared ${products.length} products and ${[...galleryBySku.values()].reduce((sum, gallery) => sum + gallery.length, 0)} gallery images.`);

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { X, ShieldCheck, Hammer, Palette, Ruler, Calendar, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { X, ShieldCheck, Hammer, Palette, Calendar, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { toast } from 'sonner';
 

@@ -4,7 +4,6 @@ import {
   Settings, Globe, Mail, ShoppingCart, Shield, UserPlus, UserCog, Trash2,
   CreditCard, CheckCircle2, AlertCircle
 } from 'lucide-react';
-import { toast } from 'sonner';
 import { useAdmin } from './AdminContext';
 
 const API = `/api`;

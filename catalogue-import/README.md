@@ -1,33 +1,16 @@
-# B-Interiors product catalogue database
+# B Interior Designz product catalogue import
 
-`b-interiors-products.sqlite` is generated from `products.json`, which is extracted from
-`B_Interior_Product_Catalogue_With_Images.xlsx`.
+`products.json` and `src/app/data/catalogue.ts` are generated from
+`B_Interior_Product_Catalogue_With_Images.xlsx`. Gallery images narrower than 600px are skipped.
 
-The database contains:
-
-- `products`: all Product Master columns plus storefront fields.
-- `product_images`: ordered image metadata and the complete image files as BLOBs.
-- `product_tags`: normalized search tags.
-- `product_rooms`: normalized room assignments.
-- `catalogue_metadata`: source checksum, generation time, and record counts.
-- `product_catalogue`: a view that compares declared and stored image counts.
-
-Regenerate the database after changing `products.json`:
-
-```bash
-npm run catalogue:sqlite
-```
-
-Regenerate the JSON, website images, server catalogue, and SQLite database directly from
-the workbook:
+Regenerate the JSON, website images and catalogue from the workbook:
 
 ```bash
 node scripts/prepare-product-catalogue.mjs /path/to/B_Interior_Product_Catalogue_With_Images.xlsx
 ```
 
-Example query:
+Load the catalogue into the Cloudflare D1 database:
 
 ```bash
-sqlite3 -header -column catalogue-import/b-interiors-products.sqlite \
-  "SELECT internal_sku, website_product_name, estimated_selling_zar FROM products ORDER BY internal_sku;"
+node scripts/seed-cloudflare-catalogue.mjs
 ```

@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { motion, useInView } from 'motion/react';
-import {
-  ChevronDown, Star, CheckCircle2, MapPin, Play, ExternalLink
-} from 'lucide-react';
+import { ChevronDown, Star, CheckCircle2, MapPin, ExternalLink } from 'lucide-react';
 import { useRef } from 'react';
 
 const ease = [0.22, 1, 0.36, 1] as [number, number, number, number];

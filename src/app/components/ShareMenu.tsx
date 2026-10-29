@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Share2, Check, Link2, Mail, X } from 'lucide-react';
 import { copyToClipboard } from '../utils/clipboard';
 import { toast } from 'sonner';
-import { createPortal } from 'react-dom';
 
 const ease = [0.22, 1, 0.36, 1] as const;
 

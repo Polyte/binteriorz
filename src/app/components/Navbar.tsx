@@ -37,8 +37,11 @@ export const Navbar = ({ products, cartCount, wishlistCount, onOpenCart, onOpenW
   const location = useLocation();
   const menuTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  const isHomePage = location.pathname === '/';
-  const isTransparent = isHomePage && !isScrolled && !isOpen && !isMegaMenuOpen;
+  // Pages that open with a dark image use light header text; the rest use dark text.
+  const hasDarkHero = /^\/($|about$|services(\/[^/]+)?$|contact$)/.test(location.pathname);
+  // Transparent at the top of every page; frosted glass once the page scrolls or a menu opens.
+  const isAtTop = !isScrolled && !isOpen && !isMegaMenuOpen;
+  const isTransparent = isAtTop && hasDarkHero;
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
@@ -86,14 +89,14 @@ export const Navbar = ({ products, cartCount, wishlistCount, onOpenCart, onOpenW
   return (
     <nav 
       className={`fixed left-0 right-0 z-50 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-500 ${
-        isTransparent 
-          ? 'bg-transparent border-b border-white/25'
+        isAtTop
+          ? `bg-transparent border-b ${hasDarkHero ? 'border-white/25' : 'border-transparent'}`
           : 'bg-sky-50/25 dark:bg-slate-900/20 backdrop-blur-2xl backdrop-saturate-150 border-b border-white/35 dark:border-white/15 shadow-[0_12px_40px_-24px_rgba(12,30,45,.5)]'
       }`}
       style={{ top: bannerVisible ? 'var(--banner-height, 44px)' : '0px' }}
       onMouseLeave={handleMouseLeave}
     >
-      {!isTransparent && <div aria-hidden="true" className="nav-glass-sheen pointer-events-none absolute inset-0 z-0 overflow-hidden" />}
+      {!isAtTop && <div aria-hidden="true" className="nav-glass-sheen pointer-events-none absolute inset-0 z-0 overflow-hidden" />}
       <div className="relative z-10 max-w-[1480px] mx-auto px-6 sm:px-8 lg:px-12">
         <div className={`flex justify-between items-center transition-[height] duration-500 ${isScrolled ? 'h-[4.5rem]' : 'h-24'}`}>
           <div className="flex-shrink-0 flex items-center">

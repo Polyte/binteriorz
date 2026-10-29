@@ -27,6 +27,7 @@
     <body>
       <div id="root"></div>
     <script>
+      // Remove the service worker and caches left by earlier versions of the site.
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.getRegistrations().then((registrations) => {
           registrations.forEach((registration) => registration.unregister());
@@ -36,6 +37,6 @@
         caches.keys().then((keys) => Promise.all(keys.map((key) => caches.delete(key))));
       }
     </script>
-    <script type="module" src="/src/main.tsx?v=catalogue-4"></script>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

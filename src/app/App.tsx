@@ -9,7 +9,7 @@ import { Wishlist } from './components/Wishlist';
 import { QuickView } from './components/QuickView';
 import { BackToTop } from './components/BackToTop';
 import { cloudflareAuth } from '../../utils/cloudflare/client';
-import { AnimatePresence, motion } from 'motion/react';
+import { AnimatePresence } from 'motion/react';
 import { MobileBottomNav } from './components/MobileBottomNav';
 import { CraftsmanshipStory } from './components/CraftsmanshipStory';
 import { GlobalSearch } from './components/GlobalSearch';
@@ -236,15 +236,16 @@ const AppContent = () => {
     return () => { active = false; };
   }, []);
 
-  const addToCart = (product: any) => {
+  const addToCart = (product: any, quantity = 1) => {
+    const amount = Math.max(1, Math.floor(quantity) || 1);
     setCartItems(prev => {
       const exists = prev.find(item => item.id === product.id);
       if (exists) {
-        return prev.map(item => item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item);
+        return prev.map(item => item.id === product.id ? { ...item, quantity: item.quantity + amount } : item);
       }
-      return [...prev, { ...product, quantity: 1 }];
+      return [...prev, { ...product, quantity: amount }];
     });
-    toast.success(`${product.name} added to collection`);
+    toast.success(amount > 1 ? `${amount} × ${product.name} added to your cart` : `${product.name} added to your cart`);
     setIsCartOpen(true);
   };
 

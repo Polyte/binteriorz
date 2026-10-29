@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, Trash2, ShoppingBag, ArrowRight } from 'lucide-react';
-import { toast } from 'sonner';
 import { useNavigate } from 'react-router';
 
 interface CartItem {

@@ -1,14 +1,8 @@
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import {
-  X, Image, Film, Upload, Plus, Link2, Loader2, GripVertical, Star,
-  Trash2, Package, Mail, CheckCircle2, Unlink
-} from 'lucide-react';
+import { X, Image, Film, Upload, Plus, Link2, Loader2, GripVertical, Star, Trash2, Package, CheckCircle2, Unlink } from 'lucide-react';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import {
-  AreaChart, Area, XAxis, Tooltip, ResponsiveContainer
-} from 'recharts';
 import { toast } from 'sonner';
 import { useAdmin, ROOM_OPTIONS } from './AdminContext';
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { CheckCircle, ArrowRight, Upload, Store, ShieldCheck, Zap } from 'lucide-react';
+import { CheckCircle, ArrowRight, Store, ShieldCheck, Zap } from 'lucide-react';
 import { toast } from 'sonner';
 
 export const VendorApplication = () => {

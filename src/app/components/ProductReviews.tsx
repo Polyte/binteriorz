@@ -67,22 +67,22 @@ export const ProductReviews = ({ productId }: { productId: string }) => {
   };
 
   return (
-    <section className="mt-32 pt-24 border-t border-neutral-100">
-      <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16">
+    <section className="border-t border-neutral-200 py-16 md:py-20">
+      <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-10">
         <div>
-          <span className="text-[10px] uppercase tracking-[0.5em] text-neutral-400 font-bold block mb-4">Client Reflections</span>
-          <h2 className="text-4xl md:text-5xl font-serif text-neutral-900 tracking-tighter">Reviews & Impressions</h2>
+          <span className="text-[10px] uppercase tracking-[0.35em] text-[#9a7b37] font-bold block mb-3">Reviews</span>
+          <h2 className="text-3xl md:text-4xl font-serif text-neutral-900">What customers say</h2>
         </div>
         <button
           onClick={() => setShowForm(!showForm)}
-          className="self-start bg-neutral-900 text-white px-8 py-4 text-[10px] uppercase tracking-[0.3em] font-bold hover:bg-neutral-800 transition-colors"
+          className="self-start rounded-full border border-neutral-900 px-6 py-3 text-[10px] uppercase tracking-[0.25em] font-bold text-neutral-900 hover:bg-neutral-900 hover:text-white transition-colors"
         >
           {showForm ? 'Cancel' : 'Write a Review'}
         </button>
       </div>
 
-      {/* Summary Bar */}
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
+      {/* Summary, only once there are reviews */}
+      {reviews.length > 0 && <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
         <div className="md:col-span-4 flex flex-col items-center justify-center bg-white border border-neutral-100 p-10 rounded-2xl">
           <p className="text-6xl font-serif text-neutral-900 mb-2">{avgRating.toFixed(1)}</p>
           <StarRating rating={Math.round(avgRating)} />
@@ -105,7 +105,7 @@ export const ProductReviews = ({ productId }: { productId: string }) => {
             </div>
           ))}
         </div>
-      </div>
+      </div>}
 
       {/* Review Form */}
       <AnimatePresence>
@@ -165,9 +165,7 @@ export const ProductReviews = ({ productId }: { productId: string }) => {
           <div className="w-8 h-8 border-2 border-neutral-200 border-t-neutral-900 rounded-full animate-spin" />
         </div>
       ) : reviews.length === 0 ? (
-        <div className="py-20 text-center border-2 border-dashed border-neutral-100 rounded-2xl">
-          <p className="text-neutral-400 font-serif text-lg">No reviews yet. Be the first to share your impressions.</p>
-        </div>
+        <p className="text-neutral-500">No reviews yet. Bought this piece? Tell others what you think.</p>
       ) : (
         <div className="space-y-0 divide-y divide-neutral-100">
           {reviews.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()).map((review, i) => (
