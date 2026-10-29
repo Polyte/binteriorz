@@ -63,7 +63,7 @@ export function payFastFields(body: Record<string, unknown>, order: PayFastOrder
     cell_number: order.customerInfo.phone.replace(/[^0-9]/g, ''),
     m_payment_id: order.orderId,
     amount: order.total.toFixed(2),
-    item_name: `B-Interiors Order ${order.orderId}`,
+    item_name: `B Interior Designz Order ${order.orderId}`,
     item_description: itemDescription,
   };
   for (const key of Object.keys(fields)) if (!fields[key]) delete fields[key];

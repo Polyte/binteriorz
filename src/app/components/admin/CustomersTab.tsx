@@ -38,7 +38,7 @@ export const CustomersTab = ({ view = 'all' }: { view?: CustomerView }) => {
             ws['!cols'] = [{ wch: 32 }, { wch: 38 }, { wch: 14 }];
             const wb = XLSX.utils.book_new();
             XLSX.utils.book_append_sheet(wb, ws, 'Subscribers');
-            XLSX.writeFile(wb, `B-Interiors_Subscribers_${new Date().toISOString().slice(0, 10)}.xlsx`);
+            XLSX.writeFile(wb, `B-Interior-Designz_Subscribers_${new Date().toISOString().slice(0, 10)}.xlsx`);
             toast.success('Subscribers exported.');
           }}
           className="flex items-center gap-1.5 px-3 py-2 border border-neutral-200 bg-white rounded-md text-xs font-medium text-neutral-700 hover:bg-neutral-50 transition-colors"

@@ -28,14 +28,14 @@ export const Contact = () => {
           {/* Content & Info */}
           <div className="lg:col-span-5 space-y-24">
             <header>
-              <motion.h1 
+              <motion.h2 
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.1 }}
                 className="text-5xl md:text-6xl font-serif text-neutral-900 leading-tight tracking-tighter"
               >
                 {cta.title}
-              </motion.h1>
+              </motion.h2>
               <motion.p 
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}

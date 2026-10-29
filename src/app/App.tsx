@@ -16,7 +16,9 @@ import { GlobalSearch } from './components/GlobalSearch';
 import { CampaignBanner } from './components/CampaignBanner';
 import { WhatsAppWidget } from './components/WhatsAppWidget';
 import { PageMotion } from './components/PageMotion';
-import { CompanyContentProvider } from './content/CompanyContentContext';
+import { CompanyContentProvider, useCompanyContent } from './content/CompanyContentContext';
+import { socialLink } from './content/company';
+import { DEFAULT_OG_IMAGE, FALLBACK_METADATA, PAGE_METADATA, absoluteUrl, businessJsonLd, productImage, productJsonLd, productMetadata } from './seo';
 import { DEFAULT_HOMEPAGE_CONTENT, HomepageContent, normalizeHomepageContent } from './content/homepage';
 import { bundledProductCatalogue, normalizeProducts, resolveProductCatalogue } from './data/productCatalogue';
 
@@ -24,45 +26,53 @@ const API = `/api`;
 
 const RouteMetadata = ({ products }: { products: any[] }) => {
   const { pathname } = useLocation();
+  const { contact } = useCompanyContent();
   useEffect(() => {
+    if (document.documentElement.dataset.notFound === pathname) return; // the 404 view owns its metadata
     const productMatch = pathname.match(/^\/product\/([^/]+)/);
     const product = productMatch ? products.find((item) => item.id === decodeURIComponent(productMatch[1])) : null;
-    const pages: Record<string, { title: string; description: string; keywords: string; noIndex?: boolean }> = {
-      '/': { title: 'Luxury Furniture & Interior Design in Alberton | B-Interiors', description: 'Shop considered furniture, home décor and bespoke interior design from B-Interiors in Alberton, South Africa. Explore our collection and book a consultation.', keywords: 'interior design Alberton, furniture South Africa, luxury home décor, bespoke furniture, interior designers Johannesburg' },
-      '/shop': { title: 'Shop Furniture & Home Décor | B-Interiors', description: 'Discover furniture and home décor curated by B-Interiors. Shop considered pieces for living rooms, bedrooms and every space in your South African home.', keywords: 'shop furniture South Africa, home décor online, luxury furniture, living room furniture, bedroom décor' },
-      '/services': { title: 'Interior Design & Bespoke Furniture Services | B-Interiors', description: 'Plan your space with B-Interiors. Explore interior design, bespoke furniture and furnishing services from our Alberton studio.', keywords: 'interior design services Alberton, bespoke furniture, interior styling Johannesburg, design consultation' },
-      '/about': { title: 'Our Story | B-Interiors Alberton', description: 'Meet B-Interiors, an Alberton design studio creating considered furniture, interiors and objects with a focus on material and craftsmanship.', keywords: 'B-Interiors Alberton, interior design studio South Africa, furniture craftsmanship' },
-      '/contact': { title: 'Contact Our Alberton Interior Design Studio | B-Interiors', description: 'Visit or contact B-Interiors at 35 Radio Street, Alberton. Book a design consultation for furniture, décor or an interior project.', keywords: 'contact interior designer Alberton, B-Interiors address, interior design consultation Johannesburg' },
-      '/become-a-partner': { title: 'Become a B-Interiors Partner', description: 'Apply to partner with B-Interiors and collaborate with our interior design and furniture studio.', keywords: 'B-Interiors partners, furniture supplier partnership', noIndex: true },
-      '/checkout': { title: 'Checkout | B-Interiors', description: 'Complete your B-Interiors order securely.', keywords: '', noIndex: true },
-      '/thank-you': { title: 'Thank You | B-Interiors', description: 'Thank you for choosing B-Interiors.', keywords: '', noIndex: true },
-      '/login': { title: 'Sign In | B-Interiors', description: 'Sign in to your B-Interiors account.', keywords: '', noIndex: true },
-      '/account': { title: 'Your Account | B-Interiors', description: 'Manage your B-Interiors account and orders.', keywords: '', noIndex: true },
-      '/admin': { title: 'Store Administration | B-Interiors', description: 'B-Interiors store administration.', keywords: '', noIndex: true },
-    };
     const metadata = product
-      ? { title: `${product.name} | B-Interiors`, description: `${product.name}${product.description ? ` — ${String(product.description).replace(/<[^>]*>/g, '').slice(0, 135)}` : ' from B-Interiors. Shop considered furniture and home décor, delivered from our Alberton studio.'}`, keywords: `${product.name}, furniture South Africa, home décor, B-Interiors` }
-      : pages[pathname] ?? { title: 'B-Interiors | Furniture & Interior Design, Alberton', description: 'Discover furniture, home décor and interior design by B-Interiors in Alberton, South Africa.', keywords: 'B-Interiors, interior design Alberton, furniture South Africa', noIndex: pathname.startsWith('/p/') };
+      ? productMetadata(product)
+      : PAGE_METADATA[pathname] ?? { ...FALLBACK_METADATA, noIndex: pathname.startsWith('/p/') };
     const setMeta = (selector: string, attribute: string, value: string) => {
       let element = document.head.querySelector<HTMLMetaElement>(selector);
-      if (!element) { element = document.createElement('meta'); document.head.appendChild(element); }
+      if (!element) {
+        element = document.createElement('meta');
+        const [, key, name] = selector.match(/\[(name|property)="([^"]+)"\]/) || [];
+        if (key && name) element.setAttribute(key, name);
+        document.head.appendChild(element);
+      }
       element.setAttribute(attribute, value);
     };
+    const url = absoluteUrl(pathname);
+    const image = absoluteUrl(product ? productImage(product) : DEFAULT_OG_IMAGE);
     document.title = metadata.title;
     setMeta('meta[name="description"]', 'content', metadata.description);
     setMeta('meta[name="keywords"]', 'content', metadata.keywords);
     setMeta('meta[name="robots"]', 'content', metadata.noIndex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large');
     setMeta('meta[property="og:title"]', 'content', metadata.title);
     setMeta('meta[property="og:description"]', 'content', metadata.description);
-    setMeta('meta[property="og:url"]', 'content', window.location.href);
+    setMeta('meta[property="og:url"]', 'content', url);
     setMeta('meta[property="og:type"]', 'content', product ? 'product' : 'website');
-    setMeta('meta[property="og:image"]', 'content', new URL(product?.image_url || product?.image || '/hero-pillows.png', window.location.origin).href);
+    setMeta('meta[property="og:image"]', 'content', image);
     setMeta('meta[name="twitter:title"]', 'content', metadata.title);
     setMeta('meta[name="twitter:description"]', 'content', metadata.description);
+    setMeta('meta[name="twitter:image"]', 'content', image);
     let canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
     if (!canonical) { canonical = document.createElement('link'); canonical.rel = 'canonical'; document.head.appendChild(canonical); }
-    canonical.href = window.location.href.split(/[?#]/)[0];
-  }, [pathname, products]);
+    canonical.href = url;
+
+    // Structured data: the business (with the contact details published in the admin) plus the product, if any.
+    const sameAs = [
+      socialLink(contact.instagram, 'https://www.instagram.com/'),
+      socialLink(contact.tiktok, 'https://www.tiktok.com/@'),
+      socialLink(contact.facebook, 'https://www.facebook.com/'),
+    ].filter(Boolean);
+    const jsonLd = [businessJsonLd({ phone: contact.phone, whatsapp: contact.whatsapp, email: contact.email, sameAs }), ...(product ? productJsonLd(product) : [])];
+    let script = document.getElementById('seo-jsonld');
+    if (!script) { script = document.createElement('script'); script.id = 'seo-jsonld'; script.setAttribute('type', 'application/ld+json'); document.head.appendChild(script); }
+    script.textContent = JSON.stringify(jsonLd);
+  }, [pathname, products, contact]);
   return null;
 };
 

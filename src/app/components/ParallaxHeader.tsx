@@ -66,7 +66,7 @@ export const ParallaxHeader = ({ image, title, subtitle }: ParallaxHeaderProps) 
               transition={{ delay: 0.2, duration: 0.8, ease }}
               className="text-[10px] md:text-xs uppercase tracking-[0.5em] text-white/80 font-bold mb-6 block"
             >
-              {subtitle || "B-Interiors Studio"}
+              {subtitle || "B Interior Designz Studio"}
             </motion.span>
             <motion.h1
               initial={{ y: 30, opacity: 0 }}

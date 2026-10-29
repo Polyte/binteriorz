@@ -96,7 +96,7 @@ export const NewsletterPopup = () => {
       setSubscribed(true);
       toast.success(result.message === 'Already subscribed'
         ? 'Your subscription preferences are up to date.'
-        : 'Welcome to the B-Interiors edit.');
+        : 'Welcome to the B Interior Designz edit.');
       window.setTimeout(() => setOpen(false), 1800);
     } catch (error) {
       console.error('Newsletter subscription error:', error);
@@ -134,7 +134,7 @@ export const NewsletterPopup = () => {
             <div className="mb-5 flex items-center gap-3 pr-10">
               <span className="h-px w-8 bg-[#d7b96a]" />
               <span className="text-[9px] font-bold uppercase tracking-[0.45em] text-[#d7b96a]">
-                The B-Interiors Edit
+                The B Interior Designz Edit
               </span>
             </div>
 

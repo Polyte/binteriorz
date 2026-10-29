@@ -101,7 +101,7 @@ const exportProductsToExcel = (products: any[]) => {
   ws['!cols'] = [{ wch: 12 }, { wch: 16 }, { wch: 18 }, { wch: 16 }, { wch: 34 }, { wch: 70 }, { wch: 16 }, { wch: 24 }, { wch: 42 }, { wch: 15 }, { wch: 16 }, { wch: 14 }, { wch: 30 }, { wch: 70 }, { wch: 24 }, { wch: 45 }, { wch: 70 }, { wch: 12 }];
   const wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, ws, 'Product Archive');
-  XLSX.writeFile(wb, `B-Interiors_Products_${new Date().toISOString().slice(0, 10)}.xlsx`);
+  XLSX.writeFile(wb, `B-Interior-Designz_Products_${new Date().toISOString().slice(0, 10)}.xlsx`);
   toast.success('Product spreadsheet exported.');
 };
 
@@ -537,7 +537,7 @@ export const Admin = ({ products, onProductsChange }: AdminProps) => {
     ws['!cols'] = [{ wch: 14 }, { wch: 24 }, { wch: 28 }, { wch: 12 }, { wch: 6 }, { wch: 12 }, { wch: 12 }];
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Orders');
-    XLSX.writeFile(wb, `B-Interiors_Orders_${new Date().toISOString().slice(0, 10)}.xlsx`);
+    XLSX.writeFile(wb, `B-Interior-Designz_Orders_${new Date().toISOString().slice(0, 10)}.xlsx`);
     toast.success('Orders exported.');
   };
 
@@ -801,7 +801,7 @@ export const Admin = ({ products, onProductsChange }: AdminProps) => {
     ws['!cols'] = [12, 18, 20, 15, 30, 42, 20, 30, 35, 18, 20, 18, 28, 35, 24, 28, 45, 12].map(wch => ({ wch }));
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Import Template');
-    XLSX.writeFile(wb, 'B-Interiors_Import_Template.xlsx');
+    XLSX.writeFile(wb, 'B-Interior-Designz_Import_Template.xlsx');
     toast.success('Template downloaded');
   };
 
@@ -947,7 +947,7 @@ export const Admin = ({ products, onProductsChange }: AdminProps) => {
       <div className="fixed inset-0 z-[60] flex min-h-screen items-center justify-center bg-[#f0f0f1]">
         <div className="text-center">
           <div className="mx-auto mb-4 h-12 w-12 overflow-hidden rounded-lg border border-neutral-200 bg-white shadow-sm">
-            <img src={logo} alt="B-Interiors" className="h-full w-full object-contain" />
+            <img src={logo} alt="B Interior Designz" className="h-full w-full object-contain" />
           </div>
           <div className="mx-auto h-1 w-36 overflow-hidden rounded-full bg-neutral-200">
             <motion.div className="h-full w-1/2 bg-[#2271b1]" animate={{ x: ['-100%', '200%'] }} transition={{ duration: 1.1, repeat: Infinity, ease: 'easeInOut' }} />
@@ -1024,7 +1024,7 @@ export const Admin = ({ products, onProductsChange }: AdminProps) => {
           </div>
           {!sidebarCollapsed && (
             <div className="min-w-0">
-              <h1 className="text-xs font-bold tracking-[0.15em] uppercase truncate">B-Interiors</h1>
+              <h1 className="text-xs font-bold tracking-[0.15em] uppercase truncate">B Interior Designz</h1>
               <p className="text-[9px] text-neutral-500 tracking-wider uppercase">Commerce & Content</p>
             </div>
           )}
@@ -1072,7 +1072,7 @@ export const Admin = ({ products, onProductsChange }: AdminProps) => {
             <motion.aside initial={{ x: -280 }} animate={{ x: 0 }} exit={{ x: -280 }} transition={{ type: 'spring', damping: 30, stiffness: 300 }} className="lg:hidden fixed left-0 top-0 bottom-0 w-[260px] bg-[#1d2327] text-white z-50 flex flex-col">
               <div className="flex items-center gap-3 px-4 h-16 border-b border-white/5 flex-shrink-0">
                 <div className="w-9 h-9 bg-neutral-800 rounded-lg overflow-hidden flex items-center justify-center flex-shrink-0"><img src={logo} alt="" className="w-full h-full object-contain" /></div>
-                <div className="min-w-0 flex-1"><h1 className="text-xs font-bold tracking-[0.15em] uppercase">B-Interiors</h1><p className="text-[9px] text-neutral-500 tracking-wider uppercase">Commerce & Content</p></div>
+                <div className="min-w-0 flex-1"><h1 className="text-xs font-bold tracking-[0.15em] uppercase">B Interior Designz</h1><p className="text-[9px] text-neutral-500 tracking-wider uppercase">Commerce & Content</p></div>
                 <button onClick={() => setMobileSidebarOpen(false)} className="text-neutral-500 hover:text-white"><X className="w-5 h-5" /></button>
               </div>
               <nav className="flex-1 overflow-y-auto py-3 px-2 space-y-4">

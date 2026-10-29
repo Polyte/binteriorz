@@ -17,7 +17,7 @@ export const FeaturedSpotlight = ({
   detailImage,
   eyebrow = 'Featured Piece',
   title = 'Where Material Meets Mastery',
-  description = 'Each B-Interiors piece begins as a dialogue between raw material and refined vision. European oak, hand-selected marble, brushed brass — every element earns its place through merit, not convenience.',
+  description = 'Each B Interior Designz piece begins as a dialogue between raw material and refined vision. European oak, hand-selected marble, brushed brass — every element earns its place through merit, not convenience.',
 }: FeaturedSpotlightProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({

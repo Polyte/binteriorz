@@ -16,7 +16,7 @@ export const NewsletterParallax = ({
   image,
   imageAlt = 'Newsletter background',
   eyebrow = 'The Inner Circle',
-  title = 'Stay Inspired with B-Interiors',
+  title = 'Stay Inspired with B Interior Designz',
   description = 'Be the first to receive exclusive previews of our new collections, artisan stories, and bespoke interior inspiration.',
 }: NewsletterParallaxProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -59,7 +59,7 @@ export const NewsletterParallax = ({
       if (data.message === 'Already subscribed') {
         toast.info('You are already part of the inner circle.');
       } else {
-        toast.success('Welcome to the B-Interiors circle.');
+        toast.success('Welcome to the B Interior Designz circle.');
       }
       setSubscribed(true);
       setEmail('');

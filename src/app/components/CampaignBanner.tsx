@@ -180,7 +180,7 @@ export const CampaignBanner = ({ onVisibilityChange }: CampaignBannerProps) => {
     } else if (month === 12 && day <= 26) {
       setActiveCampaign({
         id: 'christmas',
-        title: 'A B-Interiors Christmas',
+        title: 'A B Interior Designz Christmas',
         subtitle: 'Gift elegance this year. Free delivery in Alberton on all orders.',
         color: 'bg-emerald-800',
         gradientFrom: 'from-emerald-800',

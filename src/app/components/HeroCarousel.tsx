@@ -201,7 +201,7 @@ export const HeroCarousel = ({ slides = defaultSlides }: { slides?: HeroSlide[] 
       ref={sectionRef}
       className="relative h-[min(900px,100svh)] min-h-[700px] w-full overflow-hidden bg-neutral-950 outline-none [perspective:1800px] focus-visible:ring-1 focus-visible:ring-inset focus-visible:ring-amber-300/70"
       aria-roledescription="carousel"
-      aria-label="Featured B-Interiors collections"
+      aria-label="Featured B Interior Designz collections"
       tabIndex={0}
       onKeyDown={(event) => {
         if (event.key === 'ArrowLeft') prev();
@@ -317,7 +317,7 @@ export const HeroCarousel = ({ slides = defaultSlides }: { slides?: HeroSlide[] 
 
               {/* Cover headline */}
               <div className="relative">
-                <h1
+                <h2
                   className="relative z-[1] mb-8 h-[7rem] text-6xl leading-[0.9] tracking-tighter [perspective:900px] md:h-[11rem] md:text-8xl lg:h-[14.5rem] lg:text-9xl"
                   style={{ fontFamily: 'var(--font-playfair)' }}
                 >
@@ -342,7 +342,7 @@ export const HeroCarousel = ({ slides = defaultSlides }: { slides?: HeroSlide[] 
                       </motion.span>
                     </span>
                   ))}
-                </h1>
+                </h2>
               </div>
 
               {/* Subtitle */}

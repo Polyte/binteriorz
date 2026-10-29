@@ -5,6 +5,7 @@ import { Link, useLocation } from 'react-router';
 import { useTheme } from 'next-themes';
 import { MegaMenu } from './MegaMenu';
 import { prefetch } from '../utils/prefetch';
+import { useCompanyContent } from '../content/CompanyContentContext';
 const logo = "/logo.png";
 
 const navLinks = [
@@ -27,6 +28,7 @@ interface NavbarProps {
 }
 
 export const Navbar = ({ products, cartCount, wishlistCount, onOpenCart, onOpenWishlist, onOpenSearch, isAdmin, bannerVisible }: NavbarProps) => {
+  const { contact } = useCompanyContent();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
@@ -457,7 +459,7 @@ export const Navbar = ({ products, cartCount, wishlistCount, onOpenCart, onOpenW
                   className="pt-10 border-t border-neutral-100 dark:border-neutral-800 mt-8 space-y-3"
                 >
                   <p className="text-[9px] uppercase tracking-[0.4em] text-neutral-400 font-bold">Studio Enquiries</p>
-                  <p className="text-sm font-serif italic text-neutral-500 dark:text-neutral-400">studio@b-interiors.com</p>
+                  {contact.email && <a href={`mailto:${contact.email.trim()}`} className="block text-sm font-serif italic text-neutral-500 hover:text-neutral-900 dark:text-neutral-400">{contact.email}</a>}
                   <div className="flex items-center gap-2 pt-2">
                     <Sparkles className="w-3 h-3 text-neutral-300" />
                     <span className="text-[8px] uppercase tracking-widest text-neutral-300">Alberton, Gauteng</span>

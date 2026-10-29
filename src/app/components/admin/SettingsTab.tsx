@@ -218,7 +218,7 @@ export const SettingsTab = () => {
                 <UserPlus className="w-3.5 h-3.5" /> Add
               </button>
             </div>
-            <p className="text-[9px] text-neutral-400 mt-2">The user must have a B-Interiors account first. Enter their registered email.</p>
+            <p className="text-[9px] text-neutral-400 mt-2">The user must have a B Interior Designz account first. Enter their registered email.</p>
           </div>
 
           {/* Team List */}

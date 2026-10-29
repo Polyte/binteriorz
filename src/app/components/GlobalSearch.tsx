@@ -12,7 +12,7 @@ interface GlobalSearchProps {
 const STATIC_PAGES = [
   { title: 'Shop Collection', path: '/shop', type: 'page' },
   { title: 'Services & Design Consultation', path: '/services', type: 'page' },
-  { title: 'About B-Interiors', path: '/about', type: 'page' },
+  { title: 'About B Interior Designz', path: '/about', type: 'page' },
   { title: 'Contact Us', path: '/contact', type: 'page' },
   { title: 'Become a Partner', path: '/become-a-partner', type: 'page' },
   { title: 'My Account', path: '/account', type: 'page' },
@@ -156,7 +156,7 @@ export const GlobalSearch = ({ isOpen, onClose, products }: GlobalSearchProps) =
                     <div className="w-12 h-12 bg-neutral-50 rounded-full flex items-center justify-center mx-auto mb-3">
                       <Search className="w-5 h-5 text-neutral-300" />
                     </div>
-                    <p className="text-sm text-neutral-400">Search the B-Interiors catalogue</p>
+                    <p className="text-sm text-neutral-400">Search the B Interior Designz catalogue</p>
                     <p className="text-[10px] text-neutral-300 mt-2 uppercase tracking-widest">Type to begin</p>
                   </div>
                 ) : results.length === 0 ? (

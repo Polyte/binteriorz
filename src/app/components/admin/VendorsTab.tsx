@@ -42,7 +42,7 @@ export const VendorsTab = () => {
             const wb = XLSX.utils.book_new();
             const ws = XLSX.utils.json_to_sheet(vendors.map((v: any) => ({ 'Business Name': v.businessName, Email: v.email, Category: v.category, Location: v.location, Status: v.status, Website: v.website, Applied: v.appliedAt, 'Commission %': v.commissionRate || '', Featured: v.featured ? 'Yes' : 'No', 'Admin Notes': v.adminNotes || '' })));
             XLSX.utils.book_append_sheet(wb, ws, 'Vendors');
-            XLSX.writeFile(wb, `B-Interiors_Vendors_${new Date().toISOString().slice(0, 10)}.xlsx`);
+            XLSX.writeFile(wb, `B-Interior-Designz_Vendors_${new Date().toISOString().slice(0, 10)}.xlsx`);
             toast.success('Vendors exported.');
           }} className="flex items-center gap-1.5 px-3 py-2 border border-neutral-200 bg-white rounded-md text-xs font-medium text-neutral-700 hover:bg-neutral-50 transition-colors">
             <Download className="w-3.5 h-3.5" /> Export

@@ -6,4 +6,4 @@ Disallow: /checkout
 Disallow: /login
 Disallow: /thank-you
 
-Sitemap: https://b-interiors.com/sitemap.xml
+Sitemap: https://b-interiorz.co.za/sitemap.xml

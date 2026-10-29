@@ -111,7 +111,7 @@ const handle: PagesFunction<AppEnv> = async ({ request, env }) => {
       const inquiry = { ...body, id: crypto.randomUUID(), status: 'new', createdAt: new Date().toISOString() };
       await mutateList(env, 'inquiries', list => [...list, inquiry]);
       await addNotification(env, 'inquiry', 'New Consultation Request', `New inquiry from ${String(body.name || body.email || 'a visitor')}`, 'inquiries', { id: inquiry.id });
-      if (env.STORE_NOTIFICATION_EMAIL) await sendEmail(env, env.STORE_NOTIFICATION_EMAIL, 'New B-Interiors consultation request', `<p>New enquiry from ${escapeHtml(body.name || 'a visitor')}.</p>`);
+      if (env.STORE_NOTIFICATION_EMAIL) await sendEmail(env, env.STORE_NOTIFICATION_EMAIL, 'New B Interior Designz consultation request', `<p>New enquiry from ${escapeHtml(body.name || 'a visitor')}.</p>`);
       return json({ success: true, id: inquiry.id }, 201);
     }
     if (method === 'POST' && root === 'newsletter') {

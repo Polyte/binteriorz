@@ -12,7 +12,7 @@ export const Hero = ({ bgImage }: HeroProps) => {
       <div className="absolute inset-0 z-0">
         <img
           src={bgImage}
-          alt="B-Interiors Luxury Furniture"
+          alt="B Interior Designz Luxury Furniture"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/30" />

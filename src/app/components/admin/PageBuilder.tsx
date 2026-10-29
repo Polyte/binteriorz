@@ -749,7 +749,7 @@ const STARTER_TEMPLATES = [
       { type: 'hero', data: { heading: 'Our Story', subheading: 'Founded on a passion for exceptional design', image: '', ctaText: '', ctaLink: '', overlay: 0.5, height: 'md', alignment: 'center' }, settings: { paddingY: 'none' } },
       { type: 'image-text', data: { image: '', heading: 'A Legacy of Design Excellence', text: 'Since our founding, we have been dedicated to bringing the finest interior pieces to discerning clients who appreciate quality craftsmanship and timeless design.', imagePosition: 'left', ctaText: 'Our Process', ctaLink: '#process' }, settings: { paddingY: 'lg' } },
       { type: 'stats', data: { stats: [{ value: '500+', label: 'Projects Completed' }, { value: '99%', label: 'Client Satisfaction' }, { value: '15+', label: 'Years Experience' }, { value: '50+', label: 'Artisan Partners' }], style: 'minimal' }, settings: { paddingY: 'lg', bgColor: '#fafafa' } },
-      { type: 'testimonial', data: { quote: '"Working with B-Interiors transformed our home beyond what we imagined. Their attention to detail and design sensibility is unmatched."', author: 'Sarah Johnson', role: 'Homeowner, Sandton', avatar: '', rating: 5 }, settings: { paddingY: 'lg' } },
+      { type: 'testimonial', data: { quote: '"Working with B Interior Designz transformed our home beyond what we imagined. Their attention to detail and design sensibility is unmatched."', author: 'Sarah Johnson', role: 'Homeowner, Sandton', avatar: '', rating: 5 }, settings: { paddingY: 'lg' } },
     ],
   },
   {

@@ -3,6 +3,7 @@ import { useParams, useNavigate, useLocation } from 'react-router';
 import { motion } from 'motion/react';
 import { BlockRenderer } from '../components/BlockRenderer';
 import { Loader2 } from 'lucide-react';
+import { NOT_FOUND_METADATA } from '../seo';
 
 const API = `/api`;
 
@@ -13,6 +14,16 @@ export const DynamicPage = () => {
   const [page, setPage] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
+
+  // The host serves the app for every address, so mark missing pages as noindex (a "soft 404" otherwise).
+  useEffect(() => {
+    if (!notFound) return;
+    document.documentElement.dataset.notFound = location.pathname;
+    document.title = NOT_FOUND_METADATA.title;
+    document.head.querySelector('meta[name="robots"]')?.setAttribute('content', 'noindex, nofollow');
+    document.head.querySelector('link[rel="canonical"]')?.remove();
+    return () => { delete document.documentElement.dataset.notFound; };
+  }, [notFound, location.pathname]);
 
   // Derive slug from either /p/:slug param or catch-all pathname
   const pageSlug = slug || location.pathname.replace(/^\/+/, '').replace(/\/+$/, '');

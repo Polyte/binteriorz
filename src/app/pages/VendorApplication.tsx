@@ -51,7 +51,7 @@ export const VendorApplication = () => {
             <div>
               <span className="text-xs uppercase tracking-[0.5em] text-neutral-400 mb-6 block font-bold">Partnerships</span>
               <h1 className="text-5xl md:text-7xl font-serif text-neutral-900 leading-tight mb-8">
-                Join the <br />B-Interiors Guild
+                Join the <br />B Interior Designz Guild
               </h1>
               <p className="text-xl text-neutral-600 max-w-lg leading-relaxed">
                 We are looking for elite artisans, curators, and brands who share our commitment to quiet luxury and uncompromising quality.

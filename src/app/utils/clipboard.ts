@@ -6,7 +6,7 @@ export const copyToClipboard = async (text: string, title?: string): Promise<boo
   try {
     if (navigator.share && /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
       await navigator.share({
-        title: title || 'B-Interiors | Luxury Furniture',
+        title: title || 'B Interior Designz | Luxury Furniture',
         url: text
       });
       return true;

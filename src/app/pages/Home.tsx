@@ -41,6 +41,7 @@ export const Home = ({ products, onAddToCart, onToggleWishlist, onQuickView, wis
       className="relative"
       style={{ position: 'relative' }}
     >
+      <h1 className="sr-only">B Interior Designz: interior design, bespoke furniture and décor in Alberton, Johannesburg South</h1>
       {/* ═══ 1. HERO ═══ */}
       {home.sections.hero.enabled && (
         <HeroCarousel slides={home.sections.hero.slides.filter((slide) => slide.id !== 'material-stories').map((slide) => ({

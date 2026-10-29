@@ -235,7 +235,7 @@ export const Login = () => {
 
         <div className="mt-12 text-center">
           <p className="text-[10px] text-neutral-400 leading-relaxed uppercase tracking-widest">
-            B-Interiors Alberton Studio<br />
+            B Interior Designz Alberton Studio<br />
             Secure Entry Protocol v4.0.2
           </p>
         </div>

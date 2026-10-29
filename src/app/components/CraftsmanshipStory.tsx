@@ -104,7 +104,7 @@ export const CraftsmanshipStory = ({ isOpen, onClose }: CraftsmanshipStoryProps)
                           Where heritage meets <br /> contemporary precision.
                         </h3>
                         <p className="text-neutral-500 font-light leading-relaxed">
-                          At B-Interiors, every piece is more than furniture; it's a testament to the tactile 
+                          At B Interior Designz, every piece is more than furniture; it's a testament to the tactile 
                           beauty of natural materials. Our Alberton workshop brings together master 
                           artisans and advanced CNC precision.
                         </p>

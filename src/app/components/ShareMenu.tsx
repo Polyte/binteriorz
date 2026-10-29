@@ -80,7 +80,7 @@ const platforms: SharePlatform[] = [
     icon: <Mail className="w-4 h-4" />,
     color: 'text-neutral-600',
     hoverBg: 'hover:bg-neutral-100 dark:hover:bg-white/10',
-    getUrl: (url, text) => `mailto:?subject=${encodeURIComponent(`B-Interiors: ${text}`)}&body=${encodeURIComponent(`${text}\n\nView it here: ${url}`)}`,
+    getUrl: (url, text) => `mailto:?subject=${encodeURIComponent(`B Interior Designz: ${text}`)}&body=${encodeURIComponent(`${text}\n\nView it here: ${url}`)}`,
   },
 ];
 
@@ -113,7 +113,7 @@ export const ShareMenu = ({
   const triggerRef = useRef<HTMLButtonElement>(null);
 
   const url = shareUrl || (productId ? `${window.location.origin}/product/${productId}` : window.location.href);
-  const shareText = `Discover ${productName} — handcrafted luxury by B-Interiors`;
+  const shareText = `Discover ${productName} — handcrafted luxury by B Interior Designz`;
 
   const isDark = variant === 'dark';
 
@@ -157,7 +157,7 @@ export const ShareMenu = ({
     if (navigator.share) {
       try {
         await navigator.share({
-          title: `B-Interiors: ${productName}`,
+          title: `B Interior Designz: ${productName}`,
           text: shareText,
           url,
         });

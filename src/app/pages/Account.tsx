@@ -61,7 +61,7 @@ export const Account = () => {
         // Now sign in
         const { error } = await cloudflareAuth.signInWithPassword({ email: form.email, password: form.password });
         if (error) throw new Error(error.message);
-        toast.success('Welcome to B-Interiors. Your account is ready.');
+        toast.success('Welcome to B Interior Designz. Your account is ready.');
       } else {
         const { error } = await cloudflareAuth.signInWithPassword({ email: form.email, password: form.password });
         if (error) throw new Error(error.message);
@@ -96,7 +96,7 @@ export const Account = () => {
           <div className="text-center mb-12">
             <span className="text-[10px] uppercase tracking-[0.5em] text-neutral-400 font-bold block mb-4">Client Portal</span>
             <h1 className="text-4xl md:text-5xl font-serif text-neutral-900 tracking-tight mb-4">
-              {authMode === 'login' ? 'Welcome Back' : 'Join B-Interiors'}
+              {authMode === 'login' ? 'Welcome Back' : 'Join B Interior Designz'}
             </h1>
             <p className="text-sm text-neutral-400 font-light">
               {authMode === 'login' ? 'Access your order history and account.' : 'Create an account to track orders and manage your profile.'}
