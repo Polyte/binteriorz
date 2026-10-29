@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, Send } from 'lucide-react';
+import { useCompanyContent } from '../content/CompanyContentContext';
+import { COMPANY_NAME, whatsappLink } from '../content/company';
 
-const WHATSAPP_NUMBER = '27600000000'; // Replace with actual number
-const DEFAULT_MESSAGE = 'Hi B-Interiors! I have a question about your products.';
+const DEFAULT_MESSAGE = `Hi ${COMPANY_NAME}! I'd like to chat about my space.`;
 
 const WhatsAppIcon = ({ className }: { className?: string }) => (
   <svg viewBox="0 0 32 32" fill="currentColor" className={className}>
@@ -12,6 +13,7 @@ const WhatsAppIcon = ({ className }: { className?: string }) => (
 );
 
 export const WhatsAppWidget = () => {
+  const { contact } = useCompanyContent();
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState(DEFAULT_MESSAGE);
   const [showPulse, setShowPulse] = useState(true);
@@ -36,10 +38,12 @@ export const WhatsAppWidget = () => {
   }, []);
 
   const handleSend = () => {
-    const encoded = encodeURIComponent(message.trim() || DEFAULT_MESSAGE);
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encoded}`, '_blank', 'noopener');
+    window.open(whatsappLink(contact.whatsapp, message.trim() || DEFAULT_MESSAGE), '_blank', 'noopener');
     setIsOpen(false);
   };
+
+  // Hidden until a WhatsApp number is set in Admin → Company Profile.
+  if (!whatsappLink(contact.whatsapp)) return null;
 
   return (
     <div className="fixed bottom-20 md:bottom-6 left-4 md:left-6 right-auto z-50 flex flex-col items-start gap-3">
@@ -59,7 +63,7 @@ export const WhatsAppWidget = () => {
                 <WhatsAppIcon className="w-5 h-5 text-white" />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-white font-semibold text-sm">B-Interiors</p>
+                <p className="text-white font-semibold text-sm">{COMPANY_NAME}</p>
                 <p className="text-white/70 text-[11px]">Typically replies within minutes</p>
               </div>
               <button
@@ -74,7 +78,7 @@ export const WhatsAppWidget = () => {
             <div className="px-5 py-5 bg-[#e5ddd5] bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImEiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+PHBhdGggZD0iTTAgMGg0MHY0MEgweiIgZmlsbD0ibm9uZSIvPjxjaXJjbGUgY3g9IjIwIiBjeT0iMjAiIHI9IjEiIGZpbGw9InJnYmEoMCwwLDAsMC4wMykiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjYSkiLz48L3N2Zz4=')] min-h-[120px]">
               <div className="bg-white rounded-lg rounded-tl-none px-4 py-3 shadow-sm max-w-[85%] relative">
                 <p className="text-[13px] text-neutral-800 leading-relaxed">
-                  Hello! <span role="img" aria-label="wave">👋</span> Welcome to <strong>B-Interiors</strong>. How can we help you today?
+                  Hello! <span role="img" aria-label="wave">👋</span> Welcome to <strong>{COMPANY_NAME}</strong>. How can we help you today?
                 </p>
                 <p className="text-[10px] text-neutral-400 text-right mt-1.5">Now</p>
               </div>

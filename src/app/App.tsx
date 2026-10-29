@@ -16,6 +16,7 @@ import { GlobalSearch } from './components/GlobalSearch';
 import { CampaignBanner } from './components/CampaignBanner';
 import { WhatsAppWidget } from './components/WhatsAppWidget';
 import { PageMotion } from './components/PageMotion';
+import { CompanyContentProvider } from './content/CompanyContentContext';
 import { DEFAULT_HOMEPAGE_CONTENT, HomepageContent, normalizeHomepageContent } from './content/homepage';
 import { bundledProductCatalogue, normalizeProducts, resolveProductCatalogue } from './data/productCatalogue';
 
@@ -331,7 +332,9 @@ const AppContent = () => {
 const App = () => (
   <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
     <Router>
-      <AppContent />
+      <CompanyContentProvider>
+        <AppContent />
+      </CompanyContentProvider>
     </Router>
   </ThemeProvider>
 );

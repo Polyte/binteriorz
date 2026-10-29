@@ -13,6 +13,8 @@ export interface AdminStore {
   siteSettings: any;
   homepageContent: any;
   homepagePublishedAt: string | null;
+  companyContent: any;
+  companyPublishedAt: string | null;
   activityLog: any[];
   teamMembers: any[];
 
@@ -95,6 +97,7 @@ export interface AdminStore {
   handleSaveVendorProfile: (e: React.FormEvent<HTMLFormElement>) => void;
   handleSaveSettings: (e: React.FormEvent<HTMLFormElement>) => void;
   handleSaveHomepage: (content: any, publish?: boolean) => Promise<boolean>;
+  handleSaveCompany: (content: any, publish?: boolean) => Promise<boolean>;
   handleQuickLinkProduct: (productId: string, vendorId: string) => void;
   handleBulkLinkProducts: (productIds: string[], vendorId: string) => void;
   handleUnlinkProduct: (productId: string) => void;

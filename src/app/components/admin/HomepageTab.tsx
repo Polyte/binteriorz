@@ -1,10 +1,11 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
 import {
-  Check, ChevronRight, Eye, EyeOff, FileEdit, Globe2, Image as ImageIcon,
-  Images, LayoutTemplate, Loader2, MonitorUp, Save, X,
+  Check, ChevronRight, Eye, EyeOff, FileEdit, Globe2,
+  LayoutTemplate, Loader2, MonitorUp, Save,
 } from 'lucide-react';
 import { useAdmin } from './AdminContext';
+import { ImageField, MediaPickerModal, inputClass, labelClass } from './MediaPicker';
 import {
   HomepageContent,
   HomepageImage,
@@ -27,51 +28,6 @@ const sectionMeta: Array<{ key: SectionKey; label: string; description: string }
   { key: 'newsletter', label: 'Newsletter', description: 'Signup call-to-action and background' },
 ];
 
-const inputClass = 'w-full rounded-md border border-neutral-200 bg-white px-3 py-2 text-sm text-neutral-800 outline-none transition-colors focus:border-neutral-900';
-const labelClass = 'mb-1.5 block text-[10px] font-bold uppercase tracking-widest text-neutral-500';
-
-const ImageField = ({
-  label,
-  value,
-  onChange,
-  onBrowse,
-}: {
-  label: string;
-  value: HomepageImage;
-  onChange: (value: HomepageImage) => void;
-  onBrowse: () => void;
-}) => (
-  <div className="space-y-2">
-    <label className={labelClass}>{label}</label>
-    <div className="overflow-hidden rounded-lg border border-neutral-200 bg-neutral-50">
-      <div className="aspect-[16/9] bg-neutral-100">
-        {value?.url ? (
-          <img src={value.url} alt={value.alt || label} className="h-full w-full object-cover" />
-        ) : (
-          <div className="flex h-full items-center justify-center text-neutral-300"><ImageIcon className="h-8 w-8" /></div>
-        )}
-      </div>
-      <div className="space-y-2 p-3">
-        <input
-          value={value?.url || ''}
-          onChange={(event) => onChange({ url: event.target.value, alt: value?.alt || '', storagePath: undefined })}
-          placeholder="Image URL"
-          className={inputClass}
-        />
-        <input
-          value={value?.alt || ''}
-          onChange={(event) => onChange({ ...value, alt: event.target.value })}
-          placeholder="Alt text"
-          className={inputClass}
-        />
-        <button type="button" onClick={onBrowse} className="flex w-full items-center justify-center gap-2 rounded-md border border-neutral-200 bg-white px-3 py-2 text-xs font-medium text-neutral-700 hover:bg-neutral-100">
-          <Images className="h-3.5 w-3.5" /> Choose from Media Library
-        </button>
-      </div>
-    </div>
-  </div>
-);
-
 export const HomepageTab = () => {
   const { homepageContent, homepagePublishedAt, media, handleSaveHomepage } = useAdmin();
   const [content, setContent] = useState<HomepageContent>(() => normalizeHomepageContent(homepageContent));
@@ -79,7 +35,6 @@ export const HomepageTab = () => {
   const [saving, setSaving] = useState<'draft' | 'publish' | null>(null);
   const [dirty, setDirty] = useState(false);
   const [mediaPicker, setMediaPicker] = useState<((image: HomepageImage) => void) | null>(null);
-  const [mediaSearch, setMediaSearch] = useState('');
 
   useEffect(() => {
     setContent(normalizeHomepageContent(homepageContent));
@@ -87,7 +42,6 @@ export const HomepageTab = () => {
   }, [homepageContent]);
 
   const section = content.sections[activeSection] as any;
-  const imageMedia = useMemo(() => media.filter((item: any) => item.fileType?.startsWith('image/') && (!mediaSearch || item.fileName?.toLowerCase().includes(mediaSearch.toLowerCase()))), [media, mediaSearch]);
 
   const replaceSection = (key: SectionKey, next: any) => {
     setContent((current) => ({ ...current, sections: { ...current.sections, [key]: next } }));
@@ -118,7 +72,7 @@ export const HomepageTab = () => {
           aria-label={section.enabled ? 'Hide section' : 'Show section'}
           className={`relative h-6 w-11 rounded-full transition-colors ${section.enabled ? 'bg-emerald-500' : 'bg-neutral-300'}`}
         >
-          <span className={`absolute top-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform ${section.enabled ? 'translate-x-[22px]' : 'translate-x-0.5'}`} />
+          <span className={`absolute left-0.5 top-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform ${section.enabled ? 'translate-x-5' : 'translate-x-0'}`} />
         </button>
       </div>
       <div className="grid gap-4 md:grid-cols-2">
@@ -152,7 +106,7 @@ export const HomepageTab = () => {
                     {slide.enabled ? <Eye className="h-3 w-3" /> : <EyeOff className="h-3 w-3" />}{slide.enabled ? 'Visible' : 'Hidden'}
                   </button>
                 </div>
-                <div className="grid gap-4 lg:grid-cols-[1fr,1.25fr]">
+                <div className="grid gap-4 lg:grid-cols-[1fr_1.25fr]">
                   <ImageField label="Fallback / featured image" value={slide.image} onBrowse={() => browseFor((image) => {
                     const slides = [...content.sections.hero.slides]; slides[index] = { ...slide, image }; replaceSection('hero', { ...content.sections.hero, slides });
                   })} onChange={(image) => { const slides = [...content.sections.hero.slides]; slides[index] = { ...slide, image }; replaceSection('hero', { ...content.sections.hero, slides }); }} />
@@ -210,7 +164,7 @@ export const HomepageTab = () => {
         <span>{homepagePublishedAt ? `Published ${new Date(homepagePublishedAt).toLocaleString()}` : 'Using the built-in homepage defaults'}</span>
       </div>
 
-      <div className="grid gap-4 lg:grid-cols-[300px,minmax(0,1fr)]">
+      <div className="grid gap-4 lg:grid-cols-[300px_minmax(0,1fr)]">
         <aside className="overflow-hidden rounded-lg border border-neutral-200 bg-white lg:self-start">
           <div className="border-b border-neutral-100 px-4 py-3"><p className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.15em] text-neutral-600"><LayoutTemplate className="h-3.5 w-3.5" /> Homepage sections</p></div>
           <div className="divide-y divide-neutral-100">{sectionMeta.map((item) => {
@@ -225,14 +179,7 @@ export const HomepageTab = () => {
         </section>
       </div>
 
-      {mediaPicker && (
-        <div className="fixed inset-0 z-[90] flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm" onMouseDown={(event) => { if (event.target === event.currentTarget) setMediaPicker(null); }}>
-          <div className="flex max-h-[85vh] w-full max-w-5xl flex-col overflow-hidden rounded-xl bg-white shadow-2xl">
-            <div className="flex items-center gap-3 border-b border-neutral-200 p-4"><div className="flex-1"><h3 className="text-lg font-semibold text-neutral-900">Choose a featured image</h3><p className="text-xs text-neutral-400">Select an image already uploaded to the Media Library.</p></div><input value={mediaSearch} onChange={(e) => setMediaSearch(e.target.value)} placeholder="Search media..." className={`${inputClass} max-w-xs`} /><button onClick={() => setMediaPicker(null)} className="rounded-md p-2 text-neutral-400 hover:bg-neutral-100 hover:text-neutral-900"><X className="h-5 w-5" /></button></div>
-            <div className="overflow-y-auto p-4">{imageMedia.length ? <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">{imageMedia.map((item: any) => <button key={item.id} type="button" onClick={() => { mediaPicker({ url: item.url, storagePath: item.storagePath, alt: item.fileName }); setMediaPicker(null); setMediaSearch(''); }} className="group overflow-hidden rounded-lg border border-neutral-200 bg-neutral-50 text-left hover:border-neutral-900"><div className="aspect-square overflow-hidden"><img src={item.url} alt={item.fileName} className="h-full w-full object-cover transition-transform group-hover:scale-105" /></div><p className="truncate p-2 text-[10px] font-medium text-neutral-600">{item.fileName}</p></button>)}</div> : <div className="py-20 text-center"><ImageIcon className="mx-auto mb-3 h-10 w-10 text-neutral-200" /><p className="text-sm text-neutral-400">No matching images in the Media Library.</p></div>}</div>
-          </div>
-        </div>
-      )}
+      {mediaPicker && <MediaPickerModal media={media} onSelect={mediaPicker} onClose={() => setMediaPicker(null)} />}
     </motion.div>
   );
 };

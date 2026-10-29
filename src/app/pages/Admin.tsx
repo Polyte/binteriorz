@@ -4,7 +4,7 @@ import {
   LayoutDashboard, Package, ShoppingCart, Users, FileText, Image, Star,
   Settings, Plus, Search, Bell, ChevronRight, UserPlus, AlertTriangle,
   PanelLeftClose, PanelLeft, Globe, X, Layers, Activity, MessageSquare,
-  CheckCircle2, Shield, PanelsTopLeft, Mail, ExternalLink
+  CheckCircle2, Shield, PanelsTopLeft, Mail, ExternalLink, Building2
 } from 'lucide-react';
 import * as XLSX from 'xlsx';
 import { toast } from 'sonner';
@@ -26,6 +26,8 @@ import { SettingsTab } from '../components/admin/SettingsTab';
 import { AdminModals } from '../components/admin/AdminModals';
 import { PageBuilder } from '../components/admin/PageBuilder';
 import { HomepageTab } from '../components/admin/HomepageTab';
+import { CompanyTab } from '../components/admin/CompanyTab';
+import { normalizeCompanyContent } from '../content/company';
 import { normalizeHomepageContent } from '../content/homepage';
 import { resolveProductCatalogue } from '../data/productCatalogue';
 
@@ -52,6 +54,7 @@ const sidebarSections = [
   ]},
   { title: 'Content', items: [
     { id: 'homepage', label: 'Homepage', icon: PanelsTopLeft },
+    { id: 'company', label: 'Company Profile', icon: Building2 },
     { id: 'pages', label: 'Pages', icon: FileText },
     { id: 'media', label: 'Media Library', icon: Image },
   ]},
@@ -126,6 +129,8 @@ export const Admin = ({ products, onProductsChange }: AdminProps) => {
   const [siteSettings, setSiteSettings] = useState<any>(null);
   const [homepageContent, setHomepageContent] = useState<any>(() => normalizeHomepageContent());
   const [homepagePublishedAt, setHomepagePublishedAt] = useState<string | null>(null);
+  const [companyContent, setCompanyContent] = useState<any>(() => normalizeCompanyContent());
+  const [companyPublishedAt, setCompanyPublishedAt] = useState<string | null>(null);
   const [activityLog, setActivityLog] = useState<any[]>([]);
   const [activityRoleFilter, setActivityRoleFilter] = useState('all');
   const [activityActionFilter, setActivityActionFilter] = useState('all');
@@ -278,6 +283,7 @@ export const Admin = ({ products, onProductsChange }: AdminProps) => {
         { key: 'media', path: '/media' },
         { key: 'settings', path: '/site-settings' },
         { key: 'homepage', path: '/homepage-content/admin' },
+        { key: 'company', path: '/company-content/admin' },
       ] as const;
 
       const results = await Promise.allSettled(resources.map(async (resource) => {
@@ -333,6 +339,11 @@ export const Admin = ({ products, onProductsChange }: AdminProps) => {
         if (key === 'homepage') {
           setHomepageContent(normalizeHomepageContent(data?.draft || data?.published));
           setHomepagePublishedAt(data?.publishedAt || data?.published?.publishedAt || null);
+        }
+        if (key === 'company') {
+          const hasDraft = data?.draft && Object.keys(data.draft).length;
+          setCompanyContent(normalizeCompanyContent(hasDraft ? data.draft : data?.published));
+          setCompanyPublishedAt(data?.publishedAt || null);
         }
       });
 
@@ -655,6 +666,31 @@ export const Admin = ({ products, onProductsChange }: AdminProps) => {
     }
   };
 
+  const handleSaveCompany = async (content: any, publish = false) => {
+    try {
+      const draftRes = await authorizedFetch(`${API}/company-content`, { method: 'PUT', headers: authHeaders(), body: JSON.stringify(content) });
+      if (!draftRes.ok) {
+        const error = await draftRes.json().catch(() => ({}));
+        throw new Error(error.error || 'Failed to save company profile');
+      }
+      if (publish) {
+        const publishRes = await authorizedFetch(`${API}/company-content/publish`, { method: 'POST', headers: authHeaders() });
+        if (!publishRes.ok) {
+          const error = await publishRes.json().catch(() => ({}));
+          throw new Error(error.error || 'Failed to publish company profile');
+        }
+        toast.success('Company profile published');
+      } else {
+        toast.success('Company profile draft saved');
+      }
+      await fetchData();
+      return true;
+    } catch (error: any) {
+      toast.error(error.message || 'Failed to save company profile');
+      return false;
+    }
+  };
+
   const handleQuickLinkProduct = async (productId: string, vendorId: string) => {
     try {
       const res = await authorizedFetch(`${API}/products/${productId}`, { method: 'PUT', headers: authHeaders(), body: JSON.stringify({ vendorId }) });
@@ -940,7 +976,7 @@ export const Admin = ({ products, onProductsChange }: AdminProps) => {
   // ─── Context Store ──────────────────────────────────────────
   const store: AdminStore = {
     products, orders, vendors, reviews, inquiries, newsletterSubs, pages, media,
-    siteSettings, homepageContent, homepagePublishedAt, activityLog, teamMembers,
+    siteSettings, homepageContent, homepagePublishedAt, companyContent, companyPublishedAt, activityLog, teamMembers,
     session, userRole, canEdit, canDelete, isOwner,
     searchQuery, setSearchQuery, setActiveTab, refreshing, loadError, lastUpdatedAt,
     setProductModal, setEditingProduct, setProductGallery,
@@ -963,7 +999,7 @@ export const Admin = ({ products, onProductsChange }: AdminProps) => {
     handleDeleteInquiry, handleUpdateInquiryStatus, handleUpdateOrderStatus,
     handleDeletePage, handleDeleteMedia,
     handleUpdateVendor, handleDeleteVendor, handleSaveVendorProfile,
-    handleSaveSettings, handleSaveHomepage,
+    handleSaveSettings, handleSaveHomepage, handleSaveCompany,
     handleQuickLinkProduct, handleBulkLinkProducts,
     handleUnlinkProduct, handleBulkUnlinkProducts,
     handleInviteTeamMember, handleRemoveTeamMember, handleUpdateTeamRole,
@@ -1221,6 +1257,7 @@ export const Admin = ({ products, onProductsChange }: AdminProps) => {
                 {activeTab === 'inquiries' && <CustomersTab view="inquiries" />}
                 {activeTab === 'subscribers' && <CustomersTab view="subscribers" />}
                 {activeTab === 'homepage' && <HomepageTab />}
+                {activeTab === 'company' && <CompanyTab />}
                 {activeTab === 'pages' && <PagesTab />}
                 {activeTab === 'media' && <MediaTab />}
                 {activeTab === 'reviews' && <ReviewsTab />}

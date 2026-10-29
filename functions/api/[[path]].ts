@@ -54,6 +54,12 @@ export const onRequest: PagesFunction<AppEnv> = async ({ request, env }) => {
       return json({ draft: await getValue(env, 'homepage_content_draft', {}), published: await getValue(env, 'homepage_content_published', {}), publishedAt: await getValue(env, 'homepage_published_at', null) });
     }
     if (method === 'GET' && root === 'homepage-content') return json(await getValue(env, 'homepage_content_published', {}));
+    if (method === 'GET' && root === 'company-content' && id === 'admin') {
+      const user = await requireAdmin(request, env);
+      if (!user) return json({ error: 'Unauthorized' }, 401);
+      return json({ draft: await getValue(env, 'company_content_draft', {}), published: await getValue(env, 'company_content_published', {}), publishedAt: await getValue(env, 'company_published_at', null) });
+    }
+    if (method === 'GET' && root === 'company-content') return json(await getValue(env, 'company_content_published', {}));
     if (method === 'GET' && root === 'page' && id) {
       const page = (await readList(env, 'pages')).find((item: any) => item.slug === id && item.status === 'published');
       return page ? json(page) : json({ error: 'Page not found' }, 404);
@@ -186,6 +192,14 @@ export const onRequest: PagesFunction<AppEnv> = async ({ request, env }) => {
       return json({ success: true, publishedAt: new Date().toISOString() });
     }
     if (method === 'PUT' && root === 'homepage-content') { await setValue(env, 'homepage_content_draft', body || {}); return json({ success: true }); }
+    if (method === 'POST' && root === 'company-content' && id === 'publish') {
+      const publishedAt = new Date().toISOString();
+      await setValue(env, 'company_content_published', await getValue(env, 'company_content_draft', {}));
+      await setValue(env, 'company_published_at', publishedAt);
+      await addActivity(env, user, 'company.publish', 'Published company profile');
+      return json({ success: true, publishedAt });
+    }
+    if (method === 'PUT' && root === 'company-content') { await setValue(env, 'company_content_draft', body || {}); return json({ success: true }); }
     if (method === 'PUT' && root === 'site-settings') { await setValue(env, 'site_settings', body || {}); return json({ success: true }); }
     if (method === 'DELETE' && root === 'pages' && id) return deleteById(env, 'pages', id);
     if (method === 'DELETE' && root === 'media' && id) {

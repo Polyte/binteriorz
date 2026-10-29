@@ -1,10 +1,14 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { ConsultationForm } from '../components/ConsultationForm';
-import { MapPin, Instagram, Facebook, Linkedin, Clock, ArrowUpRight } from 'lucide-react';
+import { Clock } from 'lucide-react';
+import { ContactLinks } from '../components/company/CompanyBlocks';
+import { useCompanyContent } from '../content/CompanyContentContext';
 import { ParallaxHeader } from '../components/ParallaxHeader';
 
 export const Contact = () => {
+  const content = useCompanyContent();
+  const { cta } = content.sections;
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -13,7 +17,7 @@ export const Contact = () => {
       className="pb-32 bg-[#fcfcfc]"
     >
       <ParallaxHeader 
-        image="https://images.unsplash.com/photo-1766802981814-7af8c062759f?auto=format&fit=crop&q=80&w=2000"
+        image="/product-images/bi-066.jpg"
         title="Get in Touch"
         subtitle="Inquiries & Appointments"
       />
@@ -30,7 +34,7 @@ export const Contact = () => {
                 transition={{ delay: 0.1 }}
                 className="text-5xl md:text-6xl font-serif text-neutral-900 leading-tight tracking-tighter"
               >
-                Let’s shape your sanctuary.
+                {cta.title}
               </motion.h1>
               <motion.p 
                 initial={{ y: 20, opacity: 0 }}
@@ -38,79 +42,31 @@ export const Contact = () => {
                 transition={{ delay: 0.2 }}
                 className="mt-8 text-lg text-neutral-500 font-light leading-relaxed max-w-md"
               >
-                Whether you're commissioning a single piece or planning a complete spatial overhaul, our studio is ready to translate your vision into a tactile reality.
+                {cta.text}
               </motion.p>
             </header>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-16">
-              <section className="space-y-6">
-                <div className="flex items-center gap-3">
-                   <div className="w-1.5 h-1.5 bg-neutral-900 rounded-full" />
-                   <h3 className="text-[10px] uppercase tracking-[0.4em] font-bold text-neutral-900">The Studio</h3>
+            <section className="space-y-8">
+              <div className="flex items-center gap-3">
+                 <div className="w-1.5 h-1.5 bg-neutral-900 rounded-full" />
+                 <h3 className="text-[10px] uppercase tracking-[0.4em] font-bold text-neutral-900">Connect</h3>
+              </div>
+              <ContactLinks contact={content.contact} />
+              <div className="flex items-start gap-4 border-t border-neutral-200 pt-8 text-sm font-light text-neutral-600">
+                <Clock className="mt-0.5 h-4 w-4 flex-shrink-0 text-neutral-400" />
+                <div className="space-y-1">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-neutral-900">Studio hours</p>
+                  <p>Mon — Fri: 09:00 - 17:00 · Saturday: by appointment</p>
                 </div>
-                <div className="text-sm text-neutral-600 space-y-2 font-light leading-relaxed">
-                  <p className="font-bold text-neutral-900">35 Radio Street, Alberton</p>
-                  <p>Johannesburg, 1449</p>
-                  <p>South Africa</p>
-                  <a 
-                    href="https://www.google.com/maps/search/?api=1&query=35+Radio+Street,+Alberton,+Johannesburg" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-neutral-400 hover:text-neutral-900 transition-colors pt-2 group"
-                  >
-                    View on Maps <ArrowUpRight className="w-3 h-3 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
-                  </a>
-                </div>
-              </section>
-
-              <section className="space-y-6">
-                <div className="flex items-center gap-3">
-                   <div className="w-1.5 h-1.5 bg-neutral-900 rounded-full" />
-                   <h3 className="text-[10px] uppercase tracking-[0.4em] font-bold text-neutral-900">Connect</h3>
-                </div>
-                <div className="text-sm text-neutral-600 space-y-4 font-light">
-                  <div>
-                    <p className="text-[10px] uppercase tracking-widest text-neutral-400 mb-1">Direct Enquiries</p>
-                    <p className="font-medium text-neutral-900">+27 11 869 1234</p>
-                  </div>
-                  <div>
-                    <p className="text-[10px] uppercase tracking-widest text-neutral-400 mb-1">Electronic Mail</p>
-                    <p className="font-medium text-neutral-900">studio@b-interiors.com</p>
-                  </div>
-                </div>
-              </section>
-
-              <section className="space-y-6">
-                <div className="flex items-center gap-3">
-                   <div className="w-1.5 h-1.5 bg-neutral-900 rounded-full" />
-                   <h3 className="text-[10px] uppercase tracking-[0.4em] font-bold text-neutral-900">Studio Hours</h3>
-                </div>
-                <div className="text-sm text-neutral-600 space-y-2 font-light">
-                  <p>Mon — Fri: 09:00 - 17:00</p>
-                  <p>Saturday: By Appointment</p>
-                  <p>Sunday: Closed</p>
-                </div>
-              </section>
-
-              <section className="space-y-6">
-                <div className="flex items-center gap-3">
-                   <div className="w-1.5 h-1.5 bg-neutral-900 rounded-full" />
-                   <h3 className="text-[10px] uppercase tracking-[0.4em] font-bold text-neutral-900">Follow</h3>
-                </div>
-                <div className="flex gap-6">
-                  <Instagram className="w-5 h-5 text-neutral-300 hover:text-neutral-900 transition-all cursor-pointer" />
-                  <Facebook className="w-5 h-5 text-neutral-300 hover:text-neutral-900 transition-all cursor-pointer" />
-                  <Linkedin className="w-5 h-5 text-neutral-300 hover:text-neutral-900 transition-all cursor-pointer" />
-                </div>
-              </section>
-            </div>
+              </div>
+            </section>
           </div>
 
           {/* Form & Map */}
           <div className="lg:col-span-7 space-y-16">
             <div className="bg-white p-12 md:p-16 rounded-[3rem] border border-neutral-100 shadow-sm relative overflow-hidden">
                <div className="absolute top-0 right-0 w-64 h-64 bg-neutral-50 rounded-full -mr-32 -mt-32 opacity-50" />
-               <h2 className="text-3xl font-serif text-neutral-900 mb-12 relative">Send a Digital Inquiry</h2>
+               <h2 className="text-3xl font-serif text-neutral-900 mb-12 relative">Send us your brief</h2>
                <div className="relative">
                  <ConsultationForm />
                </div>
@@ -172,7 +128,7 @@ export const Contact = () => {
               transition={{ delay: 0.9, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
               className="mt-2 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-xl shadow-lg border border-neutral-100"
             >
-              <p className="text-[10px] md:text-xs font-bold text-neutral-900 tracking-wide whitespace-nowrap">B-Interiors Studio</p>
+              <p className="text-[10px] md:text-xs font-bold text-neutral-900 tracking-wide whitespace-nowrap">B Interior Designz</p>
               <p className="text-[9px] md:text-[10px] text-neutral-500 font-light text-center">35 Radio St, Alberton</p>
             </motion.div>
           </div>

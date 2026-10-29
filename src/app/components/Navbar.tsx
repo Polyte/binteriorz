@@ -101,12 +101,12 @@ export const Navbar = ({ products, cartCount, wishlistCount, onOpenCart, onOpenW
                   ? 'bg-white border-white/20' 
                   : 'bg-black dark:bg-white border-neutral-800 dark:border-neutral-200'
               }`}>
-                <img src={logo} alt="B-Interiors" className={`w-full h-full object-contain ${!isTransparent ? 'dark:invert' : ''}`} />
+                <img src={logo} alt="B Interior Designz" className={`w-full h-full object-contain ${!isTransparent ? 'dark:invert' : ''}`} />
               </div>
               <div className="flex flex-col">
                 <span className={`text-sm font-serif font-bold tracking-[0.2em] leading-none transition-colors duration-500 ${
                   isTransparent ? 'text-white' : 'text-neutral-900 dark:text-white'
-                }`}>B-INTERIORS</span>
+                }`}>B INTERIOR DESIGNZ</span>
                 <span className={`text-[7px] uppercase tracking-[0.4em] font-bold mt-1.5 transition-colors duration-500 ${
                   isTransparent ? 'text-white/60' : 'text-neutral-400 dark:text-neutral-500'
                 }`}>Studio Alberton</span>
