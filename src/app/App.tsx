@@ -18,6 +18,7 @@ import { WhatsAppWidget } from './components/WhatsAppWidget';
 import { PageMotion } from './components/PageMotion';
 import { CompanyContentProvider, useCompanyContent } from './content/CompanyContentContext';
 import { socialLink } from './content/company';
+import { landingMetadata } from './content/landing';
 import { DEFAULT_OG_IMAGE, FALLBACK_METADATA, PAGE_METADATA, absoluteUrl, businessJsonLd, productImage, productJsonLd, productMetadata } from './seo';
 import { DEFAULT_HOMEPAGE_CONTENT, HomepageContent, normalizeHomepageContent } from './content/homepage';
 import { bundledProductCatalogue, normalizeProducts, resolveProductCatalogue } from './data/productCatalogue';
@@ -33,7 +34,7 @@ const RouteMetadata = ({ products }: { products: any[] }) => {
     const product = productMatch ? products.find((item) => item.id === decodeURIComponent(productMatch[1])) : null;
     const metadata = product
       ? productMetadata(product)
-      : PAGE_METADATA[pathname] ?? { ...FALLBACK_METADATA, noIndex: pathname.startsWith('/p/') };
+      : PAGE_METADATA[pathname] ?? landingMetadata(pathname) ?? { ...FALLBACK_METADATA, noIndex: /^\/(p|shop|services)\//.test(pathname) };
     const setMeta = (selector: string, attribute: string, value: string) => {
       let element = document.head.querySelector<HTMLMetaElement>(selector);
       if (!element) {
@@ -79,6 +80,7 @@ const RouteMetadata = ({ products }: { products: any[] }) => {
 // Pages
 const Home = lazy(() => import('./pages/Home').then((module) => ({ default: module.Home })));
 const Shop = lazy(() => import('./pages/Shop').then((module) => ({ default: module.Shop })));
+const ServiceDetail = lazy(() => import('./pages/ServiceDetail').then((module) => ({ default: module.ServiceDetail })));
 const Services = lazy(() => import('./pages/Services').then((module) => ({ default: module.Services })));
 const About = lazy(() => import('./pages/About').then((module) => ({ default: module.About })));
 const Contact = lazy(() => import('./pages/Contact').then((module) => ({ default: module.Contact })));
@@ -304,10 +306,12 @@ const AppContent = () => {
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<PageMotion><Home products={products} onAddToCart={addToCart} onToggleWishlist={toggleWishlist} onQuickView={setQuickViewProduct} wishlistItems={wishlistItems} homepageContent={homepageContent} /></PageMotion>} />
             <Route path="/shop" element={<PageMotion><Shop products={products} onAddToCart={addToCart} onToggleWishlist={toggleWishlist} onQuickView={setQuickViewProduct} wishlistItems={wishlistItems} loading={loading} /></PageMotion>} />
+            <Route path="/shop/:category" element={<PageMotion><Shop products={products} onAddToCart={addToCart} onToggleWishlist={toggleWishlist} onQuickView={setQuickViewProduct} wishlistItems={wishlistItems} loading={loading} /></PageMotion>} />
             <Route path="/product/:id" element={<PageMotion><ProductDetail products={products} onAddToCart={addToCart} onToggleWishlist={toggleWishlist} wishlistItems={wishlistItems} /></PageMotion>} />
             <Route path="/checkout" element={<PageMotion><Checkout items={cartItems} total={cartItems.reduce((a, b) => a + (b.price * b.quantity), 0)} onClearCart={() => setCartItems([])} /></PageMotion>} />
             <Route path="/thank-you" element={<PageMotion><ThankYou /></PageMotion>} />
             <Route path="/services" element={<PageMotion><Services /></PageMotion>} />
+            <Route path="/services/:slug" element={<PageMotion><ServiceDetail products={products} /></PageMotion>} />
             <Route path="/about" element={<PageMotion><About /></PageMotion>} />
             <Route path="/contact" element={<PageMotion><Contact /></PageMotion>} />
             <Route path="/become-a-partner" element={<PageMotion><VendorApplication /></PageMotion>} />

@@ -63,11 +63,15 @@ export const absoluteUrl = (path: string) => new URL(path || '/', SITE_URL).href
 
 const plainText = (value: unknown) => String(value || '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
 
-// Catalogue descriptions can include internal notes ("confirm dimensions…"); keep those out of search snippets.
-const customerSentences = (value: unknown) => plainText(value)
+// Catalogue descriptions end with supplier notes ("…; confirm dimensions and finish before ordering").
+// Keep the customer-facing part and drop the notes.
+export const customerDescription = (value: unknown) => plainText(value)
+  .replace(/[;,]\s*confirm\b[^.]*\./gi, '.')
   .split(/(?<=\.)\s+/)
-  .filter((sentence) => sentence && !/confirm|markup|supplier|estimated/i.test(sentence))
+  .filter((sentence) => sentence && !/\bconfirm\b|markup|supplier|estimated/i.test(sentence))
   .join(' ');
+
+const customerSentences = customerDescription;
 
 const truncate = (value: string, max: number) => (value.length <= max ? value : `${value.slice(0, max - 1).replace(/\s+\S*$/, '')}…`);
 

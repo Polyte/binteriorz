@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { ShoppingBag, Heart, ChevronRight, ChevronLeft, Minus, Plus, ShieldCheck, Truck, RefreshCw, Eye, Sparkles, Play, Film } from 'lucide-react';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 import { ShareMenu } from '../components/ShareMenu';
+import { customerDescription } from '../seo';
 import { ProductReviews } from '../components/ProductReviews';
 import { trackProductView } from '../components/RecentlyViewed';
 const logo = "/logo.png";
@@ -193,7 +194,10 @@ export const ProductDetail = ({ products, onAddToCart, onToggleWishlist, wishlis
             <div className="space-y-12">
               <div className="prose prose-neutral max-w-none">
                 <p className="text-lg text-neutral-600 leading-relaxed font-light">
-                  {product.description || <>Expertly realized in our Alberton studio, the <span className="text-neutral-900 font-medium italic">{product.name}</span> represents a seamless convergence of tactile luxury and modernist geometry. Each piece is meticulously hand-finished to ensure the preservation of raw material character.</>}
+                  {customerDescription(product.description) || <>The <span className="text-neutral-900 font-medium italic">{product.name}</span> is available to view in our Alberton showroom.</>}
+                </p>
+                <p className="mt-4 text-sm text-neutral-500">
+                  Ask us about exact dimensions, finishes and sizing before you order, or <Link to="/contact" className="text-neutral-900 underline underline-offset-4">get in touch</Link> to see it in the showroom.
                 </p>
               </div>
 

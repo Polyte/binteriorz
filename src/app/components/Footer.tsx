@@ -51,7 +51,7 @@ export const Footer = () => {
             <h4 className="text-sm uppercase tracking-widest font-bold mb-8">Services</h4>
             <ul className="space-y-4 text-neutral-400">
               {content.sections.services.items.slice(0, 5).map((service) => (
-                <li key={service.id}><Link to="/services" className="hover:text-white transition-colors">{service.title}</Link></li>
+                <li key={service.id}><Link to={`/services/${service.id}`} className="hover:text-white transition-colors">{service.title}</Link></li>
               ))}
             </ul>
           </div>

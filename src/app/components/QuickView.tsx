@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { X, ShoppingCart, Heart, ShieldCheck, Search, ChevronDown, Split } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { ShareMenu } from './ShareMenu';
+import { customerDescription } from '../seo';
 const logo = "/logo.png";
 
 const knownValue = (value: unknown) => {
@@ -10,7 +11,7 @@ const knownValue = (value: unknown) => {
   return text && !/to confirm/i.test(text) ? text : '';
 };
 
-const productDescription = (product: any) => String(product?.description || '').replace(/<[^>]*>/g, '').trim();
+const productDescription = (product: any) => customerDescription(product?.description);
 
 // Only real catalogue facts are shown; unknown ("To Confirm") values are left out.
 const productDetails = (product: any) => [

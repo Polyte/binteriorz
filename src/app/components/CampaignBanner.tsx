@@ -162,6 +162,7 @@ export const CampaignBanner = ({ onVisibilityChange }: CampaignBannerProps) => {
       `linear-gradient(105deg, transparent ${x - 30}%, rgba(255,255,255,0.12) ${x - 10}%, rgba(255,255,255,0.25) ${x}%, rgba(255,255,255,0.12) ${x + 10}%, transparent ${x + 30}%)`
   );
 
+  // Seasonal messages only; real offers should be set up deliberately, not shown automatically.
   useEffect(() => {
     const today = new Date();
     const month = today.getMonth() + 1;
@@ -171,7 +172,7 @@ export const CampaignBanner = ({ onVisibilityChange }: CampaignBannerProps) => {
       setActiveCampaign({
         id: 'valentines',
         title: 'Share the Love',
-        subtitle: '15% Off all Bedroom & Decor sets this Valentine\u2019s season.',
+        subtitle: 'Gift something beautiful for the home this Valentine\u2019s season.',
         color: 'bg-rose-600',
         gradientFrom: 'from-rose-700',
         gradientTo: 'to-pink-500',
@@ -180,8 +181,8 @@ export const CampaignBanner = ({ onVisibilityChange }: CampaignBannerProps) => {
     } else if (month === 12 && day <= 26) {
       setActiveCampaign({
         id: 'christmas',
-        title: 'A B Interior Designz Christmas',
-        subtitle: 'Gift elegance this year. Free delivery in Alberton on all orders.',
+        title: 'The Festive Season',
+        subtitle: 'Find gifts and festive décor in our Alberton showroom.',
         color: 'bg-emerald-800',
         gradientFrom: 'from-emerald-800',
         gradientTo: 'to-green-600',
@@ -191,7 +192,7 @@ export const CampaignBanner = ({ onVisibilityChange }: CampaignBannerProps) => {
       setActiveCampaign({
         id: 'newyear',
         title: 'New Year, New Space',
-        subtitle: 'Kickstart 2026 with a boardroom makeover. Corporate specials inside.',
+        subtitle: 'Plan this year\u2019s refresh with a design consultation.',
         color: 'bg-neutral-900',
         gradientFrom: 'from-neutral-900',
         gradientTo: 'to-neutral-700',
@@ -200,8 +201,8 @@ export const CampaignBanner = ({ onVisibilityChange }: CampaignBannerProps) => {
     } else {
       setActiveCampaign({
         id: 'standard',
-        title: 'Autumn Refresh',
-        subtitle: 'Transform your living space with our new walnut collection.',
+        title: 'Visit Our Showroom',
+        subtitle: 'Furniture, décor and interior design at 35 Radio Street, Alberton.',
         color: 'bg-amber-800',
         gradientFrom: 'from-amber-800',
         gradientTo: 'to-orange-600',

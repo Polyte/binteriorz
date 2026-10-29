@@ -1,9 +1,10 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { Check, ChevronDown, LayoutGrid, Rows3, Search, SlidersHorizontal, X } from 'lucide-react';
-import { useSearchParams } from 'react-router';
+import { Link, useNavigate, useParams, useSearchParams } from 'react-router';
 import { ProductCard } from '../components/ProductCard';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
+import { CATEGORY_PAGES, categorySlug } from '../content/landing';
 
 interface ShopProps {
   products: any[];
@@ -64,7 +65,7 @@ const priceBand = (product: any) => PRICE_BANDS.find((band) => product.price >= 
 const toggle = (list: string[], value: string) => (list.includes(value) ? list.filter((item) => item !== value) : [...list, value]);
 
 /** Compact, vintage-styled header: parchment tones, gilt rules and arched frames around showroom antiques. */
-const ShopHeader = ({ total, categories }: { total: number; categories: number }) => (
+const ShopHeader = ({ total, categories, heading, intro, related }: { total: number; categories: number; heading?: string; intro?: string; related?: { label: string; to: string } }) => (
   <section className="relative overflow-hidden border-b border-[#c8b48a]/50 bg-[#efe6d4] pt-48 md:pt-40">
     <div
       className="pointer-events-none absolute inset-0 opacity-[0.35] mix-blend-multiply"
@@ -79,7 +80,7 @@ const ShopHeader = ({ total, categories }: { total: number; categories: number }
           <span className="text-[10px] font-bold uppercase tracking-[0.4em]">B Interior Designz · Alberton</span>
         </div>
         <h1 className="font-serif text-5xl leading-[0.95] tracking-tight text-[#2b2116] md:text-7xl">
-          The <em className="font-normal italic text-[#8a6a2f]">Collection</em>
+          {heading ? heading : <>The <em className="font-normal italic text-[#8a6a2f]">Collection</em></>}
         </h1>
         <div className="my-6 flex items-center gap-3 text-[#b8964a]" aria-hidden="true">
           <span className="h-px w-16 bg-current" />
@@ -87,8 +88,9 @@ const ShopHeader = ({ total, categories }: { total: number; categories: number }
           <span className="h-px w-16 bg-current" />
         </div>
         <p className="max-w-lg text-base font-light leading-relaxed text-[#4a3c2b] md:text-lg">
-          Timeless furniture, lighting, textiles and décor, chosen piece by piece for homes with character.
+          {intro || 'Timeless furniture, lighting, textiles and décor, chosen piece by piece for homes with character.'}
         </p>
+        {related && <Link to={related.to} className="mt-5 inline-block border-b border-[#8a6a2f] pb-1 text-[10px] font-bold uppercase tracking-[0.25em] text-[#8a6a2f] hover:text-[#2b2116]">{related.label}</Link>}
         <dl className="mt-8 flex gap-10 text-[#2b2116]">
           <div><dt className="text-[9px] font-bold uppercase tracking-[0.3em] text-[#8a6a2f]">Pieces</dt><dd className="mt-1 font-serif text-3xl tabular-nums">{total}</dd></div>
           <div><dt className="text-[9px] font-bold uppercase tracking-[0.3em] text-[#8a6a2f]">Categories</dt><dd className="mt-1 font-serif text-3xl tabular-nums">{categories}</dd></div>
@@ -138,6 +140,9 @@ const CheckRow = ({ label, count, checked, onChange, swatch }: { label: string; 
 
 export const Shop = ({ products, onAddToCart, onToggleWishlist, onQuickView, wishlistItems, loading }: ShopProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const { category: categoryParam } = useParams<{ category: string }>();
+  const categoryPage = categoryParam ? CATEGORY_PAGES[categoryParam] : undefined;
   const [searchQuery, setSearchQuery] = useState('');
   const [categories, setCategories] = useState<string[]>([]);
   const [rooms, setRooms] = useState<string[]>([]);
@@ -151,10 +156,10 @@ export const Shop = ({ products, onAddToCart, onToggleWishlist, onQuickView, wis
   // Keep filters in sync with links from the mega menu and room navigator.
   useEffect(() => {
     const room = searchParams.get('room');
-    const category = searchParams.get('category');
+    const category = categoryPage?.name || searchParams.get('category');
     setRooms(room ? [room] : []);
     setCategories(category && category !== 'All' ? [category] : []);
-  }, [searchParams]);
+  }, [searchParams, categoryPage]);
 
   const matches = (product: any, skip?: Facet) => {
     const query = searchQuery.trim().toLowerCase();
@@ -206,16 +211,10 @@ export const Shop = ({ products, onAddToCart, onToggleWishlist, onQuickView, wis
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [products, searchQuery, categories, rooms, materials, colours, prices, sortBy]);
 
-  const setCategory = (name: string | null) => {
-    setCategories(name ? [name] : []);
-    const next = new URLSearchParams(searchParams);
-    if (name) next.set('category', name); else next.delete('category');
-    setSearchParams(next, { replace: true });
-  };
 
   const clearAll = () => {
     setCategories([]); setRooms([]); setMaterials([]); setColours([]); setPrices([]); setSearchQuery('');
-    setSearchParams(new URLSearchParams(), { replace: true });
+    if (categoryParam) navigate('/shop'); else setSearchParams(new URLSearchParams(), { replace: true });
   };
 
   const activeChips = [
@@ -227,6 +226,7 @@ export const Shop = ({ products, onAddToCart, onToggleWishlist, onQuickView, wis
   ];
 
   const removeChip = (facet: Facet, value: string) => {
+    if (facet === 'category' && categoryPage?.name === value) { navigate('/shop'); return; }
     if (facet === 'category') setCategories((list) => list.filter((item) => item !== value));
     if (facet === 'room') setRooms((list) => list.filter((item) => item !== value));
     if (facet === 'material') setMaterials((list) => list.filter((item) => item !== value));
@@ -266,23 +266,29 @@ export const Shop = ({ products, onAddToCart, onToggleWishlist, onQuickView, wis
 
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="relative min-h-screen bg-[#fbf9f5] pb-24">
-      <ShopHeader total={products.length} categories={allCategories.length} />
+      <ShopHeader
+        total={categoryPage ? products.filter((product) => product.category === categoryPage.name).length : products.length}
+        categories={allCategories.length}
+        heading={categoryPage?.name}
+        intro={categoryPage?.intro}
+        related={categoryPage?.relatedService ? { label: 'About our related service', to: `/services/${categoryPage.relatedService}` } : undefined}
+      />
 
       {/* Category strip */}
       <div className="border-b border-neutral-200 bg-white/70">
         <div className={`${container} flex gap-3 overflow-x-auto py-5 [scrollbar-width:none]`}>
-          <button type="button" onClick={() => setCategory(null)} className={`flex flex-shrink-0 items-center gap-3 rounded-full border py-1.5 pl-1.5 pr-5 transition-colors ${categories.length === 0 ? 'border-neutral-900 bg-neutral-900 text-white' : 'border-neutral-200 bg-white text-neutral-700 hover:border-neutral-900'}`}>
+          <Link to="/shop" className={`flex flex-shrink-0 items-center gap-3 rounded-full border py-1.5 pl-1.5 pr-5 transition-colors ${categories.length === 0 ? 'border-neutral-900 bg-neutral-900 text-white' : 'border-neutral-200 bg-white text-neutral-700 hover:border-neutral-900'}`}>
             <span className="grid h-9 w-9 place-items-center rounded-full bg-[#efe6d4] font-serif text-sm text-[#8a6a2f]">All</span>
             <span className="text-xs font-medium">Everything</span>
-          </button>
+          </Link>
           {allCategories.map((category) => {
             const active = categories.length === 1 && categories[0] === category.name;
             return (
-              <button key={category.name} type="button" onClick={() => setCategory(active ? null : category.name)} className={`flex flex-shrink-0 items-center gap-3 rounded-full border py-1.5 pl-1.5 pr-5 transition-colors ${active ? 'border-neutral-900 bg-neutral-900 text-white' : 'border-neutral-200 bg-white text-neutral-700 hover:border-neutral-900'}`}>
+              <Link key={category.name} to={active || !CATEGORY_PAGES[categorySlug(category.name)] ? '/shop' : `/shop/${categorySlug(category.name)}`} aria-current={active ? 'page' : undefined} className={`flex flex-shrink-0 items-center gap-3 rounded-full border py-1.5 pl-1.5 pr-5 transition-colors ${active ? 'border-neutral-900 bg-neutral-900 text-white' : 'border-neutral-200 bg-white text-neutral-700 hover:border-neutral-900'}`}>
                 <ImageWithFallback src={category.image} alt="" className="h-9 w-9 rounded-full object-cover" />
                 <span className="text-xs font-medium">{category.name}</span>
                 <span className={`text-[10px] tabular-nums ${active ? 'text-white/60' : 'text-neutral-400'}`}>{category.total}</span>
-              </button>
+              </Link>
             );
           })}
         </div>

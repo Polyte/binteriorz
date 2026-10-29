@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
+import { Link } from 'react-router';
 import { ArrowRight } from 'lucide-react';
 import { ConsultationForm } from '../components/ConsultationForm';
 import { ParallaxHeader } from '../components/ParallaxHeader';
@@ -36,15 +37,18 @@ export const Services = () => {
               const wide = (spare >= 1 && index === 0) || (spare === 2 && index === services.items.length - 1);
               return (
               <motion.article key={service.id} {...reveal((index % 3) * 0.08)} className={`group flex flex-col ${wide ? 'lg:col-span-2' : ''}`}>
-                <div className={`relative aspect-[4/3] overflow-hidden bg-neutral-100 ${wide ? 'lg:aspect-[8/3]' : ''}`}>
+                <Link to={`/services/${service.id}`} tabIndex={-1} aria-hidden="true" className={`relative block aspect-[4/3] overflow-hidden bg-neutral-100 ${wide ? 'lg:aspect-[8/3]' : ''}`}>
                   {service.image?.url && <ImageWithFallback src={service.image.url} alt={service.image.alt || service.title} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />}
                   <span className="absolute left-4 top-4 bg-white/90 px-3 py-1 font-serif text-sm tabular-nums text-neutral-900 backdrop-blur-sm">{String(index + 1).padStart(2, '0')}</span>
-                </div>
-                <h3 className="mt-6 font-serif text-2xl text-neutral-900">{service.title}</h3>
+                </Link>
+                <h3 className="mt-6 font-serif text-2xl text-neutral-900"><Link to={`/services/${service.id}`} className="hover:text-[#9a7b37]">{service.title}</Link></h3>
                 <p className="mt-3 flex-1 font-light leading-relaxed text-neutral-600">{service.text}</p>
-                <button type="button" onClick={scrollToConsultation} className="mt-5 inline-flex w-fit items-center gap-2 text-[10px] font-black uppercase tracking-[0.25em] text-[#9a7b37] transition-colors hover:text-neutral-900">
-                  Enquire <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-                </button>
+                <div className="mt-5 flex items-center gap-6">
+                  <Link to={`/services/${service.id}`} className="inline-flex w-fit items-center gap-2 text-[10px] font-black uppercase tracking-[0.25em] text-neutral-900 transition-colors hover:text-[#9a7b37]">
+                    Learn more <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                  </Link>
+                  <button type="button" onClick={scrollToConsultation} className="text-[10px] font-black uppercase tracking-[0.25em] text-[#9a7b37] transition-colors hover:text-neutral-900">Enquire</button>
+                </div>
               </motion.article>
               );
             })}

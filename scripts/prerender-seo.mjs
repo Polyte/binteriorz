@@ -4,6 +4,7 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { productCatalogue } from '../src/app/data/catalogue.ts';
+import { LANDING_ROUTES, landingMetadata } from '../src/app/content/landing.ts';
 import {
   DEFAULT_OG_IMAGE, PAGE_METADATA, SITE_NAME, SITE_URL,
   absoluteUrl, businessJsonLd, productImage, productJsonLd, productMetadata, productPath,
@@ -57,6 +58,12 @@ for (const [route, meta] of Object.entries(PAGE_METADATA)) {
   pages += 1;
 }
 
+for (const route of LANDING_ROUTES) {
+  const html = template.replace(SEO_REGION, renderHead({ meta: landingMetadata(route), url: absoluteUrl(route), image: absoluteUrl(DEFAULT_OG_IMAGE), jsonLd: [business] }));
+  await writePage(route, html);
+  pages += 1;
+}
+
 for (const product of productCatalogue) {
   const route = productPath(product);
   const html = template.replace(SEO_REGION, renderHead({
@@ -73,6 +80,7 @@ for (const product of productCatalogue) {
 const today = new Date().toISOString().slice(0, 10);
 const indexable = [
   ...Object.entries(PAGE_METADATA).filter(([, meta]) => !meta.noIndex).map(([route]) => ({ loc: absoluteUrl(route), priority: route === '/' ? '1.0' : '0.8', changefreq: 'weekly' })),
+  ...LANDING_ROUTES.map((route) => ({ loc: absoluteUrl(route), priority: route.startsWith('/services/') ? '0.8' : '0.7', changefreq: 'weekly' })),
   ...productCatalogue.map((product) => ({ loc: absoluteUrl(productPath(product)), priority: '0.6', changefreq: 'monthly', image: absoluteUrl(productImage(product)) })),
 ];
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
