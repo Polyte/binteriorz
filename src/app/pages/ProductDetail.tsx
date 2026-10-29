@@ -52,11 +52,7 @@ export const ProductDetail = ({ products, onAddToCart, onToggleWishlist, wishlis
   // Use real gallery from admin or fallback to legacy image field
   const galleryItems: { url: string; type: 'image' | 'video' }[] = product.gallery?.length > 0
     ? product.gallery
-    : [
-        { url: product.image_url || product.image, type: 'image' as const },
-        { url: "https://images.unsplash.com/photo-1697697929720-d67b655ae646?auto=format&fit=crop&q=80&w=1200", type: 'image' as const },
-        { url: "https://images.unsplash.com/photo-1661446569716-86e93bf267d3?auto=format&fit=crop&q=80&w=1200", type: 'image' as const },
-      ];
+    : [{ url: product.image_url || product.image, type: 'image' as const }];
 
   const nextImage = () => setActiveImageIndex((prev) => (prev + 1) % galleryItems.length);
   const prevImage = () => setActiveImageIndex((prev) => (prev - 1 + galleryItems.length) % galleryItems.length);

@@ -5,11 +5,24 @@ import { ImageWithFallback } from './figma/ImageWithFallback';
 import { ShareMenu } from './ShareMenu';
 const logo = "/logo.png";
 
-const materialThumbnails = [
-  { id: 'grain-1', name: 'Raw Grain', url: 'https://images.unsplash.com/photo-1644931548621-f288d176b7aa?auto=format&fit=crop&q=80&w=400' },
-  { id: 'grain-2', name: 'Polished', url: 'https://images.unsplash.com/photo-1658264250874-52f403e2ebaa?auto=format&fit=crop&q=80&w=400' },
-  { id: 'grain-3', name: 'Dark Tint', url: 'https://images.unsplash.com/photo-1610460914077-197531846541?auto=format&fit=crop&q=80&w=400' },
-];
+const knownValue = (value: unknown) => {
+  const text = String(value || '').trim();
+  return text && !/to confirm/i.test(text) ? text : '';
+};
+
+const productDescription = (product: any) => String(product?.description || '').replace(/<[^>]*>/g, '').trim();
+
+// Only real catalogue facts are shown; unknown ("To Confirm") values are left out.
+const productDetails = (product: any) => [
+  { label: 'Material', value: knownValue(product?.materialFinish || product?.material) },
+  { label: 'Colour', value: knownValue(product?.color) },
+].filter((detail) => detail.value);
+
+// Extra views come from the product's own gallery; the main image is already shown first.
+const galleryThumbnails = (product: any) => (Array.isArray(product?.gallery) ? product.gallery : [])
+  .slice(1)
+  .map((item: any, index: number) => ({ id: `view-${index + 2}`, name: `View ${index + 2}`, url: typeof item === 'string' ? item : item?.url }))
+  .filter((item: { url?: string }) => item.url && item.url !== (product.image_url || product.image));
 
 interface QuickViewProps {
   product: any | null;
@@ -32,7 +45,8 @@ export const QuickView = ({ product, isOpen, onClose, onAddToCart, onToggleWishl
   useEffect(() => {
     if (product) {
       setActiveImage(product.image_url || product.image);
-      setComparisonImage(materialThumbnails[0].url);
+      setComparisonImage(galleryThumbnails(product)[0]?.url || product.image_url || product.image);
+      setComparisonMode(false);
       setShowScrollIndicator(true);
     }
   }, [product]);
@@ -205,10 +219,11 @@ export const QuickView = ({ product, isOpen, onClose, onAddToCart, onToggleWishl
                     )}
                   </div>
 
-                  {/* Multi-angle material thumbnails */}
+                  {/* Extra product views, only when the product has more than one photo */}
+                  {galleryThumbnails(product).length > 0 && (
                   <div className="mt-4 md:mt-6">
                     <div className="flex items-center justify-between gap-3 mb-3">
-                      <span className="text-[9px] uppercase tracking-[0.3em] font-bold text-neutral-400">Tactile Varieties</span>
+                      <span className="text-[9px] uppercase tracking-[0.3em] font-bold text-neutral-400">More views</span>
                       <motion.button 
                         whileTap={{ scale: 0.9 }}
                         onClick={toggleComparison}
@@ -230,7 +245,7 @@ export const QuickView = ({ product, isOpen, onClose, onAddToCart, onToggleWishl
                       >
                         <ImageWithFallback src={product.image_url || product.image} alt="Main" className="w-full h-full object-cover" />
                       </motion.button>
-                      {materialThumbnails.map((thumb) => (
+                      {galleryThumbnails(product).map((thumb: { id: string; name: string; url: string }) => (
                         <motion.button
                           key={thumb.id}
                           whileTap={{ scale: 0.95 }}
@@ -247,6 +262,7 @@ export const QuickView = ({ product, isOpen, onClose, onAddToCart, onToggleWishl
                       ))}
                     </div>
                   </div>
+                  )}
                 </div>
                 
                 <div className="flex-1 flex flex-col justify-center space-y-6 md:space-y-8">
@@ -263,11 +279,9 @@ export const QuickView = ({ product, isOpen, onClose, onAddToCart, onToggleWishl
                     <p className="text-xl md:text-2xl font-medium text-neutral-600">R {product.price?.toLocaleString()}</p>
                   </div>
 
-                  <p className="text-neutral-500 leading-relaxed text-base md:text-lg font-light">
-                    Elevate your space with our signature {product.name.toLowerCase()}. 
-                    Meticulously crafted in our Alberton workshop, this piece embodies 
-                    B-Interiors' commitment to tactile luxury and timeless design.
-                  </p>
+                  {productDescription(product) && (
+                    <p className="text-neutral-500 leading-relaxed text-base md:text-lg font-light">{productDescription(product)}</p>
+                  )}
 
                   <div className="space-y-4 pt-4">
                     <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
@@ -299,16 +313,16 @@ export const QuickView = ({ product, isOpen, onClose, onAddToCart, onToggleWishl
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-6 md:gap-8 pt-10 md:pt-12 border-t border-neutral-100">
-                    <div>
-                      <h4 className="text-[9px] md:text-[10px] uppercase tracking-[0.3em] font-bold text-neutral-400 mb-2 md:mb-3">Materiality</h4>
-                      <p className="text-xs md:text-sm text-neutral-900">Premium Oak, Tactile Velvet, Brushed Steel</p>
+                  {productDetails(product).length > 0 && (
+                    <div className="grid grid-cols-2 gap-6 md:gap-8 pt-10 md:pt-12 border-t border-neutral-100">
+                      {productDetails(product).map(({ label, value }) => (
+                        <div key={label}>
+                          <h4 className="text-[9px] md:text-[10px] uppercase tracking-[0.3em] font-bold text-neutral-400 mb-2 md:mb-3">{label}</h4>
+                          <p className="text-xs md:text-sm text-neutral-900">{value}</p>
+                        </div>
+                      ))}
                     </div>
-                    <div>
-                      <h4 className="text-[9px] md:text-[10px] uppercase tracking-[0.3em] font-bold text-neutral-400 mb-2 md:mb-3">Origin</h4>
-                      <p className="text-xs md:text-sm text-neutral-900">Alberton Workshop, South Africa</p>
-                    </div>
-                  </div>
+                  )}
                 </div>
               </div>
             </div>

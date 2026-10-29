@@ -56,7 +56,7 @@ export const DEFAULT_COMPANY_CONTENT: CompanyContent = {
       title: 'B Interior Designz',
       tagline: 'Elevating spaces through considered design, bespoke detail and personalised service.',
       intro: '',
-      image: image('/product-images/hero-living-curated.jpg', 'Bright living room with curved sofas and tall windows'),
+      image: image('/product-images/bi-068.jpg', 'B Interior showroom lounge with curved sofas and sculptural mirrors'),
     },
     about: {
       enabled: true,
@@ -98,7 +98,7 @@ export const DEFAULT_COMPANY_CONTENT: CompanyContent = {
         card('carpets', 'Carpets & Rugs', 'Floor finishes selected to support the overall design direction.', image('/product-images/bi-014.jpg', 'Textured woven rug detail')),
         card('decor', 'Décor & Accessories', 'Ornaments, artwork, plants, books, soft accessories and finishing pieces.', image('/product-images/bi-117.jpg', 'Sculptural vases on a round coffee table')),
         card('commercial', 'Commercial & Hospitality Interiors', 'Reception areas, offices, medical practices, B&Bs and hospitality spaces.', image('/product-images/bi-173.jpg', 'Lounge seating area with swivel chairs')),
-        card('refurbishment', 'Refurbishment & Finishing', 'Targeted upgrades and coordinated improvements to existing spaces.', image('/product-images/hero-reflective-balance.jpg', 'Refurbished living space with feature wall')),
+        card('refurbishment', 'Refurbishment & Finishing', 'Targeted upgrades and coordinated improvements to existing spaces.', image('/product-images/bi-150.jpg', 'Refurbished living space with feature wall')),
       ],
     },
     experience: {
@@ -159,7 +159,7 @@ export const DEFAULT_COMPANY_CONTENT: CompanyContent = {
       title: 'Where we are going',
       vision: 'To become a trusted interior design and lifestyle brand known for distinctive spaces, quality solutions and strong client relationships.',
       mission: 'To transform spaces through thoughtful design, personalised service and reliable execution, while building lasting relationships with our clients, suppliers and partners.',
-      image: image('/product-images/hero-sculpted-spaces.jpg', 'Grand interior with columns and draped curtains'),
+      image: image('/product-images/bi-044.jpg', 'Curved boucle sofa styled in the B Interior showroom'),
     },
     values: {
       enabled: true,
@@ -179,7 +179,7 @@ export const DEFAULT_COMPANY_CONTENT: CompanyContent = {
       eyebrow: 'Get in touch',
       title: "Let's transform your space",
       text: 'Whether you are furnishing one room, refreshing a reception area, upgrading a medical practice, styling a hospitality space or planning a larger refurbishment, B Interior Designz is ready to assist.',
-      image: image('/product-images/hero-restful-retreats.jpg', 'Serene bedroom with marble feature wall'),
+      image: image('/product-images/bi-100.jpg', 'Bedroom set styled in the B Interior showroom'),
     },
   },
   contact: {

@@ -51,7 +51,7 @@ export const CraftsmanshipStory = ({ isOpen, onClose }: CraftsmanshipStoryProps)
               {/* Image Section */}
               <div className="w-full md:w-1/2 h-48 md:h-full relative overflow-hidden">
                 <ImageWithFallback 
-                  src="https://images.unsplash.com/photo-1697697929720-d67b655ae646?auto=format&fit=crop&q=80&w=1080"
+                  src="/product-images/bi-089.jpg"
                   alt="Craftsmanship"
                   className="w-full h-full object-cover"
                 />

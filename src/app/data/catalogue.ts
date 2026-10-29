@@ -1,5 +1,5 @@
 // Generated from B_Interior_Product_Catalogue_With_Images.xlsx. Do not edit by hand.
-export const PRODUCT_CATALOGUE_VERSION = '2026-10-23-product-master-v4';
+export const PRODUCT_CATALOGUE_VERSION = '2026-10-29-product-master-v5';
 export const productCatalogue = [
   {
     "id": "bid-cur-001",
@@ -43,18 +43,6 @@ export const productCatalogue = [
         "fileName": "bi-001.jpg",
         "position": 1,
         "quality": "high-resolution"
-      },
-      {
-        "url": "/product-images/BID-CUR-001_02.jpeg",
-        "type": "image",
-        "fileName": "BID-CUR-001_02.jpeg",
-        "position": 2
-      },
-      {
-        "url": "/product-images/BID-CUR-001_03.jpeg",
-        "type": "image",
-        "fileName": "BID-CUR-001_03.jpeg",
-        "position": 3
       }
     ],
     "galleryImageFiles": [
@@ -62,7 +50,7 @@ export const productCatalogue = [
       "BID-CUR-001_02.jpeg",
       "BID-CUR-001_03.jpeg"
     ],
-    "imageCount": 3,
+    "imageCount": 1,
     "workbookImageCount": 3,
     "rooms": [
       "living-room",
@@ -113,19 +101,13 @@ export const productCatalogue = [
         "fileName": "bi-004.jpg",
         "position": 1,
         "quality": "high-resolution"
-      },
-      {
-        "url": "/product-images/BID-CUR-004_02.jpeg",
-        "type": "image",
-        "fileName": "BID-CUR-004_02.jpeg",
-        "position": 2
       }
     ],
     "galleryImageFiles": [
       "BID-CUR-004_01.jpeg",
       "BID-CUR-004_02.jpeg"
     ],
-    "imageCount": 2,
+    "imageCount": 1,
     "workbookImageCount": 2,
     "rooms": [
       "living-room",
@@ -176,18 +158,6 @@ export const productCatalogue = [
         "fileName": "bi-007.jpg",
         "position": 1,
         "quality": "high-resolution"
-      },
-      {
-        "url": "/product-images/BID-CUR-007_02.jpeg",
-        "type": "image",
-        "fileName": "BID-CUR-007_02.jpeg",
-        "position": 2
-      },
-      {
-        "url": "/product-images/BID-CUR-007_03.jpeg",
-        "type": "image",
-        "fileName": "BID-CUR-007_03.jpeg",
-        "position": 3
       }
     ],
     "galleryImageFiles": [
@@ -195,7 +165,7 @@ export const productCatalogue = [
       "BID-CUR-007_02.jpeg",
       "BID-CUR-007_03.jpeg"
     ],
-    "imageCount": 3,
+    "imageCount": 1,
     "workbookImageCount": 3,
     "rooms": [
       "living-room",
@@ -248,24 +218,6 @@ export const productCatalogue = [
         "fileName": "bi-014.jpg",
         "position": 1,
         "quality": "high-resolution"
-      },
-      {
-        "url": "/product-images/BID-RUG-014_02.jpeg",
-        "type": "image",
-        "fileName": "BID-RUG-014_02.jpeg",
-        "position": 2
-      },
-      {
-        "url": "/product-images/BID-RUG-014_03.jpeg",
-        "type": "image",
-        "fileName": "BID-RUG-014_03.jpeg",
-        "position": 3
-      },
-      {
-        "url": "/product-images/BID-RUG-014_04.jpeg",
-        "type": "image",
-        "fileName": "BID-RUG-014_04.jpeg",
-        "position": 4
       }
     ],
     "galleryImageFiles": [
@@ -274,7 +226,7 @@ export const productCatalogue = [
       "BID-RUG-014_03.jpeg",
       "BID-RUG-014_04.jpeg"
     ],
-    "imageCount": 4,
+    "imageCount": 1,
     "workbookImageCount": 4,
     "rooms": [
       "living-room",
@@ -382,19 +334,13 @@ export const productCatalogue = [
         "fileName": "bi-017.jpg",
         "position": 1,
         "quality": "high-resolution"
-      },
-      {
-        "url": "/product-images/BID-RUG-017_02.jpeg",
-        "type": "image",
-        "fileName": "BID-RUG-017_02.jpeg",
-        "position": 2
       }
     ],
     "galleryImageFiles": [
       "BID-RUG-017_01.jpeg",
       "BID-RUG-017_02.jpeg"
     ],
-    "imageCount": 2,
+    "imageCount": 1,
     "workbookImageCount": 2,
     "rooms": [
       "living-room",
@@ -445,30 +391,6 @@ export const productCatalogue = [
         "fileName": "bi-019.jpg",
         "position": 1,
         "quality": "high-resolution"
-      },
-      {
-        "url": "/product-images/BID-RUG-019_02.jpeg",
-        "type": "image",
-        "fileName": "BID-RUG-019_02.jpeg",
-        "position": 2
-      },
-      {
-        "url": "/product-images/BID-RUG-019_03.jpeg",
-        "type": "image",
-        "fileName": "BID-RUG-019_03.jpeg",
-        "position": 3
-      },
-      {
-        "url": "/product-images/BID-RUG-019_04.jpeg",
-        "type": "image",
-        "fileName": "BID-RUG-019_04.jpeg",
-        "position": 4
-      },
-      {
-        "url": "/product-images/BID-RUG-019_05.jpeg",
-        "type": "image",
-        "fileName": "BID-RUG-019_05.jpeg",
-        "position": 5
       }
     ],
     "galleryImageFiles": [
@@ -478,7 +400,7 @@ export const productCatalogue = [
       "BID-RUG-019_04.jpeg",
       "BID-RUG-019_05.jpeg"
     ],
-    "imageCount": 5,
+    "imageCount": 1,
     "workbookImageCount": 5,
     "rooms": [
       "living-room",
@@ -587,42 +509,6 @@ export const productCatalogue = [
         "fileName": "bi-031.jpg",
         "position": 1,
         "quality": "high-resolution"
-      },
-      {
-        "url": "/product-images/BID-RUG-031_02.jpeg",
-        "type": "image",
-        "fileName": "BID-RUG-031_02.jpeg",
-        "position": 2
-      },
-      {
-        "url": "/product-images/BID-RUG-031_03.jpeg",
-        "type": "image",
-        "fileName": "BID-RUG-031_03.jpeg",
-        "position": 3
-      },
-      {
-        "url": "/product-images/BID-RUG-031_04.jpeg",
-        "type": "image",
-        "fileName": "BID-RUG-031_04.jpeg",
-        "position": 4
-      },
-      {
-        "url": "/product-images/BID-RUG-031_05.jpeg",
-        "type": "image",
-        "fileName": "BID-RUG-031_05.jpeg",
-        "position": 5
-      },
-      {
-        "url": "/product-images/BID-RUG-031_06.jpeg",
-        "type": "image",
-        "fileName": "BID-RUG-031_06.jpeg",
-        "position": 6
-      },
-      {
-        "url": "/product-images/BID-RUG-031_07.jpeg",
-        "type": "image",
-        "fileName": "BID-RUG-031_07.jpeg",
-        "position": 7
       }
     ],
     "galleryImageFiles": [
@@ -634,7 +520,7 @@ export const productCatalogue = [
       "BID-RUG-031_06.jpeg",
       "BID-RUG-031_07.jpeg"
     ],
-    "imageCount": 7,
+    "imageCount": 1,
     "workbookImageCount": 7,
     "rooms": [
       "living-room",
@@ -687,18 +573,6 @@ export const productCatalogue = [
         "fileName": "bi-033.jpg",
         "position": 1,
         "quality": "high-resolution"
-      },
-      {
-        "url": "/product-images/BID-RUG-033_02.jpeg",
-        "type": "image",
-        "fileName": "BID-RUG-033_02.jpeg",
-        "position": 2
-      },
-      {
-        "url": "/product-images/BID-RUG-033_03.jpeg",
-        "type": "image",
-        "fileName": "BID-RUG-033_03.jpeg",
-        "position": 3
       }
     ],
     "galleryImageFiles": [
@@ -706,7 +580,7 @@ export const productCatalogue = [
       "BID-RUG-033_02.jpeg",
       "BID-RUG-033_03.jpeg"
     ],
-    "imageCount": 3,
+    "imageCount": 1,
     "workbookImageCount": 3,
     "rooms": [
       "living-room",
@@ -757,19 +631,13 @@ export const productCatalogue = [
         "fileName": "bi-036.jpg",
         "position": 1,
         "quality": "high-resolution"
-      },
-      {
-        "url": "/product-images/BID-SOF-036_02.jpeg",
-        "type": "image",
-        "fileName": "BID-SOF-036_02.jpeg",
-        "position": 2
       }
     ],
     "galleryImageFiles": [
       "BID-SOF-036_01.jpeg",
       "BID-SOF-036_02.jpeg"
     ],
-    "imageCount": 2,
+    "imageCount": 1,
     "workbookImageCount": 2,
     "rooms": [],
     "slug": "light-grey-fabric-sofa-bid-sof-036",
@@ -817,30 +685,6 @@ export const productCatalogue = [
         "fileName": "bi-043.jpg",
         "position": 1,
         "quality": "high-resolution"
-      },
-      {
-        "url": "/product-images/BID-SOF-043_02.jpeg",
-        "type": "image",
-        "fileName": "BID-SOF-043_02.jpeg",
-        "position": 2
-      },
-      {
-        "url": "/product-images/BID-SOF-043_03.jpeg",
-        "type": "image",
-        "fileName": "BID-SOF-043_03.jpeg",
-        "position": 3
-      },
-      {
-        "url": "/product-images/BID-SOF-043_04.jpeg",
-        "type": "image",
-        "fileName": "BID-SOF-043_04.jpeg",
-        "position": 4
-      },
-      {
-        "url": "/product-images/BID-SOF-043_05.jpeg",
-        "type": "image",
-        "fileName": "BID-SOF-043_05.jpeg",
-        "position": 5
       }
     ],
     "galleryImageFiles": [
@@ -850,7 +694,7 @@ export const productCatalogue = [
       "BID-SOF-043_04.jpeg",
       "BID-SOF-043_05.jpeg"
     ],
-    "imageCount": 5,
+    "imageCount": 1,
     "workbookImageCount": 5,
     "rooms": [],
     "slug": "light-grey-fabric-sofa-design-02-bid-sof-043",
@@ -898,19 +742,13 @@ export const productCatalogue = [
         "fileName": "bi-048.jpg",
         "position": 1,
         "quality": "high-resolution"
-      },
-      {
-        "url": "/product-images/BID-CHR-048_02.jpeg",
-        "type": "image",
-        "fileName": "BID-CHR-048_02.jpeg",
-        "position": 2
       }
     ],
     "galleryImageFiles": [
       "BID-CHR-048_01.jpeg",
       "BID-CHR-048_02.jpeg"
     ],
-    "imageCount": 2,
+    "imageCount": 1,
     "workbookImageCount": 2,
     "rooms": [
       "living-room",
@@ -961,19 +799,13 @@ export const productCatalogue = [
         "fileName": "bi-050.jpg",
         "position": 1,
         "quality": "high-resolution"
-      },
-      {
-        "url": "/product-images/BID-CHR-050_02.jpeg",
-        "type": "image",
-        "fileName": "BID-CHR-050_02.jpeg",
-        "position": 2
       }
     ],
     "galleryImageFiles": [
       "BID-CHR-050_01.jpeg",
       "BID-CHR-050_02.jpeg"
     ],
-    "imageCount": 2,
+    "imageCount": 1,
     "workbookImageCount": 2,
     "rooms": [
       "living-room",
@@ -1024,30 +856,6 @@ export const productCatalogue = [
         "fileName": "bi-052.jpg",
         "position": 1,
         "quality": "high-resolution"
-      },
-      {
-        "url": "/product-images/BID-SOF-052_02.jpeg",
-        "type": "image",
-        "fileName": "BID-SOF-052_02.jpeg",
-        "position": 2
-      },
-      {
-        "url": "/product-images/BID-SOF-052_03.jpeg",
-        "type": "image",
-        "fileName": "BID-SOF-052_03.jpeg",
-        "position": 3
-      },
-      {
-        "url": "/product-images/BID-SOF-052_04.jpeg",
-        "type": "image",
-        "fileName": "BID-SOF-052_04.jpeg",
-        "position": 4
-      },
-      {
-        "url": "/product-images/BID-SOF-052_05.jpeg",
-        "type": "image",
-        "fileName": "BID-SOF-052_05.jpeg",
-        "position": 5
       }
     ],
     "galleryImageFiles": [
@@ -1057,7 +865,7 @@ export const productCatalogue = [
       "BID-SOF-052_04.jpeg",
       "BID-SOF-052_05.jpeg"
     ],
-    "imageCount": 5,
+    "imageCount": 1,
     "workbookImageCount": 5,
     "rooms": [],
     "slug": "light-grey-fabric-sofa-design-03-bid-sof-052",
@@ -1106,24 +914,6 @@ export const productCatalogue = [
         "fileName": "bi-062.jpg",
         "position": 1,
         "quality": "high-resolution"
-      },
-      {
-        "url": "/product-images/BID-CHR-062_02.jpeg",
-        "type": "image",
-        "fileName": "BID-CHR-062_02.jpeg",
-        "position": 2
-      },
-      {
-        "url": "/product-images/BID-CHR-062_03.jpeg",
-        "type": "image",
-        "fileName": "BID-CHR-062_03.jpeg",
-        "position": 3
-      },
-      {
-        "url": "/product-images/BID-CHR-062_04.jpeg",
-        "type": "image",
-        "fileName": "BID-CHR-062_04.jpeg",
-        "position": 4
       }
     ],
     "galleryImageFiles": [
@@ -1132,7 +922,7 @@ export const productCatalogue = [
       "BID-CHR-062_03.jpeg",
       "BID-CHR-062_04.jpeg"
     ],
-    "imageCount": 4,
+    "imageCount": 1,
     "workbookImageCount": 4,
     "rooms": [
       "living-room",
@@ -1183,24 +973,6 @@ export const productCatalogue = [
         "fileName": "bi-066.jpg",
         "position": 1,
         "quality": "high-resolution"
-      },
-      {
-        "url": "/product-images/BID-SOF-066_02.jpeg",
-        "type": "image",
-        "fileName": "BID-SOF-066_02.jpeg",
-        "position": 2
-      },
-      {
-        "url": "/product-images/BID-SOF-066_03.jpeg",
-        "type": "image",
-        "fileName": "BID-SOF-066_03.jpeg",
-        "position": 3
-      },
-      {
-        "url": "/product-images/BID-SOF-066_04.jpeg",
-        "type": "image",
-        "fileName": "BID-SOF-066_04.jpeg",
-        "position": 4
       }
     ],
     "galleryImageFiles": [
@@ -1209,7 +981,7 @@ export const productCatalogue = [
       "BID-SOF-066_03.jpeg",
       "BID-SOF-066_04.jpeg"
     ],
-    "imageCount": 4,
+    "imageCount": 1,
     "workbookImageCount": 4,
     "rooms": [],
     "slug": "light-grey-fabric-sofa-design-04-bid-sof-066",
@@ -1257,30 +1029,6 @@ export const productCatalogue = [
         "fileName": "bi-069.jpg",
         "position": 1,
         "quality": "high-resolution"
-      },
-      {
-        "url": "/product-images/BID-SOF-069_02.jpeg",
-        "type": "image",
-        "fileName": "BID-SOF-069_02.jpeg",
-        "position": 2
-      },
-      {
-        "url": "/product-images/BID-SOF-069_03.jpeg",
-        "type": "image",
-        "fileName": "BID-SOF-069_03.jpeg",
-        "position": 3
-      },
-      {
-        "url": "/product-images/BID-SOF-069_04.jpeg",
-        "type": "image",
-        "fileName": "BID-SOF-069_04.jpeg",
-        "position": 4
-      },
-      {
-        "url": "/product-images/BID-SOF-069_05.jpeg",
-        "type": "image",
-        "fileName": "BID-SOF-069_05.jpeg",
-        "position": 5
       }
     ],
     "galleryImageFiles": [
@@ -1290,7 +1038,7 @@ export const productCatalogue = [
       "BID-SOF-069_04.jpeg",
       "BID-SOF-069_05.jpeg"
     ],
-    "imageCount": 5,
+    "imageCount": 1,
     "workbookImageCount": 5,
     "rooms": [],
     "slug": "light-grey-fabric-sofa-design-05-bid-sof-069",
@@ -1338,84 +1086,6 @@ export const productCatalogue = [
         "fileName": "bi-084.jpg",
         "position": 1,
         "quality": "high-resolution"
-      },
-      {
-        "url": "/product-images/BID-SOF-084_02.jpeg",
-        "type": "image",
-        "fileName": "BID-SOF-084_02.jpeg",
-        "position": 2
-      },
-      {
-        "url": "/product-images/BID-SOF-084_03.jpeg",
-        "type": "image",
-        "fileName": "BID-SOF-084_03.jpeg",
-        "position": 3
-      },
-      {
-        "url": "/product-images/BID-SOF-084_04.jpeg",
-        "type": "image",
-        "fileName": "BID-SOF-084_04.jpeg",
-        "position": 4
-      },
-      {
-        "url": "/product-images/BID-SOF-084_05.jpeg",
-        "type": "image",
-        "fileName": "BID-SOF-084_05.jpeg",
-        "position": 5
-      },
-      {
-        "url": "/product-images/BID-SOF-084_06.jpeg",
-        "type": "image",
-        "fileName": "BID-SOF-084_06.jpeg",
-        "position": 6
-      },
-      {
-        "url": "/product-images/BID-SOF-084_07.jpeg",
-        "type": "image",
-        "fileName": "BID-SOF-084_07.jpeg",
-        "position": 7
-      },
-      {
-        "url": "/product-images/BID-SOF-084_08.jpeg",
-        "type": "image",
-        "fileName": "BID-SOF-084_08.jpeg",
-        "position": 8
-      },
-      {
-        "url": "/product-images/BID-SOF-084_09.jpeg",
-        "type": "image",
-        "fileName": "BID-SOF-084_09.jpeg",
-        "position": 9
-      },
-      {
-        "url": "/product-images/BID-SOF-084_10.jpeg",
-        "type": "image",
-        "fileName": "BID-SOF-084_10.jpeg",
-        "position": 10
-      },
-      {
-        "url": "/product-images/BID-SOF-084_11.jpeg",
-        "type": "image",
-        "fileName": "BID-SOF-084_11.jpeg",
-        "position": 11
-      },
-      {
-        "url": "/product-images/BID-SOF-084_12.jpeg",
-        "type": "image",
-        "fileName": "BID-SOF-084_12.jpeg",
-        "position": 12
-      },
-      {
-        "url": "/product-images/BID-SOF-084_13.jpeg",
-        "type": "image",
-        "fileName": "BID-SOF-084_13.jpeg",
-        "position": 13
-      },
-      {
-        "url": "/product-images/BID-SOF-084_14.jpeg",
-        "type": "image",
-        "fileName": "BID-SOF-084_14.jpeg",
-        "position": 14
       }
     ],
     "galleryImageFiles": [
@@ -1434,7 +1104,7 @@ export const productCatalogue = [
       "BID-SOF-084_13.jpeg",
       "BID-SOF-084_14.jpeg"
     ],
-    "imageCount": 14,
+    "imageCount": 1,
     "workbookImageCount": 14,
     "rooms": [],
     "slug": "sand-fabric-sofa-bid-sof-084",
@@ -1538,42 +1208,6 @@ export const productCatalogue = [
         "fileName": "bi-104.jpg",
         "position": 1,
         "quality": "high-resolution"
-      },
-      {
-        "url": "/product-images/BID-LMP-104_02.jpeg",
-        "type": "image",
-        "fileName": "BID-LMP-104_02.jpeg",
-        "position": 2
-      },
-      {
-        "url": "/product-images/BID-LMP-104_03.jpeg",
-        "type": "image",
-        "fileName": "BID-LMP-104_03.jpeg",
-        "position": 3
-      },
-      {
-        "url": "/product-images/BID-LMP-104_04.jpeg",
-        "type": "image",
-        "fileName": "BID-LMP-104_04.jpeg",
-        "position": 4
-      },
-      {
-        "url": "/product-images/BID-LMP-104_05.jpeg",
-        "type": "image",
-        "fileName": "BID-LMP-104_05.jpeg",
-        "position": 5
-      },
-      {
-        "url": "/product-images/BID-LMP-104_06.jpeg",
-        "type": "image",
-        "fileName": "BID-LMP-104_06.jpeg",
-        "position": 6
-      },
-      {
-        "url": "/product-images/BID-LMP-104_07.jpeg",
-        "type": "image",
-        "fileName": "BID-LMP-104_07.jpeg",
-        "position": 7
       }
     ],
     "galleryImageFiles": [
@@ -1585,7 +1219,7 @@ export const productCatalogue = [
       "BID-LMP-104_06.jpeg",
       "BID-LMP-104_07.jpeg"
     ],
-    "imageCount": 7,
+    "imageCount": 1,
     "workbookImageCount": 7,
     "rooms": [
       "living-room",
@@ -1637,18 +1271,6 @@ export const productCatalogue = [
         "fileName": "bi-105.jpg",
         "position": 1,
         "quality": "high-resolution"
-      },
-      {
-        "url": "/product-images/BID-SOF-105_02.jpeg",
-        "type": "image",
-        "fileName": "BID-SOF-105_02.jpeg",
-        "position": 2
-      },
-      {
-        "url": "/product-images/BID-SOF-105_03.jpeg",
-        "type": "image",
-        "fileName": "BID-SOF-105_03.jpeg",
-        "position": 3
       }
     ],
     "galleryImageFiles": [
@@ -1656,7 +1278,7 @@ export const productCatalogue = [
       "BID-SOF-105_02.jpeg",
       "BID-SOF-105_03.jpeg"
     ],
-    "imageCount": 3,
+    "imageCount": 1,
     "workbookImageCount": 3,
     "rooms": [],
     "slug": "light-grey-fabric-sofa-design-06-bid-sof-105",
@@ -1704,24 +1326,6 @@ export const productCatalogue = [
         "fileName": "bi-111.jpg",
         "position": 1,
         "quality": "high-resolution"
-      },
-      {
-        "url": "/product-images/BID-CHR-111_02.jpeg",
-        "type": "image",
-        "fileName": "BID-CHR-111_02.jpeg",
-        "position": 2
-      },
-      {
-        "url": "/product-images/BID-CHR-111_03.jpeg",
-        "type": "image",
-        "fileName": "BID-CHR-111_03.jpeg",
-        "position": 3
-      },
-      {
-        "url": "/product-images/BID-CHR-111_04.jpeg",
-        "type": "image",
-        "fileName": "BID-CHR-111_04.jpeg",
-        "position": 4
       }
     ],
     "galleryImageFiles": [
@@ -1730,7 +1334,7 @@ export const productCatalogue = [
       "BID-CHR-111_03.jpeg",
       "BID-CHR-111_04.jpeg"
     ],
-    "imageCount": 4,
+    "imageCount": 1,
     "workbookImageCount": 4,
     "rooms": [
       "living-room",
@@ -1838,18 +1442,6 @@ export const productCatalogue = [
         "fileName": "bi-119.jpg",
         "position": 1,
         "quality": "high-resolution"
-      },
-      {
-        "url": "/product-images/BID-TBL-119_02.jpeg",
-        "type": "image",
-        "fileName": "BID-TBL-119_02.jpeg",
-        "position": 2
-      },
-      {
-        "url": "/product-images/BID-TBL-119_03.jpeg",
-        "type": "image",
-        "fileName": "BID-TBL-119_03.jpeg",
-        "position": 3
       }
     ],
     "galleryImageFiles": [
@@ -1857,7 +1449,7 @@ export const productCatalogue = [
       "BID-TBL-119_02.jpeg",
       "BID-TBL-119_03.jpeg"
     ],
-    "imageCount": 3,
+    "imageCount": 1,
     "workbookImageCount": 3,
     "rooms": [
       "living-room",
@@ -1908,24 +1500,6 @@ export const productCatalogue = [
         "fileName": "bi-121.jpg",
         "position": 1,
         "quality": "high-resolution"
-      },
-      {
-        "url": "/product-images/BID-TBL-121_02.jpeg",
-        "type": "image",
-        "fileName": "BID-TBL-121_02.jpeg",
-        "position": 2
-      },
-      {
-        "url": "/product-images/BID-TBL-121_03.jpeg",
-        "type": "image",
-        "fileName": "BID-TBL-121_03.jpeg",
-        "position": 3
-      },
-      {
-        "url": "/product-images/BID-TBL-121_04.jpeg",
-        "type": "image",
-        "fileName": "BID-TBL-121_04.jpeg",
-        "position": 4
       }
     ],
     "galleryImageFiles": [
@@ -1934,7 +1508,7 @@ export const productCatalogue = [
       "BID-TBL-121_03.jpeg",
       "BID-TBL-121_04.jpeg"
     ],
-    "imageCount": 4,
+    "imageCount": 1,
     "workbookImageCount": 4,
     "rooms": [
       "living-room",
@@ -1986,24 +1560,6 @@ export const productCatalogue = [
         "fileName": "bi-125.jpg",
         "position": 1,
         "quality": "high-resolution"
-      },
-      {
-        "url": "/product-images/BID-LMP-125_02.jpeg",
-        "type": "image",
-        "fileName": "BID-LMP-125_02.jpeg",
-        "position": 2
-      },
-      {
-        "url": "/product-images/BID-LMP-125_03.jpeg",
-        "type": "image",
-        "fileName": "BID-LMP-125_03.jpeg",
-        "position": 3
-      },
-      {
-        "url": "/product-images/BID-LMP-125_04.jpeg",
-        "type": "image",
-        "fileName": "BID-LMP-125_04.jpeg",
-        "position": 4
       }
     ],
     "galleryImageFiles": [
@@ -2012,7 +1568,7 @@ export const productCatalogue = [
       "BID-LMP-125_03.jpeg",
       "BID-LMP-125_04.jpeg"
     ],
-    "imageCount": 4,
+    "imageCount": 1,
     "workbookImageCount": 4,
     "rooms": [
       "living-room",
@@ -2118,24 +1674,6 @@ export const productCatalogue = [
         "fileName": "bi-133.jpg",
         "position": 1,
         "quality": "high-resolution"
-      },
-      {
-        "url": "/product-images/BID-TBL-133_02.jpeg",
-        "type": "image",
-        "fileName": "BID-TBL-133_02.jpeg",
-        "position": 2
-      },
-      {
-        "url": "/product-images/BID-TBL-133_03.jpeg",
-        "type": "image",
-        "fileName": "BID-TBL-133_03.jpeg",
-        "position": 3
-      },
-      {
-        "url": "/product-images/BID-TBL-133_04.jpeg",
-        "type": "image",
-        "fileName": "BID-TBL-133_04.jpeg",
-        "position": 4
       }
     ],
     "galleryImageFiles": [
@@ -2144,7 +1682,7 @@ export const productCatalogue = [
       "BID-TBL-133_03.jpeg",
       "BID-TBL-133_04.jpeg"
     ],
-    "imageCount": 4,
+    "imageCount": 1,
     "workbookImageCount": 4,
     "rooms": [
       "living-room",
@@ -2196,19 +1734,13 @@ export const productCatalogue = [
         "fileName": "bi-136.jpg",
         "position": 1,
         "quality": "high-resolution"
-      },
-      {
-        "url": "/product-images/BID-TBL-136_02.jpeg",
-        "type": "image",
-        "fileName": "BID-TBL-136_02.jpeg",
-        "position": 2
       }
     ],
     "galleryImageFiles": [
       "BID-TBL-136_01.jpeg",
       "BID-TBL-136_02.jpeg"
     ],
-    "imageCount": 2,
+    "imageCount": 1,
     "workbookImageCount": 2,
     "rooms": [
       "living-room",
@@ -2259,19 +1791,13 @@ export const productCatalogue = [
         "fileName": "bi-141.jpg",
         "position": 1,
         "quality": "high-resolution"
-      },
-      {
-        "url": "/product-images/BID-CHR-141_02.jpeg",
-        "type": "image",
-        "fileName": "BID-CHR-141_02.jpeg",
-        "position": 2
       }
     ],
     "galleryImageFiles": [
       "BID-CHR-141_01.jpeg",
       "BID-CHR-141_02.jpeg"
     ],
-    "imageCount": 2,
+    "imageCount": 1,
     "workbookImageCount": 2,
     "rooms": [
       "living-room",
@@ -2322,18 +1848,6 @@ export const productCatalogue = [
         "fileName": "bi-143.jpg",
         "position": 1,
         "quality": "high-resolution"
-      },
-      {
-        "url": "/product-images/BID-LMP-143_02.jpeg",
-        "type": "image",
-        "fileName": "BID-LMP-143_02.jpeg",
-        "position": 2
-      },
-      {
-        "url": "/product-images/BID-LMP-143_03.jpeg",
-        "type": "image",
-        "fileName": "BID-LMP-143_03.jpeg",
-        "position": 3
       }
     ],
     "galleryImageFiles": [
@@ -2341,7 +1855,7 @@ export const productCatalogue = [
       "BID-LMP-143_02.jpeg",
       "BID-LMP-143_03.jpeg"
     ],
-    "imageCount": 3,
+    "imageCount": 1,
     "workbookImageCount": 3,
     "rooms": [
       "living-room",
@@ -2393,60 +1907,6 @@ export const productCatalogue = [
         "fileName": "bi-150.jpg",
         "position": 1,
         "quality": "high-resolution"
-      },
-      {
-        "url": "/product-images/BID-SOF-150_02.jpeg",
-        "type": "image",
-        "fileName": "BID-SOF-150_02.jpeg",
-        "position": 2
-      },
-      {
-        "url": "/product-images/BID-SOF-150_03.jpeg",
-        "type": "image",
-        "fileName": "BID-SOF-150_03.jpeg",
-        "position": 3
-      },
-      {
-        "url": "/product-images/BID-SOF-150_04.jpeg",
-        "type": "image",
-        "fileName": "BID-SOF-150_04.jpeg",
-        "position": 4
-      },
-      {
-        "url": "/product-images/BID-SOF-150_05.jpeg",
-        "type": "image",
-        "fileName": "BID-SOF-150_05.jpeg",
-        "position": 5
-      },
-      {
-        "url": "/product-images/BID-SOF-150_06.jpeg",
-        "type": "image",
-        "fileName": "BID-SOF-150_06.jpeg",
-        "position": 6
-      },
-      {
-        "url": "/product-images/BID-SOF-150_07.jpeg",
-        "type": "image",
-        "fileName": "BID-SOF-150_07.jpeg",
-        "position": 7
-      },
-      {
-        "url": "/product-images/BID-SOF-150_08.jpeg",
-        "type": "image",
-        "fileName": "BID-SOF-150_08.jpeg",
-        "position": 8
-      },
-      {
-        "url": "/product-images/BID-SOF-150_09.jpeg",
-        "type": "image",
-        "fileName": "BID-SOF-150_09.jpeg",
-        "position": 9
-      },
-      {
-        "url": "/product-images/BID-SOF-150_10.jpeg",
-        "type": "image",
-        "fileName": "BID-SOF-150_10.jpeg",
-        "position": 10
       }
     ],
     "galleryImageFiles": [
@@ -2461,7 +1921,7 @@ export const productCatalogue = [
       "BID-SOF-150_09.jpeg",
       "BID-SOF-150_10.jpeg"
     ],
-    "imageCount": 10,
+    "imageCount": 1,
     "workbookImageCount": 10,
     "rooms": [],
     "slug": "off-white-fabric-sofa-bid-sof-150",
@@ -2622,24 +2082,6 @@ export const productCatalogue = [
         "fileName": "bi-161.jpg",
         "position": 1,
         "quality": "high-resolution"
-      },
-      {
-        "url": "/product-images/BID-CHR-161_02.jpeg",
-        "type": "image",
-        "fileName": "BID-CHR-161_02.jpeg",
-        "position": 2
-      },
-      {
-        "url": "/product-images/BID-CHR-161_03.jpeg",
-        "type": "image",
-        "fileName": "BID-CHR-161_03.jpeg",
-        "position": 3
-      },
-      {
-        "url": "/product-images/BID-CHR-161_04.jpeg",
-        "type": "image",
-        "fileName": "BID-CHR-161_04.jpeg",
-        "position": 4
       }
     ],
     "galleryImageFiles": [
@@ -2648,7 +2090,7 @@ export const productCatalogue = [
       "BID-CHR-161_03.jpeg",
       "BID-CHR-161_04.jpeg"
     ],
-    "imageCount": 4,
+    "imageCount": 1,
     "workbookImageCount": 4,
     "rooms": [
       "living-room",
@@ -2755,18 +2197,6 @@ export const productCatalogue = [
         "fileName": "bi-165.jpg",
         "position": 1,
         "quality": "high-resolution"
-      },
-      {
-        "url": "/product-images/BID-TBL-165_02.jpeg",
-        "type": "image",
-        "fileName": "BID-TBL-165_02.jpeg",
-        "position": 2
-      },
-      {
-        "url": "/product-images/BID-TBL-165_03.jpeg",
-        "type": "image",
-        "fileName": "BID-TBL-165_03.jpeg",
-        "position": 3
       }
     ],
     "galleryImageFiles": [
@@ -2774,7 +2204,7 @@ export const productCatalogue = [
       "BID-TBL-165_02.jpeg",
       "BID-TBL-165_03.jpeg"
     ],
-    "imageCount": 3,
+    "imageCount": 1,
     "workbookImageCount": 3,
     "rooms": [
       "living-room",
@@ -2826,18 +2256,6 @@ export const productCatalogue = [
         "fileName": "bi-167.jpg",
         "position": 1,
         "quality": "high-resolution"
-      },
-      {
-        "url": "/product-images/BID-DEC-167_02.jpeg",
-        "type": "image",
-        "fileName": "BID-DEC-167_02.jpeg",
-        "position": 2
-      },
-      {
-        "url": "/product-images/BID-DEC-167_03.jpeg",
-        "type": "image",
-        "fileName": "BID-DEC-167_03.jpeg",
-        "position": 3
       }
     ],
     "galleryImageFiles": [
@@ -2845,7 +2263,7 @@ export const productCatalogue = [
       "BID-DEC-167_02.jpeg",
       "BID-DEC-167_03.jpeg"
     ],
-    "imageCount": 3,
+    "imageCount": 1,
     "workbookImageCount": 3,
     "rooms": [
       "living-room",
@@ -2896,19 +2314,13 @@ export const productCatalogue = [
         "fileName": "bi-170.jpg",
         "position": 1,
         "quality": "high-resolution"
-      },
-      {
-        "url": "/product-images/BID-CUS-170_02.jpeg",
-        "type": "image",
-        "fileName": "BID-CUS-170_02.jpeg",
-        "position": 2
       }
     ],
     "galleryImageFiles": [
       "BID-CUS-170_01.jpeg",
       "BID-CUS-170_02.jpeg"
     ],
-    "imageCount": 2,
+    "imageCount": 1,
     "workbookImageCount": 2,
     "rooms": [
       "living-room",
@@ -2960,30 +2372,6 @@ export const productCatalogue = [
         "fileName": "bi-177.jpg",
         "position": 1,
         "quality": "high-resolution"
-      },
-      {
-        "url": "/product-images/BID-CHR-177_02.jpeg",
-        "type": "image",
-        "fileName": "BID-CHR-177_02.jpeg",
-        "position": 2
-      },
-      {
-        "url": "/product-images/BID-CHR-177_03.jpeg",
-        "type": "image",
-        "fileName": "BID-CHR-177_03.jpeg",
-        "position": 3
-      },
-      {
-        "url": "/product-images/BID-CHR-177_04.jpeg",
-        "type": "image",
-        "fileName": "BID-CHR-177_04.jpeg",
-        "position": 4
-      },
-      {
-        "url": "/product-images/BID-CHR-177_05.jpeg",
-        "type": "image",
-        "fileName": "BID-CHR-177_05.jpeg",
-        "position": 5
       }
     ],
     "galleryImageFiles": [
@@ -2993,7 +2381,7 @@ export const productCatalogue = [
       "BID-CHR-177_04.jpeg",
       "BID-CHR-177_05.jpeg"
     ],
-    "imageCount": 5,
+    "imageCount": 1,
     "workbookImageCount": 5,
     "rooms": [
       "living-room",
@@ -3047,18 +2435,6 @@ export const productCatalogue = [
         "fileName": "bi-180.jpg",
         "position": 1,
         "quality": "high-resolution"
-      },
-      {
-        "url": "/product-images/BID-TBL-180_02.jpeg",
-        "type": "image",
-        "fileName": "BID-TBL-180_02.jpeg",
-        "position": 2
-      },
-      {
-        "url": "/product-images/BID-TBL-180_03.jpeg",
-        "type": "image",
-        "fileName": "BID-TBL-180_03.jpeg",
-        "position": 3
       }
     ],
     "galleryImageFiles": [
@@ -3066,7 +2442,7 @@ export const productCatalogue = [
       "BID-TBL-180_02.jpeg",
       "BID-TBL-180_03.jpeg"
     ],
-    "imageCount": 3,
+    "imageCount": 1,
     "workbookImageCount": 3,
     "rooms": [
       "living-room",
@@ -3176,19 +2552,13 @@ export const productCatalogue = [
         "fileName": "bi-183.jpg",
         "position": 1,
         "quality": "high-resolution"
-      },
-      {
-        "url": "/product-images/BID-CUS-183_02.jpeg",
-        "type": "image",
-        "fileName": "BID-CUS-183_02.jpeg",
-        "position": 2
       }
     ],
     "galleryImageFiles": [
       "BID-CUS-183_01.jpeg",
       "BID-CUS-183_02.jpeg"
     ],
-    "imageCount": 2,
+    "imageCount": 1,
     "workbookImageCount": 2,
     "rooms": [
       "living-room",
@@ -3239,19 +2609,13 @@ export const productCatalogue = [
         "fileName": "bi-185.jpg",
         "position": 1,
         "quality": "high-resolution"
-      },
-      {
-        "url": "/product-images/BID-CON-185_02.jpeg",
-        "type": "image",
-        "fileName": "BID-CON-185_02.jpeg",
-        "position": 2
       }
     ],
     "galleryImageFiles": [
       "BID-CON-185_01.jpeg",
       "BID-CON-185_02.jpeg"
     ],
-    "imageCount": 2,
+    "imageCount": 1,
     "workbookImageCount": 2,
     "rooms": [],
     "slug": "walnut-fluted-media-console-bid-con-185",
@@ -3301,19 +2665,13 @@ export const productCatalogue = [
         "fileName": "bi-187.jpg",
         "position": 1,
         "quality": "high-resolution"
-      },
-      {
-        "url": "/product-images/BID-TBL-187_02.jpeg",
-        "type": "image",
-        "fileName": "BID-TBL-187_02.jpeg",
-        "position": 2
       }
     ],
     "galleryImageFiles": [
       "BID-TBL-187_01.jpeg",
       "BID-TBL-187_02.jpeg"
     ],
-    "imageCount": 2,
+    "imageCount": 1,
     "workbookImageCount": 2,
     "rooms": [
       "living-room",
@@ -3422,19 +2780,13 @@ export const productCatalogue = [
         "fileName": "bi-190.jpg",
         "position": 1,
         "quality": "high-resolution"
-      },
-      {
-        "url": "/product-images/BID-CUS-190_02.jpeg",
-        "type": "image",
-        "fileName": "BID-CUS-190_02.jpeg",
-        "position": 2
       }
     ],
     "galleryImageFiles": [
       "BID-CUS-190_01.jpeg",
       "BID-CUS-190_02.jpeg"
     ],
-    "imageCount": 2,
+    "imageCount": 1,
     "workbookImageCount": 2,
     "rooms": [
       "living-room",
@@ -3488,19 +2840,13 @@ export const productCatalogue = [
         "fileName": "bi-191.jpg",
         "position": 1,
         "quality": "high-resolution"
-      },
-      {
-        "url": "/product-images/BID-CUS-191_02.jpeg",
-        "type": "image",
-        "fileName": "BID-CUS-191_02.jpeg",
-        "position": 2
       }
     ],
     "galleryImageFiles": [
       "BID-CUS-191_01.jpeg",
       "BID-CUS-191_02.jpeg"
     ],
-    "imageCount": 2,
+    "imageCount": 1,
     "workbookImageCount": 2,
     "rooms": [
       "living-room",
@@ -3660,18 +3006,6 @@ export const productCatalogue = [
         "fileName": "bi-194.jpg",
         "position": 1,
         "quality": "high-resolution"
-      },
-      {
-        "url": "/product-images/BID-CUS-194_02.jpeg",
-        "type": "image",
-        "fileName": "BID-CUS-194_02.jpeg",
-        "position": 2
-      },
-      {
-        "url": "/product-images/BID-CUS-194_03.jpeg",
-        "type": "image",
-        "fileName": "BID-CUS-194_03.jpeg",
-        "position": 3
       }
     ],
     "galleryImageFiles": [
@@ -3679,7 +3013,7 @@ export const productCatalogue = [
       "BID-CUS-194_02.jpeg",
       "BID-CUS-194_03.jpeg"
     ],
-    "imageCount": 3,
+    "imageCount": 1,
     "workbookImageCount": 3,
     "rooms": [
       "living-room",
@@ -3789,19 +3123,13 @@ export const productCatalogue = [
         "fileName": "bi-196.jpg",
         "position": 1,
         "quality": "high-resolution"
-      },
-      {
-        "url": "/product-images/BID-CUS-196_02.jpeg",
-        "type": "image",
-        "fileName": "BID-CUS-196_02.jpeg",
-        "position": 2
       }
     ],
     "galleryImageFiles": [
       "BID-CUS-196_01.jpeg",
       "BID-CUS-196_02.jpeg"
     ],
-    "imageCount": 2,
+    "imageCount": 1,
     "workbookImageCount": 2,
     "rooms": [
       "living-room",
@@ -3855,24 +3183,6 @@ export const productCatalogue = [
         "fileName": "bi-201.jpg",
         "position": 1,
         "quality": "high-resolution"
-      },
-      {
-        "url": "/product-images/BID-TBL-201_02.jpeg",
-        "type": "image",
-        "fileName": "BID-TBL-201_02.jpeg",
-        "position": 2
-      },
-      {
-        "url": "/product-images/BID-TBL-201_03.jpeg",
-        "type": "image",
-        "fileName": "BID-TBL-201_03.jpeg",
-        "position": 3
-      },
-      {
-        "url": "/product-images/BID-TBL-201_04.jpeg",
-        "type": "image",
-        "fileName": "BID-TBL-201_04.jpeg",
-        "position": 4
       }
     ],
     "galleryImageFiles": [
@@ -3881,7 +3191,7 @@ export const productCatalogue = [
       "BID-TBL-201_03.jpeg",
       "BID-TBL-201_04.jpeg"
     ],
-    "imageCount": 4,
+    "imageCount": 1,
     "workbookImageCount": 4,
     "rooms": [
       "living-room",
@@ -4211,19 +3521,13 @@ export const productCatalogue = [
         "fileName": "bi-210.jpg",
         "position": 1,
         "quality": "high-resolution"
-      },
-      {
-        "url": "/product-images/BID-CHR-210_02.jpeg",
-        "type": "image",
-        "fileName": "BID-CHR-210_02.jpeg",
-        "position": 2
       }
     ],
     "galleryImageFiles": [
       "BID-CHR-210_01.jpeg",
       "BID-CHR-210_02.jpeg"
     ],
-    "imageCount": 2,
+    "imageCount": 1,
     "workbookImageCount": 2,
     "rooms": [
       "living-room",
@@ -4277,30 +3581,6 @@ export const productCatalogue = [
         "fileName": "bi-217.jpg",
         "position": 1,
         "quality": "high-resolution"
-      },
-      {
-        "url": "/product-images/BID-BED-217_02.jpeg",
-        "type": "image",
-        "fileName": "BID-BED-217_02.jpeg",
-        "position": 2
-      },
-      {
-        "url": "/product-images/BID-BED-217_03.jpeg",
-        "type": "image",
-        "fileName": "BID-BED-217_03.jpeg",
-        "position": 3
-      },
-      {
-        "url": "/product-images/BID-BED-217_04.jpeg",
-        "type": "image",
-        "fileName": "BID-BED-217_04.jpeg",
-        "position": 4
-      },
-      {
-        "url": "/product-images/BID-BED-217_05.jpeg",
-        "type": "image",
-        "fileName": "BID-BED-217_05.jpeg",
-        "position": 5
       }
     ],
     "galleryImageFiles": [
@@ -4310,7 +3590,7 @@ export const productCatalogue = [
       "BID-BED-217_04.jpeg",
       "BID-BED-217_05.jpeg"
     ],
-    "imageCount": 5,
+    "imageCount": 1,
     "workbookImageCount": 5,
     "rooms": [
       "bedroom"
@@ -4364,19 +3644,13 @@ export const productCatalogue = [
         "fileName": "bi-218.jpg",
         "position": 1,
         "quality": "high-resolution"
-      },
-      {
-        "url": "/product-images/BID-BED-218_02.jpeg",
-        "type": "image",
-        "fileName": "BID-BED-218_02.jpeg",
-        "position": 2
       }
     ],
     "galleryImageFiles": [
       "BID-BED-218_01.jpeg",
       "BID-BED-218_02.jpeg"
     ],
-    "imageCount": 2,
+    "imageCount": 1,
     "workbookImageCount": 2,
     "rooms": [
       "bedroom"
@@ -4426,18 +3700,6 @@ export const productCatalogue = [
         "fileName": "bi-223.jpg",
         "position": 1,
         "quality": "high-resolution"
-      },
-      {
-        "url": "/product-images/BID-DEC-223_02.jpeg",
-        "type": "image",
-        "fileName": "BID-DEC-223_02.jpeg",
-        "position": 2
-      },
-      {
-        "url": "/product-images/BID-DEC-223_03.jpeg",
-        "type": "image",
-        "fileName": "BID-DEC-223_03.jpeg",
-        "position": 3
       }
     ],
     "galleryImageFiles": [
@@ -4445,7 +3707,7 @@ export const productCatalogue = [
       "BID-DEC-223_02.jpeg",
       "BID-DEC-223_03.jpeg"
     ],
-    "imageCount": 3,
+    "imageCount": 1,
     "workbookImageCount": 3,
     "rooms": [
       "living-room",
@@ -4724,19 +3986,13 @@ export const productCatalogue = [
         "fileName": "bi-229.jpg",
         "position": 1,
         "quality": "high-resolution"
-      },
-      {
-        "url": "/product-images/BID-PND-229_02.jpeg",
-        "type": "image",
-        "fileName": "BID-PND-229_02.jpeg",
-        "position": 2
       }
     ],
     "galleryImageFiles": [
       "BID-PND-229_01.jpeg",
       "BID-PND-229_02.jpeg"
     ],
-    "imageCount": 2,
+    "imageCount": 1,
     "workbookImageCount": 2,
     "rooms": [],
     "slug": "black-three-light-geometric-pendant-bid-pnd-229",
@@ -4841,18 +4097,6 @@ export const productCatalogue = [
         "fileName": "bi-233.jpg",
         "position": 1,
         "quality": "high-resolution"
-      },
-      {
-        "url": "/product-images/BID-TBL-233_02.jpeg",
-        "type": "image",
-        "fileName": "BID-TBL-233_02.jpeg",
-        "position": 2
-      },
-      {
-        "url": "/product-images/BID-TBL-233_03.jpeg",
-        "type": "image",
-        "fileName": "BID-TBL-233_03.jpeg",
-        "position": 3
       }
     ],
     "galleryImageFiles": [
@@ -4860,7 +4104,7 @@ export const productCatalogue = [
       "BID-TBL-233_02.jpeg",
       "BID-TBL-233_03.jpeg"
     ],
-    "imageCount": 3,
+    "imageCount": 1,
     "workbookImageCount": 3,
     "rooms": [
       "living-room",

@@ -19,7 +19,45 @@ async function mutateList(env: AppEnv, key: string, updater: (items: any[]) => a
   return after;
 }
 
-export const onRequest: PagesFunction<AppEnv> = async ({ request, env }) => {
+// Public responses that are identical for every visitor, so Cloudflare's edge can serve them without touching D1.
+const EDGE_CACHED_ROUTES = new Set(['products', 'homepage-content', 'company-content', 'page', 'news', 'reviews']);
+// Purged after any successful admin write so publishes show up straight away.
+const PURGED_ON_WRITE = ['products', 'homepage-content', 'company-content', 'news'];
+const EDGE_TTL_SECONDS = 300;
+const BROWSER_CACHE_CONTROL = 'public, max-age=60, stale-while-revalidate=86400';
+
+export const onRequest: PagesFunction<AppEnv> = async (context) => {
+  const { request, waitUntil } = context;
+  const url = new URL(request.url);
+  const method = request.method.toUpperCase();
+  const [root = '', id = ''] = url.pathname.replace(/^\/api\/?/, '').split('/').filter(Boolean);
+  const cache = (caches as unknown as { default: Cache }).default;
+
+  // Signed-in requests (the admin) always read fresh data.
+  if (method === 'GET' && EDGE_CACHED_ROUTES.has(root) && id !== 'admin' && !request.headers.has('Authorization')) {
+    const cacheKey = new Request(url.toString(), { method: 'GET' });
+    const hit = await cache.match(cacheKey);
+    if (hit) return withHeaders(hit, { 'Cache-Control': BROWSER_CACHE_CONTROL, Vary: 'Authorization', 'X-Edge-Cache': 'HIT' });
+    const response = await handle(context);
+    if (response.status !== 200) return response;
+    waitUntil(cache.put(cacheKey, withHeaders(response.clone(), { 'Cache-Control': `public, max-age=${EDGE_TTL_SECONDS}` })));
+    return withHeaders(response, { 'Cache-Control': BROWSER_CACHE_CONTROL, Vary: 'Authorization', 'X-Edge-Cache': 'MISS' });
+  }
+
+  const response = await handle(context);
+  if (method !== 'GET' && method !== 'OPTIONS' && response.status < 400) {
+    waitUntil(Promise.all(PURGED_ON_WRITE.map((key) => cache.delete(new Request(`${url.origin}/api/${key}`)))));
+  }
+  return response;
+};
+
+function withHeaders(response: Response, headers: Record<string, string>) {
+  const copy = new Response(response.body, response);
+  for (const [name, value] of Object.entries(headers)) copy.headers.set(name, value);
+  return copy;
+}
+
+const handle: PagesFunction<AppEnv> = async ({ request, env }) => {
   const url = new URL(request.url);
   const path = url.pathname.replace(/^\/api\/?/, '').replace(/\/$/, '');
   const method = request.method.toUpperCase();

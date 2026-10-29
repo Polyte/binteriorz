@@ -42,6 +42,8 @@ export const ParallaxHeader = ({ image, title, subtitle }: ParallaxHeaderProps) 
           <ImageWithFallback
             src={image}
             alt={title}
+            loading="eager"
+            fetchPriority="high"
             className="w-full h-full object-cover"
           />
         </motion.div>

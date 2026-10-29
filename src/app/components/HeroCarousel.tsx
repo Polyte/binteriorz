@@ -251,6 +251,7 @@ export const HeroCarousel = ({ slides = defaultSlides }: { slides?: HeroSlide[] 
                   alt={activeSlide.imageAlt || activeSlide.title}
                   className="h-full w-full object-contain object-bottom [transform-origin:bottom_center] scale-[0.9] drop-shadow-[0_45px_60px_rgba(0,0,0,0.55)] sm:scale-[0.78] lg:translate-x-[15%] lg:scale-[0.84] xl:translate-x-[6%]"
                   loading={current === 0 ? "eager" : "lazy"}
+                  fetchPriority={current === 0 ? "high" : "auto"}
                   decoding="async"
                 />
               ) : (
@@ -259,6 +260,7 @@ export const HeroCarousel = ({ slides = defaultSlides }: { slides?: HeroSlide[] 
                   alt={activeSlide.imageAlt || activeSlide.title}
                   className="h-full w-full object-cover brightness-[1.14] contrast-[1.04] saturate-[1.03]"
                   loading={current === 0 ? "eager" : "lazy"}
+                  fetchPriority={current === 0 ? "high" : "auto"}
                   decoding="async"
                 />
               )}

@@ -99,7 +99,7 @@ export const ProductCard = ({ id, name, price, image, image_url, category, mater
         <ShoppingBag className="h-3.5 w-3.5" />{isSoldOut ? 'Sold out' : 'Add to cart'}
       </button>
 
-      <ImageLightbox isOpen={lightboxOpen} onClose={() => setLightboxOpen(false)} image={displayImage} alt={name} productName={name} productPrice={price} productCategory={category} productId={id} colorHex={colorHex} onAddToCart={onAddToCart} onToggleWishlist={onToggleWishlist} onViewDetails={() => navigate(`/product/${id}`)} isWishlisted={isWishlisted} />
+      <ImageLightbox isOpen={lightboxOpen} onClose={() => setLightboxOpen(false)} image={displayImage} alt={name} productName={name} productPrice={price} productCategory={category} productId={id} colorHex={colorHex} productMaterial={material} productColor={color} onAddToCart={onAddToCart} onToggleWishlist={onToggleWishlist} onViewDetails={() => navigate(`/product/${id}`)} isWishlisted={isWishlisted} />
     </motion.article>
   );
 };

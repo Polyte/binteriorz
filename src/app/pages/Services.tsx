@@ -17,7 +17,7 @@ export const Services = () => {
 
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="min-h-screen bg-white">
-      <ParallaxHeader image="/product-images/hero-studio-artistry.jpg" title="Our Services" subtitle={content.sections.hero.eyebrow} />
+      <ParallaxHeader image="/product-images/bi-036.jpg" title="Our Services" subtitle={content.sections.hero.eyebrow} />
 
       {/* Services grid */}
       {services.enabled && (

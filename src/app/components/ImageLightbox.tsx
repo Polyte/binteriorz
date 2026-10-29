@@ -17,6 +17,8 @@ interface ImageLightboxProps {
   productCategory?: string;
   productId?: string;
   colorHex?: string;
+  productMaterial?: string;
+  productColor?: string;
   onAddToCart?: () => void;
   onToggleWishlist?: () => void;
   onViewDetails?: () => void;
@@ -33,11 +35,17 @@ export const ImageLightbox = ({
   productCategory,
   productId,
   colorHex,
+  productMaterial,
+  productColor,
   onAddToCart,
   onToggleWishlist,
   onViewDetails,
   isWishlisted,
 }: ImageLightboxProps) => {
+  const details = [
+    { label: 'Material', value: productMaterial },
+    { label: 'Colour', value: productColor },
+  ].filter((detail): detail is { label: string; value: string } => Boolean(detail.value && !/to confirm/i.test(detail.value)));
   const [scale, setScale] = useState(1);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
@@ -293,17 +301,17 @@ export const ImageLightbox = ({
                     {/* Divider */}
                     <div className="h-px bg-white/10" />
 
-                    {/* Quick details */}
-                    <div className="space-y-3">
-                      <div>
-                        <p className="text-[9px] uppercase tracking-[0.3em] font-bold text-white/30 mb-1">Materiality</p>
-                        <p className="text-xs text-white/60 font-light">Premium Oak, Tactile Velvet, Brushed Steel</p>
+                    {/* Quick details: only real catalogue facts */}
+                    {details.length > 0 && (
+                      <div className="space-y-3">
+                        {details.map(({ label, value }) => (
+                          <div key={label}>
+                            <p className="text-[9px] uppercase tracking-[0.3em] font-bold text-white/30 mb-1">{label}</p>
+                            <p className="text-xs text-white/60 font-light">{value}</p>
+                          </div>
+                        ))}
                       </div>
-                      <div>
-                        <p className="text-[9px] uppercase tracking-[0.3em] font-bold text-white/30 mb-1">Origin</p>
-                        <p className="text-xs text-white/60 font-light">Alberton Workshop, South Africa</p>
-                      </div>
-                    </div>
+                    )}
                   </div>
 
                   {/* Actions */}

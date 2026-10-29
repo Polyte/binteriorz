@@ -73,12 +73,12 @@ export const Home = ({ products, onAddToCart, onToggleWishlist, onQuickView, wis
       {/* A practical guide for customers considering a bespoke piece */}
       {home.sections.bespoke.enabled && <section
         className="relative z-[30] w-full overflow-visible bg-[#171510] bg-cover bg-center bg-fixed py-16 text-white md:py-20"
-        style={{ backgroundImage: "url('https://images.unsplash.com/photo-1696761868245-3e96dfb8620b?auto=format&fit=crop&q=85&w=2200')" }}
+        style={{ backgroundImage: "url('/product-images/bi-052.jpg')" }}
       >
         <div className="pointer-events-none absolute inset-x-0 top-0 z-[9999] mx-auto hidden max-w-[1480px] px-6 sm:px-8 md:block lg:px-12">
           <img
             data-wobble-reveal
-            src="/bespoke-cushion.png"
+            src="/bespoke-cushion.webp"
             alt="Art cushion featuring an African woman in an orange headwrap"
             loading="lazy"
             decoding="async"

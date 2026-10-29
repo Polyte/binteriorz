@@ -56,6 +56,10 @@ const parseMoney = (value) => {
 const splitList = (value) => String(value || '').split(',').map((item) => item.trim()).filter(Boolean);
 const slugify = (value) => String(value || '').trim().toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 
+// Workbook gallery pictures are often small embedded thumbnails that look blurry when enlarged on the site.
+const MIN_GALLERY_WIDTH = 600;
+const imageWidth = (filePath) => Number(execFileSync('magick', ['identify', '-format', '%w', `${filePath}[0]`]).toString());
+
 const galleryBySku = new Map();
 for (const [index, row] of galleryRows.entries()) {
   const sku = String(row['Internal SKU'] || '').trim();
@@ -113,9 +117,8 @@ const products = productRows.map((row, index) => {
     position: 1,
     quality: 'high-resolution',
   };
-  const gallery = workbookGallery.length
-    ? [highResolutionImage, ...workbookGallery.slice(1)]
-    : [highResolutionImage];
+  const sharpExtras = workbookGallery.slice(1).filter((item) => imageWidth(path.join(imageDir, item.fileName)) >= MIN_GALLERY_WIDTH);
+  const gallery = [highResolutionImage, ...sharpExtras];
   const imageCount = gallery.length;
   const availability = String(row.Availability || '').trim();
   const searchTags = splitList(row['Search Tags']);

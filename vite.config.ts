@@ -19,4 +19,22 @@ export default defineConfig({
 
   // File types to support raw imports. Never add .css, .tsx, or .ts files to this.
   assetsInclude: ['**/*.svg', '**/*.csv'],
+
+  build: {
+    target: 'es2020',
+    rollupOptions: {
+      output: {
+        // Rarely-changing libraries and catalogue data get their own long-cached files,
+        // so a site update only re-downloads the code that actually changed.
+        manualChunks(id) {
+          if (id.includes('/src/app/data/catalogue')) return 'catalogue';
+          if (!id.includes('node_modules')) return undefined;
+          if (/node_modules\/(\.pnpm\/)?(react|react-dom|scheduler|react-router)[@/]/.test(id)) return 'vendor-react';
+          if (/node_modules\/(\.pnpm\/)?(motion|framer-motion|motion-dom|motion-utils)[@/]/.test(id)) return 'vendor-motion';
+          if (/node_modules\/(\.pnpm\/)?gsap[@/]/.test(id)) return 'vendor-gsap';
+          return undefined;
+        },
+      },
+    },
+  },
 })
