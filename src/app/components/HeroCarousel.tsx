@@ -2,6 +2,8 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import { ChevronLeft, ChevronRight, ArrowRight, Pause, Play } from 'lucide-react';
 import { ScrollIndicator } from './ScrollIndicator';
+import { bestImageUrl, webpSrcSet } from './figma/ImageWithFallback';
+import { useUserInteracted } from '../utils/useUserInteracted';
 import { Link } from 'react-router';
 
 const defaultSlides = [
@@ -76,7 +78,14 @@ export const HeroCarousel = ({ slides = defaultSlides }: { slides?: HeroSlide[] 
   const [direction, setDirection] = useState(1);
   const [isPaused, setIsPaused] = useState(false);
   const [isHeroInView, setIsHeroInView] = useState(true);
+  // Show the slide photo first; video starts after the visitor's first interaction.
+  const videoAllowed = useUserInteracted();
   const prefersReducedMotion = useReducedMotion();
+  // The first slide renders without its entrance animation so it paints immediately on page load;
+  // later slides animate in as usual.
+  const [hasAdvanced, setHasAdvanced] = useState(false);
+  useEffect(() => { if (current !== 0) setHasAdvanced(true); }, [current]);
+  const skipIntro = !hasAdvanced;
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -88,15 +97,6 @@ export const HeroCarousel = ({ slides = defaultSlides }: { slides?: HeroSlide[] 
   }, []);
 
   useEffect(() => {
-    const preconnects = ['https://www.youtube.com'];
-    preconnects.forEach(url => {
-      if (document.head.querySelector(`link[rel="preconnect"][href="${url}"]`)) return;
-      const link = document.createElement('link');
-      link.rel = 'preconnect';
-      link.href = url;
-      document.head.appendChild(link);
-    });
-
     const conn = (navigator as any).connection;
     if (conn) {
       const checkConnection = () => {
@@ -120,7 +120,7 @@ export const HeroCarousel = ({ slides = defaultSlides }: { slides?: HeroSlide[] 
   }, [visibleSlides.length]);
 
   const activeSlide = visibleSlides[current] || visibleSlides[0];
-  const isActiveVideo = Boolean(activeSlide.video && !isLowBandwidth);
+  const isActiveVideo = Boolean(activeSlide.video && !isLowBandwidth && videoAllowed);
   const isContain = activeSlide.fit === 'contain';
   const nextIndex = (current + 1) % visibleSlides.length;
   const nextSlide = visibleSlides[nextIndex];
@@ -190,11 +190,12 @@ export const HeroCarousel = ({ slides = defaultSlides }: { slides?: HeroSlide[] 
     };
   }, [current, isActiveVideo, isHeroInView, isPaused, next, sendVideoCommand]);
 
+  // Warm the next slide's photo once the visitor is engaging, without competing with the first paint.
   useEffect(() => {
-    if (!nextSlide?.image) return;
+    if (!nextSlide?.image || !videoAllowed) return;
     const image = new Image();
-    image.src = nextSlide.image;
-  }, [nextSlide?.image]);
+    image.src = bestImageUrl(nextSlide.image, window.innerWidth);
+  }, [nextSlide?.image, videoAllowed]);
 
   return (
     <motion.section
@@ -234,7 +235,7 @@ export const HeroCarousel = ({ slides = defaultSlides }: { slides?: HeroSlide[] 
               animate={{ scale: prefersReducedMotion ? 1 : 1.055 }}
               transition={{ duration: (SLIDE_DURATION / 1000) + 0.8, ease: 'linear' }}
             >
-              {activeSlide.video && !isLowBandwidth ? (
+              {isActiveVideo ? (
                 <div className="absolute inset-0 h-full w-full overflow-hidden bg-black pointer-events-none">
                   <iframe
                     ref={videoFrameRef}
@@ -246,6 +247,8 @@ export const HeroCarousel = ({ slides = defaultSlides }: { slides?: HeroSlide[] 
                   />
                 </div>
               ) : activeSlide.fit === 'contain' ? (
+                <picture className="contents">
+                  <source type="image/webp" srcSet={webpSrcSet(activeSlide.image || "/product-images/bi-057.jpg")} sizes="100vw" />
                 <img
                   src={activeSlide.image || "/product-images/bi-057.jpg"}
                   alt={activeSlide.imageAlt || activeSlide.title}
@@ -254,7 +257,10 @@ export const HeroCarousel = ({ slides = defaultSlides }: { slides?: HeroSlide[] 
                   fetchPriority={current === 0 ? "high" : "auto"}
                   decoding="async"
                 />
+                </picture>
               ) : (
+                <picture className="contents">
+                  <source type="image/webp" srcSet={webpSrcSet(activeSlide.image || "/product-images/bi-057.jpg")} sizes="100vw" />
                 <img
                   src={activeSlide.image || "/product-images/bi-057.jpg"}
                   alt={activeSlide.imageAlt || activeSlide.title}
@@ -263,6 +269,7 @@ export const HeroCarousel = ({ slides = defaultSlides }: { slides?: HeroSlide[] 
                   fetchPriority={current === 0 ? "high" : "auto"}
                   decoding="async"
                 />
+                </picture>
               )}
             </motion.div>
           {/* Cinematic overlay layers */}
@@ -285,7 +292,7 @@ export const HeroCarousel = ({ slides = defaultSlides }: { slides?: HeroSlide[] 
       {/* Cinematic texture and responsive ambient light */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-[62%] z-[2] w-[48vw] -translate-x-1/2 rounded-full bg-amber-100/[0.09] blur-[130px] mix-blend-screen" />
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[3] bg-[radial-gradient(circle_at_center,transparent_35%,rgba(0,0,0,.48)_100%)]" />
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[3] opacity-[0.035] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[3] opacity-[0.035] bg-noise" />
       <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 z-[4] h-px bg-gradient-to-r from-transparent via-amber-100/30 to-transparent" />
 
       {/* Content */}
@@ -294,14 +301,14 @@ export const HeroCarousel = ({ slides = defaultSlides }: { slides?: HeroSlide[] 
           <AnimatePresence initial={false} mode="wait">
             <motion.div
               key={current}
-              initial={{ opacity: 0 }}
+              initial={skipIntro ? false : { opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.48, delay: 0.12, ease }}
             >
               {/* Tag badge */}
               <motion.div
-                initial={{ opacity: 0, y: 16 }}
+                initial={skipIntro ? false : { opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3, duration: 0.7, ease: ease }}
                 className="mb-7"
@@ -324,7 +331,7 @@ export const HeroCarousel = ({ slides = defaultSlides }: { slides?: HeroSlide[] 
                   {words.map((word, i) => (
                     <span key={i} className="block overflow-hidden">
                       <motion.span
-                        initial={{ y: '-135%', opacity: 0, rotateX: -55 }}
+                        initial={skipIntro ? false : { y: '-135%', opacity: 0, rotateX: -55 }}
                         animate={{ y: '0%', opacity: 1, rotateX: 0 }}
                         exit={{ y: '115%', opacity: 0, rotateX: 35 }}
                         transition={{
@@ -347,7 +354,7 @@ export const HeroCarousel = ({ slides = defaultSlides }: { slides?: HeroSlide[] 
 
               {/* Subtitle */}
               <motion.p
-                initial={{ opacity: 0, y: 20 }}
+                initial={skipIntro ? false : { opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.7, duration: 0.8, ease: ease }}
                 className="mb-8 h-20 max-w-lg border-l border-[#d4af37]/50 pl-5 text-lg font-light leading-relaxed text-white/70 line-clamp-3 md:text-xl lg:mb-10"
@@ -358,7 +365,7 @@ export const HeroCarousel = ({ slides = defaultSlides }: { slides?: HeroSlide[] 
 
               {/* CTA buttons */}
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={skipIntro ? false : { opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.9, duration: 0.8, ease: ease }}
                 className="flex flex-wrap gap-4"
@@ -382,7 +389,7 @@ export const HeroCarousel = ({ slides = defaultSlides }: { slides?: HeroSlide[] 
               </motion.div>
 
               <motion.div
-                initial={{ opacity: 0 }}
+                initial={skipIntro ? false : { opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1.05, duration: 0.7 }}
                 className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 text-[7px] font-bold uppercase tracking-[0.26em] text-white/40 sm:text-[8px]"
@@ -424,14 +431,19 @@ export const HeroCarousel = ({ slides = defaultSlides }: { slides?: HeroSlide[] 
                 <span aria-hidden="true" className="absolute inset-y-8 right-[6px] w-px bg-gradient-to-b from-transparent via-black/55 to-transparent" />
 
                 <span className="relative block h-full overflow-hidden rounded-b-[0.75rem] rounded-t-[7.25rem] border border-[#d3a36e]/45 bg-[#17100d] shadow-[inset_0_0_30px_rgba(0,0,0,.8)]">
-                  <motion.img
-                    src={nextSlide.image || '/product-images/bi-057.jpg'}
-                    alt={nextSlide.imageAlt || nextSlide.title}
-                    className={`h-full w-full opacity-80 [filter:brightness(.88)_saturate(.72)_sepia(.14)] transition-[transform,filter,opacity] duration-1000 group-hover:scale-105 group-hover:opacity-95 group-hover:[filter:brightness(.96)_saturate(.9)_sepia(.08)] ${nextIsContain ? 'object-contain object-bottom p-4 pb-14' : 'object-cover'}`}
-                    initial={{ scale: 1.08 }}
-                    animate={{ scale: 1 }}
-                    transition={{ duration: 1.2, ease }}
-                  />
+                  <picture className="contents">
+                    <source type="image/webp" srcSet={webpSrcSet(nextSlide.image || '/product-images/bi-057.jpg')} sizes="220px" />
+                    <motion.img
+                      src={nextSlide.image || '/product-images/bi-057.jpg'}
+                      loading="lazy"
+                      decoding="async"
+                      alt={nextSlide.imageAlt || nextSlide.title}
+                      className={`h-full w-full opacity-80 [filter:brightness(.88)_saturate(.72)_sepia(.14)] transition-[transform,filter,opacity] duration-1000 group-hover:scale-105 group-hover:opacity-95 group-hover:[filter:brightness(.96)_saturate(.9)_sepia(.08)] ${nextIsContain ? 'object-contain object-bottom p-4 pb-14' : 'object-cover'}`}
+                      initial={{ scale: 1.08 }}
+                      animate={{ scale: 1 }}
+                      transition={{ duration: 1.2, ease }}
+                    />
+                  </picture>
                   <span className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-[#3b2418]/15" />
                   <span aria-hidden="true" className="absolute inset-0 bg-[linear-gradient(118deg,transparent_12%,rgba(255,255,255,.03)_24%,rgba(255,245,226,.22)_32%,rgba(255,255,255,.04)_41%,transparent_53%)] mix-blend-screen" />
                   <span aria-hidden="true" className="absolute inset-[5px] rounded-b-[0.5rem] rounded-t-[6.9rem] border border-white/15 shadow-[inset_0_0_24px_rgba(228,201,167,.12)] transition-all duration-700 group-hover:inset-[8px] group-hover:border-[#e8c18c]/30" />

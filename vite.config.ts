@@ -22,6 +22,8 @@ export default defineConfig({
 
   build: {
     target: 'es2020',
+    // Read by scripts/prerender-seo.mjs to preload each page's own code; removed after prerendering.
+    manifest: true,
     rollupOptions: {
       output: {
         // Rarely-changing libraries and catalogue data get their own long-cached files,

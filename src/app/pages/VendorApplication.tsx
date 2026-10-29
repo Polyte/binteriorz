@@ -85,7 +85,7 @@ export const VendorApplication = () => {
 
           {/* Right: Form Card */}
           <div className="bg-white border border-neutral-200 p-8 md:p-12 shadow-2xl relative">
-            <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+            <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-noise" />
             
             <AnimatePresence mode="wait">
               {step === 1 && (

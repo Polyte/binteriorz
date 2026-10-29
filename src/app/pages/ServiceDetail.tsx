@@ -28,7 +28,7 @@ export const ServiceDetail = ({ products }: { products: any[] }) => {
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="min-h-screen bg-white">
       {/* Compact header */}
       <section className="relative overflow-hidden bg-neutral-950 pt-52 text-white md:pt-44">
-        {service.image?.url && <ImageWithFallback src={service.image.url} alt="" loading="eager" fetchPriority="high" className="absolute inset-0 h-full w-full object-cover opacity-45" />}
+        {service.image?.url && <ImageWithFallback src={service.image.url} alt="" loading="eager" fetchPriority="high" sizes="(min-width: 768px) 100vw, 360px" className="absolute inset-0 h-full w-full object-cover opacity-45" />}
         <div className="absolute inset-0 bg-gradient-to-r from-neutral-950 via-neutral-950/80 to-neutral-950/30" />
         <div className={`${container} relative pb-14 md:pb-20`}>
           <nav aria-label="Breadcrumb" className="mb-8 flex flex-wrap items-center gap-2 text-[10px] font-bold uppercase tracking-[0.25em] text-white/60">
@@ -110,7 +110,7 @@ export const ServiceDetail = ({ products }: { products: any[] }) => {
             {related.map((product) => (
               <Link key={product.id} to={`/product/${encodeURIComponent(product.id)}`} className="group block">
                 <div className="aspect-[4/5] overflow-hidden bg-neutral-100">
-                  <ImageWithFallback src={product.image_url || product.image} alt={product.name} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <ImageWithFallback src={product.image_url || product.image} alt={product.name} sizes="(min-width: 1024px) 25vw, 50vw" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
                 </div>
                 <h3 className="mt-4 font-serif text-xl text-neutral-900">{product.name}</h3>
                 <p className="mt-1 text-sm text-neutral-500">R {Number(product.price).toLocaleString('en-ZA')}</p>

@@ -38,7 +38,7 @@ export const Footer = () => {
           </div>
 
           <div>
-            <h4 className="text-sm uppercase tracking-widest font-bold mb-8">Explore</h4>
+            <h2 className="text-sm uppercase tracking-widest font-bold mb-8">Explore</h2>
             <ul className="space-y-4 text-neutral-400">
               <li><Link to="/shop" className="hover:text-white transition-colors">Shop the Collection</Link></li>
               <li><Link to="/services" className="hover:text-white transition-colors">Our Services</Link></li>
@@ -48,7 +48,7 @@ export const Footer = () => {
           </div>
 
           <div>
-            <h4 className="text-sm uppercase tracking-widest font-bold mb-8">Services</h4>
+            <h2 className="text-sm uppercase tracking-widest font-bold mb-8">Services</h2>
             <ul className="space-y-4 text-neutral-400">
               {content.sections.services.items.slice(0, 5).map((service) => (
                 <li key={service.id}><Link to={`/services/${service.id}`} className="hover:text-white transition-colors">{service.title}</Link></li>
@@ -57,7 +57,7 @@ export const Footer = () => {
           </div>
 
           <div>
-            <h4 className="text-sm uppercase tracking-widest font-bold mb-8">Contact Info</h4>
+            <h2 className="text-sm uppercase tracking-widest font-bold mb-8">Contact Info</h2>
             <ul className="space-y-6">
               {details.map(({ key, value, href, icon: Icon }) => (
                 <li key={key} className="flex items-start gap-4 text-neutral-400">

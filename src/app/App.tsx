@@ -4,15 +4,10 @@ import { Toaster, toast } from 'sonner';
 import { ThemeProvider, useTheme } from 'next-themes';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
-import { Cart } from './components/Cart';
-import { Wishlist } from './components/Wishlist';
-import { QuickView } from './components/QuickView';
 import { BackToTop } from './components/BackToTop';
 import { cloudflareAuth } from '../../utils/cloudflare/client';
 import { AnimatePresence } from 'motion/react';
 import { MobileBottomNav } from './components/MobileBottomNav';
-import { CraftsmanshipStory } from './components/CraftsmanshipStory';
-import { GlobalSearch } from './components/GlobalSearch';
 import { CampaignBanner } from './components/CampaignBanner';
 import { WhatsAppWidget } from './components/WhatsAppWidget';
 import { PageMotion } from './components/PageMotion';
@@ -77,6 +72,20 @@ const RouteMetadata = ({ products }: { products: any[] }) => {
   return null;
 };
 
+// Pop-ups load the first time they open, keeping them out of the initial download.
+const Cart = lazy(() => import('./components/Cart').then((module) => ({ default: module.Cart })));
+const Wishlist = lazy(() => import('./components/Wishlist').then((module) => ({ default: module.Wishlist })));
+const QuickView = lazy(() => import('./components/QuickView').then((module) => ({ default: module.QuickView })));
+const CraftsmanshipStory = lazy(() => import('./components/CraftsmanshipStory').then((module) => ({ default: module.CraftsmanshipStory })));
+const GlobalSearch = lazy(() => import('./components/GlobalSearch').then((module) => ({ default: module.GlobalSearch })));
+
+/** True from the first time `open` is true, so a lazily loaded pop-up stays mounted for its close animation. */
+const useHasOpened = (open: boolean) => {
+  const [opened, setOpened] = useState(open);
+  useEffect(() => { if (open) setOpened(true); }, [open]);
+  return opened || open;
+};
+
 // Pages
 const Home = lazy(() => import('./pages/Home').then((module) => ({ default: module.Home })));
 const Shop = lazy(() => import('./pages/Shop').then((module) => ({ default: module.Shop })));
@@ -126,7 +135,11 @@ const AppContent = () => {
   const [session, setSession] = useState<any>(null);
 
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [isBannerVisible, setIsBannerVisible] = useState(false);
+  const cartMounted = useHasOpened(isCartOpen);
+  const wishlistMounted = useHasOpened(isWishlistOpen);
+  const quickViewMounted = useHasOpened(!!quickViewProduct);
+  const storyMounted = useHasOpened(isCraftsmanshipOpen);
+  const searchMounted = useHasOpened(isSearchOpen);
 
   const syncProducts = useCallback((nextProducts: any[], broadcast = false) => {
     const normalized = normalizeProducts(nextProducts);
@@ -260,10 +273,11 @@ const AppContent = () => {
       <BackToTop />
       <Toaster position="top-center" richColors theme={theme as 'light' | 'dark' | 'system'} />
       
-      {/* Global Grain Overlay */}
-      {!isAdminRoute && <CampaignBanner onVisibilityChange={setIsBannerVisible} />}
-
+ 
+      {/* Banner and navigation share one fixed header so the nav never shifts when the banner appears. */}
       {!isAdminRoute && (
+        <header className="fixed inset-x-0 top-0 z-50">
+        <CampaignBanner />
         <Navbar 
           products={products}
           cartCount={cartItems.reduce((a, b) => a + b.quantity, 0)} 
@@ -272,38 +286,45 @@ const AppContent = () => {
           onOpenWishlist={() => setIsWishlistOpen(true)}
           onOpenSearch={() => setIsSearchOpen(true)}
           isAdmin={!!session}
-          bannerVisible={isBannerVisible}
         />
+        </header>
       )}
       
-      <Cart 
-        isOpen={isCartOpen} 
-        onClose={() => setIsCartOpen(false)} 
-        items={cartItems}
-        onRemove={removeFromCart}
-        onClear={() => setCartItems([])}
-      />
-
-      <Wishlist
-        isOpen={isWishlistOpen}
-        onClose={() => setIsWishlistOpen(false)}
-        items={wishlistItems}
-        onRemove={removeFromWishlist}
-        onAddToCart={addToCart}
-      />
-
-      <QuickView
-        isOpen={!!quickViewProduct}
-        product={quickViewProduct}
-        onClose={() => setQuickViewProduct(null)}
-        onAddToCart={addToCart}
-        onToggleWishlist={toggleWishlist}
-        isWishlisted={quickViewProduct ? wishlistItems.some(item => item.id === quickViewProduct.id) : false}
-      />
+      <Suspense fallback={null}>
+        {cartMounted && (
+          <Cart
+            isOpen={isCartOpen}
+            onClose={() => setIsCartOpen(false)}
+            items={cartItems}
+            onRemove={removeFromCart}
+            onClear={() => setCartItems([])}
+          />
+        )}
+        {wishlistMounted && (
+          <Wishlist
+            isOpen={isWishlistOpen}
+            onClose={() => setIsWishlistOpen(false)}
+            items={wishlistItems}
+            onRemove={removeFromWishlist}
+            onAddToCart={addToCart}
+          />
+        )}
+        {quickViewMounted && (
+          <QuickView
+            isOpen={!!quickViewProduct}
+            product={quickViewProduct}
+            onClose={() => setQuickViewProduct(null)}
+            onAddToCart={addToCart}
+            onToggleWishlist={toggleWishlist}
+            isWishlisted={quickViewProduct ? wishlistItems.some(item => item.id === quickViewProduct.id) : false}
+          />
+        )}
+      </Suspense>
 
       <main className="relative z-10" style={{ position: 'relative' }}>
-        <AnimatePresence mode="wait">
-          <Suspense fallback={<div className="min-h-[60vh]" aria-label="Loading page" />}>
+        {/* initial={false}: the first page paints immediately; later navigations still fade. */}
+        <AnimatePresence mode="wait" initial={false}>
+          <Suspense fallback={<div className="min-h-screen" aria-label="Loading page" />}>
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<PageMotion><Home products={products} onAddToCart={addToCart} onToggleWishlist={toggleWishlist} onQuickView={setQuickViewProduct} wishlistItems={wishlistItems} homepageContent={homepageContent} /></PageMotion>} />
             <Route path="/shop" element={<PageMotion><Shop products={products} onAddToCart={addToCart} onToggleWishlist={toggleWishlist} onQuickView={setQuickViewProduct} wishlistItems={wishlistItems} loading={loading} /></PageMotion>} />
@@ -337,8 +358,10 @@ const AppContent = () => {
           wishlistCount={wishlistItems.length}
         />
       )}
-      <CraftsmanshipStory isOpen={isCraftsmanshipOpen} onClose={() => setIsCraftsmanshipOpen(false)} />
-      {!isAdminRoute && <GlobalSearch isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} products={products} />}
+      <Suspense fallback={null}>
+        {storyMounted && <CraftsmanshipStory isOpen={isCraftsmanshipOpen} onClose={() => setIsCraftsmanshipOpen(false)} />}
+        {!isAdminRoute && searchMounted && <GlobalSearch isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} products={products} />}
+      </Suspense>
       {!isAdminRoute && <WhatsAppWidget />}
     </div>
   );

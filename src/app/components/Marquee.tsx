@@ -1,14 +1,15 @@
 import React from 'react';
 
+// What the studio actually offers, taken from the company profile.
 const topItems = [
-  'Handcrafted Luxury',
-  'European Oak',
-  'White Glove Delivery',
-  'Bespoke Design',
+  'Interior Design',
+  'Bespoke Furniture',
+  'Curtains & Window Treatments',
+  'Upholstery',
+  'Cushions & Soft Furnishings',
+  'Lighting',
+  'Décor & Styling',
   'Alberton Studio',
-  'Artisan Verified',
-  'Lifetime Guarantee',
-  'Sustainable Timber',
 ];
 
 export const Marquee = () => {

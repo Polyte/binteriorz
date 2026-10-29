@@ -37,7 +37,7 @@ export const FeaturedSpotlight = ({
       className="relative overflow-hidden bg-neutral-950 py-20 md:py-24"
     >
       {/* Grain overlay */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-noise" />
 
       {/* Ambient glow */}
       <div className="absolute top-1/4 -left-32 w-[500px] h-[500px] bg-amber-900/[0.04] rounded-full blur-[120px] pointer-events-none" />

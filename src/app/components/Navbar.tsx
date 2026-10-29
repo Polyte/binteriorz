@@ -24,10 +24,9 @@ interface NavbarProps {
   onOpenWishlist: () => void;
   onOpenSearch?: () => void;
   isAdmin?: boolean;
-  bannerVisible?: boolean;
 }
 
-export const Navbar = ({ products, cartCount, wishlistCount, onOpenCart, onOpenWishlist, onOpenSearch, isAdmin, bannerVisible }: NavbarProps) => {
+export const Navbar = ({ products, cartCount, wishlistCount, onOpenCart, onOpenWishlist, onOpenSearch, isAdmin }: NavbarProps) => {
   const { contact } = useCompanyContent();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -88,12 +87,11 @@ export const Navbar = ({ products, cartCount, wishlistCount, onOpenCart, onOpenW
 
   return (
     <nav 
-      className={`fixed left-0 right-0 z-50 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-500 ${
+      className={`relative z-50 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-500 ${
         isAtTop
           ? `bg-transparent border-b ${hasDarkHero ? 'border-white/25' : 'border-transparent'}`
           : 'bg-sky-50/25 dark:bg-slate-900/20 backdrop-blur-2xl backdrop-saturate-150 border-b border-white/35 dark:border-white/15 shadow-[0_12px_40px_-24px_rgba(12,30,45,.5)]'
       }`}
-      style={{ top: bannerVisible ? 'var(--banner-height, 44px)' : '0px' }}
       onMouseLeave={handleMouseLeave}
     >
       {!isAtTop && <div aria-hidden="true" className="nav-glass-sheen pointer-events-none absolute inset-0 z-0 overflow-hidden" />}
@@ -282,12 +280,14 @@ export const Navbar = ({ products, cartCount, wishlistCount, onOpenCart, onOpenW
 
           {/* Mobile buttons */}
           <div className="md:hidden flex items-center space-x-2">
-             <button onClick={toggleTheme} className={`p-2 transition-colors ${isTransparent ? 'text-white/60' : 'text-neutral-400'}`}>
+             <button onClick={toggleTheme} aria-label={mounted && theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'} className={`p-2 transition-colors ${isTransparent ? 'text-white/60' : 'text-neutral-400'}`}>
                {mounted && theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
              </button>
              <motion.button
               whileTap={{ scale: 0.9 }}
               onClick={() => setIsOpen(!isOpen)}
+              aria-label={isOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={isOpen}
               className={`p-2 rounded-md focus:outline-none transition-colors ${
                 isTransparent 
                   ? 'text-white' 

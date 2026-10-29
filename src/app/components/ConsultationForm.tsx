@@ -87,6 +87,7 @@ export const ConsultationForm = () => {
           </div>
           <div className="relative group">
             <select
+              aria-label="Service you are interested in"
               className={inputClasses + " cursor-pointer appearance-none"}
               value={formData.service}
               onChange={(e) => setFormData({ ...formData, service: e.target.value })}

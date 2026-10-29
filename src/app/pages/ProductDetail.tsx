@@ -131,6 +131,7 @@ const Gallery = ({ media, name, onOpen, index, setIndex }: { media: MediaItem[];
             alt={`${name}${media.length > 1 ? `, photo ${index + 1}` : ''}`}
             loading="eager"
             fetchPriority="high"
+            sizes="(min-width: 1024px) 55vw, calc(100vw - 48px)"
             className="h-full w-full object-cover transition-transform duration-200 ease-out"
             style={zoom ? { transform: 'scale(1.9)', transformOrigin: `${zoom.x}% ${zoom.y}%` } : undefined}
           />
@@ -162,7 +163,7 @@ const Disclosure = ({ title, defaultOpen = false, children }: { title: string; d
 const ProductTile = ({ product }: { product: any }) => (
   <Link to={`/product/${encodeURIComponent(product.id)}`} className="group block">
     <div className="aspect-[4/5] overflow-hidden rounded-xl bg-[#f1ede6]">
-      <ImageWithFallback src={product.image_url || product.image} alt={product.name} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+      <ImageWithFallback src={product.image_url || product.image} alt={product.name} sizes="(min-width: 1024px) 25vw, 50vw" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
     </div>
     <p className="mt-4 text-[10px] font-bold uppercase tracking-[0.25em] text-neutral-400">{product.category}</p>
     <h3 className="mt-1 font-serif text-lg leading-snug text-neutral-900 group-hover:text-[#8a6a2f]">{product.name}</h3>

@@ -21,13 +21,15 @@ interface ProductCardProps {
   availability?: string;
   editorialIndex?: number;
   eager?: boolean;
+  /** How wide the card's image is drawn, for picking the right image size. */
+  imageSizes?: string;
   onAddToCart: () => void;
   onToggleWishlist: () => void;
   onQuickView: () => void;
   isWishlisted?: boolean;
 }
 
-export const ProductCard = ({ id, name, price, image, image_url, category, material, stock, featured, color, colorHex, availability, editorialIndex, eager = false, onAddToCart, onToggleWishlist, onQuickView, isWishlisted }: ProductCardProps) => {
+export const ProductCard = ({ id, name, price, image, image_url, category, material, stock, featured, color, colorHex, availability, editorialIndex, eager = false, imageSizes = '(min-width: 1280px) 360px, (min-width: 640px) 50vw, 100vw', onAddToCart, onToggleWishlist, onQuickView, isWishlisted }: ProductCardProps) => {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const navigate = useNavigate();
   const isLowStock = typeof stock === 'number' && stock > 0 && stock <= 5;
@@ -45,7 +47,7 @@ export const ProductCard = ({ id, name, price, image, image_url, category, mater
     >
       <div className="product-card-visual relative aspect-[4/5] overflow-hidden rounded-[1.15rem] bg-[#eee9e1] shadow-[0_12px_32px_-24px_rgba(20,20,20,.28)] transition-[box-shadow,transform] duration-700 group-hover:shadow-[0_26px_55px_-30px_rgba(20,20,20,.5)]" style={{ backgroundColor: colorHex ? `${colorHex}12` : '#eee9e1' }}>
         <Link to={`/product/${id}`} className="block h-full w-full" aria-label={`View ${name}`}>
-          <ImageWithFallback src={displayImage} alt={name} className="h-full w-full object-cover transition-[transform,filter] duration-[1400ms] ease-out group-hover:scale-[1.045] group-hover:saturate-[1.04]" loading={eager ? 'eager' : 'lazy'} fetchPriority={eager ? 'high' : 'auto'} decoding="async" />
+          <ImageWithFallback src={displayImage} alt={name} sizes={imageSizes} className="h-full w-full object-cover transition-[transform,filter] duration-[1400ms] ease-out group-hover:scale-[1.045] group-hover:saturate-[1.04]" loading={eager ? 'eager' : 'lazy'} fetchPriority={eager ? 'high' : 'auto'} decoding="async" />
           <div className="pointer-events-none absolute inset-3 rounded-[1rem] border border-white/0 transition-all duration-700 group-hover:inset-4 group-hover:border-white/55" />
           <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/40 via-black/5 to-transparent opacity-40 transition-opacity duration-500 group-hover:opacity-100" />
           <span className="absolute bottom-5 left-5 translate-y-2 text-[8px] font-bold uppercase tracking-[0.3em] text-white opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-90">Explore piece</span>

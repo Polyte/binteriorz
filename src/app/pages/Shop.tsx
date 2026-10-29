@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { Check, ChevronDown, LayoutGrid, Rows3, Search, SlidersHorizontal, X } from 'lucide-react';
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router';
@@ -18,6 +18,7 @@ interface ShopProps {
 type Facet = 'category' | 'room' | 'material' | 'colour' | 'price';
 
 const container = 'mx-auto max-w-[1480px] px-6 sm:px-8 lg:px-12';
+const PAGE_SIZE = 12;
 
 // Catalogue colours and materials are free text; group them into a few families shoppers recognise.
 const COLOUR_FAMILIES: { name: string; swatch: string; match: RegExp }[] = [
@@ -105,7 +106,7 @@ const ShopHeader = ({ total, categories, heading, intro, related }: { total: num
         ].map((image) => (
           <figure key={image.src} className="rounded-t-full border border-[#b8964a]/70 bg-[#f6efe1] p-1.5 shadow-[0_24px_40px_-28px_rgba(60,40,15,.8)]">
             <div className={`${image.className} overflow-hidden rounded-t-full`}>
-              <ImageWithFallback src={image.src} alt={image.alt} loading="eager" className="h-full w-full object-cover sepia-[.3] saturate-[.85] contrast-[1.04]" />
+              <ImageWithFallback src={image.src} alt={image.alt} loading="eager" sizes="(min-width: 1024px) 240px, 30vw" className="h-full w-full object-cover sepia-[.3] saturate-[.85] contrast-[1.04]" />
             </div>
           </figure>
         ))}
@@ -152,6 +153,8 @@ export const Shop = ({ products, onAddToCart, onToggleWishlist, onQuickView, wis
   const [sortBy, setSortBy] = useState('featured');
   const [dense, setDense] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  const loadMoreRef = useRef<HTMLDivElement>(null);
 
   // Keep filters in sync with links from the mega menu and room navigator.
   useEffect(() => {
@@ -210,6 +213,19 @@ export const Shop = ({ products, onAddToCart, onToggleWishlist, onQuickView, wis
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [products, searchQuery, categories, rooms, materials, colours, prices, sortBy]);
+
+  // Render the catalogue in batches; more pieces load as the shopper nears the end of the list.
+  useEffect(() => { setVisibleCount(PAGE_SIZE); }, [filteredProducts]);
+  const hasMore = visibleCount < filteredProducts.length;
+  useEffect(() => {
+    const sentinel = loadMoreRef.current;
+    if (!sentinel || !hasMore) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) setVisibleCount((count) => count + PAGE_SIZE);
+    }, { rootMargin: '600px 0px' });
+    observer.observe(sentinel);
+    return () => observer.disconnect();
+  }, [hasMore, visibleCount]);
 
 
   const clearAll = () => {
@@ -285,7 +301,7 @@ export const Shop = ({ products, onAddToCart, onToggleWishlist, onQuickView, wis
             const active = categories.length === 1 && categories[0] === category.name;
             return (
               <Link key={category.name} to={active || !CATEGORY_PAGES[categorySlug(category.name)] ? '/shop' : `/shop/${categorySlug(category.name)}`} aria-current={active ? 'page' : undefined} className={`flex flex-shrink-0 items-center gap-3 rounded-full border py-1.5 pl-1.5 pr-5 transition-colors ${active ? 'border-neutral-900 bg-neutral-900 text-white' : 'border-neutral-200 bg-white text-neutral-700 hover:border-neutral-900'}`}>
-                <ImageWithFallback src={category.image} alt="" className="h-9 w-9 rounded-full object-cover" />
+                <ImageWithFallback src={category.image} alt="" sizes="40px" className="h-9 w-9 rounded-full object-cover" />
                 <span className="text-xs font-medium">{category.name}</span>
                 <span className={`text-[10px] tabular-nums ${active ? 'text-white/60' : 'text-neutral-400'}`}>{category.total}</span>
               </Link>
@@ -313,7 +329,7 @@ export const Shop = ({ products, onAddToCart, onToggleWishlist, onQuickView, wis
               <button type="button" onClick={() => setIsDrawerOpen(true)} className="flex items-center gap-2 rounded-full border border-neutral-300 px-4 py-2.5 text-[10px] font-bold uppercase tracking-[0.2em] lg:hidden">
                 <SlidersHorizontal className="h-4 w-4" /> Filters{activeChips.length > 0 && ` (${activeChips.length})`}
               </button>
-              <p className="font-serif text-2xl text-neutral-900"><span className="tabular-nums">{filteredProducts.length}</span> <span className="text-neutral-500">{filteredProducts.length === 1 ? 'piece' : 'pieces'}</span></p>
+              <h2 className="font-serif text-2xl text-neutral-900"><span className="tabular-nums">{filteredProducts.length}</span> <span className="text-neutral-500">{filteredProducts.length === 1 ? 'piece' : 'pieces'}</span></h2>
             </div>
             <div className="flex flex-1 flex-col gap-3 sm:flex-row md:justify-end">
               <label className="relative block min-w-0 flex-1 md:max-w-xs">
@@ -361,7 +377,7 @@ export const Shop = ({ products, onAddToCart, onToggleWishlist, onQuickView, wis
                 </div>
               ))
             ) : filteredProducts.length > 0 ? (
-              filteredProducts.map((product, idx) => (
+              filteredProducts.slice(0, visibleCount).map((product, idx) => (
                 <ProductCard
                   key={product.id}
                   {...product}
@@ -379,6 +395,13 @@ export const Shop = ({ products, onAddToCart, onToggleWishlist, onQuickView, wis
               </div>
             )}
           </div>
+
+          {!loading && hasMore && (
+            <div ref={loadMoreRef} className="mt-14 flex flex-col items-center gap-3">
+              <p className="text-xs text-neutral-500">Showing {Math.min(visibleCount, filteredProducts.length)} of {filteredProducts.length}</p>
+              <button type="button" onClick={() => setVisibleCount((count) => count + PAGE_SIZE)} className="rounded-full border border-neutral-900 px-8 py-3 text-[10px] font-bold uppercase tracking-[0.25em] text-neutral-900 transition hover:bg-neutral-900 hover:text-white">Show more</button>
+            </div>
+          )}
         </div>
       </div>
 

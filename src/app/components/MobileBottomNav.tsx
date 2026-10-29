@@ -56,6 +56,7 @@ export const MobileBottomNav = ({
             <motion.button
               whileTap={{ scale: 0.9 }}
               onClick={onOpenStory}
+              aria-label="Our craftsmanship story"
               className="w-14 h-14 bg-neutral-900 dark:bg-white rounded-full flex items-center justify-center border-4 border-white dark:border-neutral-950 shadow-xl cursor-pointer"
             >
               <div className="w-7 h-7 rounded-full overflow-hidden border border-white/20 dark:border-neutral-800">

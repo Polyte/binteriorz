@@ -38,7 +38,7 @@ export const CraftsmanshipStory = ({ isOpen, onClose }: CraftsmanshipStoryProps)
             className="fixed inset-0 bg-neutral-900/95 backdrop-blur-md z-[200] flex items-center justify-center p-4 md:p-8"
           >
             {/* Grain Overlay */}
-            <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+            <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-overlay bg-noise" />
             
             <motion.div
               initial={{ scale: 0.95, opacity: 0, y: 20 }}

@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
+import { Link } from 'react-router';
 import { motion, AnimatePresence, useMotionValue, useTransform, animate } from 'motion/react';
 import { Gift, X, Heart, Star, ArrowRight, Sparkles } from 'lucide-react';
 
@@ -10,10 +11,6 @@ interface Campaign {
   gradientFrom: string;
   gradientTo: string;
   icon: 'heart' | 'star' | 'gift' | 'sparkles';
-}
-
-interface CampaignBannerProps {
-  onVisibilityChange?: (visible: boolean) => void;
 }
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -127,11 +124,58 @@ const AnimatedIcon = ({ type }: { type: Campaign['icon'] }) => {
   );
 };
 
-export const CampaignBanner = ({ onVisibilityChange }: CampaignBannerProps) => {
-  const [activeCampaign, setActiveCampaign] = useState<Campaign | null>(null);
+// Seasonal messages only; real offers should be set up deliberately, not shown automatically.
+const campaignFor = (today: Date): Campaign => {
+  const month = today.getMonth() + 1;
+  const day = today.getDate();
+
+  if (month === 2 && day <= 15) {
+    return {
+      id: 'valentines',
+      title: 'Share the Love',
+      subtitle: 'Gift something beautiful for the home this Valentine\u2019s season.',
+      color: 'bg-rose-600',
+      gradientFrom: 'from-rose-700',
+      gradientTo: 'to-pink-500',
+      icon: 'heart',
+    };
+  } else if (month === 12 && day <= 26) {
+    return {
+      id: 'christmas',
+      title: 'The Festive Season',
+      subtitle: 'Find gifts and festive décor in our Alberton showroom.',
+      color: 'bg-emerald-800',
+      gradientFrom: 'from-emerald-800',
+      gradientTo: 'to-green-600',
+      icon: 'star',
+    };
+  } else if ((month === 12 && day >= 27) || (month === 1 && day <= 10)) {
+    return {
+      id: 'newyear',
+      title: 'New Year, New Space',
+      subtitle: 'Plan this year\u2019s refresh with a design consultation.',
+      color: 'bg-neutral-900',
+      gradientFrom: 'from-neutral-900',
+      gradientTo: 'to-neutral-700',
+      icon: 'gift',
+    };
+  } else {
+    return {
+      id: 'standard',
+      title: 'Visit Our Showroom',
+      subtitle: 'Furniture, décor and interior design at 35 Radio Street, Alberton.',
+      color: 'bg-amber-800',
+      gradientFrom: 'from-amber-800',
+      gradientTo: 'to-orange-600',
+      icon: 'sparkles',
+    };
+  }
+};
+
+export const CampaignBanner = () => {
+  const [activeCampaign] = useState<Campaign>(() => campaignFor(new Date()));
   const [isVisible, setIsVisible] = useState(true);
   const [isHovered, setIsHovered] = useState(false);
-  const bannerElRef = useRef<HTMLDivElement>(null);
   const shimmerX = useMotionValue(-100);
 
   // Periodic shimmer sweep
@@ -162,80 +206,6 @@ export const CampaignBanner = ({ onVisibilityChange }: CampaignBannerProps) => {
       `linear-gradient(105deg, transparent ${x - 30}%, rgba(255,255,255,0.12) ${x - 10}%, rgba(255,255,255,0.25) ${x}%, rgba(255,255,255,0.12) ${x + 10}%, transparent ${x + 30}%)`
   );
 
-  // Seasonal messages only; real offers should be set up deliberately, not shown automatically.
-  useEffect(() => {
-    const today = new Date();
-    const month = today.getMonth() + 1;
-    const day = today.getDate();
-
-    if (month === 2 && day <= 15) {
-      setActiveCampaign({
-        id: 'valentines',
-        title: 'Share the Love',
-        subtitle: 'Gift something beautiful for the home this Valentine\u2019s season.',
-        color: 'bg-rose-600',
-        gradientFrom: 'from-rose-700',
-        gradientTo: 'to-pink-500',
-        icon: 'heart',
-      });
-    } else if (month === 12 && day <= 26) {
-      setActiveCampaign({
-        id: 'christmas',
-        title: 'The Festive Season',
-        subtitle: 'Find gifts and festive décor in our Alberton showroom.',
-        color: 'bg-emerald-800',
-        gradientFrom: 'from-emerald-800',
-        gradientTo: 'to-green-600',
-        icon: 'star',
-      });
-    } else if ((month === 12 && day >= 27) || (month === 1 && day <= 10)) {
-      setActiveCampaign({
-        id: 'newyear',
-        title: 'New Year, New Space',
-        subtitle: 'Plan this year\u2019s refresh with a design consultation.',
-        color: 'bg-neutral-900',
-        gradientFrom: 'from-neutral-900',
-        gradientTo: 'to-neutral-700',
-        icon: 'gift',
-      });
-    } else {
-      setActiveCampaign({
-        id: 'standard',
-        title: 'Visit Our Showroom',
-        subtitle: 'Furniture, décor and interior design at 35 Radio Street, Alberton.',
-        color: 'bg-amber-800',
-        gradientFrom: 'from-amber-800',
-        gradientTo: 'to-orange-600',
-        icon: 'sparkles',
-      });
-    }
-  }, []);
-
-  // Notify parent and set CSS variable for banner height
-  useEffect(() => {
-    const visible = !!(activeCampaign && isVisible);
-    onVisibilityChange?.(visible);
-    if (!visible) {
-      document.documentElement.style.setProperty('--banner-height', '0px');
-    }
-  }, [activeCampaign, isVisible, onVisibilityChange]);
-
-  const measureBanner = useCallback(() => {
-    if (bannerElRef.current) {
-      const h = bannerElRef.current.offsetHeight;
-      document.documentElement.style.setProperty('--banner-height', `${h}px`);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (!activeCampaign || !isVisible) return;
-    const raf = requestAnimationFrame(() => measureBanner());
-    window.addEventListener('resize', measureBanner);
-    return () => {
-      cancelAnimationFrame(raf);
-      window.removeEventListener('resize', measureBanner);
-    };
-  }, [activeCampaign, isVisible, measureBanner]);
 
   // Generate particles
   const particles = useMemo(
@@ -243,15 +213,12 @@ export const CampaignBanner = ({ onVisibilityChange }: CampaignBannerProps) => {
     []
   );
 
+  // initial={false}: the banner is already drawn by the static HTML copy in index.html, so it
+  // must not animate in again when the app starts.
   return (
-    <AnimatePresence
-      onExitComplete={() => {
-        document.documentElement.style.setProperty('--banner-height', '0px');
-      }}
-    >
+    <AnimatePresence initial={false}>
       {activeCampaign && isVisible && (
         <motion.div
-          ref={bannerElRef}
           initial={{ y: -80, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{
@@ -262,10 +229,9 @@ export const CampaignBanner = ({ onVisibilityChange }: CampaignBannerProps) => {
             y: -10,
           }}
           transition={{ duration: 0.6, ease }}
-          onAnimationComplete={measureBanner}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
-          className="campaign-gold-bar text-[#241700] py-1.5 px-4 fixed top-0 left-0 right-0 z-[60] overflow-hidden"
+          className="campaign-gold-bar relative text-[#241700] py-1.5 px-4 overflow-hidden"
         >
           {/* Animated shimmer overlay */}
           <motion.div
@@ -329,13 +295,9 @@ export const CampaignBanner = ({ onVisibilityChange }: CampaignBannerProps) => {
             </motion.p>
 
             {/* CTA button with hover animation */}
-            <motion.button
+            <Link
+              to="/shop"
               className="group relative text-[10px] sm:text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 px-4 py-1 rounded-full bg-black/10 backdrop-blur-sm border border-black/15 hover:bg-black/15 transition-colors duration-300"
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ delay: 0.7, duration: 0.5, ease }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
             >
               <span>Shop Now</span>
               <motion.span
@@ -353,7 +315,7 @@ export const CampaignBanner = ({ onVisibilityChange }: CampaignBannerProps) => {
                 whileHover={{ x: '100%' }}
                 transition={{ duration: 0.6, ease: 'easeInOut' }}
               />
-            </motion.button>
+            </Link>
           </div>
 
           {/* Animated bottom edge glow */}
@@ -370,6 +332,7 @@ export const CampaignBanner = ({ onVisibilityChange }: CampaignBannerProps) => {
           {/* Close button */}
           <motion.button
             onClick={() => setIsVisible(false)}
+            aria-label="Dismiss banner"
             className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 p-1.5 rounded-full hover:bg-black/15 transition-all duration-300 group/close"
             initial={{ opacity: 0, scale: 0.5, rotate: -90 }}
             animate={{ opacity: 1, scale: 1, rotate: 0 }}

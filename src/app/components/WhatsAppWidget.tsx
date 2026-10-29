@@ -131,6 +131,8 @@ export const WhatsAppWidget = () => {
       {/* FAB Button */}
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
+        aria-label={isOpen ? 'Close WhatsApp chat' : 'Chat with us on WhatsApp'}
+        aria-expanded={isOpen}
         whileHover={{ scale: 1.08 }}
         whileTap={{ scale: 0.95 }}
         className="relative w-14 h-14 rounded-full bg-[#25d366] text-white flex items-center justify-center shadow-lg shadow-[#25d366]/30 hover:shadow-xl hover:shadow-[#25d366]/40 transition-shadow"

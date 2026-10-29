@@ -65,7 +65,7 @@ export const Login = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#fafaf9] px-4">
-      <div className="fixed inset-0 opacity-[0.03] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+      <div className="fixed inset-0 opacity-[0.03] pointer-events-none bg-noise" />
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}

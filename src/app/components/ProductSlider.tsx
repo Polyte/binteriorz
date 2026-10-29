@@ -186,6 +186,7 @@ export const ProductSlider = ({
                 style={{ position: 'relative' }}
               >
                 <ProductCard
+                  imageSizes="(min-width: 1280px) 25vw, (min-width: 1024px) 32vw, (min-width: 640px) 48vw, 88vw"
                   {...product}
                   featured={index < 4 || product.featured}
                   editorialIndex={index + 1}

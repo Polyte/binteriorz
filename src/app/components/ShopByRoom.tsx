@@ -3,6 +3,7 @@ import { motion } from 'motion/react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router';
+import { useUserInteracted } from '../utils/useUserInteracted';
 
 interface Room {
   name: string;
@@ -67,6 +68,8 @@ interface ShopByRoomProps {
 }
 
 export const ShopByRoom = ({ rooms = defaultRooms, eyebrow = 'Shop by Room', title = 'Find Your Space', description = 'Every room tells a story. Explore curated collections designed for the way you live.' }: ShopByRoomProps) => {
+  // Room videos replace their photos only after the visitor's first interaction.
+  const showVideo = useUserInteracted();
   const displayRooms: Room[] = rooms.map((room, index) => ({
     ...room,
     span: index === 0 ? 'md:col-span-2 md:row-span-2' : '',
@@ -129,7 +132,7 @@ export const ShopByRoom = ({ rooms = defaultRooms, eyebrow = 'Shop by Room', tit
               >
                 {/* Framed image with warm, editorial color on hover */}
                 <div className="absolute inset-0 overflow-hidden">
-                  {room.video ? (
+                  {room.video && showVideo ? (
                     <iframe
                       src={room.video}
                       title={`${room.name} collection video`}

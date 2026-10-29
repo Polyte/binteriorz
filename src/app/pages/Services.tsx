@@ -38,7 +38,7 @@ export const Services = () => {
               return (
               <motion.article key={service.id} {...reveal((index % 3) * 0.08)} className={`group flex flex-col ${wide ? 'lg:col-span-2' : ''}`}>
                 <Link to={`/services/${service.id}`} tabIndex={-1} aria-hidden="true" className={`relative block aspect-[4/3] overflow-hidden bg-neutral-100 ${wide ? 'lg:aspect-[8/3]' : ''}`}>
-                  {service.image?.url && <ImageWithFallback src={service.image.url} alt={service.image.alt || service.title} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />}
+                  {service.image?.url && <ImageWithFallback sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" src={service.image.url} alt={service.image.alt || service.title} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />}
                   <span className="absolute left-4 top-4 bg-white/90 px-3 py-1 font-serif text-sm tabular-nums text-neutral-900 backdrop-blur-sm">{String(index + 1).padStart(2, '0')}</span>
                 </Link>
                 <h3 className="mt-6 font-serif text-2xl text-neutral-900"><Link to={`/services/${service.id}`} className="hover:text-[#9a7b37]">{service.title}</Link></h3>
